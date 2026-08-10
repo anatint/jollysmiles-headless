@@ -72,7 +72,7 @@ const stats = [
 
 export default function ProceduresList() {
   return (
-    <section className="pt-8 pb-8 bg-white py-12 md:py-16">
+    <section className="pt-8 pb-8 bg-white py-[15px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

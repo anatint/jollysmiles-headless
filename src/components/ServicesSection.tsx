@@ -36,7 +36,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <div className="bg-white py-12 md:py-16">
+    <div className="bg-white py-[15px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[35px] font-extrabold text-gray-900 mb-4">
           Our <span className="text-brand-red">Dental</span> Services

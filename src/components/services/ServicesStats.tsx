@@ -3,7 +3,7 @@ import { Smile, Shield, Triangle, Star } from 'lucide-react';
 
 export default function ServicesStats() {
   return (
-    <div className="bg-white py-12 md:py-16">
+    <div className="bg-white py-[15px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           

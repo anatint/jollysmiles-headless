@@ -3,7 +3,7 @@ import { ArrowRight, Star } from 'lucide-react';
 
 export default function ServicesHero() {
   return (
-    <div className="relative bg-white overflow-hidden lg:min-h-[450px] flex items-center pt-8 lg:py-0 py-12 md:py-16">
+    <div className="relative bg-white overflow-hidden lg:min-h-[450px] flex items-center pt-8 lg:py-0 py-[15px]">
       
       {/* Decorative background shape on left */}
       <div className="absolute top-0 left-0 w-full lg:w-[65%] h-full bg-gradient-to-br from-red-50/80 to-transparent lg:rounded-br-[150px] -z-10 pointer-events-none">
@@ -15,7 +15,7 @@ export default function ServicesHero() {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
           
           {/* Left Text Content */}
-          <div className="flex-1 max-w-2xl lg:pt-0 py-12 md:py-16">
+          <div className="flex-1 max-w-2xl lg:pt-0 py-[15px]">
             <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">
               Expert Care. Beautiful Smiles.
             </h4>

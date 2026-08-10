@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function TechnologiesHero() {
   return (
-    <section className="relative w-full min-h-[400px] md:min-h-[450px] flex items-center overflow-hidden bg-gray-50 md:py-8 py-12 md:py-16">
+    <section className="relative w-full min-h-[400px] md:min-h-[450px] flex items-center overflow-hidden bg-gray-50 md:py-8 py-[15px]">
       
       {/* Background Banner Image */}
       <div className="absolute inset-0 z-0">

@@ -83,7 +83,7 @@ export default function AppointmentModal() {
         </div>
 
         {submitted ? (
-          <div className="text-center space-y-4 py-12 md:py-16">
+          <div className="text-center space-y-4 py-[15px]">
             <div className="w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto shadow-sm">
               <ShieldCheck className="w-8 h-8" />
             </div>

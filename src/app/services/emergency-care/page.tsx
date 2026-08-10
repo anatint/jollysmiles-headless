@@ -50,7 +50,7 @@ export default function EmergencyCarePage() {
     <div className="bg-white font-sans">
       
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-12 md:py-16">
+      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-[15px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-8">
             
@@ -99,7 +99,7 @@ export default function EmergencyCarePage() {
       </section>
 
       {/* Intro Section */}
-      <section className="bg-white border-t border-gray-50 py-12 md:py-16">
+      <section className="bg-white border-t border-gray-50 py-[15px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase">
             URGENT CARE
@@ -115,7 +115,7 @@ export default function EmergencyCarePage() {
       </section>
 
       {/* Sub-Services List */}
-      <section className="py-8 bg-white space-y-8">
+      <section className="bg-white space-y-8 py-[15px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {subServices.map((sub, idx) => (
             <div 
