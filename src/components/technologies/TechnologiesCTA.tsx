@@ -1,3 +1,4 @@
+"use client";
 import { CalendarDays, Phone } from 'lucide-react';
 import { useModal } from '@/context/ModalContext';
 import Link from 'next/link';
