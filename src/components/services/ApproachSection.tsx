@@ -2,7 +2,7 @@ import { Heart, Stethoscope, Smile } from 'lucide-react';
 
 export default function ApproachSection() {
   return (
-    <div className="bg-[#cc3939] rounded-t-3xl sm:rounded-t-[3rem] shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.15)] mx-4 sm:mx-8 py-[25px]">
+    <div className="bg-[#cc3939] rounded-t-3xl sm:rounded-t-[3rem] shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.15)] mx-4 sm:mx-8 py-[30px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}

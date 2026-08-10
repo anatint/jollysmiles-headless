@@ -3,7 +3,7 @@ import BeforeAfterSlider from './BeforeAfterSlider';
 
 export default function TransformationsSection() {
   return (
-    <div className="bg-gray-50 border-t border-gray-100 py-[25px]">
+    <div className="bg-gray-50 border-t border-gray-100 py-[30px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
           <div>
