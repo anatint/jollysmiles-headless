@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function ContactMap() {
   return (
-    <div className="bg-white py-[15px]">
+    <div className="bg-white py-[25px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[5/2] rounded-3xl overflow-hidden shadow-xl border border-gray-100">

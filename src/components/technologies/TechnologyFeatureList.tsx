@@ -42,7 +42,7 @@ const features = [
 
 export default function TechnologyFeatureList() {
   return (
-    <section className="bg-white py-[15px]">
+    <section className="bg-white py-[25px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

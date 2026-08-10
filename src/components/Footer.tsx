@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-dark text-white pb-8 py-[15px]">
+    <footer className="bg-brand-dark text-white pb-8 py-[25px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-8">
           
@@ -80,7 +80,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-red-100 py-[15px]">
+        <div className="border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-red-100 py-[25px]">
           <p>© {new Date().getFullYear()} Jolly Smiles. All rights reserved.</p>
           <div className="flex space-x-6">
             <Link href="#" className="hover:text-white">Privacy Policy</Link>

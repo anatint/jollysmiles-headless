@@ -12,7 +12,7 @@ export default function BlogHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent md:w-3/4" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 py-[15px]">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 py-[25px]">
         <div className="max-w-2xl">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight">
             Our <span className="text-brand-red">Blog</span>
