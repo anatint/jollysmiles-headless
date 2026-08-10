@@ -37,6 +37,8 @@ export default function HeroSection() {
               Free Consultation <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </div>
+          {/* Spacer to prevent floating badges from overlapping buttons */}
+          <div className="h-10 lg:h-16"></div>
         </div>
       </div>
 
