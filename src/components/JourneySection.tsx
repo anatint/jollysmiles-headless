@@ -29,7 +29,7 @@ const steps = [
 
 export default function JourneySection() {
   return (
-    <div className="bg-gray-50 border-t border-gray-100 py-[25px]">
+    <div className="bg-gray-50 border-t border-gray-100 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[35px] font-extrabold text-gray-900 mb-4">
           Your <span className="text-brand-red">Smile</span> Journey

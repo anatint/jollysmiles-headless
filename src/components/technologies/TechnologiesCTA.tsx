@@ -1,8 +1,11 @@
 import { CalendarDays, Phone } from 'lucide-react';
+import { useModal } from '@/context/ModalContext';
+import Link from 'next/link';
 
 export default function TechnologiesCTA() {
+  const { openAppointmentModal } = useModal();
   return (
-    <section className="py-6 bg-white py-[25px]">
+    <section className="py-6 bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-red-50 rounded-2xl p-6 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8 border border-red-100">
           
@@ -21,13 +24,16 @@ export default function TechnologiesCTA() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-            <button className="bg-brand-red text-white hover:bg-brand-dark px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-md text-sm whitespace-nowrap">
+            <button 
+              onClick={openAppointmentModal}
+              className="bg-brand-red text-white hover:bg-brand-dark px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-md text-sm whitespace-nowrap"
+            >
               Book Appointment
             </button>
-            <button className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-sm whitespace-nowrap">
+            <Link href="/contact" className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-sm whitespace-nowrap">
               <Phone className="w-4 h-4" />
-              302 DR-TEETH (378-3384)
-            </button>
+              Contact Us
+            </Link>
           </div>
           
         </div>

@@ -83,7 +83,7 @@ export default function AppointmentModal() {
         </div>
 
         {submitted ? (
-          <div className="text-center space-y-4 py-[25px]">
+          <div className="text-center space-y-4 py-[50px]">
             <div className="w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto shadow-sm">
               <ShieldCheck className="w-8 h-8" />
             </div>
@@ -215,7 +215,7 @@ export default function AppointmentModal() {
             </button>
 
             {/* Privacy Disclaimer */}
-            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 pt-2 border-t border-gray-100">
+            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 border-t border-gray-100">
               <ShieldCheck className="w-4 h-4 text-brand-red/75" />
               <span>We respect your privacy. Your information is safe with us.</span>
             </div>

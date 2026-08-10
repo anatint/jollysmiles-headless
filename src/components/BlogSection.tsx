@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-
+import Link from 'next/link';
 const articles = [
   {
     date: "May 18, 2024",
@@ -25,7 +25,7 @@ const articles = [
 
 export default function BlogSection() {
   return (
-    <div className="bg-gray-50 border-t border-gray-100 py-[25px]">
+    <div className="bg-gray-50 border-t border-gray-100 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
@@ -34,9 +34,9 @@ export default function BlogSection() {
             </h2>
             <p className="text-gray-600 text-lg">Expert advice for a healthier smile</p>
           </div>
-          <a href="#" className="mt-6 md:mt-0 text-brand-red font-bold text-xs tracking-wider uppercase flex items-center hover:text-red-700 transition-colors">
+          <Link href="/blog" className="mt-6 md:mt-0 text-brand-red font-bold text-xs tracking-wider uppercase flex items-center hover:text-red-700 transition-colors">
             View All Articles <ArrowRight className="w-4 h-4 ml-2" />
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

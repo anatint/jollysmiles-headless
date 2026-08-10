@@ -2,6 +2,7 @@
 import { ArrowRight, Star, Award, Shield, Smile } from 'lucide-react';
 import Image from 'next/image';
 import { useModal } from '@/context/ModalContext';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const { openAppointmentModal } = useModal();
@@ -13,7 +14,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/10 md:via-white/60 md:to-transparent"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 py-[25px]">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[100px] pb-[80px]">
         <div className="max-w-3xl">
           <div className="inline-block bg-white border border-brand-red text-brand-red font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-6 rounded shadow-sm">
             Delaware's Trusted Dental Care
@@ -32,9 +33,9 @@ export default function HeroSection() {
             >
               Book An Appointment
             </button>
-            <button className="w-full sm:w-auto bg-white border-[2px] border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs">
+            <Link href="/contact" className="w-full sm:w-auto bg-white border-[2px] border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs">
               Free Consultation <ArrowRight className="ml-2 w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -101,9 +102,6 @@ export default function HeroSection() {
 
         </div>
       </div>
-      
-      {/* Spacer to push the next section down if needed */}
-      <div className="h-12 lg:h-24"></div>
     </div>
   );
 }

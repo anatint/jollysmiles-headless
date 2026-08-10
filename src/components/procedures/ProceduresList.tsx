@@ -72,7 +72,7 @@ const stats = [
 
 export default function ProceduresList() {
   return (
-    <section className="pt-8 pb-8 bg-white py-[25px]">
+    <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -151,7 +151,7 @@ export default function ProceduresList() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2.5 text-gray-500 text-xs mt-6 pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-2.5 text-gray-500 text-xs mt-6 border-t border-gray-100">
                   <Award className="w-4 h-4 text-brand-red flex-shrink-0" />
                   <span>Based on patient outcomes and satisfaction reports.</span>
                 </div>

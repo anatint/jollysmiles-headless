@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-dark text-white pb-8 py-[25px]">
+    <footer className="bg-brand-dark text-white pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
           
           {/* Brand Column */}
           <div className="lg:col-span-4 pr-0 lg:pr-8">
-            <div className="mb-6 flex justify-start -ml-3 sm:-ml-4">
-              <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain object-left brightness-0 invert" />
+            <div className="mb-6">
+              <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain" />
             </div>
             <p className="text-red-100 mb-8 leading-relaxed max-w-sm text-sm">
               Exceptional dental care is a lot closer than you think. Dr. Jeena Jolly’s general dentistry and cosmetic dentistry practice in Middletown, DE is easily accessible to patients throughout the area.
@@ -80,7 +80,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-red-100 py-[25px]">
+        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-red-100">
           <p>© {new Date().getFullYear()} Jolly Smiles. All rights reserved.</p>
           <div className="flex space-x-6">
             <Link href="#" className="hover:text-white">Privacy Policy</Link>
