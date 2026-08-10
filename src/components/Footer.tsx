@@ -10,7 +10,7 @@ export default function Footer() {
           
           {/* Brand Column */}
           <div className="lg:col-span-4 pr-0 lg:pr-8">
-            <div className="mb-6 flex justify-start">
+            <div className="mb-6 flex justify-start -ml-3 sm:-ml-4">
               <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain object-left brightness-0 invert" />
             </div>
             <p className="text-red-100 mb-8 leading-relaxed max-w-sm text-sm">
