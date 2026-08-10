@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 
 export default function AboutHero() {
   return (
-    <div className="relative bg-[#fff5f5] pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
+    <div className="relative bg-[#fff5f5] pt-12 pb-12 lg:pt-10 lg:pb-32 overflow-hidden">
       
       {/* Background swoosh (simulated with large curved border radius on a decorative div) */}
       <div className="absolute -bottom-24 left-0 right-0 h-48 bg-white rounded-t-[100%] scale-[1.5] origin-bottom shadow-[0_-10px_20px_rgba(255,200,200,0.2)]"></div>

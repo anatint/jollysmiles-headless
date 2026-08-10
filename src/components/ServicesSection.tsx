@@ -36,12 +36,12 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <div className="py-12 lg:py-24 bg-white">
+    <div className="py-12 lg:py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[35px] font-extrabold text-gray-900 mb-4">
           Our <span className="text-brand-red">Dental</span> Services
         </h2>
-        <p className="text-gray-600 text-base md:text-lg mb-16 max-w-2xl mx-auto">
+        <p className="text-gray-600 text-base md:text-lg mb-8 max-w-2xl mx-auto">
           Comprehensive care for a healthy, confident smile
         </p>
 

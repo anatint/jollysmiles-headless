@@ -50,9 +50,9 @@ export default function InvisalignPage() {
     <div className="bg-white font-sans">
       
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-12 md:py-20">
+      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-12 md:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-8">
             
             {/* Left Text Column */}
             <div className="w-full lg:w-[45%] space-y-6">
@@ -110,8 +110,8 @@ export default function InvisalignPage() {
       </section>
 
       {/* Sub-Services List */}
-      <section className="py-8 bg-white space-y-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <section className="py-8 bg-white space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {subServices.map((sub, idx) => (
             <div 
               key={sub.title}

@@ -2,9 +2,9 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck } from 'lucide-reac
 
 export default function ContactFormSection() {
   return (
-    <div className="bg-white py-10 lg:py-24">
+    <div className="bg-white py-10 lg:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           
           {/* Left Column: Contact Info */}
           <div className="flex-1 lg:max-w-md mt-8">

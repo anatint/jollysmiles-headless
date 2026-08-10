@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-dark text-white pt-20 pb-8">
+    <footer className="bg-brand-dark text-white pt-10 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-8">
           
           {/* Brand Column */}
           <div className="lg:col-span-4 pr-0 lg:pr-8">
             <div className="mb-6 flex justify-start">
-              <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain object-left" />
+              <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain object-left brightness-0 invert" />
             </div>
             <p className="text-red-100 mb-8 leading-relaxed max-w-sm text-sm">
               Exceptional dental care is a lot closer than you think. Dr. Jeena Jolly’s general dentistry and cosmetic dentistry practice in Middletown, DE is easily accessible to patients throughout the area.

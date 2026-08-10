@@ -72,11 +72,11 @@ const stats = [
 
 export default function ProceduresList() {
   return (
-    <section className="pt-16 pb-8 md:pt-24 md:pb-12 bg-white">
+    <section className="pt-8 pb-8 md:pt-12 md:pb-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-4">
           <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase">
             OUR EXPERTISE
           </h4>

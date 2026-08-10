@@ -42,11 +42,11 @@ const features = [
 
 export default function TechnologyFeatureList() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <h3 className="text-brand-red font-bold text-sm tracking-[0.2em] uppercase mb-3">
             CUTTING-EDGE TECHNOLOGY
           </h3>
@@ -59,7 +59,7 @@ export default function TechnologyFeatureList() {
         </div>
 
         {/* Feature List */}
-        <div className="space-y-16 md:space-y-24">
+        <div className="space-y-8 md:space-y-12">
           {features.map((feature, index) => {
             const isEven = index % 2 === 0;
             const Icon = feature.icon;
@@ -67,7 +67,7 @@ export default function TechnologyFeatureList() {
             return (
               <div 
                 key={feature.title} 
-                className={`flex flex-col md:flex-row items-center gap-10 lg:gap-16 ${
+                className={`flex flex-col md:flex-row items-center gap-10 lg:gap-8 ${
                   isEven ? '' : 'md:flex-row-reverse'
                 }`}
               >

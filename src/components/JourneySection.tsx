@@ -29,12 +29,12 @@ const steps = [
 
 export default function JourneySection() {
   return (
-    <div className="py-10 lg:py-20 bg-gray-50 border-t border-gray-100">
+    <div className="py-10 lg:py-10 bg-gray-50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[35px] font-extrabold text-gray-900 mb-4">
           Your <span className="text-brand-red">Smile</span> Journey
         </h2>
-        <p className="text-gray-600 text-lg mb-20 max-w-2xl mx-auto">
+        <p className="text-gray-600 text-lg mb-10 max-w-2xl mx-auto">
           A simple, comfortable process designed around you
         </p>
 

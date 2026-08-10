@@ -25,10 +25,10 @@ export default function OurValues() {
   ];
 
   return (
-    <div className="bg-white py-12 pb-16 lg:py-16 lg:pb-32">
+    <div className="bg-white py-12 pb-8 lg:py-8 lg:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <h2 className="text-[35px] font-extrabold text-gray-900 mb-4">
             Our Core <span className="text-brand-red">Values</span>
           </h2>

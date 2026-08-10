@@ -25,7 +25,7 @@ const articles = [
 
 export default function BlogSection() {
   return (
-    <div className="py-12 lg:py-24 bg-gray-50 border-t border-gray-100">
+    <div className="py-12 lg:py-12 bg-gray-50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>

@@ -2,9 +2,9 @@ import { ArrowRight, Check } from 'lucide-react';
 
 export default function AboutSection() {
   return (
-    <div className="py-12 lg:py-24 bg-white overflow-hidden">
+    <div className="py-12 lg:py-12 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           
           {/* Left Column - Image */}
           <div className="relative">

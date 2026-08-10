@@ -70,7 +70,7 @@ export default function BlogPage() {
     <div className="bg-white font-sans min-h-screen">
       <BlogHero />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
           {/* Main Content Area */}

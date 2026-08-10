@@ -13,7 +13,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/10 md:via-white/60 md:to-transparent"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 lg:pt-20 lg:pb-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-10 lg:pb-32">
         <div className="max-w-3xl">
           <div className="inline-block bg-white border border-brand-red text-brand-red font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-6 rounded shadow-sm">
             Delaware's Trusted Dental Care
@@ -40,7 +40,7 @@ export default function HeroSection() {
       </div>
 
       {/* Floating Badges Container */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:-mt-16 mt-8">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:-mt-8 mt-8">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 pointer-events-none">
           
           {/* Stats Bar */}

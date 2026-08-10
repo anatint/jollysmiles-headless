@@ -2,7 +2,7 @@ import { Heart, Stethoscope, Smile } from 'lucide-react';
 
 export default function ApproachSection() {
   return (
-    <div className="bg-[#cc3939] py-12 lg:py-20 rounded-t-3xl sm:rounded-t-[3rem] shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.15)] mx-4 sm:mx-8">
+    <div className="bg-[#cc3939] py-12 lg:py-10 rounded-t-3xl sm:rounded-t-[3rem] shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.15)] mx-4 sm:mx-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
@@ -16,7 +16,7 @@ export default function ApproachSection() {
         </div>
 
         {/* 3 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8 text-center">
           
           {/* Column 1 */}
           <div className="flex flex-col items-center">

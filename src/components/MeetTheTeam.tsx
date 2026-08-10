@@ -27,10 +27,10 @@ export default function MeetTheTeam() {
   ];
 
   return (
-    <div className="bg-gray-50 py-12 lg:py-24">
+    <div className="bg-gray-50 py-12 lg:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <h4 className="text-brand-red font-bold tracking-widest text-sm uppercase mb-4">
             Our Team
           </h4>
