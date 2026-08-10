@@ -50,7 +50,7 @@ export default function DentalImplantsPage() {
     <div className="bg-white font-sans">
       
       {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-12 md:py-10">
+      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-8">
             
@@ -94,7 +94,7 @@ export default function DentalImplantsPage() {
       </section>
 
       {/* Intro Section */}
-      <section className="py-12 bg-white border-t border-gray-50">
+      <section className="bg-white border-t border-gray-50 py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
           <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase">
             OUR IMPLANT DENTISTRY CARE

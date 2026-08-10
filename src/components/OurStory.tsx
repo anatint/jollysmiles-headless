@@ -7,7 +7,7 @@ import { useModal } from '@/context/ModalContext';
 export default function OurStory() {
   const { openAppointmentModal } = useModal();
   return (
-    <div className="bg-white py-12 lg:py-12">
+    <div className="bg-white py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           

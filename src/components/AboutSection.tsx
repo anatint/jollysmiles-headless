@@ -2,7 +2,7 @@ import { ArrowRight, Check } from 'lucide-react';
 
 export default function AboutSection() {
   return (
-    <div className="py-12 lg:py-12 bg-white overflow-hidden">
+    <div className="bg-white overflow-hidden py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           

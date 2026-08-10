@@ -27,7 +27,7 @@ export default function MeetTheTeam() {
   ];
 
   return (
-    <div className="bg-gray-50 py-12 lg:py-12">
+    <div className="bg-gray-50 py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-8">
@@ -53,7 +53,7 @@ export default function MeetTheTeam() {
               />
               {/* Gradient overlay for text readability if needed, though design uses a solid white card at bottom */}
               
-              <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/20 to-transparent flex justify-center">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/20 to-transparent flex justify-center py-12 md:py-16">
                 <div className="bg-white rounded-xl py-3 px-6 text-center w-[90%] shadow-lg transform transition-transform group-hover:-translate-y-2">
                   <h3 className="font-bold text-gray-900 text-sm mb-1">{member.name}</h3>
                   <p className="text-gray-500 text-xs">{member.role}</p>

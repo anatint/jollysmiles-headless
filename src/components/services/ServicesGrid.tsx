@@ -88,7 +88,7 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <div className="bg-gray-50 py-12 lg:py-10">
+    <div className="bg-gray-50 py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -127,7 +127,7 @@ export default function ServicesGrid() {
               </div>
 
               {/* Content */}
-              <div className="pt-12 px-6 flex-grow flex flex-col items-center">
+              <div className="px-6 flex-grow flex flex-col items-center py-12 md:py-16">
                 <h3 className="font-bold text-xl text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow text-center">
                   {service.description}

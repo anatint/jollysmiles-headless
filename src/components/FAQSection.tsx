@@ -19,7 +19,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="py-12 lg:py-12 bg-white">
+    <div className="bg-white py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-[35px] font-extrabold text-gray-900">

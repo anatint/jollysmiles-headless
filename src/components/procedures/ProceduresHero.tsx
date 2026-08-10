@@ -4,7 +4,7 @@ import { Clock, Star } from 'lucide-react';
 
 export default function ProceduresHero() {
   return (
-    <div className="relative bg-white overflow-hidden lg:min-h-[500px] flex items-center pt-8 pb-12 lg:py-0">
+    <div className="relative bg-white overflow-hidden lg:min-h-[500px] flex items-center pt-8 lg:py-0 py-12 md:py-16">
       
       {/* Decorative background shape on left */}
       <div className="absolute top-0 left-0 w-full lg:w-[65%] h-full bg-gradient-to-br from-red-50/80 to-transparent lg:rounded-br-[150px] -z-10 pointer-events-none">
@@ -15,7 +15,7 @@ export default function ProceduresHero() {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
           
           {/* Left Text Content */}
-          <div className="flex-1 max-w-2xl pt-10 lg:pt-0">
+          <div className="flex-1 max-w-2xl lg:pt-0 py-12 md:py-16">
             {/* Breadcrumbs */}
             <div className="flex items-center space-x-2 text-xs text-gray-500 mb-6 font-medium">
               <Link href="/" className="hover:text-brand-red transition">Home</Link>

@@ -14,7 +14,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <div className="bg-white pt-12 pb-6 lg:pt-12 lg:pb-12 overflow-hidden relative">
+    <div className="bg-white pb-6 overflow-hidden relative py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           
