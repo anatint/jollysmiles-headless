@@ -10,8 +10,8 @@ export default function Footer() {
           
           {/* Brand Column */}
           <div className="lg:col-span-4 pr-0 lg:pr-8">
-            <div className="mb-6">
-              <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain" />
+            <div className="mb-6 flex justify-start">
+              <Image src="/logo.png" alt="Jolly Smiles" width={120} height={48} className="object-contain object-left" />
             </div>
             <p className="text-red-100 mb-8 leading-relaxed max-w-sm text-sm">
               Exceptional dental care is a lot closer than you think. Dr. Jeena Jolly’s general dentistry and cosmetic dentistry practice in Middletown, DE is easily accessible to patients throughout the area.
