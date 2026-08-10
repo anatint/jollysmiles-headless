@@ -13,7 +13,7 @@ export default function ContactHero() {
         <div className="flex flex-col lg:flex-row items-center">
           
           {/* Left Text Column */}
-          <div className="flex-1 lg:pr-12 pb-8 lg:py-8 z-10 relative py-[30px]">
+          <div className="flex-1 lg:pr-12 pb-8 lg:py-8 z-10 relative py-[25px]">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight">
               Contact <span className="text-brand-red">Us</span>
             </h1>

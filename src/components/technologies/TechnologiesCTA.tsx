@@ -2,7 +2,7 @@ import { CalendarDays, Phone } from 'lucide-react';
 
 export default function TechnologiesCTA() {
   return (
-    <section className="py-6 bg-white py-[30px]">
+    <section className="py-6 bg-white py-[25px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-red-50 rounded-2xl p-6 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8 border border-red-100">
           

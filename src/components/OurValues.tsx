@@ -25,7 +25,7 @@ export default function OurValues() {
   ];
 
   return (
-    <div className="bg-white pb-8 lg:py-8 py-[30px]">
+    <div className="bg-white pb-8 lg:py-8 py-[25px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="text-center max-w-2xl mx-auto mb-8">
