@@ -2,9 +2,21 @@
 import { CalendarDays, Phone } from 'lucide-react';
 import { useModal } from '@/context/ModalContext';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function CTABanner() {
   const { openAppointmentModal } = useModal();
+  const pathname = usePathname();
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/contact') {
+      e.preventDefault();
+      const formElement = document.getElementById('contact-form');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   return (
     <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,7 +43,11 @@ export default function CTABanner() {
             >
               Book Appointment
             </button>
-            <Link href="/contact#contact-form" className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-[13px] whitespace-nowrap">
+            <Link 
+              href="/contact#contact-form" 
+              onClick={handleContactClick}
+              className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-[13px] whitespace-nowrap"
+            >
               <Phone className="w-3.5 h-3.5" />
               Contact Us
             </Link>
