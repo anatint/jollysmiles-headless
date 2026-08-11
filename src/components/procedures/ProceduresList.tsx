@@ -36,24 +36,6 @@ const procedures = [
     description: "Conservative restorations for decayed teeth.",
     icon: Layers,
     link: "#"
-  },
-  {
-    title: "TMJ Treatment",
-    description: "Relief from jaw pain, tension and headaches.",
-    icon: Activity,
-    link: "#"
-  },
-  {
-    title: "Dental Sealants",
-    description: "Protect teeth from cavities and decay.",
-    icon: Shield,
-    link: "#"
-  },
-  {
-    title: "Smile Gallery",
-    description: "See real patient transformations.",
-    icon: Smile,
-    link: "#"
   }
 ];
 
