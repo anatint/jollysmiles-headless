@@ -8,8 +8,6 @@ export default function CTABanner() {
   const { openAppointmentModal } = useModal();
   const pathname = usePathname();
 
-  const pathname = usePathname();
-
   return (
     <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
