@@ -1,8 +1,12 @@
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+"use client";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className="bg-brand-dark text-white pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +42,7 @@ export default function Footer() {
               <li><Link href="/services" className="hover:text-white hover:underline transition-colors">Services</Link></li>
               <li><Link href="/technologies" className="hover:text-white hover:underline transition-colors">Technologies</Link></li>
               <li><Link href="/blog" className="hover:text-white hover:underline transition-colors">Blog</Link></li>
-              <li><Link href="/contact#contact-form" className="hover:text-white hover:underline transition-colors">Contact Us</Link></li>
+              <li><Link href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'} className="hover:text-white hover:underline transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 

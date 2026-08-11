@@ -46,7 +46,7 @@ export default function Header() {
               <Link href="/technologies" className={`font-medium hover:text-brand-red transition ${pathname === '/technologies' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Technologies</Link>
 
               <Link href="/blog" className={`font-medium hover:text-brand-red transition ${pathname === '/blog' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Blog</Link>
-              <Link href="/contact#contact-form" className={`font-medium hover:text-brand-red transition ${pathname === '/contact' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Contact Us</Link>
+              <Link href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'} className={`font-medium hover:text-brand-red transition ${pathname === '/contact' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Contact Us</Link>
             </nav>
 
             <button 
@@ -80,7 +80,7 @@ export default function Header() {
           <Link href="/technologies" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Technologies</Link>
 
           <Link href="/blog" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Blog</Link>
-          <Link href="/contact#contact-form" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Contact Us</Link>
+          <Link href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'} className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Contact Us</Link>
           <button 
             onClick={() => {
               setIsMobileMenuOpen(false);
