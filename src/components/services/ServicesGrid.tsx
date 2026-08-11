@@ -66,15 +66,7 @@ const services = [
     image: "/after-4.jpg",
     link: "/services/cosmetic-dentistry"
   },
-  {
-    title: "Full Mouth Reconstruction",
-    description: "Restore function, aesthetics, and confidence with a customized treatment plan.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"/><path d="M15 7h6v6"/></svg>
-    ),
-    image: "/before-4.jpg",
-    link: "#"
-  },
+
   {
     title: "LANAP Treatment",
     description: "Advanced laser treatment to treat gum disease and save your teeth with minimal discomfort.",

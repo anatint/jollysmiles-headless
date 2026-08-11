@@ -31,7 +31,7 @@ export default function CTABanner() {
             >
               Book Appointment
             </button>
-            <Link href="/contact" className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-[13px] whitespace-nowrap">
+            <Link href="/contact#contact-form" className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-[13px] whitespace-nowrap">
               <Phone className="w-3.5 h-3.5" />
               Contact Us
             </Link>

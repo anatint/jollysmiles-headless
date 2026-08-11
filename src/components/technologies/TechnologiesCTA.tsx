@@ -31,7 +31,7 @@ export default function TechnologiesCTA() {
             >
               Book Appointment
             </button>
-            <Link href="/contact" className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-sm whitespace-nowrap">
+            <Link href="/contact#contact-form" className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 text-sm whitespace-nowrap">
               <Phone className="w-4 h-4" />
               Contact Us
             </Link>
