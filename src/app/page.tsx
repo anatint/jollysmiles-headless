@@ -13,8 +13,13 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import FAQSection from "@/components/FAQSection";
 import CTABanner from "@/components/CTABanner";
+import { getCollectionItems } from "@/lib/wix";
 
-export default function Home() {
+export const revalidate = 0;
+
+export default async function Home() {
+  const testimonialsData = await getCollectionItems('Testimonials');
+
   return (
     <>
       <HeroSection />
@@ -22,7 +27,7 @@ export default function Home() {
       <JourneySection />
       <AboutSection />
       <TransformationsSection />
-      <TestimonialsSection />
+      <TestimonialsSection data={testimonialsData} />
       <BlogSection />
       <FAQSection />
       <CTABanner />

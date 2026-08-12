@@ -11,8 +11,13 @@ import MeetTheTeam from '@/components/MeetTheTeam';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import CTABanner from '@/components/CTABanner';
+import { getCollectionItems } from "@/lib/wix";
 
-export default function AboutPage() {
+export const revalidate = 0;
+
+export default async function AboutPage() {
+  const testimonialsData = await getCollectionItems('Testimonials');
+
   return (
     <div className="bg-white font-sans">
       {/* New About Us Components */}
@@ -23,7 +28,7 @@ export default function AboutPage() {
       <WhyChooseUs />
       
       {/* Reused Homepage Components */}
-      <TestimonialsSection />
+      <TestimonialsSection data={testimonialsData} />
       <CTABanner />
     </div>
   );

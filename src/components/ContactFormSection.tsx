@@ -1,6 +1,42 @@
 import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
+// Force rebuild comment
 
-export default function ContactFormSection() {
+export interface ContactSettingsData {
+  heading?: string;
+  subheading?: string;
+  description?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  formFields?: {
+    fields: Array<{
+      name: string;
+      label: string;
+      type: string;
+      required: boolean;
+      options?: string[];
+    }>;
+  };
+  officeHours?: {
+    schedule: Array<{
+      days: string;
+      hours: string;
+    }>;
+  };
+}
+
+export default function ContactFormSection({ data }: { data?: ContactSettingsData }) {
+  const formFields = data?.formFields?.fields || [];
+  const officeHours = data?.officeHours?.schedule || [];
+
+  // Fallbacks in case data isn't loaded yet
+  const heading = data?.heading || "Ready to perfect your smile?";
+  const subheading = data?.subheading || "GET IN TOUCH";
+  const description = data?.description || "Fill out the form or use our contact details.<br/>Our team will get back to you as soon as possible.";
+  const phone = data?.phone || "302 DR-TEETH (378-3384)";
+  const email = data?.email || "drteeth@jollysmiles.com";
+  const address = data?.address || "102 Sleepy Hollow Drive, Suite 100, Middletown, DE 19709";
+
   return (
     <div id="contact-form" className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,15 +45,16 @@ export default function ContactFormSection() {
           {/* Left Column: Contact Info */}
           <div className="flex-1 lg:max-w-md mt-8">
             <h4 className="text-brand-red font-bold tracking-widest text-xs uppercase mb-4">
-              GET IN TOUCH
+              {subheading}
             </h4>
-            <h2 className="text-[35px] font-extrabold text-gray-900 mb-6 leading-tight">
-              Ready to perfect <br />
-              <span className="text-brand-red">your smile?</span>
-            </h2>
-            <p className="text-gray-600 text-base md:text-lg mb-12 max-w-md leading-relaxed">
-              Fill out the form or use our contact details.<br/>Our team will get back to you as soon as possible.
-            </p>
+            <h2 
+              className="text-[35px] font-extrabold text-gray-900 mb-6 leading-tight"
+              dangerouslySetInnerHTML={{ __html: heading.replace('your smile?', '<span class="text-brand-red">your smile?</span>') }}
+            />
+            <div 
+              className="text-gray-600 text-base md:text-lg mb-12 max-w-md leading-relaxed prose prose-sm"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
 
             <div className="space-y-8">
               {/* Call Us */}
@@ -27,8 +64,7 @@ export default function ContactFormSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 text-sm mb-1">Call Us</h4>
-                  <p className="text-gray-600 text-sm mb-1">302 DR-TEETH (378-3384)</p>
-                  <p className="text-gray-500 text-xs font-medium">Mon - Fri: 9:00 AM - 5:00 PM</p>
+                  <p className="text-gray-600 text-sm mb-1">{phone}</p>
                 </div>
               </div>
 
@@ -39,7 +75,7 @@ export default function ContactFormSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 text-sm mb-1">Email Us</h4>
-                  <p className="text-gray-600 text-sm mb-1">drteeth@jollysmiles.com</p>
+                  <p className="text-gray-600 text-sm mb-1">{email}</p>
                   <p className="text-gray-500 text-xs font-medium">We reply within 24 hours</p>
                 </div>
               </div>
@@ -51,8 +87,10 @@ export default function ContactFormSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 text-sm mb-1">Visit Us</h4>
-                  <p className="text-gray-600 text-sm mb-1">102 Sleepy Hollow Drive, Suite 100,</p>
-                  <p className="text-gray-600 text-sm">Middletown, DE 19709</p>
+                  <div 
+                    className="text-gray-600 text-sm prose prose-sm"
+                    dangerouslySetInnerHTML={{ __html: address }}
+                  />
                 </div>
               </div>
 
@@ -63,8 +101,18 @@ export default function ContactFormSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 text-sm mb-1">Office Hours</h4>
-                  <p className="text-gray-600 text-sm mb-1">Mon - Fri: 9:00 AM - 5:00 PM</p>
-                  <p className="text-gray-600 text-sm">Sat - Sun: Closed</p>
+                  {officeHours.length > 0 ? (
+                    officeHours.map((oh, idx) => (
+                      <p key={idx} className="text-gray-600 text-sm mb-1">
+                        {oh.days}: {oh.hours}
+                      </p>
+                    ))
+                  ) : (
+                    <>
+                      <p className="text-gray-600 text-sm mb-1">Mon - Fri: 9:00 AM - 5:00 PM</p>
+                      <p className="text-gray-600 text-sm">Sat - Sun: Closed</p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -78,56 +126,54 @@ export default function ContactFormSection() {
               </h3>
               
               <form className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <input 
-                      type="text" 
-                      placeholder="Full Name*" 
-                      className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <input 
-                      type="tel" 
-                      placeholder="Phone Number*" 
-                      className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700"
-                      required
-                    />
-                  </div>
-                </div>
+                {formFields.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {formFields.map((field, idx) => {
+                      if (field.type === 'textarea') {
+                        return (
+                          <div key={idx} className="col-span-1 md:col-span-2">
+                            <textarea 
+                              placeholder={`${field.label}${field.required ? '*' : ''}`} 
+                              rows={6}
+                              className="w-full px-5 py-4 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700 resize-none"
+                              required={field.required}
+                            ></textarea>
+                          </div>
+                        );
+                      }
+                      
+                      if (field.type === 'select') {
+                        return (
+                          <div key={idx} className="col-span-1 md:col-span-2">
+                            <select 
+                              className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700 appearance-none"
+                              required={field.required}
+                              defaultValue=""
+                            >
+                              <option value="" disabled>{field.label}{field.required ? '*' : ''}</option>
+                              {field.options?.map((opt, oIdx) => (
+                                <option key={oIdx} value={opt}>{opt}</option>
+                              ))}
+                            </select>
+                          </div>
+                        );
+                      }
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <input 
-                      type="email" 
-                      placeholder="Email Address*" 
-                      className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700"
-                      required
-                    />
+                      return (
+                        <div key={idx} className="col-span-1">
+                          <input 
+                            type={field.type} 
+                            placeholder={`${field.label}${field.required ? '*' : ''}`} 
+                            className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700"
+                            required={field.required}
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
-                  <div>
-                    <select 
-                      className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700 appearance-none"
-                      required
-                      defaultValue=""
-                    >
-                      <option value="" disabled>Subject*</option>
-                      <option value="appointment">Book an Appointment</option>
-                      <option value="inquiry">General Inquiry</option>
-                      <option value="feedback">Feedback</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <textarea 
-                    placeholder="How can we help you?*" 
-                    rows={6}
-                    className="w-full px-5 py-4 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700 resize-none"
-                    required
-                  ></textarea>
-                </div>
+                ) : (
+                  <p className="text-gray-500">Form fields loading...</p>
+                )}
 
                 <button 
                   type="submit"

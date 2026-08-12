@@ -2,7 +2,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 
-export default function ContactHero() {
+interface ContactHeroProps {
+  data?: {
+    heroHeading?: string;
+    heroSubheading?: string;
+    heroDescription?: string;
+    heroImage?: string;
+  };
+}
+
+export default function ContactHero({ data }: ContactHeroProps) {
+  // Fallbacks if data is not loaded
+  const heading = data?.heroHeading || "Contact <span class=\"text-brand-red\">Us</span>";
+  const subheading = data?.heroSubheading || "We're here to help you smile brighter.";
+  const description = data?.heroDescription || "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!";
+  const image = data?.heroImage || "/clinic-reception.png";
+
   return (
     <div className="relative bg-white overflow-hidden min-h-[400px] flex flex-col lg:flex-row items-center">
       
@@ -14,15 +29,17 @@ export default function ContactHero() {
           
           {/* Left Text Column */}
           <div className="flex-1 lg:pr-12 lg:py-8 z-10 relative py-[50px]">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight">
-              Contact <span className="text-brand-red">Us</span>
-            </h1>
+            <h1 
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight"
+              dangerouslySetInnerHTML={{ __html: heading }}
+            />
             <h2 className="text-lg lg:text-2xl font-bold text-gray-800 mb-6">
-              We're here to help you smile brighter.
+              {subheading}
             </h2>
-            <p className="text-base lg:text-lg text-gray-600 mb-10 leading-relaxed max-w-lg">
-              Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!
-            </p>
+            <div 
+              className="text-base lg:text-lg text-gray-600 mb-10 leading-relaxed max-w-lg prose prose-sm"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
             
             {/* Breadcrumb */}
             <div className="flex items-center text-sm font-medium text-brand-red">
@@ -40,7 +57,7 @@ export default function ContactHero() {
         {/* Soft gradient fade on the left edge of the image to blend into the white background */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
         <Image 
-          src="/clinic-reception.png" 
+          src={image} 
           alt="Jolly Smiles Clinic Reception" 
           fill 
           className="object-cover object-left"
@@ -51,7 +68,7 @@ export default function ContactHero() {
       {/* Mobile Image (Visible only on small screens) */}
       <div className="lg:hidden w-full h-[300px] relative mt-auto">
         <Image 
-          src="/clinic-reception.png" 
+          src={image} 
           alt="Jolly Smiles Clinic Reception" 
           fill 
           className="object-cover"
