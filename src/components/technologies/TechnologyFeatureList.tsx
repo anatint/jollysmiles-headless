@@ -40,7 +40,27 @@ const features = [
   }
 ];
 
-export default function TechnologyFeatureList() {
+export default function TechnologyFeatureList({ data }: { data?: any[] }) {
+  const displayFeatures = data && data.length > 0 
+    ? data.filter(f => f.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map((f, idx) => {
+        let IconComponent = Target;
+        if (f.icon === 'camera') IconComponent = Camera;
+        else if (f.icon === 'scan') IconComponent = Scan;
+        else if (f.icon === 'zap') IconComponent = Zap;
+        else if (f.icon === 'droplet') IconComponent = Droplet;
+        else if (f.icon === 'activity') IconComponent = Activity;
+        else if (f.icon === 'target') IconComponent = Target;
+
+        return {
+          title: f.title,
+          description: f.description,
+          icon: IconComponent,
+          imagePlaceholder: f.image ? null : `${f.title} Image`,
+          image: f.image
+        } as any;
+      })
+    : features as any[];
+
   return (
     <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,7 +80,7 @@ export default function TechnologyFeatureList() {
 
         {/* Feature List */}
         <div className="space-y-8 md:space-y-12">
-          {features.map((feature, index) => {
+          {displayFeatures.map((feature, index) => {
             const isEven = index % 2 === 0;
             const Icon = feature.icon;
 
@@ -76,10 +96,11 @@ export default function TechnologyFeatureList() {
                 <div className="w-full md:w-1/2">
                   <div className="aspect-[4/3] bg-gray-50 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-center p-8 relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-tr from-gray-50 to-white opacity-50"></div>
-                    <span className="text-gray-400 font-medium z-10 text-center">{feature.imagePlaceholder}</span>
-                    
-                    {/* Add Image component here when assets are ready */}
-                    {/* <Image src={`/images/tech-${index}.jpg`} alt={feature.title} fill className="object-contain" /> */}
+                    {feature.image ? (
+                      <img src={feature.image} alt={feature.title} className="w-full h-full object-cover relative z-10 rounded-xl" />
+                    ) : (
+                      <span className="text-gray-400 font-medium z-10 text-center">{feature.imagePlaceholder}</span>
+                    )}
                   </div>
                 </div>
 
@@ -93,9 +114,7 @@ export default function TechnologyFeatureList() {
                     {feature.title}
                   </h3>
                   
-                  <p className="text-gray-600 leading-relaxed text-lg">
-                    {feature.description}
-                  </p>
+                  <div className="text-gray-600 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: feature.description }} />
                 </div>
 
               </div>

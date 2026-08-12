@@ -8,11 +8,17 @@ export const metadata: Metadata = {
   description: "Meet our dedicated dental experts at Jolly Smiles. Our highly skilled, compassionate dentists and hygienists provide personalized, gentle care in Middletown, DE.",
 };
 
-export default function TeamPage() {
+import { getCollectionItems } from "@/lib/wix";
+
+export const revalidate = 0;
+
+export default async function TeamPage() {
+  const teamData = await getCollectionItems('TeamMembers');
+
   return (
     <div className="bg-white font-sans">
       <TeamHero />
-      <TeamGrid />
+      <TeamGrid data={teamData} />
       <CTABanner />
     </div>
   );

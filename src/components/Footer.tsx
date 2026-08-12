@@ -3,8 +3,48 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Footer() {
+export default function Footer({ settings, navigation }: { settings?: any, navigation?: any[] }) {
   const pathname = usePathname();
+
+  // If no dynamic navigation is provided or it's empty, use a fallback
+  const navItems = navigation && navigation.length > 0 
+    ? navigation.filter(n => n.visible !== false && n.location !== 'header').sort((a, b) => (a.order || 0) - (b.order || 0))
+    : [
+        { label: 'Home', url: '/' },
+        { label: 'About Us', url: '/about' },
+        { label: 'Services', url: '/services' },
+        { label: 'Technologies', url: '/technologies' },
+        { label: 'Blog', url: '/blog' },
+        { label: 'Contact Us', url: '/contact' }
+      ];
+
+  const phone = settings?.phone || "302 DR-TEETH (378-3384)";
+  const email = settings?.email || "drteeth@jollysmiles.com";
+
+  // Address
+  let addressLine1 = "102 Sleepy Hollow Drive, Suite 100";
+  let addressLine2 = "Middletown, DE 19709";
+  if (settings?.address) {
+    try {
+      // If address is stored as HTML or string
+      const parsedAddress = settings.address.replace(/<[^>]*>?/gm, '');
+      if (parsedAddress.length > 5) {
+        addressLine1 = parsedAddress;
+        addressLine2 = "";
+      }
+    } catch(e) {}
+  }
+
+  // Office Hours
+  let hours = "Mon - Fri: 9AM - 5PM";
+  if (settings?.officeHours) {
+    try {
+      const parsedHours = typeof settings.officeHours === 'string' ? JSON.parse(settings.officeHours) : settings.officeHours;
+      if (parsedHours && parsedHours.length > 0) {
+        hours = `${parsedHours[0].days}: ${parsedHours[0].hours}`;
+      }
+    } catch(e) {}
+  }
 
   return (
     <footer className="bg-brand-dark text-white pt-20 pb-8">
@@ -33,12 +73,16 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h3 className="font-bold text-lg mb-6 uppercase tracking-wider text-white">Quick Links</h3>
             <ul className="space-y-3 text-red-100">
-              <li><Link href="/" className="hover:text-white hover:underline transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-white hover:underline transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-white hover:underline transition-colors">Services</Link></li>
-              <li><Link href="/technologies" className="hover:text-white hover:underline transition-colors">Technologies</Link></li>
-              <li><Link href="/blog" className="hover:text-white hover:underline transition-colors">Blog</Link></li>
-              <li><Link href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'} className="hover:text-white hover:underline transition-colors">Contact Us</Link></li>
+              {navItems.map((item, idx) => (
+                <li key={idx}>
+                  <Link 
+                    href={item.url === '/contact' ? (pathname === '/contact' ? '#contact-form' : '/contact#contact-form') : item.url} 
+                    className="hover:text-white hover:underline transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -60,19 +104,19 @@ export default function Footer() {
             <ul className="space-y-4 text-red-100">
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 mr-3 mt-1 flex-shrink-0" />
-                <span className="leading-tight">102 Sleepy Hollow Drive, Suite 100<br/>Middletown, DE 19709</span>
+                <span className="leading-tight">{addressLine1}<br/>{addressLine2}</span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 flex-shrink-0" />
-                <span>302 DR-TEETH (378-3384)</span>
+                <span>{phone}</span>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 flex-shrink-0" />
-                <span className="break-all text-sm">drteeth@jollysmiles.com</span>
+                <span className="break-all text-sm">{email}</span>
               </li>
               <li className="flex items-center">
                 <Clock className="w-5 h-5 mr-3 flex-shrink-0" />
-                <span>Mon - Fri: 9AM - 5PM</span>
+                <span>{hours}</span>
               </li>
             </ul>
           </div>
@@ -81,7 +125,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-red-100">
-          <p>© {new Date().getFullYear()} Jolly Smiles. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {settings?.siteName || "Jolly Smiles"}. All rights reserved.</p>
           <div className="flex space-x-6">
             <Link href="#" className="hover:text-white">Privacy Policy</Link>
             <Link href="#" className="hover:text-white">Terms of Service</Link>

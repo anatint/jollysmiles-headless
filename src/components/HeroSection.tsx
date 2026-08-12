@@ -4,37 +4,42 @@ import Image from 'next/image';
 import { useModal } from '@/context/ModalContext';
 import Link from 'next/link';
 
-export default function HeroSection() {
+export default function HeroSection({ heroData, statsData }: { heroData?: any[], statsData?: any[] }) {
   const { openAppointmentModal } = useModal();
+  
+  const hero = heroData && heroData.length > 0 && heroData[0].active !== false ? heroData[0] : null;
+  const stats = statsData && statsData.length > 0 ? statsData.filter(s => s.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)) : null;
+
   return (
     <div className="relative bg-white overflow-visible">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image src="/hero-background.png" alt="Dental Patient" fill className="object-cover object-[75%_center] opacity-95" priority />
+        <Image src={hero?.backgroundImage || "/hero-background.png"} alt="Dental Patient" fill className="object-cover object-[75%_center] opacity-95" priority />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/10 md:via-white/60 md:to-transparent"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[100px] pb-[80px]">
         <div className="max-w-3xl">
           <div className="inline-block bg-white border border-brand-red text-brand-red font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-6 rounded shadow-sm">
-            Delaware's Trusted Dental Care
+            {hero?.eyebrow || "Delaware's Trusted Dental Care"}
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight">
-            Transform Your Smile, <br />
-            <span className="text-brand-red">Transform Your Life.</span>
-          </h1>
-          <p className="text-base md:text-xl text-gray-800 mb-10 max-w-xl leading-snug font-medium">
-            Advanced technology, personalized care, and a team that truly cares about your smile.
-          </p>
+          <h1 
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight"
+            dangerouslySetInnerHTML={{ __html: hero?.heading || `Transform Your Smile, <br /><span class="text-brand-red">Transform Your Life.</span>` }}
+          />
+          <div 
+            className="text-base md:text-xl text-gray-800 mb-10 max-w-xl leading-snug font-medium"
+            dangerouslySetInnerHTML={{ __html: hero?.description || "Advanced technology, personalized care, and a team that truly cares about your smile." }}
+          />
           <div className="flex flex-col sm:flex-row gap-4">
             <button 
               onClick={openAppointmentModal}
               className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors shadow-sm text-xs"
             >
-              Book An Appointment
+              {hero?.primaryButtonLabel || "Book An Appointment"}
             </button>
-            <Link href="/contact" className="w-full sm:w-auto bg-white border-[2px] border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs">
-              Free Consultation <ArrowRight className="ml-2 w-4 h-4" />
+            <Link href={hero?.secondaryButtonUrl || "/contact"} className="w-full sm:w-auto bg-white border-[2px] border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs">
+              {hero?.secondaryButtonLabel || "Free Consultation"} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </div>
           {/* Spacer to prevent floating badges from overlapping buttons */}
@@ -49,45 +54,25 @@ export default function HeroSection() {
           {/* Stats Bar */}
           <div className="bg-white py-6 px-6 sm:px-10 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] flex flex-col sm:flex-row flex-wrap lg:flex-nowrap divide-y sm:divide-y-0 sm:divide-x divide-gray-100 border border-gray-100 pointer-events-auto w-full lg:w-auto">
             
-            <div className="flex items-center gap-4 pr-8 py-4 lg:py-0 w-full lg:w-auto">
-              <div className="border-[1.5px] border-brand-red p-2.5 rounded-full text-brand-red flex-shrink-0">
-                <Smile className="w-6 h-6" strokeWidth={2} />
+            {(stats || [
+              { value: "10,000+", label: "Happy Patients", icon: "smile" },
+              { value: "50+", label: "Years of Experience", icon: "shield" },
+              { value: "Advanced", label: "Digital Technology", icon: "shield" },
+              { value: "5-Star", label: "Google Ratings", icon: "star" }
+            ]).map((stat, idx) => (
+              <div key={idx} className={`flex items-center gap-4 py-4 lg:py-0 w-full lg:w-auto ${idx === 0 ? 'pr-8' : 'px-0 lg:px-8'}`}>
+                <div className="border-[1.5px] border-brand-red p-2.5 rounded-full text-brand-red flex-shrink-0">
+                  {stat.icon === 'smile' ? <Smile className="w-6 h-6" strokeWidth={2} /> : 
+                   stat.icon === 'star' ? <Star className="w-6 h-6" strokeWidth={2} /> : 
+                   stat.icon === 'award' ? <Award className="w-6 h-6" strokeWidth={2} /> : 
+                   <Shield className="w-6 h-6" strokeWidth={2} />}
+                </div>
+                <div>
+                  <div className="font-extrabold text-gray-900 text-xl leading-none mb-1">{stat.value}</div>
+                  <div className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">{stat.label}</div>
+                </div>
               </div>
-              <div>
-                <div className="font-extrabold text-gray-900 text-xl leading-none mb-1">10,000+</div>
-                <div className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Happy Patients</div>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4 px-0 lg:px-8 py-4 lg:py-0 w-full lg:w-auto">
-              <div className="border-[1.5px] border-brand-red p-2.5 rounded-full text-brand-red flex-shrink-0">
-                <Shield className="w-6 h-6" strokeWidth={2} />
-              </div>
-              <div>
-                <div className="font-extrabold text-gray-900 text-xl leading-none mb-1">50+</div>
-                <div className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Years of Experience</div>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4 px-0 lg:px-8 py-4 lg:py-0 w-full lg:w-auto">
-              <div className="border-[1.5px] border-brand-red p-2.5 rounded-full text-brand-red flex-shrink-0">
-                <Shield className="w-6 h-6" strokeWidth={2} />
-              </div>
-              <div>
-                <div className="font-extrabold text-gray-900 text-xl leading-none mb-1">Advanced</div>
-                <div className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Digital Technology</div>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4 pl-0 lg:pl-8 py-4 lg:py-0 w-full lg:w-auto">
-              <div className="border-[1.5px] border-brand-red p-2.5 rounded-full text-brand-red flex-shrink-0">
-                <Star className="w-6 h-6" strokeWidth={2} />
-              </div>
-              <div>
-                <div className="font-extrabold text-gray-900 text-xl leading-none mb-1">5-Star</div>
-                <div className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Google Ratings</div>
-              </div>
-            </div>
+            ))}
 
           </div>
 

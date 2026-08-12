@@ -5,7 +5,8 @@ import { Sparkles, ArrowRight, Shield, Heart, Smile } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import CTABanner from "@/components/CTABanner";
 import FAQSection from "@/components/FAQSection";
-import { getCollectionItems } from "@/lib/wix";
+import ContactFormSection from "@/components/ContactFormSection";
+import { getCollectionItems, getSingleItem } from "@/lib/wix";
 
 export async function generateStaticParams() {
   const services = await getCollectionItems('Services');
@@ -40,6 +41,8 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
   const serviceFeatures = allFeatures
     .filter((f: any) => f.serviceSlug === params.slug && f.active !== false)
     .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+    
+  const contactData = await getSingleItem('ContactSettings');
 
   return (
     <div className="bg-white font-sans">
@@ -172,6 +175,8 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
       )}
 
       <FAQSection />
+
+      <ContactFormSection data={contactData as any} />
 
       <CTABanner />
     </div>

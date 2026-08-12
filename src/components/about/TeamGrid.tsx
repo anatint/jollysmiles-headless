@@ -76,7 +76,51 @@ const teamMembers = [
   }
 ];
 
-export default function TeamGrid() {
+export default function TeamGrid({ data }: { data?: any[] }) {
+  const displayMembers = data && data.length > 0 
+    ? data.filter(m => m.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map(m => {
+        
+        let parsedBadges = [];
+        if (m.badges) {
+          try {
+            parsedBadges = typeof m.badges === 'string' ? JSON.parse(m.badges) : m.badges;
+          } catch(e) {}
+        }
+        
+        // Map icon strings back to Lucide components
+        const getIcon = (iconStr: string) => {
+          if (iconStr === 'award') return Award;
+          if (iconStr === 'sparkles') return Sparkles;
+          if (iconStr === 'layers') return Layers;
+          if (iconStr === 'smile') return Smile;
+          if (iconStr === 'users') return Users;
+          if (iconStr === 'shield') return Shield;
+          if (iconStr === 'activity') return Activity;
+          if (iconStr === 'droplet') return Droplet;
+          if (iconStr === 'heart') return Heart;
+          if (iconStr === 'baby') return Baby;
+          if (iconStr === 'star') return Star;
+          if (iconStr === 'grid') return Grid;
+          return Award;
+        };
+
+        const mappedBadges = parsedBadges.map((b: any) => ({
+          icon: getIcon(b.icon),
+          label: b.label
+        }));
+
+        return {
+          name: m.name,
+          role: m.role,
+          image: m.image || "/dr-anu.png",
+          bio: m.bio,
+          badges: mappedBadges.length > 0 ? mappedBadges : [
+            { icon: Award, label: "Experience" }
+          ]
+        };
+      })
+    : teamMembers;
+
   return (
     <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +141,7 @@ export default function TeamGrid() {
 
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member) => (
+          {displayMembers.map((member) => (
             <div 
               key={member.name} 
               className="bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden flex flex-col h-full"
@@ -125,20 +169,18 @@ export default function TeamGrid() {
                   </p>
                 </div>
                 
-                <p className="text-gray-600 text-sm leading-relaxed text-center flex-grow mb-6">
-                  {member.bio}
-                </p>
+                <div className="text-gray-600 text-sm leading-relaxed text-center flex-grow mb-6" dangerouslySetInnerHTML={{ __html: member.bio }} />
 
                 <div className="w-full h-[1px] bg-gray-100 mb-6"></div>
 
                 {/* Sub-Badges */}
                 <div className="grid grid-cols-4 gap-2">
-                  {member.badges.map((badge, idx) => {
+                  {member.badges.map((badge: any, idx: number) => {
                     const Icon = badge.icon;
                     return (
                       <div key={idx} className="flex flex-col items-center text-center space-y-1">
                         <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-brand-red">
-                          <Icon className="w-4 h-4" strokeWidth={2} />
+                          {Icon && <Icon className="w-4 h-4" strokeWidth={2} />}
                         </div>
                         <span className="text-[9px] leading-tight font-semibold text-gray-500 max-w-[70px]">
                           {badge.label}

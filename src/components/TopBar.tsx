@@ -1,13 +1,35 @@
 import { Phone, Mail, Clock } from 'lucide-react';
 
-export default function TopBar() {
+export default function TopBar({ settings }: { settings?: any }) {
+  const phone = settings?.phone || "302 DR-TEETH (378-3384)";
+  const email = settings?.email || "drteeth@jollysmiles.com";
+  
+  // Try to extract first office hours if available
+  let hours = "Mon - Fri: 9:00 AM - 5:00 PM";
+  if (settings?.officeHours) {
+    try {
+      const parsedHours = typeof settings.officeHours === 'string' ? JSON.parse(settings.officeHours) : settings.officeHours;
+      if (parsedHours && parsedHours.length > 0) {
+        hours = `${parsedHours[0].days}: ${parsedHours[0].hours}`;
+      }
+    } catch(e) {}
+  }
+
+  // Extract social links
+  let socialLinks = [];
+  if (settings?.socialLinks) {
+    try {
+      socialLinks = typeof settings.socialLinks === 'string' ? JSON.parse(settings.socialLinks) : settings.socialLinks;
+    } catch(e) {}
+  }
+
   return (
     <div className="hidden md:block bg-gray-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs py-2 flex flex-row justify-between items-center text-gray-600">
         <div className="flex flex-row space-x-6 items-center">
-          <span className="flex items-center font-medium"><Phone className="w-3.5 h-3.5 mr-1.5 text-brand-red" /> 302 DR-TEETH (378-3384)</span>
-          <span className="flex items-center font-medium"><Mail className="w-3.5 h-3.5 mr-1.5 text-brand-red" /> drteeth@jollysmiles.com</span>
-          <span className="flex items-center font-medium"><Clock className="w-3.5 h-3.5 mr-1.5 text-brand-red" /> Mon - Fri: 9:00 AM - 5:00 PM</span>
+          <span className="flex items-center font-medium"><Phone className="w-3.5 h-3.5 mr-1.5 text-brand-red" /> {phone}</span>
+          <span className="flex items-center font-medium"><Mail className="w-3.5 h-3.5 mr-1.5 text-brand-red" /> {email}</span>
+          <span className="flex items-center font-medium"><Clock className="w-3.5 h-3.5 mr-1.5 text-brand-red" /> {hours}</span>
         </div>
         <div className="flex space-x-4 items-center">
           <a href="https://www.facebook.com/jollysmilesDE" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-brand-red transition-colors duration-300 text-gray-500">

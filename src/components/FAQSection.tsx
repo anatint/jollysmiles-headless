@@ -11,8 +11,12 @@ const faqs = [
   { question: "How do I schedule an appointment?", answer: "You can schedule an appointment by calling our office or using the online booking tool on our website." }
 ];
 
-export default function FAQSection() {
+export default function FAQSection({ data }: { data?: any[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const displayFaqs = data && data.length > 0 
+    ? data.filter(f => f.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
+    : faqs;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -28,7 +32,7 @@ export default function FAQSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-          {faqs.map((faq, index) => (
+          {displayFaqs.map((faq, index) => (
             <div key={index} className="border-b border-gray-200 py-4">
               <button 
                 onClick={() => toggleFAQ(index)}
@@ -39,9 +43,8 @@ export default function FAQSection() {
               </button>
               <div 
                 className={`mt-4 text-gray-600 leading-relaxed overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
-              >
-                {faq.answer}
-              </div>
+                dangerouslySetInnerHTML={{ __html: faq.answer }}
+              />
             </div>
           ))}
         </div>

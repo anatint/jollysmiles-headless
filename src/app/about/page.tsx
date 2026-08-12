@@ -17,18 +17,19 @@ export const revalidate = 0;
 
 export default async function AboutPage() {
   const testimonialsData = await getCollectionItems('Testimonials');
+  const valuesData = await getCollectionItems('Values');
 
   return (
     <div className="bg-white font-sans">
       {/* New About Us Components */}
       <AboutHero />
       <OurStory />
-      <OurValues />
+      <OurValues data={valuesData as any} />
       <MeetTheTeam />
       <WhyChooseUs />
       
       {/* Reused Homepage Components */}
-      <TestimonialsSection data={testimonialsData} />
+      <TestimonialsSection data={testimonialsData as any} />
       <CTABanner />
     </div>
   );

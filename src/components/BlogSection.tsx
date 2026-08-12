@@ -23,7 +23,21 @@ const articles = [
   }
 ];
 
-export default function BlogSection() {
+export default function BlogSection({ data }: { data?: any[] }) {
+  const displayArticles = data && data.length > 0 
+    ? data.filter(a => a.active !== false).sort((a, b) => new Date(b.date || b.publishDate || 0).getTime() - new Date(a.date || a.publishDate || 0).getTime()).slice(0, 4)
+    : articles;
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    try {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    } catch(e) {
+      return dateStr;
+    }
+  };
+
   return (
     <div className="bg-gray-50 border-t border-gray-100 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,22 +54,25 @@ export default function BlogSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {articles.map((article, index) => (
+          {displayArticles.map((article, index) => (
             <div key={index} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col group">
               <div className="h-48 bg-gray-200 relative overflow-hidden">
-                {/* Image Placeholder */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100 flex items-center justify-center text-gray-500 font-medium group-hover:scale-105 transition-transform duration-500">
-                  [{article.image} Image]
-                </div>
+                {article.featuredImage || article.image ? (
+                  <img src={article.featuredImage || article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100 flex items-center justify-center text-gray-500 font-medium group-hover:scale-105 transition-transform duration-500">
+                    [{article.image || 'Blog'} Image]
+                  </div>
+                )}
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <div className="text-xs font-semibold text-gray-500 mb-3">{article.date}</div>
+                <div className="text-xs font-semibold text-gray-500 mb-3">{formatDate(article.date || article.publishDate || "May 18, 2024")}</div>
                 <h3 className="text-lg font-bold text-gray-900 mb-4 leading-snug group-hover:text-brand-red transition-colors">
                   {article.title}
                 </h3>
-                <a href="#" className="mt-auto text-brand-red font-bold text-xs tracking-wider uppercase flex items-center group-hover:text-red-700 transition-colors">
+                <Link href={`/blog/${article.slug || '#'}`} className="mt-auto text-brand-red font-bold text-xs tracking-wider uppercase flex items-center group-hover:text-red-700 transition-colors">
                   Read More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </div>
             </div>
           ))}

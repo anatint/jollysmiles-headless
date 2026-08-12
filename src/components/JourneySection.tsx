@@ -27,7 +27,23 @@ const steps = [
   }
 ];
 
-export default function JourneySection() {
+export default function JourneySection({ data }: { data?: any[] }) {
+  const dynamicSteps = data && data.length > 0
+    ? data.filter(s => s.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map((s, idx) => {
+        let iconMatch = <Smile className="w-8 h-8 text-brand-red" />;
+        if (s.title?.toLowerCase().includes('consult') || s.icon === 'clipboard') iconMatch = <ClipboardList className="w-8 h-8 text-brand-red" />;
+        else if (s.title?.toLowerCase().includes('diagnos') || s.icon === 'scan') iconMatch = <ScanSearch className="w-8 h-8 text-brand-red" />;
+        else if (s.title?.toLowerCase().includes('plan') || s.icon === 'map') iconMatch = <Map className="w-8 h-8 text-brand-red" />;
+        
+        return {
+          num: s.stepNumber || String(idx + 1),
+          title: s.title || "Step",
+          description: s.description || "",
+          icon: iconMatch
+        };
+      })
+    : steps;
+
   return (
     <div className="bg-gray-50 border-t border-gray-100 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -43,7 +59,7 @@ export default function JourneySection() {
           <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-0.5 bg-gray-200 border-t-2 border-dashed border-gray-300 z-0"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-            {steps.map((step, index) => (
+            {dynamicSteps.map((step, index) => (
               <div key={index} className="flex flex-col items-center group">
                 <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center border-4 border-gray-50 shadow-md mb-6 relative group-hover:border-red-100 transition-colors">
                   {step.icon}
@@ -52,9 +68,7 @@ export default function JourneySection() {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-gray-600 text-sm max-w-[200px] leading-relaxed">
-                  {step.description}
-                </p>
+                <p className="text-gray-600 text-sm max-w-[200px] leading-relaxed" dangerouslySetInnerHTML={{ __html: step.description }} />
               </div>
             ))}
           </div>

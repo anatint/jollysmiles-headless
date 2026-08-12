@@ -1,7 +1,7 @@
 import { Heart, ShieldCheck, Award, Users } from 'lucide-react';
 
-export default function OurValues() {
-  const values = [
+export default function OurValues({ data }: { data?: any[] }) {
+  const defaultValues = [
     {
       icon: Heart,
       title: "Patient First",
@@ -24,6 +24,21 @@ export default function OurValues() {
     }
   ];
 
+  const displayValues = data && data.length > 0 
+    ? data.filter(v => v.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map(v => {
+        let IconComponent = Heart;
+        if (v.icon === 'shield') IconComponent = ShieldCheck;
+        else if (v.icon === 'award') IconComponent = Award;
+        else if (v.icon === 'users') IconComponent = Users;
+
+        return {
+          icon: IconComponent,
+          title: v.title,
+          description: v.description
+        };
+      })
+    : defaultValues;
+
   return (
     <div className="bg-white lg:py-8 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -38,7 +53,7 @@ export default function OurValues() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((val, idx) => (
+          {displayValues.map((val, idx) => (
             <div key={idx} className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-6 border border-red-100">
                 <val.icon className="w-8 h-8 text-brand-red" strokeWidth={1.5} />

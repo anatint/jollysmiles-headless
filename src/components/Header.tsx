@@ -6,11 +6,27 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useModal } from '@/context/ModalContext';
 
-export default function Header() {
+export default function Header({ settings, navigation }: { settings?: any, navigation?: any[] }) {
   const { openAppointmentModal } = useModal();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
+
+  // If no dynamic navigation is provided or it's empty, use a fallback
+  const navItems = navigation && navigation.length > 0 
+    ? navigation.filter(n => n.visible !== false && n.location !== 'footer').sort((a, b) => (a.order || 0) - (b.order || 0))
+    : [
+        { label: 'Home', url: '/' },
+        { label: 'About Us', url: '/about' },
+        { label: 'Services', url: '/services' },
+        { label: 'Procedures', url: '/procedures' },
+        { label: 'Technologies', url: '/technologies' },
+        { label: 'Blog', url: '/blog' },
+        { label: 'Contact Us', url: '/contact' }
+      ];
+
+  const logoUrl = settings?.logo || "/logo.png";
+  const siteName = settings?.siteName || "Jolly Smiles";
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -20,33 +36,25 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center -ml-4 md:-ml-8">
             <Link href="/" className="flex items-center">
-              <Image src="/logo.png" alt="Jolly Smiles" width={180} height={70} className="object-contain object-left w-36 md:w-[150px] h-auto" priority />
+              <Image src={logoUrl} alt={siteName} width={180} height={70} className="object-contain object-left w-36 md:w-[150px] h-auto" priority />
             </Link>
           </div>
 
           {/* Desktop Navigation and Call to action */}
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex space-x-8 items-center">
-              <Link href="/" className={`font-semibold hover:text-brand-red transition ${pathname === '/' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Home</Link>
-              
-              {/* About Dropdown */}
-              <div className="relative group py-2">
-                <Link href="/about" className={`font-medium hover:text-brand-red transition flex items-center gap-1 cursor-pointer ${pathname.startsWith('/about') ? 'text-brand-red pb-1' : 'text-gray-700'}`}>
-                  About Us <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-                </Link>
-                <div className="absolute left-0 mt-1 w-40 bg-white border border-gray-100 rounded-lg shadow-lg py-2 hidden group-hover:block z-50">
-                  <Link href="/about/team" className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-brand-red transition">Our Team</Link>
-                </div>
-              </div>
-              
-              <Link href="/services" className={`font-medium hover:text-brand-red transition ${pathname?.startsWith('/services') ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Services</Link>
-              
-              <Link href="/procedures" className={`font-medium hover:text-brand-red transition ${pathname?.startsWith('/procedures') ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Procedures</Link>
-
-              <Link href="/technologies" className={`font-medium hover:text-brand-red transition ${pathname === '/technologies' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Technologies</Link>
-
-              <Link href="/blog" className={`font-medium hover:text-brand-red transition ${pathname === '/blog' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Blog</Link>
-              <Link href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'} className={`font-medium hover:text-brand-red transition ${pathname === '/contact' ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}>Contact Us</Link>
+              {navItems.map((item, idx) => {
+                const isActive = item.url === '/' ? pathname === '/' : pathname?.startsWith(item.url);
+                return (
+                  <Link 
+                    key={idx} 
+                    href={item.url === '/contact' ? (pathname === '/contact' ? '#contact-form' : '/contact#contact-form') : item.url} 
+                    className={`font-medium hover:text-brand-red transition ${isActive ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <button 

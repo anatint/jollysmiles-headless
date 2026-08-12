@@ -20,17 +20,24 @@ export const revalidate = 0;
 export default async function Home() {
   const testimonialsData = await getCollectionItems('Testimonials');
   const servicesData = await getCollectionItems('Services');
+  const heroData = await getCollectionItems('HomeHero');
+  const statsData = await getCollectionItems('HomeStats');
+  const aboutData = await getCollectionItems('HomeAbout');
+  const journeyData = await getCollectionItems('HomeJourney');
+  const transformationsData = await getCollectionItems('Transformations');
+  const faqsData = await getCollectionItems('FAQs');
+  const blogData = await getCollectionItems('BlogPosts');
 
   return (
     <>
-      <HeroSection />
-      <ServicesSection data={servicesData} />
-      <JourneySection />
-      <AboutSection />
-      <TransformationsSection />
-      <TestimonialsSection data={testimonialsData} />
-      <BlogSection />
-      <FAQSection />
+      <HeroSection heroData={heroData} statsData={statsData} />
+      <ServicesSection data={servicesData as any} />
+      <JourneySection data={journeyData} />
+      <AboutSection data={aboutData} />
+      <TransformationsSection data={transformationsData} />
+      <TestimonialsSection data={testimonialsData as any} />
+      <BlogSection data={blogData} />
+      <FAQSection data={faqsData} />
       <CTABanner />
     </>
   );

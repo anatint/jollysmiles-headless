@@ -22,3 +22,13 @@ export async function getSingleItem(collectionId: string) {
   const itemsList = await getCollectionItems(collectionId);
   return itemsList[0] || null;
 }
+
+export async function submitAppointment(data: any) {
+  try {
+    const response = await wixClient.items.insert('Appointments', data);
+    return response;
+  } catch (error) {
+    console.error('Error submitting appointment:', error);
+    throw error;
+  }
+}

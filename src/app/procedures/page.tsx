@@ -9,12 +9,19 @@ export const metadata: Metadata = {
   description: "Explore our range of dental procedures, from crowns & bridges to cosmetic whitening, implants and veneers in Middletown, DE. Check out our proven success rates and stats.",
 };
 
-export default function ProceduresPage() {
+import { getCollectionItems } from "@/lib/wix";
+
+export const revalidate = 0;
+
+export default async function ProceduresPage() {
+  const proceduresData = await getCollectionItems('Procedures');
+  const faqsData = await getCollectionItems('FAQs');
+
   return (
     <div className="bg-white font-sans">
       <ProceduresHero />
-      <ProceduresList />
-      <FAQSection />
+      <ProceduresList data={proceduresData} />
+      <FAQSection data={faqsData} />
       <CTABanner />
     </div>
   );

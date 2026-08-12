@@ -52,7 +52,27 @@ const stats = [
   { icon: Star, value: "5-Star", label: "Google Ratings" }
 ];
 
-export default function ProceduresList() {
+export default function ProceduresList({ data }: { data?: any[] }) {
+  const displayProcedures = data && data.length > 0 
+    ? data.filter(p => p.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map(p => {
+        let IconComponent = Layers;
+        if (p.icon === 'sparkles') IconComponent = Sparkles;
+        else if (p.icon === 'shield') IconComponent = Shield;
+        else if (p.icon === 'heart') IconComponent = Heart;
+        else if (p.icon === 'smile') IconComponent = Smile;
+        else if (p.icon === 'activity') IconComponent = Activity;
+        else if (p.icon === 'award') IconComponent = Award;
+        else if (p.icon === 'users') IconComponent = Users;
+
+        return {
+          title: p.title,
+          description: p.description,
+          icon: IconComponent,
+          link: "#"
+        };
+      })
+    : procedures;
+
   return (
     <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +100,7 @@ export default function ProceduresList() {
               Our Dental Procedures
             </h3>
             <div className="space-y-3">
-              {procedures.map((proc, idx) => {
+              {displayProcedures.map((proc, idx) => {
                 const Icon = proc.icon;
                 return (
                   <div 
@@ -95,9 +115,7 @@ export default function ProceduresList() {
                         <h4 className="font-bold text-gray-900 text-sm">
                           {proc.title}
                         </h4>
-                        <p className="text-gray-500 text-xs mt-0.5 leading-relaxed">
-                          {proc.description}
-                        </p>
+                        <p className="text-gray-500 text-xs mt-0.5 leading-relaxed" dangerouslySetInnerHTML={{ __html: proc.description }} />
                       </div>
                     </div>
                   </div>

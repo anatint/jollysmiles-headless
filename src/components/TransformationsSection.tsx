@@ -1,7 +1,16 @@
 import { ArrowRight } from 'lucide-react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 
-export default function TransformationsSection() {
+export default function TransformationsSection({ data }: { data?: any[] }) {
+  const dynamicTransformations = data && data.length > 0 
+    ? data.filter(t => t.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
+    : [
+        { beforeImage: "/before-1.jpg", afterImage: "/after-1.jpg" },
+        { beforeImage: "/before-2.jpg", afterImage: "/after-2.jpg" },
+        { beforeImage: "/before-3.png", afterImage: "/after-3.jpg" },
+        { beforeImage: "/before-4-new.png", afterImage: "/after-4.jpg" }
+      ];
+
   return (
     <div className="bg-gray-50 border-t border-gray-100 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,11 +24,11 @@ export default function TransformationsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="relative rounded-2xl overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-300 bg-gray-100 aspect-[4/3] border border-gray-200">
+          {dynamicTransformations.slice(0, 4).map((item, index) => (
+            <div key={index} className="relative rounded-2xl overflow-hidden group shadow-sm hover:shadow-lg transition-shadow duration-300 bg-gray-100 aspect-[4/3] border border-gray-200">
               <BeforeAfterSlider 
-                beforeImage={item === 1 ? "/before-1.jpg" : item === 2 ? "/before-2.jpg" : item === 3 ? "/before-3.png" : item === 4 ? "/before-4-new.png" : null}
-                afterImage={item === 1 ? "/after-1.jpg" : item === 2 ? "/after-2.jpg" : item === 3 ? "/after-3.jpg" : item === 4 ? "/after-4.jpg" : null}
+                beforeImage={item.beforeImage}
+                afterImage={item.afterImage}
               />
             </div>
           ))}

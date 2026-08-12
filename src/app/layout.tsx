@@ -21,7 +21,14 @@ export const metadata: Metadata = {
   description: "Transform Your Smile, Transform Your Life. Advanced technology, personalized care.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import { getSingleItem, getCollectionItems } from "@/lib/wix";
+
+export const revalidate = 0;
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const siteSettings = await getSingleItem('SiteSettings') || {};
+  const navigation = await getCollectionItems('Navigation') || [];
+
   return (
     <html
       lang="en"
@@ -29,12 +36,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col font-sans">
         <ModalProvider>
-          <TopBar />
-          <Header />
+          <TopBar settings={siteSettings} />
+          <Header settings={siteSettings} navigation={navigation} />
           <main className="flex-grow">
             {children}
           </main>
-          <Footer />
+          <Footer settings={siteSettings} navigation={navigation} />
         </ModalProvider>
       </body>
     </html>

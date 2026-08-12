@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, User, Mail, Phone, Calendar, ShieldCheck, ChevronDown } from 'lucide-react';
 import { useModal } from '@/context/ModalContext';
+import { submitAppointment } from '@/lib/wix';
 
 export default function AppointmentModal() {
   const { isAppointmentModalOpen, closeAppointmentModal } = useModal();
@@ -15,6 +16,7 @@ export default function AppointmentModal() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -37,14 +39,23 @@ export default function AppointmentModal() {
 
   if (!isAppointmentModalOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      closeAppointmentModal();
-      setFormData({ name: '', email: '', phone: '', service: '', date: '', message: '' });
-    }, 2000);
+    setIsSubmitting(true);
+    try {
+      await submitAppointment(formData);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        closeAppointmentModal();
+        setFormData({ name: '', email: '', phone: '', service: '', date: '', message: '' });
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to submit appointment', error);
+      alert('Failed to submit appointment. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -58,6 +69,7 @@ export default function AppointmentModal() {
         {/* Close Button */}
         <button 
           onClick={closeAppointmentModal}
+          disabled={isSubmitting}
           className="absolute top-4 right-4 md:top-6 md:right-6 w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition flex items-center justify-center shadow-sm"
         >
           <X className="w-4 h-4" />
@@ -208,14 +220,15 @@ export default function AppointmentModal() {
             {/* Submit Button */}
             <button 
               type="submit"
-              className="w-full bg-brand-red hover:bg-brand-dark text-white py-3.5 px-6 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg"
+              disabled={isSubmitting}
+              className="w-full bg-brand-red hover:bg-brand-dark text-white py-3.5 px-6 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <Calendar className="w-4 h-4" />
-              Book Appointment
+              {isSubmitting ? 'Booking...' : 'Book Appointment'}
             </button>
 
             {/* Privacy Disclaimer */}
-            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 border-t border-gray-100">
+            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 border-t border-gray-100 mt-4 pt-4">
               <ShieldCheck className="w-4 h-4 text-brand-red/75" />
               <span>We respect your privacy. Your information is safe with us.</span>
             </div>
