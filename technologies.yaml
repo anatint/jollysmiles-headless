@@ -1,0 +1,47 @@
+technologies:
+    hero:
+      eyebrow: "Advanced Technology"
+      heading: "Advanced Technology Better Care, Healthier Smiles"
+      description: "At Jolly Smiles, we combine advanced technology with clinical expertise to deliver precise diagnosis, comfortable treatments, and exceptional results."
+      image: "/technologies-banner.png"
+
+    intro:
+      eyebrow: "CUTTING-EDGE TECHNOLOGY"
+      heading: "Innovation for Your Comfort and Confidence"
+      description: "We invest in the latest dental technology to ensure more accurate diagnoses, safer treatments, and a better overall experience for our patients."
+
+    features:
+      - title: "Intra Oral Cameras"
+        description: "A small, pen-shaped device with LED lighting captures sharp digital images of teeth and gums, helping the provider show patients oral health findings."
+        icon: "camera"
+        order: 1
+      - title: "Cone Beam CT"
+        description: "3D dental imaging creates detailed views of teeth, soft tissues, nerve pathways and bone to support diagnosis and accurate implant planning."
+        icon: "scan"
+        order: 2
+      - title: "iTero element 5D"
+        description: "An intraoral scanner digitally captures teeth and gums, supports smile simulations, early cavity detection and digital impressions for laboratory fabrication."
+        icon: "target"
+        order: 3
+      - title: "Picasso Soft Tissue Laser"
+        description: "Laser bacterial reduction can be used around gum tissue to reduce bacteria and support periodontal treatment."
+        icon: "zap"
+        order: 4
+      - title: "iPlus Waterlase"
+        description: "Laser energy and water spray can provide gentle, minimally invasive treatment for several common dental conditions."
+        icon: "droplet"
+        order: 5
+      - title: "The Wand"
+        description: "A computer-controlled local anesthetic delivery system designed to provide more controlled injections and a more comfortable experience."
+        icon: "activity"
+        order: 6
+
+    cta:
+      heading: "Experience the Difference"
+      description: "Our advanced technology and caring team work together to give you the best possible dental care."
+      primaryButton:
+        label: "Book Appointment"
+        action: "appointment-modal"
+      secondaryButton:
+        label: "Contact Us"
+        url: "/contact"

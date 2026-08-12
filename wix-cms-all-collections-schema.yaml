@@ -1,0 +1,400 @@
+collections:
+  SiteSettings:
+    purpose: "Global brand, contact and SEO settings"
+    fields:
+      - key: siteName
+        type: text
+        required: true
+      - key: logo
+        type: image
+      - key: favicon
+        type: image
+      - key: phone
+        type: text
+      - key: email
+        type: text
+      - key: address
+        type: richText
+      - key: officeHours
+        type: richText
+      - key: primaryColor
+        type: text
+      - key: primaryDarkColor
+        type: text
+      - key: socialLinks
+        type: json
+      - key: defaultMetaTitle
+        type: text
+      - key: defaultMetaDescription
+        type: richText
+
+  Navigation:
+    purpose: "Header and footer navigation"
+    fields:
+      - key: label
+        type: text
+      - key: url
+        type: text
+      - key: parent
+        type: text
+      - key: location
+        type: text
+      - key: order
+        type: number
+      - key: visible
+        type: boolean
+
+  Pages:
+    purpose: "Page-level routing, SEO and section ordering"
+    fields:
+      - key: title
+        type: text
+        required: true
+      - key: slug
+        type: text
+        required: true
+      - key: pageType
+        type: text
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+      - key: heroImage
+        type: image
+      - key: sections
+        type: json
+      - key: published
+        type: boolean
+
+  HomeHero:
+    purpose: "Homepage hero content"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+      - key: description
+        type: richText
+      - key: backgroundImage
+        type: image
+      - key: primaryButtonLabel
+        type: text
+      - key: primaryButtonUrl
+        type: text
+      - key: secondaryButtonLabel
+        type: text
+      - key: secondaryButtonUrl
+        type: text
+      - key: active
+        type: boolean
+
+  HomeStats:
+    purpose: "Homepage floating statistics and trust badges"
+    fields:
+      - key: value
+        type: text
+      - key: label
+        type: text
+      - key: icon
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  HomeAbout:
+    purpose: "Homepage About Jolly Smiles section"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: experienceValue
+        type: text
+      - key: experienceLabel
+        type: text
+      - key: bulletPoints
+        type: json
+      - key: buttonLabel
+        type: text
+      - key: buttonUrl
+        type: text
+
+  HomeServices:
+    purpose: "Homepage service cards"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: icon
+        type: image
+      - key: url
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  HomeWhyChooseUs:
+    purpose: "Homepage Why Choose Us section"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+      - key: image
+        type: image
+      - key: points
+        type: json
+      - key: buttonLabel
+        type: text
+      - key: buttonUrl
+        type: text
+
+  HomeJourney:
+    purpose: "Homepage four-step patient journey"
+    fields:
+      - key: number
+        type: text
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: icon
+        type: image
+      - key: order
+        type: number
+
+  Testimonials:
+    purpose: "Patient testimonials"
+    fields:
+      - key: quote
+        type: richText
+      - key: name
+        type: text
+      - key: image
+        type: image
+      - key: rating
+        type: number
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  Transformations:
+    purpose: "Before/after smile transformations"
+    fields:
+      - key: title
+        type: text
+      - key: treatment
+        type: text
+      - key: beforeImage
+        type: image
+      - key: afterImage
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  BlogPosts:
+    purpose: "Blog listing and article content"
+    fields:
+      - key: title
+        type: text
+      - key: slug
+        type: text
+      - key: excerpt
+        type: richText
+      - key: content
+        type: richText
+      - key: featuredImage
+        type: image
+      - key: category
+        type: text
+      - key: author
+        type: text
+      - key: publishDate
+        type: date
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+      - key: published
+        type: boolean
+
+  Services:
+    purpose: "Service landing pages and service cards"
+    fields:
+      - key: title
+        type: text
+      - key: slug
+        type: text
+      - key: shortDescription
+        type: richText
+      - key: heroDescription
+        type: richText
+      - key: heroImage
+        type: image
+      - key: eyebrow
+        type: text
+      - key: introHeading
+        type: text
+      - key: introDescription
+        type: richText
+      - key: ctaPrimaryLabel
+        type: text
+      - key: ctaPrimaryUrl
+        type: text
+      - key: ctaSecondaryLabel
+        type: text
+      - key: ctaSecondaryUrl
+        type: text
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+      - key: active
+        type: boolean
+
+  ServiceFeatures:
+    purpose: "Reusable alternating content blocks inside service pages"
+    fields:
+      - key: serviceSlug
+        type: text
+      - key: title
+        type: text
+      - key: subtitle
+        type: text
+      - key: description
+        type: richText
+      - key: tags
+        type: json
+      - key: image
+        type: image
+      - key: alignLeft
+        type: boolean
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  Procedures:
+    purpose: "Dental procedure cards and success-rate content"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: successPercentage
+        type: number
+      - key: category
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  TechnologyFeatures:
+    purpose: "Technology page feature list"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: icon
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  TeamMembers:
+    purpose: "Dental team directory"
+    fields:
+      - key: name
+        type: text
+      - key: credentials
+        type: text
+      - key: role
+        type: text
+      - key: image
+        type: image
+      - key: bio
+        type: richText
+      - key: specialties
+        type: json
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  Values:
+    purpose: "About page values"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: icon
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  FAQs:
+    purpose: "Reusable FAQ content"
+    fields:
+      - key: question
+        type: text
+      - key: answer
+        type: richText
+      - key: category
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  ContactSettings:
+    purpose: "Contact page information and form configuration"
+    fields:
+      - key: heroHeading
+        type: text
+      - key: heroSubheading
+        type: text
+      - key: heroDescription
+        type: richText
+      - key: heroImage
+        type: image
+      - key: heading
+        type: text
+      - key: subheading
+        type: text
+      - key: description
+        type: richText
+      - key: phone
+        type: text
+      - key: email
+        type: text
+      - key: address
+        type: richText
+      - key: mapImage
+        type: image
+      - key: formFields
+        type: json
+      - key: officeHours
+        type: json
+

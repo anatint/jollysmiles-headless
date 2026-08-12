@@ -1,0 +1,1454 @@
+site:
+  id: jolly-smiles
+  name: Jolly Smiles
+  locale: en-US
+  currency: USD
+  type: dental-clinic
+
+global:
+  theme:
+    primaryColor: "#E53935"
+    primaryDarkColor: "#B71C1C"
+    backgroundColor: "#FFFFFF"
+    softBackgroundColor: "#F9FAFB"
+    softRedBackground: "#FFF0F0"
+    textColor: "#111827"
+    mutedTextColor: "#6B7280"
+    headingFont: "Inter"
+    bodyFont: "Inter"
+    borderRadius: "16px"
+
+  contact:
+    phoneDisplay: "302 DR-TEETH (378-3384)"
+    phoneLink: "tel:3023783384"
+    email: "drteeth@jollysmiles.com"
+    address:
+      line1: "102 Sleepy Hollow Drive, Suite 100"
+      city: "Middletown"
+      state: "DE"
+      postalCode: "19709"
+      country: "USA"
+    officeHours:
+      - days: "Mon - Fri"
+        hours: "9:00 AM - 5:00 PM"
+      - days: "Sat - Sun"
+        hours: "Closed"
+
+  buttons:
+    primary:
+      style: filled
+      color: "#E53935"
+      textColor: "#FFFFFF"
+      radius: 4
+      uppercase: true
+    secondary:
+      style: outline
+      color: "#E53935"
+      textColor: "#E53935"
+      radius: 4
+      uppercase: true
+
+# -------------------------------------------------------------------
+# WIX COLLECTION: SiteSettings
+# -------------------------------------------------------------------
+collections:
+  SiteSettings:
+    purpose: "Global brand, contact and SEO settings"
+    fields:
+      - key: siteName
+        type: text
+        required: true
+      - key: logo
+        type: image
+      - key: favicon
+        type: image
+      - key: phone
+        type: text
+      - key: email
+        type: text
+      - key: address
+        type: richText
+      - key: officeHours
+        type: richText
+      - key: primaryColor
+        type: text
+      - key: primaryDarkColor
+        type: text
+      - key: socialLinks
+        type: json
+      - key: defaultMetaTitle
+        type: text
+      - key: defaultMetaDescription
+        type: richText
+
+  Navigation:
+    purpose: "Header and footer navigation"
+    fields:
+      - key: label
+        type: text
+      - key: url
+        type: text
+      - key: parent
+        type: text
+      - key: location
+        type: text
+      - key: order
+        type: number
+      - key: visible
+        type: boolean
+
+  Pages:
+    purpose: "Page-level routing, SEO and section ordering"
+    fields:
+      - key: title
+        type: text
+        required: true
+      - key: slug
+        type: text
+        required: true
+      - key: pageType
+        type: text
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+      - key: heroImage
+        type: image
+      - key: sections
+        type: json
+      - key: published
+        type: boolean
+
+  HomeHero:
+    purpose: "Homepage hero content"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+      - key: description
+        type: richText
+      - key: backgroundImage
+        type: image
+      - key: primaryButtonLabel
+        type: text
+      - key: primaryButtonUrl
+        type: text
+      - key: secondaryButtonLabel
+        type: text
+      - key: secondaryButtonUrl
+        type: text
+      - key: active
+        type: boolean
+
+  HomeStats:
+    purpose: "Homepage floating statistics and trust badges"
+    fields:
+      - key: value
+        type: text
+      - key: label
+        type: text
+      - key: icon
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  HomeAbout:
+    purpose: "Homepage About Jolly Smiles section"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: experienceValue
+        type: text
+      - key: experienceLabel
+        type: text
+      - key: bulletPoints
+        type: json
+      - key: buttonLabel
+        type: text
+      - key: buttonUrl
+        type: text
+
+  HomeServices:
+    purpose: "Homepage service cards"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: icon
+        type: image
+      - key: url
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  HomeWhyChooseUs:
+    purpose: "Homepage Why Choose Us section"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+      - key: image
+        type: image
+      - key: points
+        type: json
+      - key: buttonLabel
+        type: text
+      - key: buttonUrl
+        type: text
+
+  HomeJourney:
+    purpose: "Homepage four-step patient journey"
+    fields:
+      - key: number
+        type: text
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: icon
+        type: image
+      - key: order
+        type: number
+
+  Testimonials:
+    purpose: "Patient testimonials"
+    fields:
+      - key: quote
+        type: richText
+      - key: name
+        type: text
+      - key: image
+        type: image
+      - key: rating
+        type: number
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  Transformations:
+    purpose: "Before/after smile transformations"
+    fields:
+      - key: title
+        type: text
+      - key: treatment
+        type: text
+      - key: beforeImage
+        type: image
+      - key: afterImage
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  BlogPosts:
+    purpose: "Blog listing and article content"
+    fields:
+      - key: title
+        type: text
+      - key: slug
+        type: text
+      - key: excerpt
+        type: richText
+      - key: content
+        type: richText
+      - key: featuredImage
+        type: image
+      - key: category
+        type: text
+      - key: author
+        type: text
+      - key: publishDate
+        type: date
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+      - key: published
+        type: boolean
+
+  Services:
+    purpose: "Service landing pages and service cards"
+    fields:
+      - key: title
+        type: text
+      - key: slug
+        type: text
+      - key: shortDescription
+        type: richText
+      - key: heroDescription
+        type: richText
+      - key: heroImage
+        type: image
+      - key: eyebrow
+        type: text
+      - key: introHeading
+        type: text
+      - key: introDescription
+        type: richText
+      - key: ctaPrimaryLabel
+        type: text
+      - key: ctaPrimaryUrl
+        type: text
+      - key: ctaSecondaryLabel
+        type: text
+      - key: ctaSecondaryUrl
+        type: text
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+      - key: active
+        type: boolean
+
+  ServiceFeatures:
+    purpose: "Reusable alternating content blocks inside service pages"
+    fields:
+      - key: serviceSlug
+        type: text
+      - key: title
+        type: text
+      - key: subtitle
+        type: text
+      - key: description
+        type: richText
+      - key: tags
+        type: json
+      - key: image
+        type: image
+      - key: alignLeft
+        type: boolean
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  Procedures:
+    purpose: "Dental procedure cards and success-rate content"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: successPercentage
+        type: number
+      - key: category
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  TechnologyFeatures:
+    purpose: "Technology page feature list"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: icon
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  TeamMembers:
+    purpose: "Dental team directory"
+    fields:
+      - key: name
+        type: text
+      - key: credentials
+        type: text
+      - key: role
+        type: text
+      - key: image
+        type: image
+      - key: bio
+        type: richText
+      - key: specialties
+        type: json
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  Values:
+    purpose: "About page values"
+    fields:
+      - key: title
+        type: text
+      - key: description
+        type: richText
+      - key: icon
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  FAQs:
+    purpose: "Reusable FAQ content"
+    fields:
+      - key: question
+        type: text
+      - key: answer
+        type: richText
+      - key: category
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+
+  ContactSettings:
+    purpose: "Contact page information and form configuration"
+    fields:
+      - key: heading
+        type: text
+      - key: subheading
+        type: text
+      - key: description
+        type: richText
+      - key: phone
+        type: text
+      - key: email
+        type: text
+      - key: address
+        type: richText
+      - key: mapImage
+        type: image
+      - key: formFields
+        type: json
+      - key: officeHours
+        type: json
+
+# -------------------------------------------------------------------
+# SITE NAVIGATION
+# -------------------------------------------------------------------
+data:
+  navigation:
+    header:
+      - label: "Home"
+        url: "/"
+        order: 1
+      - label: "About"
+        url: "/about"
+        order: 2
+      - label: "Services"
+        url: "/services"
+        order: 3
+      - label: "Procedures"
+        url: "/procedures"
+        order: 4
+      - label: "Technologies"
+        url: "/technologies"
+        order: 5
+      - label: "Our Team"
+        url: "/about/team"
+        order: 6
+      - label: "Blog"
+        url: "/blog"
+        order: 7
+      - label: "Contact"
+        url: "/contact"
+        order: 8
+
+# -------------------------------------------------------------------
+# HOMEPAGE /
+# -------------------------------------------------------------------
+  pages:
+    - slug: "/"
+      pageType: home
+      metaTitle: "Jolly Smiles | Top Rated Dentists in Delaware"
+      metaDescription: "Experience compassionate, advanced dental care at Jolly Smiles in Delaware. From Invisalign to Smile Makeovers, we help you transform your smile and your life."
+      sections:
+        - announcement_bar
+        - header
+        - home_hero
+        - home_stats
+        - home_about
+        - home_services
+        - home_why_choose_us
+        - home_transformations
+        - home_journey
+        - testimonials
+        - home_blog
+        - global_cta
+        - footer
+
+    - slug: "/about"
+      pageType: about
+      metaTitle: "About Us | Jolly Smiles Dental Clinic"
+      metaDescription: "Learn about our team of expert dentists at Jolly Smiles. With over 50 years of combined experience, we provide exceptional, patient-first care in Delaware."
+      sections:
+        - about_hero
+        - about_story
+        - about_values
+        - about_team_preview
+        - global_cta
+        - footer
+
+    - slug: "/about/team"
+      pageType: team
+      metaTitle: "Our Dental Team | Jolly Smiles Dental Clinic"
+      metaDescription: "Meet our dedicated dental experts at Jolly Smiles. Our highly skilled, compassionate dentists and hygienists provide personalized, gentle care in Middletown, DE."
+      sections:
+        - team_hero
+        - team_grid
+        - global_cta
+        - footer
+
+    - slug: "/services"
+      pageType: services
+      metaTitle: "Our Services | Jolly Smiles"
+      metaDescription: "We provide a full range of dental services using advanced technology and a gentle approach."
+      sections:
+        - services_hero
+        - services_grid
+        - services_approach
+        - services_stats
+        - global_cta
+        - footer
+
+    - slug: "/services/cosmetic-dentistry"
+      pageType: service_detail
+      serviceSlug: cosmetic-dentistry
+      metaTitle: "Cosmetic Dentistry | Jolly Smiles Middletown"
+      metaDescription: "Enhance the natural beauty of your smile with our advanced cosmetic dentistry services in Middletown, DE. Teeth whitening, porcelain veneers, and smile makeovers."
+      sections:
+        - service_hero
+        - service_intro
+        - service_features
+        - faq
+        - global_cta
+        - footer
+
+    - slug: "/services/dental-implants"
+      pageType: service_detail
+      serviceSlug: dental-implants
+      metaTitle: "Dental Implants | Jolly Smiles Middletown"
+      metaDescription: "Permanent replacement for missing teeth that looks and feels natural. Explore our single tooth implants, implant-supported bridges, and All-on-4® full arch restorations."
+      sections:
+        - service_hero
+        - service_intro
+        - service_features
+        - faq
+        - global_cta
+        - footer
+
+    - slug: "/services/emergency-care"
+      pageType: service_detail
+      serviceSlug: emergency-care
+      metaTitle: "Emergency Dental Care | Jolly Smiles Middletown"
+      metaDescription: "Same-day emergency dental care in Middletown, DE. Relieve tooth pain, treat broken teeth, or fix lost crowns. Call 302 DR-TEETH immediately."
+      sections:
+        - emergency_hero
+        - service_intro
+        - service_features
+        - faq
+        - global_cta
+        - footer
+
+    - slug: "/services/invisalign"
+      pageType: service_detail
+      serviceSlug: invisalign
+      metaTitle: "Invisalign® Clear Aligners | Jolly Smiles Middletown"
+      metaDescription: "Straighten your teeth comfortably and discreetly with Invisalign® at Jolly Smiles. Middletown's trusted Diamond Top 1% Invisalign provider."
+      sections:
+        - service_hero
+        - service_intro
+        - service_features
+        - faq
+        - global_cta
+        - footer
+
+    - slug: "/services/lanap-treatment"
+      pageType: service_detail
+      serviceSlug: lanap-treatment
+      metaTitle: "LANAP® Laser Gum Treatment | Jolly Smiles Middletown"
+      metaDescription: "Advanced, FDA-cleared LANAP® laser therapy to treat gum disease and regenerate tissue without scalpels or sutures in Middletown, DE."
+      sections:
+        - service_hero
+        - service_intro
+        - service_features
+        - faq
+        - global_cta
+        - footer
+
+    - slug: "/procedures"
+      pageType: procedures
+      metaTitle: "Dental Procedures & Success Rates | Jolly Smiles"
+      metaDescription: "Explore our range of dental procedures, from crowns & bridges to cosmetic whitening, implants and veneers in Middletown, DE. Check out our proven success rates and stats."
+      sections:
+        - procedures_hero
+        - procedures_list
+        - procedure_stats
+        - global_cta
+        - footer
+
+    - slug: "/technologies"
+      pageType: technologies
+      metaTitle: "Advanced Technology | Jolly Smiles"
+      metaDescription: "At Jolly Smiles, we combine advanced technology with clinical expertise to deliver precise diagnosis, comfortable treatments, and exceptional results."
+      sections:
+        - technologies_hero
+        - technology_features
+        - technologies_cta
+        - footer
+
+    - slug: "/blog"
+      pageType: blog
+      metaTitle: "Our Blog | Jolly Smiles Dental Care"
+      metaDescription: "Read the latest tips, insights, and inspiration for a healthier, happier smile from the experts at Jolly Smiles."
+      sections:
+        - blog_hero
+        - blog_listing
+        - footer
+
+    - slug: "/contact"
+      pageType: contact
+      metaTitle: "Contact Us | Book Your Appointment at Jolly Smiles"
+      metaDescription: "Ready to perfect your smile? Contact Jolly Smiles in Middletown, DE today to book an appointment or ask any questions about our dental services."
+      sections:
+        - contact_hero
+        - contact_form
+        - contact_map
+        - footer
+
+# -------------------------------------------------------------------
+# HOMEPAGE DATA
+# -------------------------------------------------------------------
+  homeHero:
+    eyebrow: "Delaware's Trusted Dental Care"
+    heading: "Transform Your Smile, Transform Your Life."
+    description: "Advanced technology, personalized care, and a team that truly cares about your smile."
+    backgroundImage: "/hero-background.png"
+    primaryButton:
+      label: "Book An Appointment"
+      action: "appointment-modal"
+    secondaryButton:
+      label: "Free Consultation"
+      url: "/contact"
+
+  homeStats:
+    - value: "10,000+"
+      label: "Happy Patients"
+      icon: "smile"
+      order: 1
+    - value: "50+"
+      label: "Years of Experience"
+      icon: "shield"
+      order: 2
+    - value: "Advanced"
+      label: "Digital Technology"
+      icon: "shield"
+      order: 3
+    - value: "5-Star"
+      label: "Google Ratings"
+      icon: "star"
+      order: 4
+
+  homeAbout:
+    eyebrow: "About Jolly Smiles"
+    heading: "Compassionate Care. Exceptional Results."
+    description: "For over 50 years, Jolly Smiles has been Delaware's trusted partner in dental health. Our experienced team combines advanced technology with personalized care to deliver exceptional results in a comfortable environment."
+    image: "/clinic-reception.png"
+    experienceValue: "50+"
+    experienceLabel: "Years of Combined Experience"
+    bulletPoints:
+      - "State-of-the-art technology"
+      - "Comfortable, patient-first approach"
+      - "Most insurances accepted"
+      - "Convenient scheduling"
+    button:
+      label: "Meet Our Doctors"
+      url: "/about/team"
+
+  homeServices:
+    - title: "Dental Implants"
+      description: "Permanent solutions for missing teeth that look, feel, and function naturally."
+      image: "/before-3.png"
+      url: "/services/dental-implants"
+      order: 1
+    - title: "Invisalign®"
+      description: "Straighten your teeth comfortably and confidently with clear aligners."
+      image: "/after-2.jpg"
+      url: "/services/invisalign"
+      order: 2
+    - title: "LANAP Treatment"
+      description: "Advanced laser treatment to treat gum disease and save your teeth with minimal discomfort."
+      image: "/before-3.png"
+      url: "/services/lanap-treatment"
+      order: 3
+    - title: "Teeth Whitening"
+      description: "Professional whitening for a brighter, more radiant smile."
+      image: "/after-4.jpg"
+      url: "/services/cosmetic-dentistry"
+      order: 4
+    - title: "Emergency Care"
+      description: "Same-day care for dental emergencies when you need us most."
+      image: "/clinic-reception.png"
+      url: "/services/emergency-care"
+      order: 5
+
+  homeWhyChooseUs:
+    eyebrow: "Why Choose Us"
+    heading: "Advanced Care with a Personal Touch"
+    image: "/dental-chair.png"
+    points:
+      - "State-of-the-art technology"
+      - "Personalized treatment plans"
+      - "Comfortable & relaxing environment"
+      - "Affordable care with flexible options"
+      - "Experienced & friendly dental professionals"
+    button:
+      label: "Book Appointment"
+      action: "appointment-modal"
+
+  homeJourney:
+    heading: "Your Smile Journey"
+    description: "A simple, comfortable process designed around you"
+    steps:
+      - number: "1"
+        title: "Consultation"
+        description: "We listen to your concerns and goals"
+        icon: "clipboard-list"
+      - number: "2"
+        title: "Diagnosis"
+        description: "Advanced 3D scanning and digital imaging"
+        icon: "scan-search"
+      - number: "3"
+        title: "Treatment Plan"
+        description: "Personalized plan just for you"
+        icon: "map"
+      - number: "4"
+        title: "Smile Transformation"
+        description: "Achieve the healthy, beautiful smile you deserve"
+        icon: "smile"
+
+  testimonials:
+    - quote: "The team at Jolly Smiles changed my life! I finally have the smile I've always dreamed of."
+      name: "Sarah M."
+      rating: 5
+    - quote: "Professional, gentle, and amazing results. I highly recommend Jolly Smiles to everyone!"
+      name: "Michael R."
+      rating: 5
+    - quote: "From the first visit to the final result, the experience was outstanding. Thank you!"
+      name: "Jessica L."
+      rating: 5
+
+  transformations:
+    - title: "Smile Transformation 1"
+      beforeImage: "/before-1.jpg"
+      afterImage: "/after-1.jpg"
+      order: 1
+    - title: "Smile Transformation 2"
+      beforeImage: "/before-2.jpg"
+      afterImage: "/after-2.jpg"
+      order: 2
+    - title: "Smile Transformation 3"
+      beforeImage: "/before-3.png"
+      afterImage: "/after-3.jpg"
+      order: 3
+    - title: "Smile Transformation 4"
+      beforeImage: "/before-4-new.png"
+      afterImage: "/after-4.jpg"
+      order: 4
+
+  blogPreview:
+    heading: "Dental Tips & Insights"
+    description: "Expert advice for a healthier smile"
+    articles:
+      - date: "May 18, 2024"
+        title: "What You Need to Know About Dental Implants"
+        category: "Implants"
+      - date: "May 12, 2024"
+        title: "Invisalign vs. Braces: Which Is Right for You?"
+        category: "Invisalign"
+      - date: "May 5, 2024"
+        title: "5 Ways to Maintain Your Whitening Results"
+        category: "Whitening"
+      - date: "April 28, 2024"
+        title: "How Often Should You Visit the Dentist?"
+        category: "Dental Care"
+
+# -------------------------------------------------------------------
+# SERVICES DATA
+# -------------------------------------------------------------------
+  services:
+    - slug: "dental-implants"
+      title: "Dental Implants"
+      shortDescription: "Permanent replacement for missing teeth that looks and feels natural."
+      heroImage: "/before-3.png"
+      eyebrow: "RESTORATIVE DENTISTRY"
+      introHeading: "Restore Your Smile. Restore Your Confidence."
+      ctaPrimaryLabel: "Book Appointment"
+      ctaSecondaryLabel: "Consult Our Experts"
+
+    - slug: "invisalign"
+      title: "Invisalign® Aligners"
+      shortDescription: "Straighten your teeth comfortably and discreetly with clear aligners."
+      heroImage: "/after-2.jpg"
+      eyebrow: "SMILE ALIGNMENT"
+      introHeading: "Clear. Comfortable. Convenient."
+      ctaPrimaryLabel: "Book Appointment"
+      ctaSecondaryLabel: "Consult Our Experts"
+
+    - slug: "lanap-treatment"
+      title: "LANAP® Treatment"
+      shortDescription: "Advanced laser therapy for gum disease with minimal discomfort."
+      heroImage: "/before-3.png"
+      eyebrow: "LASER PERIODONTICS"
+      introHeading: "Laser Precision. Gentle Care."
+      ctaPrimaryLabel: "Book Appointment"
+      ctaSecondaryLabel: "Consult Our Experts"
+
+    - slug: "emergency-care"
+      title: "Emergency Care"
+      shortDescription: "Same-day emergency dental care when you need it most."
+      heroImage: "/clinic-reception.png"
+      eyebrow: "URGENT CARE"
+      introHeading: "Relieving Pain. Restoring Health."
+      ctaPrimaryLabel: "Call 302 DR-TEETH"
+      ctaSecondaryLabel: "View Location Map"
+
+    - slug: "cosmetic-dentistry"
+      title: "Cosmetic Dentistry"
+      shortDescription: "Enhance the natural beauty of your smile with advanced cosmetic treatments."
+      heroImage: "/procedures-hero.png"
+      eyebrow: "COSMETIC DENTISTRY"
+      introHeading: "A More Confident Smile Starts Here"
+      ctaPrimaryLabel: "Book Appointment"
+      ctaSecondaryLabel: "Consult Our Experts"
+
+  serviceFeatures:
+    cosmetic-dentistry:
+      - order: 1
+        title: "Teeth Whitening"
+        subtitle: "Brighten your smile safely and effectively."
+        description: "Brighten your smile with safe and effective professional whitening treatments. Remove everyday stains and restore a brighter, more youthful appearance."
+        tags:
+          - "Professional Whitening"
+          - "Safe Treatment"
+          - "Brighter Smile"
+        image: "/after-4.jpg"
+        alignLeft: true
+      - order: 2
+        title: "Porcelain Veneers"
+        subtitle: "Correct chips, gaps, or uneven teeth."
+        description: "Thin, custom-made porcelain shells can cover imperfections and create a natural-looking, balanced smile."
+        tags:
+          - "Natural Looking"
+          - "Custom Designed"
+          - "Minimally Invasive"
+        image: "/after-3.jpg"
+        alignLeft: false
+      - order: 3
+        title: "Smile Makeovers"
+        subtitle: "Personalized treatment plans tailored to your goals."
+        description: "Combine whitening, veneers, bonding and contouring to create a smile that looks beautiful and feels natural."
+        tags:
+          - "Personalized Plan"
+          - "Smile Design"
+          - "Natural Results"
+        image: "/dr-roberts.png"
+        alignLeft: true
+      - order: 4
+        title: "Cosmetic Dentist in Middletown"
+        subtitle: "A trusted cosmetic dentist you can count on."
+        description: "Whether you want a subtle change or a complete transformation, our experienced team guides you through every step."
+        tags:
+          - "Experienced Team"
+          - "Personalized Care"
+          - "Middletown"
+        image: "/clinic-reception.png"
+        alignLeft: false
+
+    dental-implants:
+      - order: 1
+        title: "Single Tooth Implants"
+        subtitle: "Replace a single missing tooth seamlessly."
+        description: "A medical-grade titanium implant acts as a replacement root and supports a custom porcelain crown that blends with surrounding teeth."
+        tags:
+          - "Natural Looking"
+          - "Permanent Solution"
+          - "Restores Function"
+        image: "/before-3.png"
+        alignLeft: true
+      - order: 2
+        title: "Implant-Supported Bridges"
+        subtitle: "Sturdy replacement for multiple adjacent missing teeth."
+        description: "Implant-supported bridges provide a secure, permanent solution without relying on adjacent healthy teeth for support."
+        tags:
+          - "Stable Support"
+          - "Multiple Teeth"
+          - "Natural Appearance"
+        image: "/after-3.jpg"
+        alignLeft: false
+      - order: 3
+        title: "All-on-4® Dental Implants"
+        subtitle: "Complete full-arch restoration in a single day."
+        description: "A full arch of missing teeth can be replaced using four strategically placed implants for a secure, permanent restoration."
+        tags:
+          - "Full Arch"
+          - "Secure"
+          - "Restores Chewing"
+        image: "/after-1.jpg"
+        alignLeft: true
+      - order: 4
+        title: "Bone Grafting & Sinus Lifts"
+        subtitle: "Preparing your jaw for successful implant placement."
+        description: "Bone grafting and sinus lifts can rebuild bone volume and create a strong foundation for long-term implant success."
+        tags:
+          - "Bone Support"
+          - "Implant Preparation"
+          - "Long-Term Success"
+        image: "/clinic-reception.png"
+        alignLeft: false
+
+    invisalign:
+      - order: 1
+        title: "iTero® 3D Digital Scans"
+        subtitle: "Preview your new smile in real-time."
+        description: "State-of-the-art iTero scanning creates accurate 3D digital impressions without messy putty and can provide a treatment simulation."
+        tags:
+          - "No Messy Putty"
+          - "Accurate Scans"
+          - "Smile Simulation"
+        image: "/dental-chair.png"
+        alignLeft: true
+      - order: 2
+        title: "Custom Clear Aligners"
+        subtitle: "Virtually invisible, comfortable, and removable."
+        description: "Custom medical-grade aligners gradually shift teeth while remaining removable for eating, brushing and flossing."
+        tags:
+          - "Removable"
+          - "Comfortable"
+          - "Virtually Invisible"
+        image: "/after-2.jpg"
+        alignLeft: false
+      - order: 3
+        title: "Invisalign® for Teens"
+        subtitle: "Designed specifically for busy teenagers."
+        description: "Invisalign Teen® aligners are designed for growing smiles and active lifestyles with compliance indicators."
+        tags:
+          - "Teen Friendly"
+          - "Active Lifestyle"
+          - "Compliance Indicators"
+        image: "/dr-roberts.png"
+        alignLeft: true
+      - order: 4
+        title: "Vivera® Retainers"
+        subtitle: "Protect your investment and lock in your new smile."
+        description: "Custom Vivera retainers help maintain alignment after treatment and are designed for durable nightly wear."
+        tags:
+          - "Extra Sturdy"
+          - "Comfortable"
+          - "Prevents Shifting"
+        image: "/after-1.jpg"
+        alignLeft: false
+
+    lanap-treatment:
+      - order: 1
+        title: "PerioLase® MVP-7 Laser Technology"
+        subtitle: "Highly targeted laser energy that protects healthy gums."
+        description: "The LANAP® protocol uses targeted laser energy to address diseased tissue and bacteria while protecting healthy gum tissue, bone and roots."
+        tags:
+          - "Minimally Invasive"
+          - "No Scalpel"
+          - "Targeted Energy"
+        image: "/before-3.png"
+        alignLeft: true
+      - order: 2
+        title: "Gum and Bone Regeneration"
+        subtitle: "Stimulating your body's natural healing response."
+        description: "LANAP® is designed to support healing and regeneration around teeth while creating a protective seal over treated pockets."
+        tags:
+          - "Tissue Regeneration"
+          - "Advanced Laser Care"
+          - "Natural Teeth"
+        image: "/after-3.jpg"
+        alignLeft: false
+      - order: 3
+        title: "Comfortable and Fast Recovery"
+        subtitle: "Resume your normal day after treatment."
+        description: "With no traditional cuts or sutures, LANAP® can offer a more comfortable experience and a streamlined recovery."
+        tags:
+          - "Quick Healing"
+          - "Comfort Focused"
+          - "No Sutures"
+        image: "/dr-thompson.png"
+        alignLeft: true
+      - order: 4
+        title: "Advanced Periodontal Diagnostics"
+        subtitle: "Thorough mapping of pocket depth for precise treatment."
+        description: "Detailed periodontal measurements help tailor treatment to individual gum health needs."
+        tags:
+          - "Precision Mapping"
+          - "Custom Treatment"
+          - "Long-Term Gum Health"
+        image: "/clinic-reception.png"
+        alignLeft: false
+
+    emergency-care:
+      - order: 1
+        title: "Severe Toothache Relief"
+        subtitle: "Quick pain relief for tooth infections or abscesses."
+        description: "A sudden toothache can indicate deep decay or infection. Our emergency team can diagnose the cause and provide prompt treatment."
+        tags:
+          - "Same-Day Care"
+          - "Pain Relief"
+          - "Emergency Diagnosis"
+        image: "/dr-anderson.png"
+        alignLeft: true
+      - order: 2
+        title: "Chipped, Cracked, or Broken Teeth"
+        subtitle: "Rapid restorations to prevent further tooth damage."
+        description: "Same-day bonding or temporary crowns can protect damaged tooth structure, reduce sensitivity and restore function."
+        tags:
+          - "Rapid Restoration"
+          - "Protects Teeth"
+          - "Same-Day Care"
+        image: "/after-3.jpg"
+        alignLeft: false
+      - order: 3
+        title: "Knocked-Out Tooth Replantation"
+        subtitle: "Urgent care to save your natural knocked-out tooth."
+        description: "Time is critical when a tooth is knocked out. Contact the clinic immediately and seek emergency dental care."
+        tags:
+          - "Time-Sensitive Care"
+          - "Urgent Replantation"
+          - "Natural Tooth"
+        image: "/before-3.png"
+        alignLeft: true
+      - order: 4
+        title: "Lost Fillings or Crowns"
+        subtitle: "Protect exposed, sensitive tooth structure."
+        description: "A lost filling or crown can expose sensitive tooth structure. Prompt care can protect the tooth and restore the restoration."
+        tags:
+          - "Quick Replacement"
+          - "Protects Dentin"
+          - "Prevents Further Damage"
+        image: "/clinic-reception.png"
+        alignLeft: false
+
+# -------------------------------------------------------------------
+# SERVICES LANDING PAGE
+# -------------------------------------------------------------------
+  servicesLanding:
+    hero:
+      eyebrow: "Expert Care. Beautiful Smiles."
+      heading: "Complete Dental Care For a Healthier You"
+      description: "We provide a full range of dental services using advanced technology and a gentle approach to help you achieve a confident, healthy smile that lasts a lifetime."
+      image: "/dental-chair.png"
+      badge:
+        title: "Invisalign® Provider"
+        value: "Diamond"
+    gridHeading: "Our Services"
+    services:
+      - title: "Cosmetic Dentistry"
+        description: "Transform your smile with natural-looking cosmetic treatments."
+        image: "/after-3.jpg"
+        url: "/services/cosmetic-dentistry"
+      - title: "Invisalign®"
+        description: "Clear aligners for a straighter smile without metal braces."
+        image: "/after-2.jpg"
+        url: "/services/invisalign"
+      - title: "6 Month Braces"
+        description: "Fast, effective teeth straightening in as little as 6 months."
+        image: "/before-2.jpg"
+        url: "/services"
+      - title: "Veneers & Laminates"
+        description: "Transform your smile with natural-looking veneers."
+        image: "/after-3.jpg"
+        url: "/services/cosmetic-dentistry"
+      - title: "Dental Implants"
+        description: "Permanent replacement for missing teeth that looks and feels natural."
+        image: "/before-3.png"
+        url: "/services/dental-implants"
+      - title: "Teeth Whitening"
+        description: "Brighten your smile safely and effectively."
+        image: "/after-4.jpg"
+        url: "/services/cosmetic-dentistry"
+      - title: "LANAP Treatment"
+        description: "Advanced laser treatment for gum disease with minimal discomfort."
+        image: "/before-3.png"
+        url: "/services/lanap-treatment"
+      - title: "Emergency Care"
+        description: "Same-day care for dental emergencies."
+        image: "/clinic-reception.png"
+        url: "/services/emergency-care"
+
+  servicesStats:
+    heading: "Trusted Care. Proven Results."
+    eyebrow: "Why Choose Us"
+    stats:
+      - value: "10,000+"
+        label: "Happy Patients"
+        icon: "smile"
+      - value: "50+"
+        label: "Years of Experience"
+        icon: "shield"
+      - value: "Diamond"
+        label: "Invisalign® Provider"
+        icon: "award"
+      - value: "5-Star"
+        label: "Google Ratings"
+        icon: "star"
+    image: "/clinic-reception.png"
+
+# -------------------------------------------------------------------
+# PROCEDURES
+# -------------------------------------------------------------------
+  procedures:
+    hero:
+      eyebrow: "HOW DO WE DO IT?"
+      heading: "Dental Procedures Designed for Your Smile"
+      description: "We combine advanced technology with compassionate care to deliver safe, comfortable, and effective dental procedures for patients in Middletown, DE and surrounding communities."
+      image: "/procedures-hero.png"
+      primaryButton:
+        label: "Meet Our Team"
+        url: "/about/team"
+      secondaryButton:
+        label: "View Working Hours"
+        url: "/contact"
+      badge:
+        title: "Diamond Invisalign®"
+        value: "Top 1% Provider"
+
+    items:
+      - title: "Crowns & Bridges"
+        description: "Restore damaged or missing teeth for a strong, natural smile."
+        order: 1
+      - title: "Teeth Whitening"
+        description: "Brighten your smile safely and effectively."
+        order: 2
+      - title: "Dental Implants"
+        description: "Permanent replacement for missing teeth."
+        order: 3
+      - title: "Veneers & Laminates"
+        description: "Transform your smile with natural-looking veneers."
+        order: 4
+      - title: "Root Canal Treatment"
+        description: "Save your natural tooth and relieve pain."
+        order: 5
+      - title: "Inlays & Onlays"
+        description: "Conservative restorations for decayed teeth."
+        order: 6
+
+    skillStats:
+      - name: "DENTAL SURGERY SKILLS"
+        percentage: 95
+      - name: "DENTAL COSMETIC SKILLS"
+        percentage: 92
+      - name: "TEETH WHITENING SKILLS"
+        percentage: 83
+
+    trustStats:
+      - value: "10,000+"
+        label: "Happy Patients"
+      - value: "50+"
+        label: "Years of Experience"
+      - value: "98%"
+        label: "Patient Satisfaction"
+      - value: "5-Star"
+        label: "Google Ratings"
+
+# -------------------------------------------------------------------
+# TECHNOLOGIES
+# -------------------------------------------------------------------
+  technologies:
+    hero:
+      eyebrow: "Advanced Technology"
+      heading: "Advanced Technology Better Care, Healthier Smiles"
+      description: "At Jolly Smiles, we combine advanced technology with clinical expertise to deliver precise diagnosis, comfortable treatments, and exceptional results."
+      image: "/technologies-banner.png"
+
+    intro:
+      eyebrow: "CUTTING-EDGE TECHNOLOGY"
+      heading: "Innovation for Your Comfort and Confidence"
+      description: "We invest in the latest dental technology to ensure more accurate diagnoses, safer treatments, and a better overall experience for our patients."
+
+    features:
+      - title: "Intra Oral Cameras"
+        description: "A small, pen-shaped device with LED lighting captures sharp digital images of teeth and gums, helping the provider show patients oral health findings."
+        icon: "camera"
+        order: 1
+      - title: "Cone Beam CT"
+        description: "3D dental imaging creates detailed views of teeth, soft tissues, nerve pathways and bone to support diagnosis and accurate implant planning."
+        icon: "scan"
+        order: 2
+      - title: "iTero element 5D"
+        description: "An intraoral scanner digitally captures teeth and gums, supports smile simulations, early cavity detection and digital impressions for laboratory fabrication."
+        icon: "target"
+        order: 3
+      - title: "Picasso Soft Tissue Laser"
+        description: "Laser bacterial reduction can be used around gum tissue to reduce bacteria and support periodontal treatment."
+        icon: "zap"
+        order: 4
+      - title: "iPlus Waterlase"
+        description: "Laser energy and water spray can provide gentle, minimally invasive treatment for several common dental conditions."
+        icon: "droplet"
+        order: 5
+      - title: "The Wand"
+        description: "A computer-controlled local anesthetic delivery system designed to provide more controlled injections and a more comfortable experience."
+        icon: "activity"
+        order: 6
+
+    cta:
+      heading: "Experience the Difference"
+      description: "Our advanced technology and caring team work together to give you the best possible dental care."
+      primaryButton:
+        label: "Book Appointment"
+        action: "appointment-modal"
+      secondaryButton:
+        label: "Contact Us"
+        url: "/contact"
+
+# -------------------------------------------------------------------
+# ABOUT PAGE
+# -------------------------------------------------------------------
+  about:
+    hero:
+      heading: "About Jolly Smiles"
+      description: "Compassionate dental care, advanced technology, and a team dedicated to healthier, happier smiles."
+      image: "/about-hero.png"
+
+    story:
+      eyebrow: "Our Story"
+      heading: "Creating Healthier, Happier Smiles Every Day"
+      paragraphs:
+        - "Founded with a passion for patient care and a commitment to excellence, Jolly Smiles has grown into a trusted dental practice known for its personalized approach and advanced treatments."
+        - "We combine technology, skill, and compassion to deliver outstanding results in a comfortable, friendly environment."
+      image: "/clinic-reception.png"
+      button:
+        label: "Book Appointment"
+        action: "appointment-modal"
+
+    values:
+      heading: "Our Values"
+      items:
+        - title: "Patient First"
+          description: "Your comfort, health, and satisfaction are always our top priority."
+        - title: "Integrity"
+          description: "We believe in honest advice and transparent treatment."
+        - title: "Excellence"
+          description: "We use the latest technology and techniques to ensure the best outcomes."
+        - title: "Compassion"
+          description: "We treat every patient like family with kindness, respect, and care."
+
+# -------------------------------------------------------------------
+# TEAM
+# -------------------------------------------------------------------
+  team:
+    hero:
+      heading: "Meet Our Dental Team"
+      description: "Experienced, compassionate dental professionals committed to your health and confidence."
+      image: "/team-banner.png"
+
+    members:
+      - name: "Dr. Anu Rajan, DDS"
+        role: "Founder & Cosmetic Dentist"
+        image: "/dr-anu.png"
+        specialties:
+          - "20+ Years Experience"
+          - "Cosmetic Dentistry"
+          - "Implants & Restorative"
+          - "Smile Makeovers"
+        order: 1
+      - name: "Dr. Michael Thompson, DDS"
+        role: "General & Family Dentist"
+        image: "/dr-michael.png"
+        specialties:
+          - "15+ Years Experience"
+          - "Family Dentistry"
+          - "Preventive Care"
+          - "Emergency Care"
+        order: 2
+      - name: "Dr. Sarah Martinez, DDS"
+        role: "Cosmetic Dentist"
+        image: "/dr-sarah.png"
+        specialties:
+          - "12+ Years Experience"
+          - "Cosmetic Dentistry"
+          - "Veneers & Bonding"
+          - "Teeth Whitening"
+        order: 3
+      - name: "Dr. James Wilson, DDS"
+        role: "Oral Surgeon"
+        image: "/dr-james.png"
+        specialties:
+          - "14+ Years Experience"
+          - "Dental Implants"
+          - "Oral Surgery"
+          - "Wisdom Teeth"
+        order: 4
+      - name: "Dr. Priya Shah, DDS"
+        role: "Pediatric Dentist"
+        image: "/dr-priya.png"
+        specialties:
+          - "10+ Years Experience"
+          - "Pediatric Dentistry"
+          - "Kids Care"
+          - "Preventive Care"
+        order: 5
+      - name: "Dr. Emily Carter, DDS"
+        role: "Orthodontist"
+        image: "/dr-emily.png"
+        specialties:
+          - "11+ Years Experience"
+          - "Invisalign® Provider"
+          - "Braces"
+          - "Smile Alignment"
+        order: 6
+
+    previewTeam:
+      - name: "Dr. Michael Anderson"
+        role: "Lead Dentist"
+        image: "/dr-anderson.png"
+      - name: "Dr. Sarah Thompson"
+        role: "Cosmetic Dentist"
+        image: "/dr-thompson.png"
+      - name: "Dr. David Miller"
+        role: "Orthodontist"
+        image: "/dr-miller.png"
+      - name: "Dr. Emily Roberts"
+        role: "Pediatric Dentist"
+        image: "/dr-roberts.png"
+
+# -------------------------------------------------------------------
+# BLOG
+# -------------------------------------------------------------------
+  blog:
+    hero:
+      heading: "Our Blog"
+      description: "Tips, insights, and inspiration for a healthier, happier smile."
+      image: "/blog-hero.png"
+
+    posts:
+      - title: "5 Daily Habits for a Healthier, Brighter Smile"
+        slug: "5-daily-habits-for-a-healthier-brighter-smile"
+        description: "Simple daily habits can make a big difference in your oral health. Here are our top 5 tips..."
+        category: "Dental Care"
+        publishDate: "2024-05-20"
+        published: true
+      - title: "Teeth Whitening: What to Expect"
+        slug: "teeth-whitening-what-to-expect"
+        description: "Professional teeth whitening can instantly boost your confidence. Learn what to expect before, during, and after treatment."
+        category: "Whitening"
+        publishDate: "2024-05-18"
+        published: true
+      - title: "How Often Should You Visit the Dentist?"
+        slug: "how-often-should-you-visit-the-dentist"
+        description: "Regular dental visits are key to preventing problems and maintaining a healthy smile."
+        category: "Dental Care"
+        publishDate: "2024-05-15"
+        published: true
+      - title: "Dental Care Tips for Kids"
+        slug: "dental-care-tips-for-kids"
+        description: "Good oral hygiene habits start early. Here are some fun and easy tips to keep your child's smile healthy."
+        category: "Kids Dentistry"
+        publishDate: "2024-05-10"
+        published: true
+      - title: "Dental Implants: A Long-Term Solution"
+        slug: "dental-implants-a-long-term-solution"
+        description: "Dental implants look, feel, and function like natural teeth. Find out if they're right for you."
+        category: "Implants"
+        publishDate: "2024-05-05"
+        published: true
+      - title: "Invisalign vs. Braces: Which is Right for You?"
+        slug: "invisalign-vs-braces-which-is-right-for-you"
+        description: "Compare the benefits of Invisalign and traditional braces to choose the best option for your smile."
+        category: "Invisalign"
+        publishDate: "2024-05-01"
+        published: true
+
+# -------------------------------------------------------------------
+# CONTACT
+# -------------------------------------------------------------------
+  contact:
+    hero:
+      heading: "Contact Us"
+      highlightedWord: "Us"
+      subheading: "We're here to help you smile brighter."
+      description: "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!"
+      image: "/clinic-reception.png"
+
+    info:
+      eyebrow: "GET IN TOUCH"
+      heading: "Ready to perfect your smile?"
+      description: "Fill out the form or use our contact details. Our team will get back to you as soon as possible."
+      items:
+        - title: "Call Us"
+          value: "302 DR-TEETH (378-3384)"
+          subtext: "Mon - Fri: 9:00 AM - 5:00 PM"
+          action: "tel:3023783384"
+        - title: "Email Us"
+          value: "drteeth@jollysmiles.com"
+          subtext: "We reply within 24 hours"
+        - title: "Visit Us"
+          value: "102 Sleepy Hollow Drive, Suite 100, Middletown, DE 19709"
+        - title: "Office Hours"
+          value: "Mon - Fri: 9:00 AM - 5:00 PM"
+          subtext: "Sat - Sun: Closed"
+
+    form:
+      heading: "Send Us a Message"
+      fields:
+        - name: "fullName"
+          label: "Full Name"
+          type: "text"
+          required: true
+        - name: "phone"
+          label: "Phone Number"
+          type: "tel"
+          required: true
+        - name: "email"
+          label: "Email Address"
+          type: "email"
+          required: true
+        - name: "service"
+          label: "Select Service"
+          type: "select"
+          required: true
+          options:
+            - "General Dentistry"
+            - "Cosmetic Dentistry"
+            - "Dental Implants"
+            - "Invisalign®"
+            - "Emergency Care"
+            - "LANAP® Treatment"
+        - name: "message"
+          label: "Message"
+          type: "textarea"
+          required: true
+        - name: "consent"
+          label: "I agree to be contacted regarding my request."
+          type: "checkbox"
+          required: true
+      submitLabel: "Send Message"
+
+    map:
+      image: "/contact-map-final.png"
+      address: "102 Sleepy Hollow Drive, Suite 100, Middletown, DE 19709"

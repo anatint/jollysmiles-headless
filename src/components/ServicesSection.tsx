@@ -34,7 +34,29 @@ const services = [
   }
 ];
 
-export default function ServicesSection() {
+export interface ServiceData {
+  title?: string;
+  shortDescription?: string;
+  slug?: string;
+  icon?: string;
+  active?: boolean;
+}
+
+export default function ServicesSection({ data }: { data?: ServiceData[] }) {
+  // If no CMS data is provided, fallback to the static array
+  const displayServices = data && data.length > 0
+    ? data.filter(s => s.active !== false).map(s => {
+        // Find a matching static icon if one exists by title, otherwise use a default
+        const staticMatch = services.find(stat => stat.title.toLowerCase().includes(s.title?.toLowerCase() || ''));
+        return {
+          title: s.title || "Dental Service",
+          description: s.shortDescription ? s.shortDescription.replace(/<[^>]*>?/gm, '') : "Comprehensive dental care for your smile.",
+          icon: staticMatch ? staticMatch.icon : <Sparkles className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
+          link: `/services/${s.slug}`
+        };
+      })
+    : services;
+
   return (
     <div className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -46,7 +68,7 @@ export default function ServicesSection() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {services.map((service, index) => (
+          {displayServices.map((service, index) => (
             <div 
               key={index} 
               className="group bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-red-100 transition-all duration-300 flex flex-col items-center text-center"

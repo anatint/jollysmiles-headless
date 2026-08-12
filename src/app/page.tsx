@@ -19,11 +19,12 @@ export const revalidate = 0;
 
 export default async function Home() {
   const testimonialsData = await getCollectionItems('Testimonials');
+  const servicesData = await getCollectionItems('Services');
 
   return (
     <>
       <HeroSection />
-      <ServicesSection />
+      <ServicesSection data={servicesData} />
       <JourneySection />
       <AboutSection />
       <TransformationsSection />

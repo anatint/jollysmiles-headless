@@ -1,0 +1,142 @@
+# jollysmiles-technologies-collection.yaml
+# Wix CMS collection structure for Next.js Headless frontend
+
+collection:
+  name: Technologies
+  displayName: Technologies
+  slug: technologies
+  type: CMS
+
+fields:
+  - name: title
+    type: text
+    required: true
+
+  - name: slug
+    type: text
+    required: true
+
+  - name: eyebrow
+    type: text
+
+  - name: description
+    type: richText
+
+  - name: icon
+    type: image
+
+  - name: image
+    type: image
+
+  - name: imageAlt
+    type: text
+
+  - name: layout
+    type: text
+    options:
+      - image-left
+      - content-left
+
+  - name: order
+    type: number
+    required: true
+
+  - name: active
+    type: boolean
+    default: true
+
+  - name: page
+    type: text
+    default: technologies
+
+
+items:
+
+  - title: Intra Oral Cameras
+    slug: intra-oral-cameras
+    eyebrow: ""
+    description: |
+      A small, pen-shaped device that lets your dental team see and
+      capture sharp digital images of your teeth and gums. These images
+      help patients better understand their oral health.
+    icon: /icons/camera.svg
+    image: /technologies/intra-oral-camera.png
+    imageAlt: Intra Oral Cameras
+    layout: image-left
+    order: 1
+    active: true
+    page: technologies
+
+  - title: Cone Beam CT
+    slug: cone-beam-ct
+    eyebrow: ""
+    description: |
+      Dental cone beam computed tomography creates detailed three-dimensional
+      images of your teeth, soft tissues, nerve pathways and bone. This
+      technology helps with accurate diagnosis and implant treatment planning.
+    icon: /icons/scan.svg
+    image: /technologies/cone-beam-ct.png
+    imageAlt: Cone Beam CT
+    layout: content-left
+    order: 2
+    active: true
+    page: technologies
+
+  - title: iTero element 5D
+    slug: itero-element-5d
+    eyebrow: ""
+    description: |
+      An advanced intraoral scanner that digitally captures the structure
+      of your teeth and gums. It provides highly accurate digital impressions,
+      smile simulations and support for early cavity detection.
+    icon: /icons/scan-target.svg
+    image: /technologies/itero-element-5d.png
+    imageAlt: iTero element 5D
+    layout: image-left
+    order: 3
+    active: true
+    page: technologies
+
+  - title: Picasso Soft Tissue Laser
+    slug: picasso-soft-tissue-laser
+    eyebrow: ""
+    description: |
+      Laser technology used for bacterial reduction around gum tissue.
+      It provides a comfortable and precise approach to periodontal treatment.
+    icon: /icons/laser.svg
+    image: /technologies/picasso-laser.png
+    imageAlt: Picasso Soft Tissue Laser
+    layout: content-left
+    order: 4
+    active: true
+    page: technologies
+
+  - title: iPlus Waterlase
+    slug: iplus-waterlase
+    eyebrow: ""
+    description: |
+      Waterlase combines laser energy and water spray to provide gentle,
+      minimally invasive dental treatment while helping reduce heat,
+      vibration and discomfort.
+    icon: /icons/water-drop.svg
+    image: /technologies/iplus-waterlase.png
+    imageAlt: iPlus Waterlase
+    layout: image-left
+    order: 5
+    active: true
+    page: technologies
+
+  - title: The Wand
+    slug: the-wand
+    eyebrow: ""
+    description: |
+      The Wand is a computer-controlled local anesthetic delivery system
+      designed to provide controlled injections and a more comfortable
+      experience during dental procedures.
+    icon: /icons/injection.svg
+    image: /technologies/the-wand.png
+    imageAlt: The Wand
+    layout: content-left
+    order: 6
+    active: true
+    page: technologies

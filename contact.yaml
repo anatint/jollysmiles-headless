@@ -1,0 +1,65 @@
+contact:
+    hero:
+      heading: "Contact Us"
+      highlightedWord: "Us"
+      subheading: "We're here to help you smile brighter."
+      description: "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!"
+      image: "/clinic-reception.png"
+
+    info:
+      eyebrow: "GET IN TOUCH"
+      heading: "Ready to perfect your smile?"
+      description: "Fill out the form or use our contact details. Our team will get back to you as soon as possible."
+      items:
+        - title: "Call Us"
+          value: "302 DR-TEETH (378-3384)"
+          subtext: "Mon - Fri: 9:00 AM - 5:00 PM"
+          action: "tel:3023783384"
+        - title: "Email Us"
+          value: "drteeth@jollysmiles.com"
+          subtext: "We reply within 24 hours"
+        - title: "Visit Us"
+          value: "102 Sleepy Hollow Drive, Suite 100, Middletown, DE 19709"
+        - title: "Office Hours"
+          value: "Mon - Fri: 9:00 AM - 5:00 PM"
+          subtext: "Sat - Sun: Closed"
+
+    form:
+      heading: "Send Us a Message"
+      fields:
+        - name: "fullName"
+          label: "Full Name"
+          type: "text"
+          required: true
+        - name: "phone"
+          label: "Phone Number"
+          type: "tel"
+          required: true
+        - name: "email"
+          label: "Email Address"
+          type: "email"
+          required: true
+        - name: "service"
+          label: "Select Service"
+          type: "select"
+          required: true
+          options:
+            - "General Dentistry"
+            - "Cosmetic Dentistry"
+            - "Dental Implants"
+            - "Invisalign®"
+            - "Emergency Care"
+            - "LANAP® Treatment"
+        - name: "message"
+          label: "Message"
+          type: "textarea"
+          required: true
+        - name: "consent"
+          label: "I agree to be contacted regarding my request."
+          type: "checkbox"
+          required: true
+      submitLabel: "Send Message"
+
+    map:
+      image: "/contact-map-final.png"
+      address: "102 Sleepy Hollow Drive, Suite 100, Middletown, DE 19709"
