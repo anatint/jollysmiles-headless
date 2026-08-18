@@ -18,13 +18,20 @@ export default function AboutSection({ data }: { data?: any[] }) {
           {/* Left Column - Image */}
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200 shadow-xl relative">
-              {about?.image ? (
-                <img src={about.image} alt="About Us" className="w-full h-full object-cover" />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100 flex items-center justify-center text-gray-500 font-medium">
-                  [ Team Image Placeholder ]
-                </div>
-              )}
+              {(() => {
+                let aboutImg = about?.image || about?.aboutImage;
+                if (typeof aboutImg === 'string' && aboutImg.startsWith('wix:image://v1/')) {
+                  const mediaId = aboutImg.replace('wix:image://v1/', '').split('/')[0];
+                  aboutImg = `https://static.wixstatic.com/media/${mediaId}`;
+                }
+                return aboutImg ? (
+                  <img src={aboutImg} alt="About Us" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100 flex items-center justify-center text-gray-500 font-medium">
+                    [ Team Image Placeholder ]
+                  </div>
+                );
+              })()}
             </div>
             
             {/* Floating Experience Badge */}

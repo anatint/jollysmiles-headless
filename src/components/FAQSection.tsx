@@ -14,9 +14,38 @@ const faqs = [
 export default function FAQSection({ data }: { data?: any[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const displayFaqs = data && data.length > 0 
-    ? data.filter(f => f.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
-    : faqs;
+  // Check if data is passed as a single setting item containing numbered columns (e.g., faq1Question, faq1Answer)
+  const singleSettingObj = data && data.length > 0 ? data[0] : null;
+
+  const extractedHeading = singleSettingObj?.faqHeading || singleSettingObj?.['FAQ Heading'] || "Frequently Asked Questions";
+
+  let displayFaqs: any[] = [];
+
+  if (singleSettingObj) {
+    // Collect all numbered FAQ fields (e.g., faq1Question / faq1Answer, FAQ 1 Question / FAQ 1 Answer)
+    for (let i = 1; i <= 10; i++) {
+      const q = singleSettingObj[`faq${i}Question`] || 
+                singleSettingObj[`faq${i}Q`] || 
+                singleSettingObj[`FAQ ${i} Question`] || 
+                singleSettingObj[`faq_${i}_question`];
+      
+      const a = singleSettingObj[`faq${i}Answer`] || 
+                singleSettingObj[`faq${i}A`] || 
+                singleSettingObj[`FAQ ${i} Answer`] || 
+                singleSettingObj[`faq_${i}_answer`];
+
+      if (q || a) {
+        displayFaqs.push({ question: q || "", answer: a || "" });
+      }
+    }
+  }
+
+  // Fallback to list items or default faqs if no numbered fields were found
+  if (displayFaqs.length === 0) {
+    displayFaqs = data && data.length > 0 && !singleSettingObj?.faq1Question && !singleSettingObj?.['FAQ 1 Question']
+      ? data.filter(f => f.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
+      : faqs;
+  }
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -27,26 +56,30 @@ export default function FAQSection({ data }: { data?: any[] }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-[35px] font-extrabold text-gray-900">
-            Frequently Asked Questions
+            {extractedHeading}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-          {displayFaqs.map((faq, index) => (
-            <div key={index} className="border-b border-gray-200 py-4">
-              <button 
-                onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center text-left focus:outline-none group"
-              >
-                <span className="text-gray-900 font-bold text-lg group-hover:text-brand-red transition-colors">{faq.question}</span>
-                <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-brand-red' : ''}`} />
-              </button>
-              <div 
-                className={`mt-4 text-gray-600 leading-relaxed overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
-                dangerouslySetInnerHTML={{ __html: faq.answer }}
-              />
-            </div>
-          ))}
+          {displayFaqs.map((faq: any, index: number) => {
+            const questionText = faq.question || faq.title || faq.name || faq.q || faq.heading || "";
+            const answerText = faq.answer || faq.description || faq.content || faq.a || faq.solution || faq.text || "";
+            return (
+              <div key={index} className="border-b border-gray-200 py-4">
+                <button 
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full flex justify-between items-center text-left focus:outline-none group"
+                >
+                  <span className="text-gray-900 font-bold text-lg group-hover:text-brand-red transition-colors">{questionText}</span>
+                  <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-brand-red' : ''}`} />
+                </button>
+                <div 
+                  className={`mt-4 text-gray-600 leading-relaxed overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                  dangerouslySetInnerHTML={{ __html: answerText }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

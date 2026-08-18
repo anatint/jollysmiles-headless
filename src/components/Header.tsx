@@ -25,7 +25,12 @@ export default function Header({ settings, navigation }: { settings?: any, navig
         { label: 'Contact Us', url: '/contact' }
       ];
 
-  const logoUrl = settings?.logo || "/logo.png";
+  let logoUrl = settings?.logo || "/logo.png";
+  if (typeof logoUrl === 'string' && logoUrl.startsWith('wix:image://v1/')) {
+    const parts = logoUrl.replace('wix:image://v1/', '').split('/');
+    const mediaId = parts[0];
+    logoUrl = `https://static.wixstatic.com/media/${mediaId}`;
+  }
   const siteName = settings?.siteName || "Jolly Smiles";
 
   return (

@@ -10,11 +10,17 @@ export default function HeroSection({ heroData, statsData }: { heroData?: any[],
   const hero = heroData && heroData.length > 0 && heroData[0].active !== false ? heroData[0] : null;
   const stats = statsData && statsData.length > 0 ? statsData.filter(s => s.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)) : null;
 
+  let heroBgImage = hero?.backgroundImage || hero?.heroImage || "/hero-background.png";
+  if (typeof heroBgImage === 'string' && heroBgImage.startsWith('wix:image://v1/')) {
+    const mediaId = heroBgImage.replace('wix:image://v1/', '').split('/')[0];
+    heroBgImage = `https://static.wixstatic.com/media/${mediaId}`;
+  }
+
   return (
     <div className="relative bg-white overflow-visible">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image src={hero?.backgroundImage || "/hero-background.png"} alt="Dental Patient" fill className="object-cover object-[75%_center] opacity-95" priority />
+        <Image src={heroBgImage} alt="Dental Patient" fill className="object-cover object-[75%_center] opacity-95" priority />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/10 md:via-white/60 md:to-transparent"></div>
       </div>
 
