@@ -1,3 +1,11 @@
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 
-export default defineCloudflareConfig();
+export default defineCloudflareConfig({
+  override: {
+    wrapper: "cloudflare-node",
+    converter: "edge",
+    incrementalCache: "dummy",
+    tagCache: "dummy",
+    queue: "dummy",
+  },
+});
