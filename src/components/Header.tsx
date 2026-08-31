@@ -17,12 +17,13 @@ export default function Header({ settings, navigation }: { settings?: any, navig
     ? navigation.filter(n => n.visible !== false && n.location !== 'footer').sort((a, b) => (a.order || 0) - (b.order || 0))
     : [
         { label: 'Home', url: '/' },
-        { label: 'About Us', url: '/about' },
+        { label: 'About', url: '/about' },
         { label: 'Services', url: '/services' },
         { label: 'Procedures', url: '/procedures' },
         { label: 'Technologies', url: '/technologies' },
+        { label: 'Our Team', url: '/about/team' },
         { label: 'Blog', url: '/blog' },
-        { label: 'Contact Us', url: '/contact' }
+        { label: 'Contact', url: '/contact' }
       ];
 
   let logoUrl = settings?.logo || "/logo.png";

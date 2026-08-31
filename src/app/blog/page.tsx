@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import BlogHero from '@/components/BlogHero';
 import CTABanner from '@/components/CTABanner';
 import { Search, ArrowRight, Activity, Smile as SmileIcon, Heart, Calendar, Stethoscope, Star } from 'lucide-react';
+import { getCollectionItems } from '@/lib/wix';
+
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Our Blog | Jolly Smiles Dental Care",
@@ -65,7 +68,23 @@ const blogPosts = [
   }
 ];
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const wixPosts = await getCollectionItems('BlogPosts');
+  
+  const formattedWixPosts = (wixPosts && wixPosts.length > 0)
+    ? wixPosts.map((post: any, idx: number) => ({
+        id: post._id || idx + 1,
+        category: post.category || "Dental Care",
+        title: post.title || "Untitled Article",
+        description: post.excerpt || (typeof post.content === 'string' ? post.content.replace(/<[^>]*>?/gm, '').slice(0, 120) + '...' : "Read more about this dental topic..."),
+        date: post._createdDate ? new Date(post._createdDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Recent",
+        readTime: post.readTime || "4 min read",
+        icon: [SmileIcon, Star, Calendar, Heart, Stethoscope, Activity][idx % 6],
+      }))
+    : blogPosts;
+
+  const displayPosts = formattedWixPosts.length > 0 ? formattedWixPosts : blogPosts;
+
   return (
     <div className="bg-white font-sans min-h-screen">
       <BlogHero />
@@ -95,7 +114,7 @@ export default function BlogPage() {
 
             {/* Grid of Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {blogPosts.map(post => (
+              {displayPosts.map((post: any) => (
                 <article key={post.id} className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden flex flex-col transition hover:shadow-lg">
                   {/* Image Placeholder */}
                   <div className="h-56 bg-gradient-to-br from-red-50 to-gray-50 flex items-center justify-center border-b border-gray-100 relative">
@@ -163,7 +182,7 @@ export default function BlogPage() {
             <div className="bg-white rounded-xl shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 p-6 md:p-8">
               <h3 className="text-xl font-extrabold text-brand-red mb-6">Recent Posts</h3>
               <div className="flex flex-col gap-6">
-                {blogPosts.slice(0, 5).map(post => (
+                {displayPosts.slice(0, 5).map((post: any) => (
                   <div key={`recent-${post.id}`} className="flex gap-4 group cursor-pointer">
                     <div className="w-20 h-20 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0 relative overflow-hidden group-hover:opacity-90 transition">
                       <post.icon className="w-8 h-8 text-brand-red opacity-30" />

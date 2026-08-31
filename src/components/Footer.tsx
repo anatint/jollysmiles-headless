@@ -6,17 +6,23 @@ import { usePathname } from 'next/navigation';
 export default function Footer({ settings, navigation }: { settings?: any, navigation?: any[] }) {
   const pathname = usePathname();
 
-  // If no dynamic navigation is provided or it's empty, use a fallback
-  const navItems = navigation && navigation.length > 0 
-    ? navigation.filter(n => n.visible !== false && n.location !== 'header').sort((a, b) => (a.order || 0) - (b.order || 0))
-    : [
-        { label: 'Home', url: '/' },
-        { label: 'About Us', url: '/about' },
-        { label: 'Services', url: '/services' },
-        { label: 'Technologies', url: '/technologies' },
-        { label: 'Blog', url: '/blog' },
-        { label: 'Contact Us', url: '/contact' }
-      ];
+  // Filter for footer navigation or general navigation
+  const footerSpecific = navigation?.filter(n => n.visible !== false && n.location === 'footer');
+  
+  const navItems = (footerSpecific && footerSpecific.length > 0)
+    ? footerSpecific.sort((a, b) => (a.order || 0) - (b.order || 0))
+    : (navigation && navigation.length > 0)
+      ? navigation.filter(n => n.visible !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
+      : [
+          { label: 'Home', url: '/' },
+          { label: 'About', url: '/about' },
+          { label: 'Services', url: '/services' },
+          { label: 'Procedures', url: '/procedures' },
+          { label: 'Technologies', url: '/technologies' },
+          { label: 'Our Team', url: '/about/team' },
+          { label: 'Blog', url: '/blog' },
+          { label: 'Contact', url: '/contact' }
+        ];
 
   const phone = settings?.phone || "302 DR-TEETH (378-3384)";
   const email = settings?.email || "drteeth@jollysmiles.com";
