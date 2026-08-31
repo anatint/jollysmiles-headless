@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 
+import { getWixImageUrl } from '@/lib/wix';
+
 interface ContactHeroProps {
   data?: {
     heroHeading?: string;
@@ -16,7 +18,7 @@ export default function ContactHero({ data }: ContactHeroProps) {
   const heading = data?.heroHeading || "Contact <span class=\"text-brand-red\">Us</span>";
   const subheading = data?.heroSubheading || "We're here to help you smile brighter.";
   const description = data?.heroDescription || "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!";
-  const image = data?.heroImage || "/clinic-reception.png";
+  const image = getWixImageUrl(data?.heroImage, "/clinic-reception.png");
 
   return (
     <div className="relative bg-white overflow-hidden min-h-[400px] flex flex-col lg:flex-row items-center">

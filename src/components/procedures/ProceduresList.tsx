@@ -115,7 +115,7 @@ export default function ProceduresList({ data }: { data?: any[] }) {
                         <h4 className="font-bold text-gray-900 text-sm">
                           {proc.title}
                         </h4>
-                        <p className="text-gray-500 text-xs mt-0.5 leading-relaxed" dangerouslySetInnerHTML={{ __html: proc.description }} />
+                        <p className="text-gray-500 text-xs mt-0.5 leading-relaxed" dangerouslySetInnerHTML={{ __html: proc.description || '' }} />
                       </div>
                     </div>
                   </div>

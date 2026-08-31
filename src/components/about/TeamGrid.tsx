@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import { Award, Sparkles, Heart, Smile, Users, Shield, Activity, Layers, Droplet, Star, Baby, Grid } from 'lucide-react';
+import { getWixImageUrl } from '@/lib/wix';
 
-const teamMembers = [
-  {
-    name: "Dr. Anu Rajan, DDS",
-    role: "Founder & Cosmetic Dentist",
+const defaultDoctorMeta: Record<string, { image: string; bio: string; badges: { icon: any; label: string }[] }> = {
+  "dr-anu-rajan": {
     image: "/dr-anu.png",
     bio: "With over 20 years of experience in cosmetic and restorative dentistry, Dr. Anu is passionate about creating beautiful smiles and building lasting relationships with patients.",
     badges: [
@@ -14,9 +13,7 @@ const teamMembers = [
       { icon: Smile, label: "Smile Makeovers" }
     ]
   },
-  {
-    name: "Dr. Michael Thompson, DDS",
-    role: "General & Family Dentist",
+  "dr-michael-thompson": {
     image: "/dr-michael.png",
     bio: "Dr. Michael provides comprehensive dental care for patients of all ages, focusing on prevention, comfort, and long-term oral health.",
     badges: [
@@ -26,9 +23,7 @@ const teamMembers = [
       { icon: Activity, label: "Emergency Care" }
     ]
   },
-  {
-    name: "Dr. Sarah Martinez, DDS",
-    role: "Cosmetic Dentist",
+  "dr-sarah-martinez": {
     image: "/dr-sarah.png",
     bio: "Dr. Sarah specializes in aesthetic dentistry, helping patients achieve natural-looking, confident smiles with the latest techniques.",
     badges: [
@@ -38,9 +33,7 @@ const teamMembers = [
       { icon: Droplet, label: "Teeth Whitening" }
     ]
   },
-  {
-    name: "Dr. James Wilson, DDS",
-    role: "Oral Surgeon",
+  "dr-james-wilson": {
     image: "/dr-james.png",
     bio: "Dr. James is an expert in oral surgery and dental implants, ensuring safe, precise treatments with a focus on patient comfort.",
     badges: [
@@ -50,9 +43,7 @@ const teamMembers = [
       { icon: Shield, label: "Wisdom Teeth" }
     ]
   },
-  {
-    name: "Dr. Priya Shah, DDS",
-    role: "Pediatric Dentist",
+  "dr-priya-shah": {
     image: "/dr-priya.png",
     bio: "Dr. Priya loves working with children and making dental visits fun, positive, and stress-free for kids and parents.",
     badges: [
@@ -62,9 +53,7 @@ const teamMembers = [
       { icon: Shield, label: "Preventive Care" }
     ]
   },
-  {
-    name: "Dr. Emily Carter, DDS",
-    role: "Orthodontist",
+  "dr-emily-carter": {
     image: "/dr-emily.png",
     bio: "Dr. Emily specializes in braces and clear aligners, helping patients of all ages achieve perfectly aligned, healthy smiles.",
     badges: [
@@ -74,47 +63,94 @@ const teamMembers = [
       { icon: Smile, label: "Smile Alignment" }
     ]
   }
-];
+};
+
+const teamMembers = Object.entries(defaultDoctorMeta).map(([slug, meta]) => {
+  const nameMap: Record<string, { name: string; role: string }> = {
+    "dr-anu-rajan": { name: "Dr. Anu Rajan, DDS", role: "Founder & Cosmetic Dentist" },
+    "dr-michael-thompson": { name: "Dr. Michael Thompson, DDS", role: "General & Family Dentist" },
+    "dr-sarah-martinez": { name: "Dr. Sarah Martinez, DDS", role: "Cosmetic Dentist" },
+    "dr-james-wilson": { name: "Dr. James Wilson, DDS", role: "Oral Surgeon" },
+    "dr-priya-shah": { name: "Dr. Priya Shah, DDS", role: "Pediatric Dentist" },
+    "dr-emily-carter": { name: "Dr. Emily Carter, DDS", role: "Orthodontist" }
+  };
+  return {
+    name: nameMap[slug]?.name || slug,
+    role: nameMap[slug]?.role || "Dentist",
+    image: meta.image,
+    bio: meta.bio,
+    badges: meta.badges
+  };
+});
+
+function getIconByName(iconStr: string) {
+  const lower = (iconStr || '').toLowerCase();
+  if (lower.includes('award') || lower.includes('experience')) return Award;
+  if (lower.includes('sparkle') || lower.includes('cosmetic')) return Sparkles;
+  if (lower.includes('layer') || lower.includes('implant') || lower.includes('veneer') || lower.includes('restorative')) return Layers;
+  if (lower.includes('smile') || lower.includes('align')) return Smile;
+  if (lower.includes('user') || lower.includes('family')) return Users;
+  if (lower.includes('shield') || lower.includes('prevent') || lower.includes('wisdom')) return Shield;
+  if (lower.includes('activity') || lower.includes('surgery') || lower.includes('emergency')) return Activity;
+  if (lower.includes('drop') || lower.includes('whiten')) return Droplet;
+  if (lower.includes('heart') || lower.includes('kid')) return Heart;
+  if (lower.includes('baby') || lower.includes('pediatric')) return Baby;
+  if (lower.includes('star') || lower.includes('invisalign')) return Star;
+  if (lower.includes('grid') || lower.includes('brace')) return Grid;
+  return Award;
+}
 
 export default function TeamGrid({ data }: { data?: any[] }) {
   const displayMembers = data && data.length > 0 
     ? data.filter(m => m.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map(m => {
-        
-        let parsedBadges = [];
+        const slug = m.slug || (m.name ? m.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '');
+        const meta = defaultDoctorMeta[slug] || {};
+
+        // Parse badges or build from specialties & experience
+        let badges: { icon: any; label: string }[] = [];
         if (m.badges) {
           try {
-            parsedBadges = typeof m.badges === 'string' ? JSON.parse(m.badges) : m.badges;
+            const parsed = typeof m.badges === 'string' ? JSON.parse(m.badges) : m.badges;
+            if (Array.isArray(parsed)) {
+              badges = parsed.map((b: any) => ({
+                icon: getIconByName(b.icon || b.label),
+                label: b.label || ''
+              }));
+            }
           } catch(e) {}
         }
-        
-        // Map icon strings back to Lucide components
-        const getIcon = (iconStr: string) => {
-          if (iconStr === 'award') return Award;
-          if (iconStr === 'sparkles') return Sparkles;
-          if (iconStr === 'layers') return Layers;
-          if (iconStr === 'smile') return Smile;
-          if (iconStr === 'users') return Users;
-          if (iconStr === 'shield') return Shield;
-          if (iconStr === 'activity') return Activity;
-          if (iconStr === 'droplet') return Droplet;
-          if (iconStr === 'heart') return Heart;
-          if (iconStr === 'baby') return Baby;
-          if (iconStr === 'star') return Star;
-          if (iconStr === 'grid') return Grid;
-          return Award;
-        };
 
-        const mappedBadges = parsedBadges.map((b: any) => ({
-          icon: getIcon(b.icon),
-          label: b.label
-        }));
+        if (badges.length === 0) {
+          if (m.experience) {
+            badges.push({
+              icon: Award,
+              label: m.experience
+            });
+          }
+          if (Array.isArray(m.specialties)) {
+            m.specialties.forEach((spec: string) => {
+              badges.push({
+                icon: getIconByName(spec),
+                label: spec
+              });
+            });
+          }
+        }
+
+        if (badges.length === 0 && meta.badges) {
+          badges = meta.badges;
+        }
+
+        const role = m.title || m.role || "Dental Specialist";
+        const image = getWixImageUrl(m.image, meta.image || "/dr-anu.png");
+        const bio = m.bio || m.description || meta.bio || (m.experience ? `With over ${m.experience} in ${role}, ${m.name} is dedicated to providing personalized, high-quality care.` : "Dedicated to providing compassionate and comprehensive dental care for every patient.");
 
         return {
           name: m.name,
-          role: m.role,
-          image: m.image || "/dr-anu.png",
-          bio: m.bio,
-          badges: mappedBadges.length > 0 ? mappedBadges : [
+          role: role,
+          image: image,
+          bio: bio,
+          badges: badges.length > 0 ? badges.slice(0, 4) : [
             { icon: Award, label: "Experience" }
           ]
         };
@@ -169,7 +205,10 @@ export default function TeamGrid({ data }: { data?: any[] }) {
                   </p>
                 </div>
                 
-                <div className="text-gray-600 text-sm leading-relaxed text-center flex-grow mb-6" dangerouslySetInnerHTML={{ __html: member.bio }} />
+                <div 
+                  className="text-gray-600 text-sm leading-relaxed text-center flex-grow mb-6" 
+                  dangerouslySetInnerHTML={{ __html: member.bio || '' }} 
+                />
 
                 <div className="w-full h-[1px] bg-gray-100 mb-6"></div>
 

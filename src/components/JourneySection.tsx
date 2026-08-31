@@ -68,7 +68,7 @@ export default function JourneySection({ data }: { data?: any[] }) {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-gray-600 text-sm max-w-[200px] leading-relaxed" dangerouslySetInnerHTML={{ __html: step.description }} />
+                <p className="text-gray-600 text-sm max-w-[200px] leading-relaxed" dangerouslySetInnerHTML={{ __html: step.description || '' }} />
               </div>
             ))}
           </div>

@@ -35,3 +35,14 @@ export async function submitAppointment(data: any) {
     throw error;
   }
 }
+
+export function getWixImageUrl(url?: string | null, fallback: string = ''): string {
+  if (!url || typeof url !== 'string') return fallback;
+  if (url.startsWith('wix:image://v1/')) {
+    const parts = url.replace('wix:image://v1/', '').split('/');
+    const mediaId = parts[0];
+    return `https://static.wixstatic.com/media/${mediaId}`;
+  }
+  return url;
+}
+

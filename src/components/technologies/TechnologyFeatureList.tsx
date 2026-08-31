@@ -114,7 +114,7 @@ export default function TechnologyFeatureList({ data }: { data?: any[] }) {
                     {feature.title}
                   </h3>
                   
-                  <div className="text-gray-600 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: feature.description }} />
+                  <div className="text-gray-600 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: feature.description || '' }} />
                 </div>
 
               </div>
