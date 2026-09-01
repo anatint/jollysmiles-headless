@@ -18,6 +18,7 @@ export const revalidate = 0;
 export default async function AboutPage() {
   const testimonialsData = await getCollectionItems('Testimonials');
   const valuesData = await getCollectionItems('Values');
+  const teamData = await getCollectionItems('TeamMembers');
 
   return (
     <div className="bg-white font-sans">
@@ -25,7 +26,7 @@ export default async function AboutPage() {
       <AboutHero />
       <OurStory />
       <OurValues data={valuesData as any} />
-      <MeetTheTeam />
+      <MeetTheTeam data={teamData as any} />
       <WhyChooseUs />
       
       {/* Reused Homepage Components */}

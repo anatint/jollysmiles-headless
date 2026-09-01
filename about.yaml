@@ -1,0 +1,118 @@
+# About Us Page Configuration & Collections (excluding Testimonials)
+about:
+  hero:
+    eyebrow: "About Us"
+    heading: "About"
+    highlightedWord: "Us"
+    subheading: "Compassionate Care. Exceptional Results."
+    description: "At Jolly Smiles, we're more than just a dental clinic – we're a team that truly cares about your smile and your well-being."
+    image: "/about-hero.png"
+    imageAlt: "Patient at Jolly Smiles"
+    breadcrumb:
+      - label: "Home"
+        url: "/"
+      - label: "About Us"
+        url: "/about"
+
+  story:
+    eyebrow: "OUR STORY"
+    heading: "Creating Healthier, Happier Smiles Every Day"
+    highlightedWord: "Smiles"
+    description:
+      - "Founded with a passion for patient care and a commitment to excellence, Jolly Smiles has grown into a trusted dental practice known for its personalized approach and advanced treatments."
+      - "We combine technology, skill, and compassion to deliver outstanding results in a comfortable, friendly environment."
+    image: "/clinic-reception.png"
+    imageAlt: "Jolly Smiles Clinic Reception"
+    buttonText: "Book Appointment"
+    buttonAction: "appointment-modal"
+    stats:
+      - value: "15+"
+        label: "Years of Trusted Dental Care"
+        icon: "activity"
+      - value: "10K+"
+        label: "Happy & Satisfied Patients"
+        icon: "smile"
+      - value: "5+"
+        label: "Modern Clinics Across Locations"
+        icon: "building-2"
+
+  values:
+    eyebrow: "OUR CORE VALUES"
+    heading: "Our Core Values"
+    highlightedWord: "Values"
+    description: "The principles that guide our practice and patient care every single day."
+    items:
+      - title: "Patient First"
+        description: "Your comfort, health, and satisfaction are always our top priority."
+        icon: "heart"
+        order: 1
+        active: true
+      - title: "Integrity"
+        description: "We believe in honest advice and transparent treatment."
+        icon: "shield"
+        order: 2
+        active: true
+      - title: "Excellence"
+        description: "We use the latest technology and techniques to ensure the best outcomes."
+        icon: "award"
+        order: 3
+        active: true
+      - title: "Compassion"
+        description: "We treat every patient like family with kindness, respect, and care."
+        icon: "users"
+        order: 4
+        active: true
+
+  team:
+    eyebrow: "OUR TEAM"
+    heading: "Meet the Experts Behind Your Smile"
+    highlightedWord: "Your Smile"
+    description: "Our skilled dentists and caring staff are dedicated to providing you with the best possible dental care."
+    buttonText: "Meet Our Team"
+    buttonUrl: "/about/team"
+    members:
+      - name: "Dr. Michael Anderson"
+        role: "Lead Dentist"
+        image: "/dr-anderson.png"
+        order: 1
+        active: true
+      - name: "Dr. Sarah Thompson"
+        role: "Cosmetic Dentist"
+        image: "/dr-thompson.png"
+        order: 2
+        active: true
+      - name: "Dr. David Miller"
+        role: "Orthodontist"
+        image: "/dr-miller.png"
+        order: 3
+        active: true
+      - name: "Dr. Emily Roberts"
+        role: "Pediatric Dentist"
+        image: "/dr-roberts.png"
+        order: 4
+        active: true
+
+  whyChooseUs:
+    eyebrow: "WHY CHOOSE US"
+    heading: "Advanced Care with a Personal Touch"
+    highlightedWord: "Personal"
+    image: "/dental-chair.png"
+    imageAlt: "Modern Dental Chair"
+    points:
+      - "State-of-the-art technology"
+      - "Personalized treatment plans"
+      - "Comfortable & relaxing environment"
+      - "Affordable care with flexible options"
+      - "Experienced & friendly dental professionals"
+    buttonText: "Book Appointment"
+    buttonAction: "appointment-modal"
+
+  ctaBanner:
+    heading: "Experience the Difference"
+    description: "Advanced technology and a caring team for your best smile."
+    primaryButton:
+      label: "Book Appointment"
+      action: "appointment-modal"
+    secondaryButton:
+      label: "Contact Us"
+      url: "/contact#contact-form"

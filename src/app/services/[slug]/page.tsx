@@ -8,32 +8,86 @@ import FAQSection from "@/components/FAQSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import { getCollectionItems, getSingleItem } from "@/lib/wix";
 
+const defaultServices = [
+  {
+    slug: 'dental-implants',
+    title: 'Dental Implants',
+    eyebrow: 'OUR DENTAL IMPLANT CARE',
+    heroDescription: 'Permanent, natural-looking replacement for missing teeth. Restore your bite, preserve your jawbone, and regain your confident smile.',
+    heroImage: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2000&auto=format&fit=crop',
+    introHeading: 'Permanent Teeth. Permanent Confidence.',
+    introDescription: 'Our advanced implant procedures provide long-lasting, stable solutions for single or multiple missing teeth with minimal discomfort.',
+    ctaPrimaryLabel: 'Book Implant Consultation',
+    ctaPrimaryUrl: '/contact',
+    ctaSecondaryLabel: 'Consult Our Experts',
+    ctaSecondaryUrl: '/contact',
+    metaTitle: 'Dental Implants in Middletown, DE | Jolly Smiles',
+    metaDescription: 'Restore your smile with permanent, natural-looking dental implants at Jolly Smiles in Middletown, DE.',
+    active: true
+  },
+  {
+    slug: 'cosmetic-dentistry',
+    title: 'Cosmetic Dentistry',
+    eyebrow: 'OUR COSMETIC CARE',
+    heroDescription: 'Transform your smile with veneers, whitening, and custom aesthetic treatments designed for natural beauty and harmony.',
+    heroImage: '/procedures-hero.png',
+    introHeading: 'Enhancing Smiles. Transforming Lives.',
+    introDescription: 'From subtle enhancements to full smile makeovers, our cosmetic solutions help you smile with pride and joy.',
+    ctaPrimaryLabel: 'Book Cosmetic Consultation',
+    ctaPrimaryUrl: '/contact',
+    ctaSecondaryLabel: 'View Before & After',
+    ctaSecondaryUrl: '/#transformations',
+    metaTitle: 'Cosmetic Dentistry in Middletown, DE | Jolly Smiles',
+    metaDescription: 'Custom cosmetic dentistry including veneers, teeth whitening, and smile makeovers at Jolly Smiles.',
+    active: true
+  },
+  {
+    slug: 'general-dentistry',
+    title: 'General Dentistry',
+    eyebrow: 'OUR PREVENTIVE CARE',
+    heroDescription: 'Comprehensive dental exams, cleanings, and proactive treatments to keep your teeth and gums healthy for a lifetime.',
+    heroImage: '/procedures-hero.png',
+    introHeading: 'Gentle Care for the Whole Family',
+    introDescription: 'We focus on preventive health, patient comfort, and early detection so you can avoid painful issues down the road.',
+    ctaPrimaryLabel: 'Book Appointment',
+    ctaPrimaryUrl: '/contact',
+    ctaSecondaryLabel: 'Contact Us',
+    ctaSecondaryUrl: '/contact',
+    metaTitle: 'General Dentistry | Jolly Smiles Dental Clinic',
+    metaDescription: 'Comprehensive exams, gentle cleanings, and preventive family dentistry in Delaware.',
+    active: true
+  }
+];
+
 export async function generateStaticParams() {
-  const services = await getCollectionItems('Services');
-  return services.map((service: any) => ({
+  const wixServices = await getCollectionItems('Services');
+  const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
+  return servicesList.map((service: any) => ({
     slug: service.slug,
   }));
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const services = await getCollectionItems('Services');
-  const service = services.find((s: any) => s.slug === params.slug);
+  const wixServices = await getCollectionItems('Services');
+  const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
+  const service = servicesList.find((s: any) => s.slug === params.slug);
 
   if (!service) {
     return { title: 'Service Not Found | Jolly Smiles' };
   }
 
   return {
-    title: service.metaTitle || `${service.title} | Jolly Smiles`,
-    description: service.metaDescription,
+    title: (service as any).metaTitle || `${(service as any).title} | Jolly Smiles`,
+    description: (service as any).metaDescription,
   };
 }
 
 export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const services = await getCollectionItems('Services');
-  const service = services.find((s: any) => s.slug === params.slug);
+  const wixServices = await getCollectionItems('Services');
+  const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
+  const service = servicesList.find((s: any) => s.slug === params.slug);
 
-  if (!service || service.active === false) {
+  if (!service || (service as any).active === false) {
     notFound();
   }
 

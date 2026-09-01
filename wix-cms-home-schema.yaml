@@ -1,0 +1,249 @@
+# Wix CMS Headless Schema & Data for Homepage (Excluding Testimonials & Blogs)
+
+collections:
+  # 1. HomeHero Collection
+  HomeHero:
+    purpose: "Homepage hero content and banner settings"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+        required: true
+      - key: description
+        type: richText
+      - key: backgroundImage
+        type: image
+      - key: primaryButtonLabel
+        type: text
+      - key: primaryButtonUrl
+        type: text
+      - key: secondaryButtonLabel
+        type: text
+      - key: secondaryButtonUrl
+        type: text
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - eyebrow: "Delaware's Trusted Dental Care"
+        heading: "Transform Your Smile, <br /><span class=\"text-brand-red\">Transform Your Life.</span>"
+        description: "Advanced technology, personalized care, and a team that truly cares about your smile."
+        backgroundImage: "/hero-background.png"
+        primaryButtonLabel: "Book An Appointment"
+        primaryButtonUrl: "#appointment"
+        secondaryButtonLabel: "Free Consultation"
+        secondaryButtonUrl: "/contact"
+        active: true
+
+  # 2. HomeStats Collection
+  HomeStats:
+    purpose: "Homepage floating statistics bar"
+    fields:
+      - key: value
+        type: text
+        required: true
+      - key: label
+        type: text
+        required: true
+      - key: icon
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - value: "10,000+"
+        label: "Happy Patients"
+        icon: "smile"
+        order: 1
+        active: true
+      - value: "50+"
+        label: "Years of Experience"
+        icon: "shield"
+        order: 2
+        active: true
+      - value: "Advanced"
+        label: "Digital Technology"
+        icon: "shield"
+        order: 3
+        active: true
+      - value: "5-Star"
+        label: "Google Ratings"
+        icon: "star"
+        order: 4
+        active: true
+
+  # 3. HomeJourney Collection (Step by step process)
+  HomeJourney:
+    purpose: "Homepage four-step patient journey"
+    fields:
+      - key: stepNumber
+        type: text
+        required: true
+      - key: title
+        type: text
+        required: true
+      - key: description
+        type: richText
+      - key: icon
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - stepNumber: "1"
+        title: "Consultation"
+        description: "We listen to your concerns and goals"
+        icon: "clipboard"
+        order: 1
+        active: true
+      - stepNumber: "2"
+        title: "Diagnosis"
+        description: "Advanced 3D scanning and digital imaging"
+        icon: "scan"
+        order: 2
+        active: true
+      - stepNumber: "3"
+        title: "Treatment Plan"
+        description: "Personalized plan just for you"
+        icon: "map"
+        order: 3
+        active: true
+      - stepNumber: "4"
+        title: "Smile Transformation"
+        description: "Achieve the healthy, beautiful smile you deserve"
+        icon: "smile"
+        order: 4
+        active: true
+
+  # 4. HomeAbout Collection
+  HomeAbout:
+    purpose: "Homepage About section"
+    fields:
+      - key: eyebrow
+        type: text
+      - key: heading
+        type: richText
+        required: true
+      - key: description
+        type: richText
+      - key: image
+        type: image
+      - key: badgeValue
+        type: text
+      - key: badgeLabel
+        type: text
+      - key: features
+        type: json
+      - key: buttonLabel
+        type: text
+      - key: buttonUrl
+        type: text
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - eyebrow: "About Jolly Smiles"
+        heading: "Compassionate Care. <br/>Exceptional Results."
+        description: "For over 50 years, Jolly Smiles has been Delaware's trusted partner in dental health. Our experienced team combines advanced technology with personalized care to deliver exceptional results in a comfortable environment."
+        image: "/clinic-reception.png"
+        badgeValue: "50+"
+        badgeLabel: "Years of Combined Experience"
+        features:
+          - "State-of-the-art technology"
+          - "Comfortable, patient-first approach"
+          - "Most insurances accepted"
+          - "Convenient scheduling"
+        buttonLabel: "Meet Our Doctors"
+        buttonUrl: "/about/team"
+        active: true
+
+  # 5. Transformations Collection
+  Transformations:
+    purpose: "Before & after smile transformation cases"
+    fields:
+      - key: title
+        type: text
+      - key: beforeImage
+        type: image
+        required: true
+      - key: afterImage
+        type: image
+        required: true
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - title: "Smile Makeover 1"
+        beforeImage: "/before-1.jpg"
+        afterImage: "/after-1.jpg"
+        order: 1
+        active: true
+      - title: "Smile Makeover 2"
+        beforeImage: "/before-2.jpg"
+        afterImage: "/after-2.jpg"
+        order: 2
+        active: true
+      - title: "Smile Makeover 3"
+        beforeImage: "/before-3.png"
+        afterImage: "/after-3.jpg"
+        order: 3
+        active: true
+      - title: "Smile Makeover 4"
+        beforeImage: "/before-4-new.png"
+        afterImage: "/after-4.jpg"
+        order: 4
+        active: true
+
+  # 6. FAQs Collection
+  FAQs:
+    purpose: "Frequently Asked Questions"
+    fields:
+      - key: question
+        type: text
+        required: true
+      - key: answer
+        type: richText
+        required: true
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - question: "Does dental treatment hurt?"
+        answer: "We prioritize your comfort and use the latest techniques to ensure treatments are as pain-free as possible."
+        order: 1
+        active: true
+      - question: "How long does treatment take?"
+        answer: "Treatment times vary depending on the procedure, but we will always provide a clear timeline during your consultation."
+        order: 2
+        active: true
+      - question: "How much do dental implants cost?"
+        answer: "Cost varies based on individual needs. We offer consultations to provide a detailed estimate and discuss financing options."
+        order: 3
+        active: true
+      - question: "Is Invisalign right for me?"
+        answer: "Invisalign is a great option for many adults and teens. We can determine if you're a candidate during a free consultation."
+        order: 4
+        active: true
+      - question: "Do you accept my insurance?"
+        answer: "We accept most major dental insurances and will work with you to maximize your benefits."
+        order: 5
+        active: true
+      - question: "How do I schedule an appointment?"
+        answer: "You can schedule an appointment by calling our office or using the online booking tool on our website."
+        order: 6
+        active: true

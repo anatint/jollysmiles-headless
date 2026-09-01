@@ -17,11 +17,15 @@ export default async function ProceduresPage() {
   const proceduresData = await getCollectionItems('Procedures');
   const faqsData = await getCollectionItems('FAQs');
 
+  const mergedFaqs = (faqsData && faqsData.length > 0) 
+    ? faqsData 
+    : (proceduresData[0]?.faqs || proceduresData);
+
   return (
     <div className="bg-white font-sans">
-      <ProceduresHero />
+      <ProceduresHero data={proceduresData} />
       <ProceduresList data={proceduresData} />
-      <FAQSection data={faqsData} />
+      <FAQSection data={mergedFaqs} />
       <CTABanner />
     </div>
   );

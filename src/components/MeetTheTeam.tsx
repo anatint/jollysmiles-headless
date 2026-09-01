@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { getWixImageUrl } from '@/lib/wix';
 
-export default function MeetTheTeam() {
-  const team = [
+export default function MeetTheTeam({ data }: { data?: any[] }) {
+  const defaultTeam = [
     {
       name: "Dr. Michael Anderson",
       role: "Lead Dentist",
@@ -25,6 +26,15 @@ export default function MeetTheTeam() {
       image: "/dr-roberts.png"
     }
   ];
+
+  const team = data && data.length > 0
+    ? data.filter(m => m.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).slice(0, 4).map(m => ({
+        name: m.name,
+        role: m.role || m.title || "Dental Specialist",
+        image: getWixImageUrl(m.photo || m.image, "/dr-anderson.png")
+      }))
+    : defaultTeam;
+
 
   return (
     <div className="bg-gray-50 py-[50px]">

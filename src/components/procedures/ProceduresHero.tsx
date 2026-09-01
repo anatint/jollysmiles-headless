@@ -2,7 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, Star } from 'lucide-react';
 
-export default function ProceduresHero() {
+export default function ProceduresHero({ data }: { data?: any[] }) {
+  const root = data && data.length > 0 ? data[0] : null;
+
+  const eyebrow = root?.heroEyebrow || "HOW DO WE DO IT?";
+  const heading = root?.heroHeading || `Dental Procedures <br /><span class="text-brand-red">Designed for Your Smile</span>`;
+  const description = root?.heroDescription || "We combine advanced technology with compassionate care to deliver safe, comfortable, and effective dental procedures for patients in Middletown, DE and surrounding communities.";
+  const primaryLabel = root?.ctaPrimaryLabel || "Meet Our Team";
+  const primaryUrl = root?.ctaPrimaryUrl || "/about/team";
+  const secondaryLabel = root?.ctaSecondaryLabel || "View Working Hours";
+  const secondaryUrl = root?.ctaSecondaryUrl || "/contact";
+  const badgeText = root?.heroBadge || "Diamond Invisalign® Top 1% Provider";
+
   return (
     <div className="relative bg-white overflow-hidden lg:min-h-[500px] flex items-center lg:py-0 py-[50px]">
       
@@ -26,25 +37,25 @@ export default function ProceduresHero() {
             </div>
 
             <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">
-              HOW DO WE DO IT?
+              {eyebrow}
             </h4>
             
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif">
-              Dental Procedures <br />
-              <span className="text-brand-red">Designed for Your Smile</span>
-            </h1>
+            <h1 
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif"
+              dangerouslySetInnerHTML={{ __html: heading.includes('<') ? heading : heading.replace('Designed', '<span class="text-brand-red">Designed') }}
+            />
             
             <p className="text-base sm:text-lg text-gray-700 mb-10 leading-relaxed max-w-xl font-medium">
-              We combine advanced technology with compassionate care to deliver safe, comfortable, and effective dental procedures for patients in Middletown, DE and surrounding communities.
+              {description}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/about/team" className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors shadow-sm text-xs text-center">
-                Meet Our Team
+              <Link href={primaryUrl} className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors shadow-sm text-xs text-center">
+                {primaryLabel}
               </Link>
-              <Link href="/contact" className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
+              <Link href={secondaryUrl} className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
                 <Clock className="mr-2 w-4 h-4" />
-                View Working Hours
+                {secondaryLabel}
               </Link>
             </div>
           </div>

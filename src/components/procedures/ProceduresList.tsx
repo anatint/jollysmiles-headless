@@ -1,6 +1,6 @@
 import { Sparkles, Layers, Award, Heart, Smile, Shield, Activity, Users, Star } from 'lucide-react';
 
-const procedures = [
+const defaultProcedures = [
   {
     title: "Crowns & Bridges",
     description: "Restore damaged or missing teeth for a strong, natural smile.",
@@ -39,39 +39,90 @@ const procedures = [
   }
 ];
 
-const skills = [
+const defaultSkills = [
   { name: "DENTAL SURGERY SKILLS", percentage: 95 },
   { name: "DENTAL COSMETIC SKILLS", percentage: 92 },
   { name: "TEETH WHITENING SKILLS", percentage: 83 }
 ];
 
-const stats = [
+const defaultStats = [
   { icon: Users, value: "10,000+", label: "Happy Patients" },
   { icon: Award, value: "50+", label: "Years of Experience" },
   { icon: Heart, value: "98%", label: "Patient Satisfaction" },
   { icon: Star, value: "5-Star", label: "Google Ratings" }
 ];
 
+function getProcedureIcon(iconStr?: string, title?: string) {
+  const check = ((iconStr || '') + ' ' + (title || '')).toLowerCase();
+  if (check.includes('sparkle') || check.includes('whiten') || check.includes('veneer')) return Sparkles;
+  if (check.includes('shield') || check.includes('canal') || check.includes('protect')) return Shield;
+  if (check.includes('heart') || check.includes('care')) return Heart;
+  if (check.includes('smile')) return Smile;
+  if (check.includes('activity') || check.includes('surgery')) return Activity;
+  if (check.includes('award') || check.includes('implant')) return Award;
+  if (check.includes('user') || check.includes('family')) return Users;
+  if (check.includes('star')) return Star;
+  return Layers;
+}
+
 export default function ProceduresList({ data }: { data?: any[] }) {
-  const displayProcedures = data && data.length > 0 
-    ? data.filter(p => p.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map(p => {
-        let IconComponent = Layers;
-        if (p.icon === 'sparkles') IconComponent = Sparkles;
-        else if (p.icon === 'shield') IconComponent = Shield;
-        else if (p.icon === 'heart') IconComponent = Heart;
-        else if (p.icon === 'smile') IconComponent = Smile;
-        else if (p.icon === 'activity') IconComponent = Activity;
-        else if (p.icon === 'award') IconComponent = Award;
-        else if (p.icon === 'users') IconComponent = Users;
+  const rootObj = data && data.length > 0 ? data[0] : null;
+
+  // Extract procedures list from nested property or flat array
+  let rawProceduresList: any[] = [];
+  if (rootObj && rootObj.procedures) {
+    rawProceduresList = typeof rootObj.procedures === 'string' ? JSON.parse(rootObj.procedures) : rootObj.procedures;
+  } else if (data && data.length > 0 && (data[0]?.title || data[0]?.name)) {
+    rawProceduresList = data;
+  }
+
+  const displayProcedures = rawProceduresList && rawProceduresList.length > 0
+    ? rawProceduresList.filter(p => p.active !== false).map(p => ({
+        title: p.title || p.name || "Procedure",
+        description: p.description || "",
+        icon: getProcedureIcon(p.icon, p.title || p.name),
+        link: p.link || "#"
+      }))
+    : defaultProcedures;
+
+  // Extract skills/success rates
+  let rawSkills: any[] = [];
+  if (rootObj && (rootObj.successRates || rootObj.skills)) {
+    const raw = rootObj.successRates || rootObj.skills;
+    rawSkills = typeof raw === 'string' ? JSON.parse(raw) : raw;
+  }
+
+  const displaySkills = rawSkills && rawSkills.length > 0
+    ? rawSkills.map(s => ({
+        name: (s.label || s.name || "Skill").toUpperCase(),
+        percentage: Number(s.value || s.percentage || 90)
+      }))
+    : defaultSkills;
+
+  // Extract stats
+  let rawStats: any[] = [];
+  if (rootObj && rootObj.stats) {
+    rawStats = typeof rootObj.stats === 'string' ? JSON.parse(rootObj.stats) : rootObj.stats;
+  }
+
+  const displayStats = rawStats && rawStats.length > 0
+    ? rawStats.map(s => {
+        let IconComp = Users;
+        const labelLower = (s.label || '').toLowerCase();
+        if (labelLower.includes('experience')) IconComp = Award;
+        else if (labelLower.includes('satisfaction') || labelLower.includes('patient')) IconComp = Heart;
+        else if (labelLower.includes('rating') || labelLower.includes('star') || labelLower.includes('google')) IconComp = Star;
 
         return {
-          title: p.title,
-          description: p.description,
-          icon: IconComponent,
-          link: "#"
+          icon: IconComp,
+          value: s.value || "100%",
+          label: s.label || ""
         };
       })
-    : procedures;
+    : defaultStats;
+
+  const sectionHeading = rootObj?.proceduresHeading || "Procedures and Effectiveness";
+  const successNote = rootObj?.successRatesNote || "Based on patient outcomes and satisfaction reports.";
 
   return (
     <section className="bg-white py-[50px]">
@@ -83,7 +134,7 @@ export default function ProceduresList({ data }: { data?: any[] }) {
             OUR EXPERTISE
           </h4>
           <h2 className="text-[35px] font-extrabold text-gray-900 font-serif">
-            Procedures and Effectiveness
+            {sectionHeading}
           </h2>
           <div className="w-12 h-0.5 bg-brand-red mx-auto"></div>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed pt-2">
@@ -101,7 +152,7 @@ export default function ProceduresList({ data }: { data?: any[] }) {
             </h3>
             <div className="space-y-3">
               {displayProcedures.map((proc, idx) => {
-                const Icon = proc.icon;
+                const Icon = proc.icon || Layers;
                 return (
                   <div 
                     key={idx}
@@ -135,7 +186,7 @@ export default function ProceduresList({ data }: { data?: any[] }) {
                 
                 {/* Progress bars */}
                 <div className="space-y-6">
-                  {skills.map((skill, idx) => (
+                  {displaySkills.map((skill, idx) => (
                     <div key={idx} className="space-y-2">
                       <div className="flex justify-between text-xs font-bold text-gray-800 tracking-wider">
                         <span>{skill.name}</span>
@@ -153,14 +204,14 @@ export default function ProceduresList({ data }: { data?: any[] }) {
 
                 <div className="flex items-center gap-2.5 text-gray-500 text-xs mt-6 border-t border-gray-100">
                   <Award className="w-4 h-4 text-brand-red flex-shrink-0" />
-                  <span>Based on patient outcomes and satisfaction reports.</span>
+                  <span>{successNote}</span>
                 </div>
               </div>
 
               {/* Stats Footer inside Card */}
               <div className="bg-red-50/50 rounded-xl p-4 sm:p-6 grid grid-cols-2 gap-4">
-                {stats.map((stat, idx) => {
-                  const StatIcon = stat.icon;
+                {displayStats.map((stat, idx) => {
+                  const StatIcon = stat.icon || Users;
                   return (
                     <div key={idx} className="flex flex-col items-center text-center p-2">
                       <StatIcon className="w-5 h-5 text-brand-red mb-2" />

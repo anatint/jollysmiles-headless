@@ -1,0 +1,151 @@
+# Wix CMS Headless Schema & Data for "About" Page (Excluding Testimonials)
+
+collections:
+  # 1. AboutPage Settings (Hero, Story, Why Choose Us, CTA)
+  AboutPage:
+    purpose: "Manages content and settings for the About Us page"
+    fields:
+      - key: heroHeading
+        type: text
+      - key: heroSubheading
+        type: text
+      - key: heroDescription
+        type: richText
+      - key: heroImage
+        type: image
+      - key: storyEyebrow
+        type: text
+      - key: storyHeading
+        type: text
+      - key: storyDescription
+        type: richText
+      - key: storyImage
+        type: image
+      - key: storyStats
+        type: json
+      - key: whyChooseUsEyebrow
+        type: text
+      - key: whyChooseUsHeading
+        type: text
+      - key: whyChooseUsImage
+        type: image
+      - key: whyChooseUsPoints
+        type: json
+      - key: metaTitle
+        type: text
+      - key: metaDescription
+        type: richText
+
+    data:
+      - heroHeading: "About Us"
+        heroSubheading: "Compassionate Care. Exceptional Results."
+        heroDescription: "At Jolly Smiles, we're more than just a dental clinic – we're a team that truly cares about your smile and your well-being."
+        heroImage: "/about-hero.png"
+        storyEyebrow: "OUR STORY"
+        storyHeading: "Creating Healthier, Happier Smiles Every Day"
+        storyDescription: "Founded with a passion for patient care and a commitment to excellence, Jolly Smiles has grown into a trusted dental practice known for its personalized approach and advanced treatments.\n\nWe combine technology, skill, and compassion to deliver outstanding results in a comfortable, friendly environment."
+        storyImage: "/clinic-reception.png"
+        storyStats:
+          - value: "15+"
+            label: "Years of Trusted Dental Care"
+          - value: "10K+"
+            label: "Happy & Satisfied Patients"
+          - value: "5+"
+            label: "Modern Clinics Across Locations"
+        whyChooseUsEyebrow: "WHY CHOOSE US"
+        whyChooseUsHeading: "Advanced Care with a Personal Touch"
+        whyChooseUsImage: "/dental-chair.png"
+        whyChooseUsPoints:
+          - "State-of-the-art technology"
+          - "Personalized treatment plans"
+          - "Comfortable & relaxing environment"
+          - "Affordable care with flexible options"
+          - "Experienced & friendly dental professionals"
+        metaTitle: "About Us | Jolly Smiles Dental Clinic"
+        metaDescription: "Learn about our team of expert dentists at Jolly Smiles. With over 50 years of combined experience, we provide exceptional, patient-first care in Delaware."
+
+  # 2. Values Collection (Core Values)
+  Values:
+    purpose: "About page core values"
+    fields:
+      - key: title
+        type: text
+        required: true
+      - key: description
+        type: richText
+        required: true
+      - key: icon
+        type: text
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - title: "Patient First"
+        description: "Your comfort, health, and satisfaction are always our top priority."
+        icon: "heart"
+        order: 1
+        active: true
+
+      - title: "Integrity"
+        description: "We believe in honest advice and transparent treatment."
+        icon: "shield"
+        order: 2
+        active: true
+
+      - title: "Excellence"
+        description: "We use the latest technology and techniques to ensure the best outcomes."
+        icon: "award"
+        order: 3
+        active: true
+
+      - title: "Compassion"
+        description: "We treat every patient like family with kindness, respect, and care."
+        icon: "users"
+        order: 4
+        active: true
+
+  # 3. TeamMembers Collection
+  TeamMembers:
+    purpose: "Dental team directory"
+    fields:
+      - key: name
+        type: text
+        required: true
+      - key: role
+        type: text
+        required: true
+      - key: image
+        type: image
+      - key: order
+        type: number
+      - key: active
+        type: boolean
+        default: true
+
+    data:
+      - name: "Dr. Michael Anderson"
+        role: "Lead Dentist"
+        image: "/dr-anderson.png"
+        order: 1
+        active: true
+
+      - name: "Dr. Sarah Thompson"
+        role: "Cosmetic Dentist"
+        image: "/dr-thompson.png"
+        order: 2
+        active: true
+
+      - name: "Dr. David Miller"
+        role: "Orthodontist"
+        image: "/dr-miller.png"
+        order: 3
+        active: true
+
+      - name: "Dr. Emily Roberts"
+        role: "Pediatric Dentist"
+        image: "/dr-roberts.png"
+        order: 4
+        active: true

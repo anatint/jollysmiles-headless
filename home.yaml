@@ -1,0 +1,184 @@
+# Homepage Configuration & Collections (Excluding Testimonials & Blogs)
+home:
+  hero:
+    eyebrow: "DELAWARE'S TRUSTED DENTAL CARE"
+    heading: "Transform Your Smile, Transform Your Life."
+    highlightedWord: "Transform Your Life."
+    description: "Advanced technology, personalized care, and a team that truly cares about your smile."
+    backgroundImage: "/hero-background.png"
+    primaryButton:
+      label: "Book An Appointment"
+      action: "appointment-modal"
+    secondaryButton:
+      label: "Free Consultation"
+      url: "/contact"
+    invisalignBadge:
+      title: "Invisalign Provider"
+      subtitle: "Top 1% Provider"
+
+  stats:
+    - value: "10,000+"
+      label: "Happy Patients"
+      icon: "smile"
+      order: 1
+      active: true
+    - value: "50+"
+      label: "Years of Experience"
+      icon: "shield"
+      order: 2
+      active: true
+    - value: "Advanced"
+      label: "Digital Technology"
+      icon: "shield"
+      order: 3
+      active: true
+    - value: "5-Star"
+      label: "Google Ratings"
+      icon: "star"
+      order: 4
+      active: true
+
+  services:
+    eyebrow: "OUR SERVICES"
+    heading: "Comprehensive Dental Care for Every Smile"
+    description: "From routine checkups to advanced cosmetic transformations, we provide personalized care tailored to you."
+    items:
+      - title: "General Dentistry"
+        description: "Routine cleanings, exams, and preventive care to keep your smile healthy."
+        url: "/services/general-dentistry"
+        icon: "shield"
+        order: 1
+      - title: "Cosmetic Dentistry"
+        description: "Teeth whitening, veneers, and smile makeovers for a confident smile."
+        url: "/services/cosmetic-dentistry"
+        icon: "sparkles"
+        order: 2
+      - title: "Dental Implants"
+        description: "Permanent, natural-looking tooth replacements for missing teeth."
+        url: "/services/dental-implants"
+        icon: "award"
+        order: 3
+      - title: "Invisalign® & Braces"
+        description: "Discreet orthodontic solutions to straighten your teeth comfortably."
+        url: "/services/invisalign"
+        icon: "star"
+        order: 4
+      - title: "Emergency Dental Care"
+        description: "Same-day urgent dental appointments when you need relief fast."
+        url: "/services/emergency-care"
+        icon: "activity"
+        order: 5
+      - title: "LANAP® Laser Treatment"
+        description: "Advanced, minimally invasive gum disease treatment without scalpels."
+        url: "/services/lanap-treatment"
+        icon: "zap"
+        order: 6
+
+  journey:
+    eyebrow: "HOW IT WORKS"
+    heading: "Your Smile Journey"
+    subheading: "A simple, comfortable process designed around you"
+    steps:
+      - stepNumber: "1"
+        title: "Consultation"
+        description: "We listen to your concerns and goals."
+        icon: "clipboard"
+        order: 1
+        active: true
+      - stepNumber: "2"
+        title: "Diagnosis"
+        description: "Advanced 3D scanning and digital imaging."
+        icon: "scan"
+        order: 2
+        active: true
+      - stepNumber: "3"
+        title: "Treatment Plan"
+        description: "Personalized plan just for you."
+        icon: "map"
+        order: 3
+        active: true
+      - stepNumber: "4"
+        title: "Smile Transformation"
+        description: "Achieve the healthy, beautiful smile you deserve."
+        icon: "smile"
+        order: 4
+        active: true
+
+  about:
+    eyebrow: "About Jolly Smiles"
+    heading: "Compassionate Care. Exceptional Results."
+    description: "For over 50 years, Jolly Smiles has been Delaware's trusted partner in dental health. Our experienced team combines advanced technology with personalized care to deliver exceptional results in a comfortable environment."
+    badgeValue: "50+"
+    badgeLabel: "Years of Combined Experience"
+    image: "/clinic-reception.png"
+    buttonLabel: "Meet Our Doctors"
+    buttonUrl: "/about/team"
+    features:
+      - "State-of-the-art technology"
+      - "Comfortable, patient-first approach"
+      - "Most insurances accepted"
+      - "Convenient scheduling"
+
+  transformations:
+    eyebrow: "SMILE GALLERY"
+    heading: "Smile Transformations"
+    subheading: "Real patients. Real results."
+    items:
+      - title: "Smile Makeover 1"
+        beforeImage: "/before-1.jpg"
+        afterImage: "/after-1.jpg"
+        order: 1
+        active: true
+      - title: "Smile Makeover 2"
+        beforeImage: "/before-2.jpg"
+        afterImage: "/after-2.jpg"
+        order: 2
+        active: true
+      - title: "Smile Makeover 3"
+        beforeImage: "/before-3.png"
+        afterImage: "/after-3.jpg"
+        order: 3
+        active: true
+      - title: "Smile Makeover 4"
+        beforeImage: "/before-4-new.png"
+        afterImage: "/after-4.jpg"
+        order: 4
+        active: true
+
+  faqs:
+    heading: "Frequently Asked Questions"
+    items:
+      - question: "Does dental treatment hurt?"
+        answer: "We prioritize your comfort and use the latest techniques to ensure treatments are as pain-free as possible."
+        order: 1
+        active: true
+      - question: "How long does treatment take?"
+        answer: "Treatment times vary depending on the procedure, but we will always provide a clear timeline during your consultation."
+        order: 2
+        active: true
+      - question: "How much do dental implants cost?"
+        answer: "Cost varies based on individual needs. We offer consultations to provide a detailed estimate and discuss financing options."
+        order: 3
+        active: true
+      - question: "Is Invisalign right for me?"
+        answer: "Invisalign is a great option for many adults and teens. We can determine if you're a candidate during a free consultation."
+        order: 4
+        active: true
+      - question: "Do you accept my insurance?"
+        answer: "We accept most major dental insurances and will work with you to maximize your benefits."
+        order: 5
+        active: true
+      - question: "How do I schedule an appointment?"
+        answer: "You can schedule an appointment by calling our office or using the online booking tool on our website."
+        order: 6
+        active: true
+
+  ctaBanner:
+    heading: "Experience the Difference"
+    description: "Advanced technology and a caring team for your best smile."
+    primaryButton:
+      label: "Book Appointment"
+      action: "appointment-modal"
+    secondaryButton:
+      label: "Contact Us"
+      url: "/contact#contact-form"
