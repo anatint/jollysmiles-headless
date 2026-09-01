@@ -1,37 +1,42 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-const articles = [
+const defaultArticles = [
   {
-    date: "May 18, 2024",
-    title: "What You Need to Know About Dental Implants",
-    image: "Implants"
+    date: "Dec 29, 2025",
+    title: "Straighten Your Teeth Invisibly with Invisalign Clear Aligners",
+    slug: "straighten-your-teeth-invisibly-with-invisalign-clear-aligners",
+    image: "https://static.wixstatic.com/media/0840ea_e7516718de6747a9a9ef4f9fac231197~mv2.jpg"
   },
   {
-    date: "May 12, 2024",
-    title: "Invisalign vs. Braces: Which Is Right for You?",
-    image: "Invisalign"
+    date: "Dec 29, 2025",
+    title: "The Importance of Hydration for Oral Health",
+    slug: "importance-hydration-oral-health-1",
+    image: "/clinic-reception.png"
   },
   {
-    date: "May 5, 2024",
-    title: "5 Ways to Maintain Your Whitening Results",
-    image: "Whitening"
+    date: "Dec 29, 2025",
+    title: "Enhance Your Smile with Cosmetic Dentistry Services",
+    slug: "enhance-your-smile-with-cosmetic-dentistry-services",
+    image: "/after-3.jpg"
   },
   {
-    date: "April 28, 2024",
-    title: "How Often Should You Visit the Dentist?",
-    image: "Dentist"
+    date: "Dec 08, 2025",
+    title: "Explore the Benefits of Dental Implants for Your Smile",
+    slug: "explore-the-benefits-of-dental-implants-for-your-smile",
+    image: "/before-3.png"
   }
 ];
 
 export default function BlogSection({ data }: { data?: any[] }) {
   const displayArticles = data && data.length > 0 
-    ? data.filter(a => a.active !== false).sort((a, b) => new Date(b.date || b.publishDate || 0).getTime() - new Date(a.date || a.publishDate || 0).getTime()).slice(0, 4)
-    : articles;
+    ? data.filter(a => a.active !== false).sort((a, b) => new Date(b.date || b.publishDate || b._createdDate || 0).getTime() - new Date(a.date || a.publishDate || a._createdDate || 0).getTime()).slice(0, 4)
+    : defaultArticles;
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
     try {
       const date = new Date(dateStr);
+      if (isNaN(date.getTime())) return dateStr;
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     } catch(e) {
       return dateStr;
