@@ -117,8 +117,14 @@ function extractCoverImage(post: any): string {
 
 export async function getAllBlogs(): Promise<BlogPost[]> {
   const localList: any[] = blogsData as any[];
+  const localMap = new Map<string, any>();
+  for (const post of localList) {
+    if (post.slug) {
+      localMap.set(post.slug.toLowerCase(), post);
+    }
+  }
 
-  // Fetch live Wix CMS collection items if available
+  // Fetch live Wix CMS collection items
   let wixList: any[] = [];
   try {
     wixList = await getCollectionItems('BlogPosts');
@@ -126,24 +132,52 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
     console.error('Error fetching BlogPosts from Wix:', e);
   }
 
-  // Combine and format
-  const sourceList = localList.length > 0 ? localList : wixList;
+  // Use live Wix items if available, or fall back to local
+  const baseList = wixList.length > 0 ? wixList : localList;
 
-  return sourceList.map((post: any, idx: number) => {
+  return baseList.map((post: any, idx: number) => {
     const rawSlug = post.slug || (post.title ? post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : `post-${idx + 1}`);
-    const dateStr = post.firstPublishedDate || post.publishDate || post._createdDate;
-    const formattedDate = dateStr ? new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'May 2025';
-    const readTime = post.minutesToRead ? `${post.minutesToRead} min read` : (post.readTime || '4 min read');
-    const contentHtml = renderWixRichContent(post.richContent) || (typeof post.content === 'string' ? post.content : '');
+    const localMatch = localMap.get(rawSlug.toLowerCase());
+
+    const dateVal = post.date || post.firstPublishedDate || post.publishDate || post._createdDate || localMatch?.firstPublishedDate;
+    let formattedDate = 'Recent';
+    if (dateVal) {
+      try {
+        const d = new Date(dateVal);
+        if (!isNaN(d.getTime())) {
+          formattedDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } else {
+          formattedDate = String(dateVal);
+        }
+      } catch (e) {
+        formattedDate = String(dateVal);
+      }
+    }
+
+    const readTime = post.readTime || (post.minutesToRead ? `${post.minutesToRead} min read` : (localMatch?.minutesToRead ? `${localMatch.minutesToRead} min read` : '4 min read'));
+    
+    // Extract rich content HTML
+    let contentHtml = '';
+    if (post.content && typeof post.content === 'string') {
+      contentHtml = post.content;
+    } else if (post.richContent) {
+      contentHtml = renderWixRichContent(post.richContent);
+    } else if (localMatch?.richContent) {
+      contentHtml = renderWixRichContent(localMatch.richContent);
+    }
+
+    const excerpt = post.excerpt || localMatch?.excerpt || (contentHtml ? contentHtml.replace(/<[^>]*>?/gm, '').slice(0, 150) + '...' : 'Read more about this dental topic...');
+
+    const coverImage = extractCoverImage(post) || (localMatch ? extractCoverImage(localMatch) : '/clinic-reception.png');
 
     return {
       id: post.id || post._id || String(idx + 1),
       slug: rawSlug,
-      title: post.title || 'Dental Care & Smile Guide',
-      excerpt: post.excerpt || (post.customExcerpt || (contentHtml ? contentHtml.replace(/<[^>]*>?/gm, '').slice(0, 150) + '...' : 'Read more about this dental topic...')),
-      contentHtml: contentHtml || `<p class="leading-relaxed text-gray-700 text-lg">${post.excerpt || 'Comprehensive guide to healthy dental care at Jolly Smiles.'}</p>`,
-      coverImage: extractCoverImage(post),
-      category: post.category || (post.hashtags && post.hashtags[0]) || 'Dental Care',
+      title: post.title || localMatch?.title || 'Dental Care & Smile Guide',
+      excerpt: excerpt,
+      contentHtml: contentHtml || `<p class="leading-relaxed text-gray-700 text-lg">${excerpt}</p>`,
+      coverImage: coverImage,
+      category: post.category || localMatch?.category || 'Dental Care',
       date: formattedDate,
       readTime: readTime,
       author: post.author || 'Jolly Smiles Team'
