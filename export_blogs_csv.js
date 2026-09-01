@@ -4,6 +4,15 @@ const path = require('path');
 const blogsPath = path.join(__dirname, 'src', 'data', 'blogs.json');
 const blogs = JSON.parse(fs.readFileSync(blogsPath, 'utf8'));
 
+function convertWixMediaUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  if (url.startsWith('wix:image://v1/')) {
+    const parts = url.replace('wix:image://v1/', '').split('/');
+    return `https://static.wixstatic.com/media/${parts[0]}`;
+  }
+  return url;
+}
+
 function renderWixRichContent(richContent) {
   if (!richContent) return '';
   if (typeof richContent === 'string') return richContent;
@@ -43,11 +52,7 @@ function renderWixRichContent(richContent) {
         return `<li>${children}</li>`;
       case 'IMAGE': {
         const src = node.imageData?.image?.src?.url || '';
-        let imgUrl = src;
-        if (typeof imgUrl === 'string' && imgUrl.startsWith('wix:image://v1/')) {
-          const parts = imgUrl.replace('wix:image://v1/', '').split('/');
-          imgUrl = `https://static.wixstatic.com/media/${parts[0]}`;
-        }
+        const imgUrl = convertWixMediaUrl(src);
         const alt = node.imageData?.altText || 'Blog Illustration';
         return imgUrl ? `<img src="${imgUrl}" alt="${alt}" />` : '';
       }
@@ -75,11 +80,31 @@ function stripHtml(str) {
     .trim();
 }
 
+function extractCover(b) {
+  let img = b.coverMedia?.image?.url || 
+            b.media?.wixMedia?.image || 
+            b.media?.image?.url || 
+            b.featuredImage || 
+            b.image || 
+            '';
+
+  if (!img && b.richContent?.nodes) {
+    for (const node of b.richContent.nodes) {
+      if (node.type === 'IMAGE' && node.imageData?.image?.src?.url) {
+        img = node.imageData.image.src.url;
+        break;
+      }
+    }
+  }
+
+  return convertWixMediaUrl(img) || 'https://static.wixstatic.com/media/0840ea_988ca18d217143dd9df24baae8ae6cf4~mv2.avif';
+}
+
 const headers = ['title', 'slug', 'excerpt', 'category', 'date', 'readTime', 'coverImage', 'content', 'metaTitle', 'metaDescription'];
 
 const rows = blogs.map(b => {
-  const dateStr = b.firstPublishedDate ? new Date(b.firstPublishedDate).toLocaleDateString('en-US') : '';
-  const img = b.coverMedia?.image?.url || b.media?.wixMedia?.image || '';
+  const dateStr = b.firstPublishedDate ? new Date(b.firstPublishedDate).toLocaleDateString('en-US') : '12/29/2025';
+  const img = extractCover(b);
   const cat = b.category || (b.hashtags && b.hashtags[0]) || 'Dental Care';
   const clean = (str) => `"${(str || '').replace(/"/g, '""')}"`;
   const cleanExcerpt = stripHtml(b.excerpt || '');
@@ -104,4 +129,5 @@ const rows = blogs.map(b => {
 const csv = [headers.join(','), ...rows].join('\n');
 fs.writeFileSync('wix_blogs_import.csv', csv, 'utf8');
 fs.writeFileSync(path.join(__dirname, 'public', 'wix_blogs_import.csv'), csv, 'utf8');
-console.log(`Successfully generated wix_blogs_import.csv with full HTML 'content', 'metaTitle', and 'metaDescription' columns for ${rows.length} blog posts!`);
+fs.writeFileSync(path.join('C:', 'Users', 'Intertoons', '.gemini', 'antigravity-ide', 'brain', 'ad63ed1f-9ccb-4452-90eb-34975d739659', 'wix_blogs_import.csv'), csv, 'utf8');
+console.log(`Successfully generated wix_blogs_import.csv with full HTML 'content', 'metaTitle', 'metaDescription', and CDN 'coverImage' for ${rows.length} blog posts!`);
