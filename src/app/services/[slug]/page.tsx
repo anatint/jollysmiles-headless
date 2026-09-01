@@ -59,6 +59,8 @@ const defaultServices = [
   }
 ];
 
+import TestimonialsSection from "@/components/TestimonialsSection";
+
 export async function generateStaticParams() {
   const wixServices = await getCollectionItems('Services');
   const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
@@ -67,10 +69,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const wixServices = await getCollectionItems('Services');
   const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
-  const service = servicesList.find((s: any) => s.slug === params.slug);
+  const service = servicesList.find((s: any) => s.slug === slug);
 
   if (!service) {
     return { title: 'Service Not Found | Jolly Smiles' };
@@ -82,10 +85,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const wixServices = await getCollectionItems('Services');
   const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
-  const service = servicesList.find((s: any) => s.slug === params.slug);
+  const service = servicesList.find((s: any) => s.slug === slug);
 
   if (!service || (service as any).active === false) {
     notFound();
@@ -93,10 +97,11 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
 
   const allFeatures = await getCollectionItems('ServiceFeatures');
   const serviceFeatures = allFeatures
-    .filter((f: any) => f.serviceSlug === params.slug && f.active !== false)
+    .filter((f: any) => f.serviceSlug === slug && f.active !== false)
     .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
     
   const contactData = await getSingleItem('ContactSettings');
+  const testimonialsData = await getCollectionItems('Testimonials');
 
   return (
     <div className="bg-white font-sans">
@@ -227,6 +232,8 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
           </div>
         </section>
       )}
+
+      <TestimonialsSection data={testimonialsData as any} />
 
       <FAQSection />
 

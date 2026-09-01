@@ -16,9 +16,9 @@ export default async function TechnologiesPage() {
 
   return (
     <>
-      <TechnologiesHero />
+      <TechnologiesHero data={techData} />
       <TechnologyFeatureList data={techData} />
-      <TechnologiesCTA />
+      <TechnologiesCTA data={techData} />
     </>
   );
 }

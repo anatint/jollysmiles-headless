@@ -1,7 +1,8 @@
-import { Camera, Scan, Target, Zap, Droplet, Activity } from 'lucide-react';
+import { Camera, Scan, Target, Zap, Droplet, Activity, Sparkles, Layers } from 'lucide-react';
 import Image from 'next/image';
+import { getWixImageUrl } from '@/lib/wix';
 
-const features = [
+const fallbackFeatures = [
   {
     title: 'Intra Oral Cameras',
     description: 'A small, pen-shaped device that our team may use to get a closer look at your oral health. These tiny cameras with LED lights capture sharp digital images of your teeth and gums, allowing the provider to show you any tooth or gum abnormalities.',
@@ -40,46 +41,76 @@ const features = [
   }
 ];
 
-export default function TechnologyFeatureList({ data }: { data?: any[] }) {
-  const displayFeatures = data && data.length > 0 
-    ? data.filter(f => f.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map((f, idx) => {
-        let IconComponent = Target;
-        if (f.icon === 'camera') IconComponent = Camera;
-        else if (f.icon === 'scan') IconComponent = Scan;
-        else if (f.icon === 'zap') IconComponent = Zap;
-        else if (f.icon === 'droplet') IconComponent = Droplet;
-        else if (f.icon === 'activity') IconComponent = Activity;
-        else if (f.icon === 'target') IconComponent = Target;
+function resolveIcon(iconName?: string, index: number = 0) {
+  const iconStr = (iconName || '').toLowerCase();
+  if (iconStr.includes('camera')) return Camera;
+  if (iconStr.includes('scan') || iconStr.includes('ct')) return Scan;
+  if (iconStr.includes('scanner') || iconStr.includes('target')) return Target;
+  if (iconStr.includes('laser') || iconStr.includes('zap') || iconStr.includes('picasso')) return Zap;
+  if (iconStr.includes('water') || iconStr.includes('droplet')) return Droplet;
+  if (iconStr.includes('wand') || iconStr.includes('activity')) return Activity;
+  
+  const iconList = [Camera, Scan, Target, Zap, Droplet, Activity];
+  return iconList[index % iconList.length] || Layers;
+}
 
-        return {
-          title: f.title,
-          description: f.description,
-          icon: IconComponent,
-          imagePlaceholder: f.image ? null : `${f.title} Image`,
-          image: f.image
-        } as any;
-      })
-    : features as any[];
+export default function TechnologyFeatureList({ data }: { data?: any }) {
+  const item = Array.isArray(data) ? (data[0] || {}) : (data || {});
+  
+  const introEyebrow = item.introEyebrow || 'CUTTING-EDGE TECHNOLOGY';
+  const introHeading = item.introHeading || 'Innovation for Your Comfort and Confidence';
+  const introDescription = item.introDescription || 'We invest in the latest dental technology to ensure more accurate diagnoses, safer treatments, and a better overall experience for our patients.';
+
+  let displayFeatures: any[] = [];
+
+  if (item.technology1Name) {
+    for (let i = 1; i <= 10; i++) {
+      const name = item[`technology${i}Name`];
+      const desc = item[`technology${i}Description`];
+      const img = item[`technology${i}Image`];
+      const iconKey = item[`technology${i}Icon`];
+      
+      if (name) {
+        displayFeatures.push({
+          title: name,
+          description: desc || '',
+          icon: resolveIcon(iconKey, i - 1),
+          image: getWixImageUrl(img, ''),
+          imagePlaceholder: `${name} Image`
+        });
+      }
+    }
+  } else if (Array.isArray(data) && data.length > 0) {
+    displayFeatures = data.filter((f: any) => f.active !== false).map((f: any, idx: number) => ({
+      title: f.title || f.name,
+      description: f.description || '',
+      icon: resolveIcon(f.icon, idx),
+      image: getWixImageUrl(f.image || f.photo, ''),
+      imagePlaceholder: `${f.title || f.name} Image`
+    }));
+  } else {
+    displayFeatures = fallbackFeatures;
+  }
 
   return (
     <section className="bg-white py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h3 className="text-brand-red font-bold text-sm tracking-[0.2em] uppercase mb-3">
-            CUTTING-EDGE TECHNOLOGY
+            {introEyebrow}
           </h3>
           <h2 className="text-[35px] leading-tight font-extrabold text-slate-800 mb-6">
-            Innovation for Your Comfort and Confidence
+            {introHeading}
           </h2>
           <p className="text-gray-600 text-lg">
-            We invest in the latest dental technology to ensure more accurate diagnoses, safer treatments, and a better overall experience for our patients.
+            {introDescription}
           </p>
         </div>
 
         {/* Feature List */}
-        <div className="space-y-8 md:space-y-12">
+        <div className="space-y-12 md:space-y-16">
           {displayFeatures.map((feature, index) => {
             const isEven = index % 2 === 0;
             const Icon = feature.icon;
@@ -87,17 +118,20 @@ export default function TechnologyFeatureList({ data }: { data?: any[] }) {
             return (
               <div 
                 key={feature.title} 
-                className={`flex flex-col md:flex-row items-center gap-10 lg:gap-8 ${
+                className={`flex flex-col md:flex-row items-center gap-10 lg:gap-12 ${
                   isEven ? '' : 'md:flex-row-reverse'
                 }`}
               >
                 
                 {/* Image Side */}
                 <div className="w-full md:w-1/2">
-                  <div className="aspect-[4/3] bg-gray-50 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-center p-8 relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-gray-50 to-white opacity-50"></div>
+                  <div className="aspect-[4/3] bg-gray-50 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-center p-2 relative overflow-hidden group">
                     {feature.image ? (
-                      <img src={feature.image} alt={feature.title} className="w-full h-full object-cover relative z-10 rounded-xl" />
+                      <img 
+                        src={feature.image} 
+                        alt={feature.title} 
+                        className="w-full h-full object-cover relative z-10 rounded-xl group-hover:scale-105 transition-transform duration-500" 
+                      />
                     ) : (
                       <span className="text-gray-400 font-medium z-10 text-center">{feature.imagePlaceholder}</span>
                     )}
@@ -105,7 +139,7 @@ export default function TechnologyFeatureList({ data }: { data?: any[] }) {
                 </div>
 
                 {/* Text Side */}
-                <div className="w-full md:w-1/2 space-y-6">
+                <div className="w-full md:w-1/2 space-y-5">
                   <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center text-brand-red">
                     <Icon className="w-6 h-6" strokeWidth={2} />
                   </div>
@@ -114,7 +148,10 @@ export default function TechnologyFeatureList({ data }: { data?: any[] }) {
                     {feature.title}
                   </h3>
                   
-                  <div className="text-gray-600 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: feature.description || '' }} />
+                  <div 
+                    className="text-gray-600 leading-relaxed text-base md:text-lg space-y-4" 
+                    dangerouslySetInnerHTML={{ __html: feature.description || '' }} 
+                  />
                 </div>
 
               </div>
