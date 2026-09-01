@@ -1,131 +1,150 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles, Smile, ShieldCheck, Heart, Layers } from 'lucide-react';
+import { getWixImageUrl } from '@/lib/wix';
 
-const services = [
+const defaultServices = [
   {
     title: "General Dentist",
     description: "Comprehensive care for your oral health and beautiful smile.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><path d="M11 20H8a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-3l-2 3z"/></svg>
-    ),
     image: "/after-1.jpg",
-    link: "#"
+    link: "/services/general-dentistry"
   },
   {
     title: "Same Day Crowns",
     description: "Custom-made crowns in just one visit for a perfect fit.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
-    ),
     image: "/before-1.jpg",
-    link: "#"
+    link: "/services/general-dentistry"
   },
   {
     title: "Invisalign®",
     description: "Clear aligners for a straighter smile without metal braces.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
-    ),
     image: "/after-2.jpg",
-    link: "#"
+    link: "/services/cosmetic-dentistry"
   },
   {
     title: "6 Month Braces",
     description: "Fast, effective teeth straightening in as little as 6 months.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M3 9h18"/><path d="M9 21V9"/><path d="M15 21V9"/></svg>
-    ),
     image: "/before-2.jpg",
-    link: "#"
+    link: "/services/cosmetic-dentistry"
   },
   {
     title: "Veneers & Laminates",
     description: "Transform your smile with natural-looking veneers.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><rect width="16" height="16" x="4" y="4" rx="2"/><path d="M12 4v16"/></svg>
-    ),
     image: "/after-3.jpg",
     link: "/services/cosmetic-dentistry"
   },
   {
     title: "Dental Implants",
     description: "Permanent replacement for missing teeth that looks and feels natural.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-    ),
     image: "/before-3.png",
     link: "/services/dental-implants"
   },
   {
     title: "Teeth Whitening",
     description: "Brighten your smile safely and effectively.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-    ),
     image: "/after-4.jpg",
     link: "/services/cosmetic-dentistry"
   },
-
   {
     title: "LANAP Treatment",
     description: "Advanced laser treatment to treat gum disease and save your teeth with minimal discomfort.",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-red"><path d="M12 22v-4h3l-4-6-4 6h3v4h2z"/></svg>
-    ),
     image: "/before-3.png",
-    link: "#"
+    link: "/services/general-dentistry"
   }
 ];
 
-export default function ServicesGrid() {
+function getServiceLink(title: string) {
+  const t = title.toLowerCase();
+  if (t.includes('implant')) return '/services/dental-implants';
+  if (t.includes('whitening') || t.includes('veneer') || t.includes('invisalign') || t.includes('brace')) return '/services/cosmetic-dentistry';
+  return '/services/general-dentistry';
+}
+
+export default function ServicesGrid({ data }: { data?: any }) {
+  const item = Array.isArray(data) ? (data[0] || {}) : (data || {});
+
+  const eyebrow = item.servicesEyebrow || 'OUR SERVICES';
+  const heading = item.servicesHeading || 'Solutions for Every Smile';
+  const subheading = item.servicesSubheading || 'From preventive care to advanced treatments, we offer personalized dental solutions for patients of all ages.';
+
+  let displayServices: any[] = [];
+
+  if (item.service1Name) {
+    for (let i = 1; i <= 10; i++) {
+      const name = item[`service${i}Name`];
+      const desc = item[`service${i}Description`];
+      const img = item[`service${i}Image`];
+      if (name) {
+        displayServices.push({
+          title: name,
+          description: desc || '',
+          image: getWixImageUrl(img, `/after-${(i % 4) + 1}.jpg`),
+          link: getServiceLink(name)
+        });
+      }
+    }
+  } else if (Array.isArray(data) && data.length > 0) {
+    displayServices = data.filter((s: any) => s.active !== false).map((s: any) => ({
+      title: s.title || s.name,
+      description: s.description || s.heroDescription || '',
+      image: getWixImageUrl(s.image || s.heroImage || s.photo, '/after-1.jpg'),
+      link: s.slug ? `/services/${s.slug}` : getServiceLink(s.title || s.name)
+    }));
+  } else {
+    displayServices = defaultServices;
+  }
+
   return (
     <div className="bg-gray-50 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-0">
+        <div className="text-center max-w-3xl mx-auto mb-4">
           <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">
-            Our Services
+            {eyebrow}
           </h4>
-          <h2 className="text-[35px] font-extrabold text-gray-900 mb-6 tracking-tight">
-            Solutions for Every Smile
+          <h2 className="text-[35px] font-extrabold text-gray-900 mb-6 tracking-tight font-serif">
+            {heading}
           </h2>
-          <p className="text-gray-600 text-lg">
-            From preventive care to advanced treatments, we offer personalized dental solutions for patients of all ages.
+          <p className="text-gray-600 text-lg leading-relaxed">
+            {subheading}
           </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
-          {services.map((service, index) => (
+          {displayServices.map((service, index) => (
             <div 
               key={index}
-              className="bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full relative"
+              className="bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col h-full relative group overflow-hidden"
             >
               {/* Image */}
-              <div className="w-full h-40 relative rounded-t-2xl overflow-hidden">
+              <div className="w-full h-44 relative bg-gray-100 overflow-hidden">
                 <Image 
                   src={service.image}
                   alt={service.title}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
               {/* Overlapping Circular Icon */}
-              <div className="w-16 h-16 bg-red-50 border-4 border-white rounded-full flex items-center justify-center shadow-sm absolute top-40 -mt-8 z-10 left-[50%] -translate-x-[50%]">
-                {service.icon}
+              <div className="w-14 h-14 bg-red-50 border-4 border-white rounded-full flex items-center justify-center shadow-md absolute top-44 -mt-7 z-10 left-[50%] -translate-x-[50%] text-brand-red">
+                <Sparkles className="w-6 h-6" />
               </div>
 
               {/* Content */}
-              <div className="px-6 flex-grow flex flex-col items-center py-[50px]">
-                <h3 className="font-bold text-xl text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow text-center">
+              <div className="px-6 flex-grow flex flex-col items-center pt-10 pb-6 text-center">
+                <h3 className="font-bold text-xl text-gray-900 mb-3 font-serif">{service.title}</h3>
+                <p className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow">
                   {service.description}
                 </p>
-                <Link href={service.link} className="text-brand-red font-bold text-xs uppercase tracking-wider flex items-center hover:text-brand-dark transition-colors group mb-6">
-                  Learn More <ArrowRight className="ml-1 w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <Link 
+                  href={service.link} 
+                  className="text-brand-red font-bold text-xs uppercase tracking-wider flex items-center hover:text-brand-dark transition-colors group/link mt-auto pt-2"
+                >
+                  Learn More <ArrowRight className="ml-1 w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
 

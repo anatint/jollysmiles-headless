@@ -3,15 +3,25 @@ import Image from 'next/image';
 import { ArrowRight, Star } from 'lucide-react';
 import Link from 'next/link';
 import { useModal } from '@/context/ModalContext';
+import { getWixImageUrl } from '@/lib/wix';
 
-export default function ServicesHero() {
+export default function ServicesHero({ data }: { data?: any }) {
   const { openAppointmentModal } = useModal();
+  const item = Array.isArray(data) ? (data[0] || {}) : (data || {});
+
+  const badge = item.heroBadge || 'Invisalign® Provider Diamond';
+  const heading = item.heroHeading || 'Expert Care. Beautiful Smiles.';
+  const subheading = item.heroSubheading || 'Complete Dental Care For a Healthier You';
+  const description = item.heroDescription || 'We provide a full range of dental services using advanced technology and a gentle approach to help you achieve a confident, healthy smile that lasts a lifetime.';
+  const primaryButton = item.heroPrimaryButton || 'Book An Appointment';
+  const secondaryButton = item.heroSecondaryButton || 'Free Consultation';
+  const heroImage = getWixImageUrl(item.heroImage, '/dental-chair.png');
+
   return (
     <div className="relative bg-white overflow-hidden lg:min-h-[450px] flex items-center lg:py-0 py-[50px]">
       
       {/* Decorative background shape on left */}
       <div className="absolute top-0 left-0 w-full lg:w-[65%] h-full bg-gradient-to-br from-red-50/80 to-transparent lg:rounded-br-[150px] -z-10 pointer-events-none">
-        {/* Soft radial glow */}
         <div className="absolute top-1/4 -left-1/4 w-full h-full bg-brand-red/5 rounded-full blur-3xl"></div>
       </div>
 
@@ -21,35 +31,39 @@ export default function ServicesHero() {
           {/* Left Text Content */}
           <div className="flex-1 max-w-2xl lg:py-[50px]">
             <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">
-              Expert Care. Beautiful Smiles.
+              {heading}
             </h4>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight">
-              Complete Dental Care <br className="hidden sm:block" />
-              <span className="text-brand-red">For a Healthier You</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif">
+              {subheading.includes('Healthier') ? (
+                <>Complete Dental Care <br className="hidden sm:block" />
+                <span className="text-brand-red">For a Healthier You</span></>
+              ) : (
+                subheading
+              )}
             </h1>
             <p className="text-base sm:text-lg text-gray-700 mb-10 leading-relaxed max-w-xl font-medium">
-              We provide a full range of dental services using advanced technology and a gentle approach to help you achieve a confident, healthy smile that lasts a lifetime.
+              {description}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={openAppointmentModal}
-                className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors shadow-sm text-xs"
+                className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-6 py-3 rounded-lg font-bold uppercase tracking-wider transition-colors shadow-sm text-xs"
               >
-                Book An Appointment
+                {primaryButton}
               </button>
-              <Link href="/contact" className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
-                Free Consultation <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <Link href="/contact" className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-3 rounded-lg font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
+                {secondaryButton} <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
 
           {/* Right Image Content */}
           <div className="flex-1 relative w-full lg:h-[450px] flex items-center justify-center mt-8 lg:mt-0">
-            <div className="relative w-full max-w-lg aspect-square lg:aspect-auto lg:h-[80%] rounded-[2rem] overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-lg aspect-square lg:aspect-auto lg:h-[80%] rounded-[2rem] overflow-hidden shadow-2xl bg-gray-50">
               <Image 
-                src="/dental-chair.png" 
-                alt="Patient in dental chair receiving care" 
+                src={heroImage} 
+                alt="Services at Jolly Smiles" 
                 fill 
                 className="object-cover"
                 priority
@@ -61,7 +75,7 @@ export default function ServicesHero() {
                <div className="text-brand-red font-black text-4xl sm:text-5xl opacity-80" style={{ fontFamily: 'serif' }}>A</div>
                <div className="flex flex-col justify-center">
                  <span className="text-[10px] sm:text-xs font-bold text-gray-800 flex items-center gap-1 mb-0.5 whitespace-nowrap">
-                   Invisalign® Provider
+                   {badge.split('Diamond')[0] || 'Invisalign® Provider'}
                  </span>
                  <span className="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-widest flex items-center gap-1">
                    <Star className="w-3 h-3 fill-brand-red text-brand-red" />
