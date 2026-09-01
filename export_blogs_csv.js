@@ -75,7 +75,7 @@ function stripHtml(str) {
     .trim();
 }
 
-const headers = ['title', 'slug', 'excerpt', 'category', 'date', 'readTime', 'coverImage', 'content'];
+const headers = ['title', 'slug', 'excerpt', 'category', 'date', 'readTime', 'coverImage', 'content', 'metaTitle', 'metaDescription'];
 
 const rows = blogs.map(b => {
   const dateStr = b.firstPublishedDate ? new Date(b.firstPublishedDate).toLocaleDateString('en-US') : '';
@@ -84,6 +84,8 @@ const rows = blogs.map(b => {
   const clean = (str) => `"${(str || '').replace(/"/g, '""')}"`;
   const cleanExcerpt = stripHtml(b.excerpt || '');
   const htmlContent = renderWixRichContent(b.richContent) || (typeof b.content === 'string' ? b.content : '');
+  const metaTitle = b.title ? `${b.title} | Jolly Smiles Dental Clinic` : 'Dental Care & Smile Guide';
+  const metaDescription = cleanExcerpt;
 
   return [
     clean(b.title),
@@ -93,11 +95,13 @@ const rows = blogs.map(b => {
     clean(dateStr),
     clean(b.minutesToRead ? `${b.minutesToRead} min read` : '4 min read'),
     clean(img),
-    clean(htmlContent)
+    clean(htmlContent),
+    clean(metaTitle),
+    clean(metaDescription)
   ].join(',');
 });
 
 const csv = [headers.join(','), ...rows].join('\n');
 fs.writeFileSync('wix_blogs_import.csv', csv, 'utf8');
 fs.writeFileSync(path.join(__dirname, 'public', 'wix_blogs_import.csv'), csv, 'utf8');
-console.log(`Successfully generated wix_blogs_import.csv with full HTML 'content' column for ${rows.length} blog posts!`);
+console.log(`Successfully generated wix_blogs_import.csv with full HTML 'content', 'metaTitle', and 'metaDescription' columns for ${rows.length} blog posts!`);

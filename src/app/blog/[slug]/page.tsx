@@ -25,14 +25,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  const metaTitle = blog.metaTitle ? (blog.metaTitle.includes('Jolly Smiles') ? blog.metaTitle : `${blog.metaTitle} | Jolly Smiles Dental Clinic`) : `${blog.title} | Jolly Smiles Dental Clinic`;
+  const metaDescription = blog.metaDescription || blog.excerpt;
+
   return {
-    title: `${blog.title} | Jolly Smiles Dental Clinic`,
-    description: blog.excerpt,
+    title: metaTitle,
+    description: metaDescription,
     openGraph: {
-      title: blog.title,
-      description: blog.excerpt,
-      images: [blog.coverImage],
+      title: metaTitle,
+      description: metaDescription,
+      images: blog.coverImage ? [blog.coverImage] : [],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: metaTitle,
+      description: metaDescription,
+      images: blog.coverImage ? [blog.coverImage] : [],
+    }
   };
 }
 

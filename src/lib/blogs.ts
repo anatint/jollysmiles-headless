@@ -12,6 +12,8 @@ export interface BlogPost {
   date: string;
   readTime: string;
   author: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 export function stripHtml(str?: string | null): string {
@@ -184,18 +186,23 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
     const cleanExcerpt = stripHtml(rawExcerpt);
 
     const coverImage = extractCoverImage(post) || (localMatch ? extractCoverImage(localMatch) : '/clinic-reception.png');
+    const title = stripHtml(post.title || localMatch?.title || 'Dental Care & Smile Guide');
+    const metaTitle = stripHtml(post.metaTitle || post.seoTitle || title);
+    const metaDescription = stripHtml(post.metaDescription || post.seoDescription || cleanExcerpt);
 
     return {
       id: post.id || post._id || String(idx + 1),
       slug: rawSlug,
-      title: stripHtml(post.title || localMatch?.title || 'Dental Care & Smile Guide'),
+      title: title,
       excerpt: cleanExcerpt,
       contentHtml: contentHtml || `<p class="leading-relaxed text-gray-700 text-lg">${cleanExcerpt}</p>`,
       coverImage: coverImage,
       category: post.category || localMatch?.category || 'Dental Care',
       date: formattedDate,
       readTime: readTime,
-      author: post.author || 'Jolly Smiles Team'
+      author: post.author || 'Jolly Smiles Team',
+      metaTitle: metaTitle,
+      metaDescription: metaDescription
     };
   });
 }
