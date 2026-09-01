@@ -37,15 +37,9 @@ export default function OurStory({ data }: { data?: any }) {
             </h2>
             
             <div 
-              className="text-gray-600 mb-6 text-base md:text-lg leading-relaxed space-y-3 prose prose-gray max-w-none"
+              className="text-gray-600 mb-8 text-base md:text-lg leading-relaxed space-y-3 prose prose-gray max-w-none"
               dangerouslySetInnerHTML={{ __html: paragraph1 }}
             />
-
-            {paragraph2 && (
-              <p className="text-gray-600 mb-8 text-base md:text-lg leading-relaxed">
-                {paragraph2}
-              </p>
-            )}
 
             <button 
               onClick={openAppointmentModal}
