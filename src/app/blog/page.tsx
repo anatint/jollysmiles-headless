@@ -3,7 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BlogHero from '@/components/BlogHero';
 import CTABanner from '@/components/CTABanner';
-import { Search, ArrowRight, Calendar, Clock, BookOpen } from 'lucide-react';
+import BlogListWithPagination from '@/components/blog/BlogListWithPagination';
+import { Search, ArrowRight, BookOpen } from 'lucide-react';
 import { getAllBlogs } from '@/lib/blogs';
 
 export const revalidate = 0;
@@ -23,79 +24,21 @@ export default async function BlogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[35px]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
-          {/* Main Content Area */}
-          <div className="lg:col-span-2">
+          {/* Main Content Area with Pagination */}
+          <div className="lg:col-span-2 space-y-8">
             
-            {/* Header: Latest Articles & Search */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
-              <div>
-                <h2 className="text-[35px] font-extrabold text-gray-900 font-serif leading-tight">
-                  Latest <span className="text-brand-red">Articles</span>
-                </h2>
-                <p className="text-gray-500 text-sm mt-1">
-                  Discover expert dental advice, smile transformations, and oral health tips.
-                </p>
-              </div>
+            {/* Header Title */}
+            <div>
+              <h2 className="text-[35px] font-extrabold text-gray-900 font-serif leading-tight">
+                Latest <span className="text-brand-red">Articles</span>
+              </h2>
+              <p className="text-gray-500 text-sm mt-1">
+                Discover expert dental advice, smile transformations, and oral health tips.
+              </p>
             </div>
 
-            {/* Grid of Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {blogs.map((post) => (
-                <article 
-                  key={post.id} 
-                  className="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
-                >
-                  {/* Article Image Container */}
-                  <Link href={`/blog/${post.slug}`} className="block relative aspect-[16/10] w-full bg-gray-50 overflow-hidden">
-                    <Image 
-                      src={post.coverImage} 
-                      alt={post.title} 
-                      fill 
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-block bg-white/95 backdrop-blur-sm text-brand-red font-bold text-[10px] px-3 py-1 uppercase tracking-wider rounded shadow-sm border border-red-50">
-                        {post.category}
-                      </span>
-                    </div>
-                  </Link>
-                  
-                  {/* Card Content */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <Link href={`/blog/${post.slug}`}>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-brand-red transition-colors font-serif line-clamp-2">
-                        {post.title}
-                      </h3>
-                    </Link>
-
-                    <p className="text-gray-600 text-sm mb-6 flex-grow leading-relaxed line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                    
-                    <div className="flex items-center justify-between mt-auto border-t border-gray-100 pt-4 text-xs font-semibold text-gray-500">
-                      <div className="flex items-center gap-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-brand-red" />
-                          {post.date}
-                        </span>
-                        <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-gray-400" />
-                          {post.readTime}
-                        </span>
-                      </div>
-                      
-                      <Link 
-                        href={`/blog/${post.slug}`}
-                        className="text-brand-red font-bold flex items-center gap-1 hover:text-brand-dark transition-colors group-hover:translate-x-1 duration-300"
-                      >
-                        Read <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+            {/* Paginated Blog List */}
+            <BlogListWithPagination blogs={blogs} itemsPerPage={6} />
 
           </div>
 
@@ -109,7 +52,7 @@ export default async function BlogPage() {
                   JS
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 text-base">Jolly Smiles Dental</h3>
+                  <h3 className="font-bold text-gray-900 text-base font-serif">Jolly Smiles Dental</h3>
                   <p className="text-xs text-gray-500">Middletown, Delaware</p>
                 </div>
               </div>
@@ -156,7 +99,7 @@ export default async function BlogPage() {
               </div>
             </div>
 
-            {/* Stay Updated Widget */}
+            {/* Have Questions Widget */}
             <div className="bg-red-50/70 rounded-2xl p-8 text-center relative overflow-hidden border border-red-100">
               <div className="bg-white w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-4 shadow-sm text-brand-red">
                 <Search className="w-6 h-6" />
