@@ -160,7 +160,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               Our team of dedicated dental professionals in Middletown, DE is committed to providing patient-centered, compassionate care with the latest technology.
             </p>
             <div className="pt-1">
-              <Link href="/about/team" className="text-brand-red font-bold text-xs uppercase tracking-wider hover:underline inline-flex items-center">
+              <Link href="/team" className="text-brand-red font-bold text-xs uppercase tracking-wider hover:underline inline-flex items-center">
                 Meet Our Doctors <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </Link>
             </div>

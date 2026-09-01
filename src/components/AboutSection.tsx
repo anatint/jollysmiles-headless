@@ -73,7 +73,7 @@ export default function AboutSection({ data }: { data?: any[] }) {
               ))}
             </ul>
 
-            <Link href={about?.buttonUrl || "/about/team"} className="bg-brand-red hover:bg-brand-dark text-white px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg inline-flex items-center text-sm w-fit">
+            <Link href={about?.buttonUrl || "/team"} className="bg-brand-red hover:bg-brand-dark text-white px-6 py-2.5 rounded font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg inline-flex items-center text-sm w-fit">
               {about?.buttonLabel || "Meet Our Doctors"} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </div>

@@ -19,7 +19,7 @@ export default function Footer({ settings, navigation }: { settings?: any, navig
           { label: 'Services', url: '/services' },
           { label: 'Procedures', url: '/procedures' },
           { label: 'Technologies', url: '/technologies' },
-          { label: 'Our Team', url: '/about/team' },
+          { label: 'Our Team', url: '/team' },
           { label: 'Blog', url: '/blog' },
           { label: 'Contact', url: '/contact' }
         ];

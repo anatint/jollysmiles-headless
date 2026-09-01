@@ -21,7 +21,7 @@ export default function Header({ settings, navigation }: { settings?: any, navig
         { label: 'Services', url: '/services' },
         { label: 'Procedures', url: '/procedures' },
         { label: 'Technologies', url: '/technologies' },
-        { label: 'Our Team', url: '/about/team' },
+        { label: 'Our Team', url: '/team' },
         { label: 'Blog', url: '/blog' },
         { label: 'Contact', url: '/contact' }
       ];
@@ -88,7 +88,7 @@ export default function Header({ settings, navigation }: { settings?: any, navig
         <div className="md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-3 space-y-1 shadow-lg absolute w-full left-0">
           <Link href="/" className="block px-3 py-2 text-brand-red font-medium">Home</Link>
           <Link href="/about" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">About Us</Link>
-          <Link href="/about/team" className="block px-3 py-2 pl-6 text-gray-600 font-medium hover:text-brand-red">Our Team</Link>
+          <Link href="/team" className="block px-3 py-2 pl-6 text-gray-600 font-medium hover:text-brand-red">Our Team</Link>
           <Link href="/services" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Services</Link>
           <Link href="/procedures" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Procedures</Link>
           <Link href="/technologies" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Technologies</Link>

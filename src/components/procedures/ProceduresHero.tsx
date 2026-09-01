@@ -9,7 +9,7 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
   const heading = root?.heroHeading || `Dental Procedures <br /><span class="text-brand-red">Designed for Your Smile</span>`;
   const description = root?.heroDescription || "We combine advanced technology with compassionate care to deliver safe, comfortable, and effective dental procedures for patients in Middletown, DE and surrounding communities.";
   const primaryLabel = root?.ctaPrimaryLabel || "Meet Our Team";
-  const primaryUrl = root?.ctaPrimaryUrl || "/about/team";
+  const primaryUrl = root?.ctaPrimaryUrl || "/team";
   const secondaryLabel = root?.ctaSecondaryLabel || "View Working Hours";
   const secondaryUrl = root?.ctaSecondaryUrl || "/contact";
   const badgeText = root?.heroBadge || "Diamond Invisalign® Top 1% Provider";

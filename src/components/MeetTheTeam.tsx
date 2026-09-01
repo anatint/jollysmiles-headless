@@ -99,7 +99,7 @@ export default function MeetTheTeam({ data, settings }: { data?: any[]; settings
 
         <div className="text-center">
           <Link 
-            href="/about/team"
+            href="/team"
             className="bg-brand-red hover:bg-brand-dark text-white px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg inline-flex items-center group"
           >
             {buttonLabel} 
