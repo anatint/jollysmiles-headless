@@ -14,6 +14,20 @@ export interface BlogPost {
   author: string;
 }
 
+export function stripHtml(str?: string | null): string {
+  if (!str) return '';
+  return str
+    .replace(/<[^>]*>?/gm, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export function renderWixRichContent(richContent: any): string {
   if (!richContent) return '';
   if (typeof richContent === 'string') return richContent;
@@ -155,7 +169,7 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
     }
 
     const readTime = post.readTime || (post.minutesToRead ? `${post.minutesToRead} min read` : (localMatch?.minutesToRead ? `${localMatch.minutesToRead} min read` : '4 min read'));
-    
+
     // Extract rich content HTML
     let contentHtml = '';
     if (post.content && typeof post.content === 'string') {
@@ -166,16 +180,17 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
       contentHtml = renderWixRichContent(localMatch.richContent);
     }
 
-    const excerpt = post.excerpt || localMatch?.excerpt || (contentHtml ? contentHtml.replace(/<[^>]*>?/gm, '').slice(0, 150) + '...' : 'Read more about this dental topic...');
+    const rawExcerpt = post.excerpt || localMatch?.excerpt || (contentHtml ? contentHtml.slice(0, 300) : 'Read more about this dental topic...');
+    const cleanExcerpt = stripHtml(rawExcerpt);
 
     const coverImage = extractCoverImage(post) || (localMatch ? extractCoverImage(localMatch) : '/clinic-reception.png');
 
     return {
       id: post.id || post._id || String(idx + 1),
       slug: rawSlug,
-      title: post.title || localMatch?.title || 'Dental Care & Smile Guide',
-      excerpt: excerpt,
-      contentHtml: contentHtml || `<p class="leading-relaxed text-gray-700 text-lg">${excerpt}</p>`,
+      title: stripHtml(post.title || localMatch?.title || 'Dental Care & Smile Guide'),
+      excerpt: cleanExcerpt,
+      contentHtml: contentHtml || `<p class="leading-relaxed text-gray-700 text-lg">${cleanExcerpt}</p>`,
       coverImage: coverImage,
       category: post.category || localMatch?.category || 'Dental Care',
       date: formattedDate,
