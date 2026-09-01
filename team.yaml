@@ -1,0 +1,143 @@
+# Team Members Page Configuration & Data
+team:
+  meta:
+    title: "Our Dental Team | Jolly Smiles Dental Clinic"
+    description: "Meet our dedicated dental experts at Jolly Smiles. Our highly skilled, compassionate dentists and hygienists provide personalized, gentle care in Middletown, DE."
+
+  hero:
+    eyebrow: "Our Dental Team"
+    heading: "Our Dental Team"
+    highlightedWord: "Team"
+    description: "Our team of experienced and compassionate dental professionals is dedicated to providing exceptional care in a comfortable and welcoming environment. Get to know the experts who will help you achieve a healthy, beautiful smile."
+    image: "/team-banner.png"
+    imageAlt: "Jolly Smiles Dental Team"
+    breadcrumb:
+      - label: "Home"
+        url: "/"
+      - label: "Team"
+        url: "/team"
+
+  intro:
+    eyebrow: "EXPERT CARE. PERSONAL TOUCH."
+    heading: "Meet Our Dedicated Dental Experts"
+    description: "Highly skilled, continuously trained, and truly passionate about your oral health — our team is here to provide the best care for you and your family."
+
+  members:
+    - id: "dr-anu-rajan"
+      name: "Dr. Anu Rajan, DDS"
+      role: "Founder & Cosmetic Dentist"
+      image: "/dr-anu.png"
+      bio: "With over 20 years of experience in cosmetic and restorative dentistry, Dr. Anu is passionate about creating beautiful smiles and building lasting relationships with patients."
+      order: 1
+      active: true
+      experience: "20+ Years"
+      specialties:
+        - label: "20+ Years Experience"
+          icon: "award"
+        - label: "Cosmetic Dentistry"
+          icon: "tooth"
+        - label: "Implants & Restorative"
+          icon: "layers"
+        - label: "Smile Makeovers"
+          icon: "smile"
+
+    - id: "dr-michael-thompson"
+      name: "Dr. Michael Thompson, DDS"
+      role: "General & Family Dentist"
+      image: "/dr-michael.png"
+      bio: "Dr. Michael provides comprehensive dental care for patients of all ages, focusing on prevention, comfort, and long-term oral health."
+      order: 2
+      active: true
+      experience: "15+ Years"
+      specialties:
+        - label: "15+ Years Experience"
+          icon: "award"
+        - label: "Family Dentistry"
+          icon: "users"
+        - label: "Preventive Care"
+          icon: "shield"
+        - label: "Emergency Care"
+          icon: "activity"
+
+    - id: "dr-sarah-martinez"
+      name: "Dr. Sarah Martinez, DDS"
+      role: "Cosmetic Dentist"
+      image: "/dr-sarah.png"
+      bio: "Dr. Sarah specializes in aesthetic dentistry, helping patients achieve natural-looking, confident smiles with the latest techniques."
+      order: 3
+      active: true
+      experience: "12+ Years"
+      specialties:
+        - label: "12+ Years Experience"
+          icon: "award"
+        - label: "Cosmetic Dentistry"
+          icon: "tooth"
+        - label: "Veneers & Bonding"
+          icon: "layers"
+        - label: "Teeth Whitening"
+          icon: "droplet"
+
+    - id: "dr-james-wilson"
+      name: "Dr. James Wilson, DDS"
+      role: "Oral Surgeon"
+      image: "/dr-james.png"
+      bio: "Dr. James is an expert in oral surgery and dental implants, ensuring safe, precise treatments with a focus on patient comfort."
+      order: 4
+      active: true
+      experience: "14+ Years"
+      specialties:
+        - label: "14+ Years Experience"
+          icon: "award"
+        - label: "Dental Implants"
+          icon: "tooth"
+        - label: "Oral Surgery"
+          icon: "activity"
+        - label: "Wisdom Teeth Removal"
+          icon: "shield"
+
+    - id: "dr-priya-shah"
+      name: "Dr. Priya Shah, DDS"
+      role: "Pediatric Dentist"
+      image: "/dr-priya.png"
+      bio: "Dr. Priya loves working with children and making dental visits fun, positive, and stress-free for kids and parents."
+      order: 5
+      active: true
+      experience: "10+ Years"
+      specialties:
+        - label: "10+ Years Experience"
+          icon: "award"
+        - label: "Pediatric Dentistry"
+          icon: "baby"
+        - label: "Kids Care"
+          icon: "heart"
+        - label: "Preventive Care"
+          icon: "shield"
+
+    - id: "dr-emily-carter"
+      name: "Dr. Emily Carter, DDS"
+      role: "Orthodontist"
+      image: "/dr-emily.png"
+      bio: "Dr. Emily specializes in braces and clear aligners, helping patients of all ages achieve perfectly aligned, healthy smiles."
+      order: 6
+      active: true
+      experience: "11+ Years"
+      specialties:
+        - label: "11+ Years Experience"
+          icon: "award"
+        - label: "Invisalign® Provider"
+          icon: "star"
+        - label: "Braces"
+          icon: "grid"
+        - label: "Smile Alignment"
+          icon: "smile"
+
+  cta:
+    heading: "Experience the Difference"
+    description: "Advanced technology and a caring team for your best smile."
+    primaryButton:
+      label: "BOOK APPOINTMENT"
+      action: "appointment-modal"
+    secondaryButton:
+      label: "CONTACT US"
+      url: "/contact#contact-form"
+      icon: "phone"

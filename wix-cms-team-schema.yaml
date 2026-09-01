@@ -1,0 +1,42 @@
+# Wix CMS Schema & Item Template for Team Collection
+collectionName: "TeamMembers"
+displayName: "Team Members"
+description: "Collection of dentists and staff members for the /team and /about pages"
+
+fields:
+  - key: "name"
+    displayName: "Full Name"
+    type: "text"
+    required: true
+    example: "Dr. Anu Rajan, DDS"
+  - key: "role"
+    displayName: "Role / Specialty"
+    type: "text"
+    required: true
+    example: "Founder & Cosmetic Dentist"
+  - key: "photo"
+    displayName: "Profile Photo"
+    type: "image"
+    required: true
+    example: "wix:image://v1/.../dr-anu.png"
+  - key: "bio"
+    displayName: "Short Biography"
+    type: "richText"
+    required: true
+    example: "With over 20 years of experience in cosmetic and restorative dentistry..."
+  - key: "order"
+    displayName: "Display Order"
+    type: "number"
+    example: 1
+  - key: "active"
+    displayName: "Active / Visible"
+    type: "boolean"
+    example: true
+  - key: "experience"
+    displayName: "Years of Experience"
+    type: "text"
+    example: "20+ Years Experience"
+  - key: "specialties"
+    displayName: "Specialties (JSON Array)"
+    type: "text"
+    example: '[{"label":"20+ Years Experience","icon":"award"},{"label":"Cosmetic Dentistry","icon":"tooth"},{"label":"Implants & Restorative","icon":"layers"},{"label":"Smile Makeovers","icon":"smile"}]'
