@@ -73,11 +73,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               Back to All Articles
             </Link>
 
-            <div className="hidden sm:flex items-center text-xs text-gray-500 font-medium space-x-2">
-              <Link href="/" className="hover:text-brand-red">Home</Link>
-              <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-              <Link href="/blog" className="hover:text-brand-red">Blog</Link>
-              <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+            <div className="hidden sm:flex items-center text-sm font-medium text-brand-red">
+              <Link href="/" className="hover:underline">Home</Link>
+              <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
+              <Link href="/blog" className="hover:underline">Blog</Link>
+              <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
               <span className="text-gray-700 truncate max-w-[200px]">{blog.category}</span>
             </div>
           </div>
