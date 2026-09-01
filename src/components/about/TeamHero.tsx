@@ -24,13 +24,11 @@ export default function TeamHero() {
               Our team of experienced and compassionate dental professionals is dedicated to providing exceptional care in a comfortable and welcoming environment. Get to know the experts who will help you achieve a healthy, beautiful smile.
             </p>
             
-            {/* Breadcrumbs matching About page */}
+            {/* Breadcrumb */}
             <div className="flex items-center text-sm font-medium text-brand-red">
               <Link href="/" className="hover:underline">Home</Link>
               <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-              <Link href="/about" className="hover:underline">About Us</Link>
-              <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-              <span className="text-gray-700">Our Team</span>
+              <span className="text-gray-700">Team</span>
             </div>
           </div>
           
