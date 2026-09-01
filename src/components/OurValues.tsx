@@ -1,54 +1,74 @@
 import { Heart, ShieldCheck, Award, Users } from 'lucide-react';
 
-export default function OurValues({ data }: { data?: any[] }) {
-  const defaultValues = [
-    {
-      icon: Heart,
-      title: "Patient First",
-      description: "Your comfort, health, and satisfaction are always our top priority."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Integrity",
-      description: "We believe in honest advice and transparent treatment."
-    },
-    {
-      icon: Award,
-      title: "Excellence",
-      description: "We use the latest technology and techniques to ensure the best outcomes."
-    },
-    {
-      icon: Users,
-      title: "Compassion",
-      description: "We treat every patient like family with kindness, respect, and care."
+export default function OurValues({ data }: { data?: any }) {
+  const item = Array.isArray(data) ? (data[0] || {}) : (data || {});
+
+  const valuesHeading = item.valuesHeading || 'Our Core Values';
+  const valuesSubheading = item.valuesSubheading || 'The principles that guide our practice and patient care every single day.';
+
+  let displayValues: any[] = [];
+
+  if (item.value1Title) {
+    const icons = [Heart, ShieldCheck, Award, Users];
+    for (let i = 1; i <= 6; i++) {
+      const title = item[`value${i}Title`];
+      const description = item[`value${i}Description`];
+      if (title) {
+        displayValues.push({
+          icon: icons[(i - 1) % icons.length],
+          title,
+          description: description || ''
+        });
+      }
     }
-  ];
-
-  const displayValues = data && data.length > 0 
-    ? data.filter(v => v.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0)).map(v => {
-        let IconComponent = Heart;
-        if (v.icon === 'shield') IconComponent = ShieldCheck;
-        else if (v.icon === 'award') IconComponent = Award;
-        else if (v.icon === 'users') IconComponent = Users;
-
-        return {
-          icon: IconComponent,
-          title: v.title,
-          description: v.description
-        };
-      })
-    : defaultValues;
+  } else if (Array.isArray(data) && data.length > 0) {
+    displayValues = data.filter((v: any) => v.active !== false).map((v: any, idx: number) => {
+      const icons = [Heart, ShieldCheck, Award, Users];
+      return {
+        icon: icons[idx % icons.length],
+        title: v.title || v.name,
+        description: v.description || ''
+      };
+    });
+  } else {
+    displayValues = [
+      {
+        icon: Heart,
+        title: "Patient First",
+        description: "Your comfort, health, and satisfaction are always our top priority."
+      },
+      {
+        icon: ShieldCheck,
+        title: "Integrity",
+        description: "We believe in honest advice and transparent treatment."
+      },
+      {
+        icon: Award,
+        title: "Excellence",
+        description: "We use the latest technology and techniques to ensure the best outcomes."
+      },
+      {
+        icon: Users,
+        title: "Compassion",
+        description: "We treat every patient like family with kindness, respect, and care."
+      }
+    ];
+  }
 
   return (
     <div className="bg-white lg:py-8 py-[50px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <h2 className="text-[35px] font-extrabold text-gray-900 mb-4">
-            Our Core <span className="text-brand-red">Values</span>
+          <h2 className="text-[35px] font-extrabold text-gray-900 mb-4 font-serif">
+            {valuesHeading.includes('Values') ? (
+              <>Our Core <span className="text-brand-red">Values</span></>
+            ) : (
+              valuesHeading
+            )}
           </h2>
           <p className="text-gray-600 text-base md:text-lg">
-            The principles that guide our practice and patient care every single day.
+            {valuesSubheading}
           </p>
         </div>
 
@@ -58,7 +78,7 @@ export default function OurValues({ data }: { data?: any[] }) {
               <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-6 border border-red-100">
                 <val.icon className="w-8 h-8 text-brand-red" strokeWidth={1.5} />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4">{val.title}</h3>
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 font-serif">{val.title}</h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">
                 {val.description}
               </p>
