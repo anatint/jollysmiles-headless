@@ -1,8 +1,11 @@
+"use client";
 import Image from 'next/image';
 import Link from 'next/link';
-import { Clock, Star } from 'lucide-react';
+import { Calendar, Star } from 'lucide-react';
+import { useModal } from '@/context/ModalContext';
 
 export default function ProceduresHero({ data }: { data?: any[] }) {
+  const { openAppointmentModal } = useModal();
   const root = data && data.length > 0 ? data[0] : null;
 
   const eyebrow = root?.heroEyebrow || "HOW DO WE DO IT?";
@@ -10,8 +13,9 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
   const description = root?.heroDescription || "We combine advanced technology with compassionate care to deliver safe, comfortable, and effective dental procedures for patients in Middletown, DE and surrounding communities.";
   const primaryLabel = root?.ctaPrimaryLabel || "Meet Our Team";
   const primaryUrl = root?.ctaPrimaryUrl || "/team";
-  const secondaryLabel = root?.ctaSecondaryLabel || "View Working Hours";
-  const secondaryUrl = root?.ctaSecondaryUrl || "/contact";
+  const secondaryLabel = root?.ctaSecondaryLabel && !root.ctaSecondaryLabel.toLowerCase().includes('working')
+    ? root.ctaSecondaryLabel 
+    : "BOOK AN APPOINTMENT";
   const badgeText = root?.heroBadge || "Diamond Invisalign® Top 1% Provider";
 
   return (
@@ -50,13 +54,16 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href={primaryUrl} className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors shadow-sm text-xs text-center">
+              <Link href={primaryUrl} className="w-full sm:w-auto bg-brand-red hover:bg-brand-dark text-white px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors shadow-sm text-xs text-center flex items-center justify-center">
                 {primaryLabel}
               </Link>
-              <Link href={secondaryUrl} className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
-                <Clock className="mr-2 w-4 h-4" />
+              <button 
+                onClick={openAppointmentModal}
+                className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group cursor-pointer"
+              >
+                <Calendar className="mr-2 w-4 h-4 text-brand-red" />
                 {secondaryLabel}
-              </Link>
+              </button>
             </div>
           </div>
 
