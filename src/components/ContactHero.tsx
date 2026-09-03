@@ -30,63 +30,70 @@ function cleanHtmlText(text?: string): string {
 }
 
 export default function ContactHero({ data }: ContactHeroProps) {
+  const eyebrow = cleanHtmlText(data?.subheading) || "GET IN TOUCH";
   const rawHeading = data?.heroHeading || data?.heading || "Contact Us";
   const heading = rawHeading.includes('<') 
     ? rawHeading 
     : rawHeading.replace(/Contact Us/i, 'Contact <span class="text-brand-red">Us</span>');
 
-  const subheading = cleanHtmlText(data?.heroSubheading || data?.subheading) || "We're here to help you smile brighter.";
+  const highlight = cleanHtmlText(data?.heroSubheading) || "We're here to help you smile brighter.";
   const description = cleanHtmlText(data?.heroDescription || data?.description) || "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!";
-  const image = getWixImageUrl(data?.heroImage, "/clinic-reception.png");
+  const bannerImage = getWixImageUrl(data?.heroImage, "/clinic-reception.png");
 
   return (
-    <div className="relative bg-white overflow-hidden lg:min-h-[480px] flex items-center py-10 lg:py-16">
+    <section className="relative w-full min-h-[420px] md:min-h-[480px] flex items-center overflow-hidden bg-gray-50 md:py-12 py-[50px]">
       
-      {/* Background decorative swoosh */}
-      <div className="absolute top-0 left-0 w-full lg:w-[60%] h-full bg-gradient-to-br from-red-50/70 to-transparent -z-10 pointer-events-none">
-        <div className="absolute top-1/4 -left-1/4 w-full h-full bg-brand-red/5 rounded-full blur-3xl"></div>
+      {/* Full Background Banner Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-red-50 to-gray-200" />
+        {bannerImage ? (
+          <Image 
+            src={bannerImage} 
+            alt="Jolly Smiles Contact Banner" 
+            fill 
+            className="object-cover object-center md:object-right"
+            priority
+          />
+        ) : null}
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+      {/* Smooth Gradient Overlay from left to right for crisp readability */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-white via-white/85 to-transparent md:w-[70%] w-full pointer-events-none"></div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full md:w-3/4 lg:w-1/2 space-y-5">
           
-          {/* Left Text Column */}
-          <div className="flex-1 max-w-xl">
-            <h1 
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight font-serif"
-              dangerouslySetInnerHTML={{ __html: heading }}
-            />
-            <h2 className="text-lg lg:text-2xl font-bold text-gray-800 mb-4 font-serif">
-              {subheading}
+          <div className="inline-block">
+            <h4 className="text-brand-red font-bold text-xs tracking-[0.2em] uppercase bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded">
+              {eyebrow}
+            </h4>
+          </div>
+          
+          <h1 
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.08] tracking-tight font-serif"
+            dangerouslySetInnerHTML={{ __html: heading }}
+          />
+
+          {highlight && (
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 font-serif leading-snug">
+              {highlight}
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed">
-              {description}
-            </p>
-            
-            {/* Breadcrumb */}
-            <div className="flex items-center text-sm font-medium text-brand-red">
-              <Link href="/" className="hover:underline">Home</Link>
-              <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-              <span className="text-gray-900 font-semibold">Contact Us</span>
-            </div>
+          )}
+          
+          <p className="text-gray-700 text-base sm:text-lg leading-relaxed font-medium">
+            {description}
+          </p>
+          
+          {/* Breadcrumb */}
+          <div className="flex items-center text-sm font-medium text-brand-red pt-2">
+            <Link href="/" className="hover:underline">Home</Link>
+            <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
+            <span className="text-gray-900 font-semibold">Contact Us</span>
           </div>
 
-          {/* Right Image Column */}
-          <div className="flex-1 w-full relative">
-            <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[440px] rounded-[2rem] overflow-hidden shadow-2xl border border-gray-100">
-              <Image 
-                src={image} 
-                alt="Jolly Smiles Dental Clinic Reception" 
-                fill 
-                className="object-cover object-center"
-                priority
-              />
-            </div>
-          </div>
-          
         </div>
       </div>
       
-    </div>
+    </section>
   );
 }
