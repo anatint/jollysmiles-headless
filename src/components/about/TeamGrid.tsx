@@ -179,10 +179,24 @@ export default function TeamGrid({ data, settings }: { data?: any[]; settings?: 
         }
       }
 
+      const rawImage =
+        cmsItem.photo ||
+        cmsItem.image ||
+        cmsItem.profilePhoto ||
+        cmsItem.profileImage ||
+        cmsItem.memberPhoto ||
+        cmsItem.headshot ||
+        cmsItem.picture ||
+        cmsItem.avatar ||
+        cmsItem.photoUrl ||
+        cmsItem.imageUrl ||
+        cmsItem.img ||
+        cmsItem.thumbnail;
+
       return {
         name: cleanHtmlText(cmsItem.name) || fallbackDoc?.name || '',
         role: cleanHtmlText(cmsItem.role || cmsItem.title) || fallbackDoc?.role || '',
-        image: getWixImageUrl(cmsItem.photo || cmsItem.image, fallbackDoc?.image || '/dr-anu.png'),
+        image: getWixImageUrl(rawImage, fallbackDoc?.image || '/dr-anu.png'),
         bio: cleanBio,
         badges: memberBadges
       };

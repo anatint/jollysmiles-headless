@@ -36,13 +36,42 @@ export async function submitAppointment(data: any) {
   }
 }
 
-export function getWixImageUrl(url?: string | null, fallback: string = ''): string {
-  if (!url || typeof url !== 'string') return fallback;
+export function getWixImageUrl(url?: any, fallback: string = ''): string {
+  if (!url) return fallback;
+
+  if (typeof url === 'object') {
+    url = url.url || url.src || url.uri || url.image || url.file_url || url.id || '';
+  }
+
+  if (typeof url !== 'string' || !url.trim()) return fallback;
+  url = url.trim();
+
+  // Already a full HTTP or relative URL
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/')) {
+    return url;
+  }
+
+  // Handle wix:image://v1/<uri>/<filename>#originWidth=...
   if (url.startsWith('wix:image://v1/')) {
-    const parts = url.replace('wix:image://v1/', '').split('/');
-    const mediaId = parts[0];
+    const raw = url.replace('wix:image://v1/', '');
+    const firstPart = raw.split('/')[0];
+    const mediaId = firstPart.split('#')[0];
     return `https://static.wixstatic.com/media/${mediaId}`;
   }
+
+  // Handle wix:document://v1/<uri>/...
+  if (url.startsWith('wix:document://v1/')) {
+    const raw = url.replace('wix:document://v1/', '');
+    const firstPart = raw.split('/')[0];
+    const mediaId = firstPart.split('#')[0];
+    return `https://static.wixstatic.com/ugd/${mediaId}`;
+  }
+
+  // Handle bare Wix media IDs
+  if (url.includes('~mv2') || /^[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp|svg|gif)/i.test(url)) {
+    return `https://static.wixstatic.com/media/${url.split('#')[0]}`;
+  }
+
   return url;
 }
 

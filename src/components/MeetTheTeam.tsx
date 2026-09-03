@@ -14,21 +14,38 @@ export default function MeetTheTeam({ data, settings }: { data?: any[]; settings
   let team: any[] = [];
 
   if (Array.isArray(data) && data.length > 0) {
-    team = data.filter((m: any) => m.active !== false).slice(0, 4).map((m: any) => ({
-      name: m.name,
-      role: m.role || m.title || "Dental Specialist",
-      image: getWixImageUrl(m.photo || m.image, "/dr-anderson.png")
-    }));
+    const fallbackImgs = ["/dr-anu.png", "/dr-michael.png", "/dr-sarah.png", "/dr-james.png"];
+    team = data.filter((m: any) => m.active !== false).slice(0, 4).map((m: any, idx: number) => {
+      const rawImg =
+        m.photo ||
+        m.image ||
+        m.profilePhoto ||
+        m.profileImage ||
+        m.memberPhoto ||
+        m.headshot ||
+        m.picture ||
+        m.avatar ||
+        m.photoUrl ||
+        m.imageUrl ||
+        m.img ||
+        m.thumbnail;
+
+      return {
+        name: m.name ? m.name.replace(/<[^>]*>/g, '').trim() : "Dental Specialist",
+        role: m.role || m.title || "Dental Specialist",
+        image: getWixImageUrl(rawImg, fallbackImgs[idx % fallbackImgs.length])
+      };
+    });
   } else if (settingsItem.teamMember1Name) {
     for (let i = 1; i <= 4; i++) {
       const name = settingsItem[`teamMember${i}Name`];
       const role = settingsItem[`teamMember${i}Role`];
-      const img = settingsItem[`teamMember${i}Image`];
+      const img = settingsItem[`teamMember${i}Image`] || settingsItem[`teamMember${i}Photo`];
       if (name) {
         team.push({
-          name,
+          name: name.replace(/<[^>]*>/g, '').trim(),
           role: role || 'Dental Specialist',
-          image: getWixImageUrl(img, '/dr-anderson.png')
+          image: getWixImageUrl(img, '/dr-anu.png')
         });
       }
     }
