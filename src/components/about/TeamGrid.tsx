@@ -139,7 +139,7 @@ export default function TeamGrid({ data, settings }: { data?: any[]; settings?: 
   const introHeading = cleanHtmlText(settingsItem.introHeading || settingsItem.sectionHeading || settingsItem.teamHeading || settingsItem.heading) || "Meet Our Dedicated Dental Experts";
   const introDescription = cleanHtmlText(settingsItem.introDescription || settingsItem.sectionDescription || settingsItem.teamDescription || settingsItem.description) || "Highly skilled, continuously trained, and truly passionate about your oral health — our team is here to provide the best care for you and your family.";
 
-  let displayMembers = defaultDoctors;
+  let displayMembers: any[] = defaultDoctors;
 
   if (data && data.length > 0) {
     displayMembers = data.map((cmsItem, idx) => {
@@ -147,7 +147,7 @@ export default function TeamGrid({ data, settings }: { data?: any[]; settings?: 
       const rawBio = cmsItem.bio || cmsItem.description;
       const cleanBio = rawBio ? cleanHtmlText(rawBio) : (fallbackDoc?.bio || '');
 
-      let memberBadges = fallbackDoc?.badges || [];
+      let memberBadges: any[] = fallbackDoc?.badges || [];
       if (cmsItem.specialties) {
         try {
           const parsed = typeof cmsItem.specialties === 'string' ? JSON.parse(cmsItem.specialties) : cmsItem.specialties;
