@@ -117,16 +117,33 @@ function getIconByName(iconStr: string) {
   return ToothIcon;
 }
 
+function cleanHtmlText(text?: string | null): string {
+  if (!text || typeof text !== 'string') return '';
+  return text
+    .replace(/<[^>]*>/g, '') // remove HTML tags
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export default function TeamGrid({ data }: { data?: any[] }) {
   const displayMembers = defaultDoctors.map((doc, idx) => {
     // If Wix CMS has item matching this slot, merge photo / bio / name
     if (data && data[idx]) {
       const cmsItem = data[idx];
+      const rawBio = cmsItem.bio || cmsItem.description;
+      const cleanBio = rawBio ? cleanHtmlText(rawBio) : doc.bio;
       return {
-        name: cmsItem.name || doc.name,
-        role: cmsItem.role || cmsItem.title || doc.role,
+        name: cleanHtmlText(cmsItem.name) || doc.name,
+        role: cleanHtmlText(cmsItem.role || cmsItem.title) || doc.role,
         image: getWixImageUrl(cmsItem.photo || cmsItem.image, doc.image),
-        bio: cmsItem.bio || cmsItem.description || doc.bio,
+        bio: cleanBio || doc.bio,
         badges: doc.badges
       };
     }
@@ -182,7 +199,7 @@ export default function TeamGrid({ data }: { data?: any[] }) {
                 </div>
                 
                 <p className="text-gray-600 text-sm leading-relaxed text-center flex-grow mb-6 font-normal">
-                  {member.bio}
+                  {cleanHtmlText(member.bio)}
                 </p>
 
                 <div className="w-full h-[1px] bg-gray-100 mb-6"></div>
