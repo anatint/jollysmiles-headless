@@ -65,6 +65,19 @@ function getProcedureIcon(iconStr?: string, title?: string) {
   return Layers;
 }
 
+function cleanHtmlText(text?: string): string {
+  if (!text) return '';
+  return text
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .trim();
+}
+
 export default function ProceduresList({ data }: { data?: any[] }) {
   const rootObj = data && data.length > 0 ? data[0] : null;
 
@@ -87,8 +100,8 @@ export default function ProceduresList({ data }: { data?: any[] }) {
           return true;
         })
         .map(p => ({
-          title: p.title || p.name || "Procedure",
-          description: p.description || "",
+          title: cleanHtmlText(p.title || p.name || "Procedure"),
+          description: cleanHtmlText(p.description || ""),
           icon: getProcedureIcon(p.icon, p.title || p.name),
           link: p.link || "#"
         }))
@@ -103,7 +116,7 @@ export default function ProceduresList({ data }: { data?: any[] }) {
 
   const displaySkills = rawSkills && rawSkills.length > 0
     ? rawSkills.map(s => ({
-        name: (s.label || s.name || "Skill").toUpperCase(),
+        name: cleanHtmlText(s.label || s.name || "Skill").toUpperCase(),
         percentage: Number(s.value || s.percentage || 90)
       }))
     : defaultSkills;
@@ -125,13 +138,15 @@ export default function ProceduresList({ data }: { data?: any[] }) {
         return {
           icon: IconComp,
           value: s.value || "100%",
-          label: s.label || ""
+          label: cleanHtmlText(s.label || "")
         };
       })
     : defaultStats;
 
-  const sectionHeading = rootObj?.proceduresHeading || "Procedures and Effectiveness";
-  const successNote = rootObj?.successRatesNote || "Based on patient outcomes and satisfaction reports.";
+  const rawHeading = rootObj?.proceduresHeading || "Procedures and Effectiveness";
+  const sectionHeading = rawHeading.replace(/^our expertise\s*[-–:]\s*/i, '') || "Procedures and Effectiveness";
+  const sectionDesc = cleanHtmlText(rootObj?.description || rootObj?.proceduresIntro) || "We offer a complete range of dental procedures with proven results and patient satisfaction.";
+  const successNote = cleanHtmlText(rootObj?.successRatesNote) || "Based on patient outcomes and satisfaction reports.";
 
   return (
     <section className="bg-white py-[50px]">
@@ -147,7 +162,7 @@ export default function ProceduresList({ data }: { data?: any[] }) {
           </h2>
           <div className="w-12 h-0.5 bg-brand-red mx-auto"></div>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed pt-2">
-            We offer a complete range of dental procedures with proven results and patient satisfaction.
+            {sectionDesc}
           </p>
         </div>
 
@@ -175,7 +190,9 @@ export default function ProceduresList({ data }: { data?: any[] }) {
                         <h4 className="font-bold text-gray-900 text-sm">
                           {proc.title}
                         </h4>
-                        <p className="text-gray-500 text-xs mt-0.5 leading-relaxed" dangerouslySetInnerHTML={{ __html: proc.description || '' }} />
+                        <p className="text-gray-500 text-xs mt-0.5 leading-relaxed">
+                          {proc.description}
+                        </p>
                       </div>
                     </div>
                   </div>

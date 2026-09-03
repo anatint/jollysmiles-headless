@@ -11,13 +11,13 @@ const faqs = [
   { question: "How do I schedule an appointment?", answer: "You can schedule an appointment by calling our office or using the online booking tool on our website." }
 ];
 
-export default function FAQSection({ data }: { data?: any[] }) {
+export default function FAQSection({ data, heading }: { data?: any[], heading?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   // Check if data is passed as a single setting item containing numbered columns (e.g., faq1Question, faq1Answer)
   const singleSettingObj = data && data.length > 0 ? data[0] : null;
 
-  const extractedHeading = singleSettingObj?.faqHeading || singleSettingObj?.['FAQ Heading'] || "Frequently Asked Questions";
+  const extractedHeading = heading || singleSettingObj?.faqHeading || singleSettingObj?.['FAQ Heading'] || "Frequently Asked Questions";
 
   let displayFaqs: any[] = [];
 

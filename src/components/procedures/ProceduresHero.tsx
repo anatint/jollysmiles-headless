@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Star } from 'lucide-react';
 import { useModal } from '@/context/ModalContext';
+import { getWixImageUrl } from '@/lib/wix';
 
 export default function ProceduresHero({ data }: { data?: any[] }) {
   const { openAppointmentModal } = useModal();
@@ -17,6 +18,7 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
     ? root.ctaSecondaryLabel 
     : "BOOK AN APPOINTMENT";
   const badgeText = root?.heroBadge || "Diamond Invisalign® Top 1% Provider";
+  const heroImage = getWixImageUrl(root?.heroImage, "/procedures-hero.png");
 
   return (
     <div className="relative bg-white overflow-hidden lg:min-h-[500px] flex items-center lg:py-0 py-[50px]">
@@ -64,7 +66,7 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
           <div className="flex-1 relative w-full lg:h-[500px] flex items-center justify-center mt-8 lg:mt-0">
             <div className="relative w-full max-w-lg aspect-square lg:aspect-auto lg:h-[80%] rounded-[2rem] overflow-hidden shadow-2xl">
               <Image 
-                src="/procedures-hero.png" 
+                src={heroImage} 
                 alt="Dentist performing dental procedure" 
                 fill 
                 className="object-cover"
@@ -77,12 +79,14 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
                <div className="text-brand-red font-black text-4xl sm:text-5xl opacity-80" style={{ fontFamily: 'serif' }}>A</div>
                <div className="flex flex-col justify-center">
                  <span className="text-[10px] sm:text-xs font-bold text-gray-800 flex items-center gap-1 mb-0.5 whitespace-nowrap">
-                   Diamond Invisalign®
+                   {badgeText.includes('Top') ? badgeText.split('Top')[0].trim() : badgeText}
                  </span>
-                 <span className="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-widest flex items-center gap-1">
-                   <Star className="w-3 h-3 fill-brand-red text-brand-red" />
-                   Top 1% Provider
-                 </span>
+                 {badgeText.includes('Top') && (
+                   <span className="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-widest flex items-center gap-1">
+                     <Star className="w-3 h-3 fill-brand-red text-brand-red" />
+                     Top {badgeText.split('Top')[1].trim()}
+                   </span>
+                 )}
                </div>
             </div>
           </div>
