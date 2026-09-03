@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
+import { buildPageMetadata } from "@/lib/seo";
+import SchemaJsonLd from "@/components/SchemaJsonLd";
 
-export const metadata: Metadata = {
-  title: "Jolly Smiles | Top Rated Dentists in Delaware",
-  description: "Experience compassionate, advanced dental care at Jolly Smiles in Delaware. From Invisalign to Smile Makeovers, we help you transform your smile and your life.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const homePageSettingsData = await getCollectionItems('HomePageSettings');
+  const homePageSettingAltData = await getCollectionItems('Home page setting');
+  const root = homePageSettingsData[0] || homePageSettingAltData[0] || {};
+  return buildPageMetadata('/', root);
+}
 import ServicesSection from "@/components/ServicesSection";
 import JourneySection from "@/components/JourneySection";
 import AboutSection from "@/components/AboutSection";
@@ -50,6 +54,7 @@ export default async function Home() {
 
   return (
     <>
+      <SchemaJsonLd path="/" />
       <HeroSection heroData={mergedHeroData} statsData={statsData} />
       <ServicesSection data={servicesData as any} />
       <JourneySection data={journeyData} />

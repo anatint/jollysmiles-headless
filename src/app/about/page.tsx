@@ -8,10 +8,15 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import CTABanner from '@/components/CTABanner';
 import { getCollectionItems } from "@/lib/wix";
 
-export const metadata: Metadata = {
-  title: "About Us | Jolly Smiles Dental Clinic",
-  description: "Learn about our team of expert dentists at Jolly Smiles. With over 50 years of combined experience, we provide exceptional, patient-first care in Delaware.",
-};
+import { buildPageMetadata } from "@/lib/seo";
+import SchemaJsonLd from "@/components/SchemaJsonLd";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const aboutSettingsList = await getCollectionItems('AboutSettings');
+  const aboutPageSettingsList = await getCollectionItems('AboutPageSettings');
+  const root = aboutSettingsList[0] || aboutPageSettingsList[0] || {};
+  return buildPageMetadata('/about', root);
+}
 
 export const revalidate = 0;
 
@@ -31,6 +36,7 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-white font-sans">
+      <SchemaJsonLd path="/about" />
       <AboutHero data={aboutData} />
       <OurStory data={aboutData} />
       <OurValues data={valuesData.length > 0 ? valuesData : aboutData} />

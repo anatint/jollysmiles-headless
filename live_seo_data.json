@@ -1,0 +1,512 @@
+{
+  "/": {
+    "route": "/",
+    "liveUrl": "https://www.jollysmiles.com/",
+    "title": "Best Dentist and Dental Clinic in Delaware | Jolly Smiles | Middletown",
+    "description": "Jolly Smiles Best Dentist and Dental clinic in Delaware for all Dental Problem Solution. We have a team of Delaware’s best dentists.",
+    "ogTitle": "Best Dentist and Dental Clinic in Delaware | Jolly Smiles | Middletown",
+    "ogDesc": "Jolly Smiles Best Dentist and Dental clinic in Delaware for all Dental Problem Solution. We have a team of Delaware’s best dentists.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com",
+    "schemas": [
+      {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "Jolly Smiles",
+        "url": "https://www.jollysmiles.com"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "image": "https://www.jollysmiles.com/logo.png",
+        "@id": "https://www.jollysmiles.com/",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Main Street, Suite 100",
+          "addressLocality": "City",
+          "addressRegion": "State",
+          "postalCode": "ZIP Code",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "XX.XXXX",
+          "longitude": "XX.XXXX"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.facebook.com/yourpage",
+          "https://www.yelp.com/biz/yourbusiness",
+          "https://www.healthgrades.com/yourprofile"
+        ]
+      }
+    ]
+  },
+  "/about": {
+    "route": "/about",
+    "liveUrl": "https://www.jollysmiles.com/about-us",
+    "title": "About Us | Jolly Smiles Ready to Serve all Your Dental Needs in Delaware",
+    "description": "Jolly Smiles Complete smile makeover, Uneven smiles, Missing teeth, Throbbing pain Solution in Delaware. Over 50 years of combined experience in Dental.",
+    "ogTitle": "About Us | Jolly Smiles Ready to Serve all Your Dental Needs in Delaware",
+    "ogDesc": "Jolly Smiles Complete smile makeover, Uneven smiles, Missing teeth, Throbbing pain Solution in Delaware. Over 50 years of combined experience in Dental.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/about-us",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/about-us"
+      }
+    ]
+  },
+  "/team": {
+    "route": "/team",
+    "liveUrl": "https://www.jollysmiles.com/our-team",
+    "title": "Our Team | Jolly Smiles Dental Clinic in Delaware Best team of Dentists",
+    "description": "Jolly Smiles Dental Clinic in Delaware have the Best Team for all your Dental issues. Find the best team for you in Delaware.",
+    "ogTitle": "Our Team | Jolly Smiles Dental Clinic in Delaware Best team of Dentists",
+    "ogDesc": "Jolly Smiles Dental Clinic in Delaware have the Best Team for all your Dental issues. Find the best team for you in Delaware.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/our-team",
+    "schemas": []
+  },
+  "/services": {
+    "route": "/services",
+    "liveUrl": "https://www.jollysmiles.com/services",
+    "title": "Professional Dental Services at Jolly Smiles Clinic | Delaware",
+    "description": "Jolly Smiles Dental Clinic in Delaware offers professional Dental Medical Service. We give you Medical Advices and we care about you.",
+    "ogTitle": "Professional Dental Services at Jolly Smiles Clinic | Delaware",
+    "ogDesc": "Jolly Smiles Dental Clinic in Delaware offers professional Dental Medical Service. We give you Medical Advices and we care about you.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/services",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/procedures": {
+    "route": "/procedures",
+    "liveUrl": "https://www.jollysmiles.com/procedures",
+    "title": "Procedures | Jolly Smiles Dental Clinic in Delaware, Treatment procedures",
+    "description": "Jolly Smiles Dental Clinic in Delaware Call us to know about Procedure, Treatment for your Teeth Problems. We Give You the Best Solution.",
+    "ogTitle": "Procedures | Jolly Smiles Dental Clinic in Delaware, Treatment procedures",
+    "ogDesc": "Jolly Smiles Dental Clinic in Delaware Call us to know about Procedure, Treatment for your Teeth Problems. We Give You the Best Solution.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/procedures",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/technologies": {
+    "route": "/technologies",
+    "liveUrl": "https://www.jollysmiles.com/technologies",
+    "title": "Technologies used in Dental Treatment | Jolly Smiles in Delaware",
+    "description": "Jolly Smiles | Technologies used in Dental Treatment, Call us to know about procedure, treatment, &amp; cost. Give your teeth the best care!",
+    "ogTitle": "Technologies used in Dental Treatment | Jolly Smiles in Delaware",
+    "ogDesc": "Jolly Smiles | Technologies used in Dental Treatment, Call us to know about procedure, treatment, &amp; cost. Give your teeth the best care!",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/technologies",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/contact": {
+    "route": "/contact",
+    "liveUrl": "https://www.jollysmiles.com/contact-us",
+    "title": "Contact Us | Jolly Smiles Dental Clinic in Delaware, Get in touch",
+    "description": "Jolly Smiles Dental Clinic in Delaware, Contact us to know more about Dental treatment and Procedures. Feel free to Contact us:102 Sleepy Hollow Drive, Suite 100 Middletown, DE 19709.",
+    "ogTitle": "Contact Us | Jolly Smiles Dental Clinic in Delaware, Get in touch",
+    "ogDesc": "Jolly Smiles Dental Clinic in Delaware, Contact us to know more about Dental treatment and Procedures. Feel free to Contact us:102 Sleepy Hollow Drive, Suite 100 Middletown, DE 19709.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/contact-us",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/contact-us",
+        "about": {
+          "@type": "Dentist",
+          "name": "Jolly Smiles Dental"
+        }
+      }
+    ]
+  },
+  "/blog": {
+    "route": "/blog",
+    "liveUrl": "https://www.jollysmiles.com/news",
+    "title": "News | Jolly Smiles Dental Clinic in Delaware, Get in touch with us for news",
+    "description": "Jolly Smiles Dental Clinic in Delaware, Get in touch with us for more news about Dental Treatment.",
+    "ogTitle": "News | Jolly Smiles Dental Clinic in Delaware, Get in touch with us for news",
+    "ogDesc": "Jolly Smiles Dental Clinic in Delaware, Get in touch with us for more news about Dental Treatment.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/news",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Latest Dental News",
+        "author": {
+          "@type": "Organization",
+          "name": "Jolly Smiles Dental"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Jolly Smiles Dental"
+        }
+      }
+    ]
+  },
+  "/services/cosmetic-dentistry": {
+    "route": "/services/cosmetic-dentistry",
+    "liveUrl": "https://www.jollysmiles.com/cosmetic-dentistry",
+    "title": "Cosmetic Dentistry Services in Middletown Delaware Transform Your Smile with Professional Aesthetic Solutions",
+    "description": "Enhance your smile at Jolly Smiles with expert cosmetic dentistry in Middletown. We offer teeth whitening, porcelain veneers, and full smile makeovers tailored to you.",
+    "ogTitle": "Cosmetic Dentistry Services in Middletown Delaware Transform Your Smile with Professional Aesthetic Solutions",
+    "ogDesc": "Enhance your smile at Jolly Smiles with expert cosmetic dentistry in Middletown. We offer teeth whitening, porcelain veneers, and full smile makeovers tailored to you.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/cosmetic-dentistry",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/services/restorative-dentistry": {
+    "route": "/services/restorative-dentistry",
+    "liveUrl": "https://www.jollysmiles.com/restorative-dentistry",
+    "title": "Restorative Dentistry | Dental Implants, Crowns &amp; Root Canals – Jolly Smiles",
+    "description": "Restore your smile with expert care at Jolly Smiles. We offer dental implants, crowns, bridges, root canals, and broken tooth repair for a healthier, confident you.",
+    "ogTitle": "Restorative Dentistry | Dental Implants, Crowns &amp; Root Canals – Jolly Smiles",
+    "ogDesc": "Restore your smile with expert care at Jolly Smiles. We offer dental implants, crowns, bridges, root canals, and broken tooth repair for a healthier, confident you.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/restorative-dentistry",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/services/preventive-dental-care": {
+    "route": "/services/preventive-dental-care",
+    "liveUrl": "https://www.jollysmiles.com/preventive-dental-care",
+    "title": "Preventive Dental Care in Middletown DE Regular Checkups, Cleanings, and Sealants for Healthy Smiles",
+    "description": "Preventive Dental Care in Middletown DE\nRegular Checkups, Cleanings, and Sealants for Healthy Smiles",
+    "ogTitle": "Preventive Dental Care in Middletown DE Regular Checkups, Cleanings, and Sealants for Healthy Smiles",
+    "ogDesc": "Preventive Dental Care in Middletown DE\nRegular Checkups, Cleanings, and Sealants for Healthy Smiles",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/preventive-dental-care",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/services/emergency-dental-services": {
+    "route": "/services/emergency-dental-services",
+    "liveUrl": "https://www.jollysmiles.com/emergency-dental-services",
+    "title": "Emergency Dental Clinic in Middletown DE 24/7 Urgent Dental Care for Toothaches, Swelling, and Injuries",
+    "description": "Emergency Dental Clinic in Middletown DE\n24/7 Urgent Dental Care for Toothaches, Swelling, and Injuries",
+    "ogTitle": "Emergency Dental Clinic in Middletown DE 24/7 Urgent Dental Care for Toothaches, Swelling, and Injuries",
+    "ogDesc": "Emergency Dental Clinic in Middletown DE\n24/7 Urgent Dental Care for Toothaches, Swelling, and Injuries",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/emergency-dental-services",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/services/pediatric-dentistry": {
+    "route": "/services/pediatric-dentistry",
+    "liveUrl": "https://www.jollysmiles.com/pediatric-dentistry",
+    "title": "Pediatric Dentist in Middletown DE Gentle Dental Care for Children and Toddlers at JollySmiles",
+    "description": "Discover expert pediatric dentistry at [Your Clinic Name]. From a child’s first dental visit to painless care for toddlers, our kids-friendly dentists are here for every smile.",
+    "ogTitle": "Pediatric Dentist in Middletown DE Gentle Dental Care for Children and Toddlers at JollySmiles",
+    "ogDesc": "Discover expert pediatric dentistry at [Your Clinic Name]. From a child’s first dental visit to painless care for toddlers, our kids-friendly dentists are here for every smile.",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/pediatric-dentistry",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  },
+  "/services/invisalign": {
+    "route": "/services/invisalign",
+    "liveUrl": "https://www.jollysmiles.com/invisalign",
+    "title": "Invisalign Middletown DE | Clear Aligners | Jolly Smiles",
+    "description": "Get Invisalign clear aligners at Jolly Smiles in Middletown, DE. Dr. Jeena Jolly offers custom treatment plans for adults and teens. Schedule your free consultation today. Call 302-378-3384. Middletown: 19709",
+    "ogTitle": "Invisalign Middletown DE | Clear Aligners | Jolly Smiles",
+    "ogDesc": "Get Invisalign clear aligners at Jolly Smiles in Middletown, DE. Dr. Jeena Jolly offers custom treatment plans for adults and teens. Schedule your free consultation today. Call 302-378-3384. Middletown: 19709",
+    "ogImage": "",
+    "canonical": "https://www.jollysmiles.com/invisalign",
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles",
+        "image": "https://static.wixstatic.com/media/db6928_07fe18239acb4890bf9d3012b03a1881~mv2.png",
+        "url": "https://www.jollysmiles.com",
+        "telephone": "+1-302-378-3384",
+        "email": "drteeth@jollysmiles.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "102 Sleepy Hollow Drive, Suite 100",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "19709",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 39.4496,
+          "longitude": -75.7163
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ],
+        "priceRange": "$$",
+        "medicalSpecialty": "Dentistry",
+        "availableService": {
+          "@type": "MedicalProcedure",
+          "name": "Invisalign Clear Aligners",
+          "description": "Custom Invisalign clear aligner treatment for adults and teens to straighten teeth without metal braces."
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much does Invisalign cost in Middletown DE?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Invisalign treatment at Jolly Smiles in Middletown typically ranges from $3,000 to $6,000 depending on case complexity. We offer flexible payment plans and accept most dental insurance. Schedule a free consultation for an exact estimate."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does Invisalign treatment take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most Invisalign cases at Jolly Smiles are completed in 12 to 18 months. Simple cases may finish in as little as 6 months. Dr. Jeena Jolly will provide a personalized timeline during your consultation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does insurance cover Invisalign in Delaware?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many dental insurance plans in Delaware cover Invisalign the same way they cover traditional braces. Our team at Jolly Smiles will verify your benefits and help maximize your coverage."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Invisalign available for teens at Jolly Smiles?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Jolly Smiles offers Invisalign for teens in Middletown DE. Teen aligners include compliance indicators so parents can track wear time. All permanent teeth should be in place before starting treatment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between Invisalign and traditional braces?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Invisalign uses clear removable aligners while traditional braces use fixed metal brackets and wires. Invisalign is nearly invisible, allows normal eating and brushing, and typically requires fewer office visits."
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Jolly Smiles Dental",
+        "url": "https://www.jollysmiles.com/",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "YOUR EXACT ADDRESS",
+          "addressLocality": "Middletown",
+          "addressRegion": "DE",
+          "postalCode": "ZIP",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.yelp.com/",
+          "https://www.healthgrades.com/"
+        ]
+      }
+    ]
+  }
+}

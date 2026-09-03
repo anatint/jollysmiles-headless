@@ -6,12 +6,15 @@ import ContactMap from '@/components/ContactMap';
 import CTABanner from '@/components/CTABanner';
 import { getSingleItem } from '@/lib/wix';
 
+import { buildPageMetadata } from '@/lib/seo';
+import SchemaJsonLd from '@/components/SchemaJsonLd';
+
 export const revalidate = 0; // Force dynamic rendering so CMS changes appear instantly
 
-export const metadata: Metadata = {
-  title: "Contact Us | Book Your Appointment at Jolly Smiles",
-  description: "Ready to perfect your smile? Contact Jolly Smiles in Middletown, DE today to book an appointment or ask any questions about our dental services.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const contactData = await getSingleItem('ContactSettings');
+  return buildPageMetadata('/contact', contactData);
+}
 
 export default async function ContactPage() {
   // Fetch ContactSettings data from Wix CMS
@@ -19,6 +22,7 @@ export default async function ContactPage() {
 
   return (
     <div className="bg-white font-sans">
+      <SchemaJsonLd path="/contact" />
       <ContactHero data={contactData as any} />
       <ContactFormSection data={contactData as any} />
       <ContactMap address={contactData?.address} />

@@ -7,18 +7,21 @@ import BlogListWithPagination from '@/components/blog/BlogListWithPagination';
 import { Search, ArrowRight, BookOpen } from 'lucide-react';
 import { getAllBlogs } from '@/lib/blogs';
 
+import { buildPageMetadata } from '@/lib/seo';
+import SchemaJsonLd from '@/components/SchemaJsonLd';
+
 export const revalidate = 0;
 
-export const metadata: Metadata = {
-  title: "Our Blog | Jolly Smiles Dental Care",
-  description: "Read the latest tips, insights, and inspiration for a healthier, happier smile from the experts at Jolly Smiles in Middletown, DE.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata('/blog');
+}
 
 export default async function BlogPage() {
   const blogs = await getAllBlogs();
 
   return (
     <div className="bg-white font-sans min-h-screen">
+      <SchemaJsonLd path="/blog" />
       <BlogHero />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[35px]">

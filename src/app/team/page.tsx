@@ -52,16 +52,15 @@ async function getTeamSettingsData() {
   return [];
 }
 
+import { buildPageMetadata } from "@/lib/seo";
+import SchemaJsonLd from "@/components/SchemaJsonLd";
+
 export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
   const settingsList = await getTeamSettingsData();
   const settingsItem = settingsList[0] || {};
-
-  return {
-    title: cleanHtmlText(settingsItem.metaTitle || settingsItem.title) || "Our Dental Team | Jolly Smiles Dental Clinic",
-    description: cleanHtmlText(settingsItem.metaDescription || settingsItem.description) || "Meet our dedicated dental experts at Jolly Smiles. Our highly skilled, compassionate dentists and hygienists provide personalized, gentle care in Middletown, DE.",
-  };
+  return buildPageMetadata('/team', settingsItem);
 }
 
 export default async function TeamPage() {
@@ -75,6 +74,7 @@ export default async function TeamPage() {
 
   return (
     <main className="bg-white font-sans min-h-screen">
+      <SchemaJsonLd path="/team" />
       <TeamHero data={activeSettings} />
       <TeamGrid data={teamMembersData} settings={activeSettings} />
       <TeamCTA data={activeSettings} />

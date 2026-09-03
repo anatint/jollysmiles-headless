@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { Calendar, Clock, ArrowLeft, ArrowRight, Share2, User, ChevronRight, Sparkles } from 'lucide-react';
 import CTABanner from '@/components/CTABanner';
 import { getAllBlogs, getBlogBySlug } from '@/lib/blogs';
+import SchemaJsonLd from '@/components/SchemaJsonLd';
 
 export const revalidate = 0;
 
@@ -56,8 +57,30 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const allBlogs = await getAllBlogs();
   const recentBlogs = allBlogs.filter(b => b.slug !== blog.slug).slice(0, 3);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": blog.title,
+    "description": blog.excerpt || blog.metaDescription,
+    "image": blog.coverImage ? [blog.coverImage] : undefined,
+    "datePublished": blog.date,
+    "author": {
+      "@type": "Person",
+      "name": blog.author || "Dr. Jeena Jolly"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jolly Smiles Dental",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.jollysmiles.com/logo.png"
+      }
+    }
+  };
+
   return (
     <div className="bg-white font-sans min-h-screen">
+      <SchemaJsonLd customSchemas={[articleSchema]} />
       
       {/* Hero / Header Section */}
       <div className="relative bg-gradient-to-b from-red-50/60 via-white to-white py-[40px] border-b border-gray-100">

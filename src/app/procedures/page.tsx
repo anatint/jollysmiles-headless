@@ -5,16 +5,15 @@ import FAQSection from "@/components/FAQSection";
 import CTABanner from "@/components/CTABanner";
 import { getCollectionItems } from "@/lib/wix";
 
+import { buildPageMetadata } from "@/lib/seo";
+import SchemaJsonLd from "@/components/SchemaJsonLd";
+
 export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
   const proceduresData = await getCollectionItems('Procedures');
   const root = proceduresData && proceduresData.length > 0 ? proceduresData[0] : null;
-
-  return {
-    title: root?.metaTitle || "Dental Procedures & Success Rates | Jolly Smiles",
-    description: root?.metaDescription || "Explore our range of dental procedures, from crowns & bridges to cosmetic whitening, implants and veneers in Middletown, DE. Check out our proven success rates and stats.",
-  };
+  return buildPageMetadata('/procedures', root);
 }
 
 export default async function ProceduresPage() {
@@ -30,6 +29,7 @@ export default async function ProceduresPage() {
 
   return (
     <div className="bg-white font-sans">
+      <SchemaJsonLd path="/procedures" />
       <ProceduresHero data={proceduresData} />
       <ProceduresList data={proceduresData} />
       <FAQSection data={mergedFaqs} heading={faqHeading} />

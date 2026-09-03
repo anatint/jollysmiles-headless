@@ -69,6 +69,9 @@ export async function generateStaticParams() {
   }));
 }
 
+import { buildPageMetadata } from '@/lib/seo';
+import SchemaJsonLd from '@/components/SchemaJsonLd';
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const wixServices = await getCollectionItems('Services');
@@ -79,10 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: 'Service Not Found | Jolly Smiles' };
   }
 
-  return {
-    title: (service as any).metaTitle || `${(service as any).title} | Jolly Smiles`,
-    description: (service as any).metaDescription,
-  };
+  return buildPageMetadata(`/services/${slug}`, service);
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -103,8 +103,21 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const contactData = await getSingleItem('ContactSettings');
   const testimonialsData = await getCollectionItems('Testimonials');
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    "name": (service as any).title,
+    "description": (service as any).introDescription || (service as any).description || (service as any).heroDescription,
+    "provider": {
+      "@type": "Dentist",
+      "name": "Jolly Smiles Dental",
+      "url": "https://www.jollysmiles.com/"
+    }
+  };
+
   return (
     <div className="bg-white font-sans">
+      <SchemaJsonLd path={`/services/${slug}`} customSchemas={[serviceSchema]} />
       
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-[25px]">

@@ -8,17 +8,16 @@ import CTABanner from '@/components/CTABanner';
 import ContactFormSection from '@/components/ContactFormSection';
 import { getSingleItem, getCollectionItems } from '@/lib/wix';
 
+import { buildPageMetadata } from '@/lib/seo';
+import SchemaJsonLd from '@/components/SchemaJsonLd';
+
 export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
   const settingsList = await getCollectionItems('ServicesPageSettings');
   const altSettingsList = await getCollectionItems('ServicePageSettings');
   const item = settingsList[0] || altSettingsList[0] || {};
-
-  return {
-    title: item.metaTitle || 'Our Services | Jolly Smiles',
-    description: item.metaDescription || 'We provide a full range of dental services using advanced technology and a gentle approach.',
-  };
+  return buildPageMetadata('/services', item);
 }
 
 export default async function ServicesPage() {
@@ -36,6 +35,7 @@ export default async function ServicesPage() {
 
   return (
     <main className="min-h-screen bg-white">
+      <SchemaJsonLd path="/services" />
       <ServicesHero data={servicesData} />
       <ServicesGrid data={servicesData} />
       <ApproachSection data={servicesData} />

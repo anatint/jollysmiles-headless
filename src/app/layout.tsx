@@ -16,9 +16,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import { buildPageMetadata } from "@/lib/seo";
+
 export const metadata: Metadata = {
-  title: "Jolly Smiles | Delaware's Trusted Dental Care",
-  description: "Transform Your Smile, Transform Your Life. Advanced technology, personalized care.",
+  metadataBase: new URL("https://www.jollysmiles.com"),
+  ...buildPageMetadata('/'),
 };
 
 import { getSingleItem, getCollectionItems } from "@/lib/wix";
