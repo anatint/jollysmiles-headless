@@ -76,13 +76,22 @@ export default function ProceduresList({ data }: { data?: any[] }) {
     rawProceduresList = data;
   }
 
+  const excludedProcedures = ['tmj treatment', 'dental sealants', 'smile gallery'];
+
   const displayProcedures = rawProceduresList && rawProceduresList.length > 0
-    ? rawProceduresList.filter(p => p.active !== false).map(p => ({
-        title: p.title || p.name || "Procedure",
-        description: p.description || "",
-        icon: getProcedureIcon(p.icon, p.title || p.name),
-        link: p.link || "#"
-      }))
+    ? rawProceduresList
+        .filter(p => {
+          if (p.active === false) return false;
+          const title = (p.title || p.name || '').trim().toLowerCase();
+          if (excludedProcedures.includes(title)) return false;
+          return true;
+        })
+        .map(p => ({
+          title: p.title || p.name || "Procedure",
+          description: p.description || "",
+          icon: getProcedureIcon(p.icon, p.title || p.name),
+          link: p.link || "#"
+        }))
     : defaultProcedures;
 
   // Extract skills/success rates
