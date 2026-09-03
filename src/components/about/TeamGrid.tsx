@@ -132,23 +132,62 @@ function cleanHtmlText(text?: string | null): string {
     .trim();
 }
 
-export default function TeamGrid({ data }: { data?: any[] }) {
-  const displayMembers = defaultDoctors.map((doc, idx) => {
-    // If Wix CMS has item matching this slot, merge photo / bio / name
-    if (data && data[idx]) {
-      const cmsItem = data[idx];
+export default function TeamGrid({ data, settings }: { data?: any[]; settings?: any }) {
+  const settingsItem = Array.isArray(settings) ? (settings[0] || {}) : (settings || {});
+
+  const introEyebrow = cleanHtmlText(settingsItem.introEyebrow || settingsItem.sectionLabel || settingsItem.teamEyebrow || settingsItem.eyebrow) || "EXPERT CARE. PERSONAL TOUCH.";
+  const introHeading = cleanHtmlText(settingsItem.introHeading || settingsItem.sectionHeading || settingsItem.teamHeading || settingsItem.heading) || "Meet Our Dedicated Dental Experts";
+  const introDescription = cleanHtmlText(settingsItem.introDescription || settingsItem.sectionDescription || settingsItem.teamDescription || settingsItem.description) || "Highly skilled, continuously trained, and truly passionate about your oral health — our team is here to provide the best care for you and your family.";
+
+  let displayMembers = defaultDoctors;
+
+  if (data && data.length > 0) {
+    displayMembers = data.map((cmsItem, idx) => {
+      const fallbackDoc = defaultDoctors[idx % defaultDoctors.length];
       const rawBio = cmsItem.bio || cmsItem.description;
-      const cleanBio = rawBio ? cleanHtmlText(rawBio) : doc.bio;
+      const cleanBio = rawBio ? cleanHtmlText(rawBio) : (fallbackDoc?.bio || '');
+
+      let memberBadges = fallbackDoc?.badges || [];
+      if (cmsItem.specialties) {
+        try {
+          const parsed = typeof cmsItem.specialties === 'string' ? JSON.parse(cmsItem.specialties) : cmsItem.specialties;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            memberBadges = parsed.map((b: any) => ({
+              label: typeof b === 'string' ? b : (b.label || b.name || ''),
+              icon: getIconByName(b.icon || b.label || '')
+            }));
+          }
+        } catch (e) {
+          // ignore
+        }
+      } else {
+        const badgeKeys = ['badge1', 'badge2', 'badge3', 'badge4'];
+        const individualBadges = badgeKeys
+          .map(k => cleanHtmlText(cmsItem[k]))
+          .filter(Boolean);
+        if (individualBadges.length > 0) {
+          memberBadges = individualBadges.map(label => ({
+            label,
+            icon: getIconByName(label)
+          }));
+        } else if (cmsItem.experience) {
+          const expLabel = cleanHtmlText(cmsItem.experience);
+          memberBadges = [
+            { icon: Award, label: expLabel },
+            ...(fallbackDoc?.badges?.slice(1) || [])
+          ];
+        }
+      }
+
       return {
-        name: cleanHtmlText(cmsItem.name) || doc.name,
-        role: cleanHtmlText(cmsItem.role || cmsItem.title) || doc.role,
-        image: getWixImageUrl(cmsItem.photo || cmsItem.image, doc.image),
-        bio: cleanBio || doc.bio,
-        badges: doc.badges
+        name: cleanHtmlText(cmsItem.name) || fallbackDoc?.name || '',
+        role: cleanHtmlText(cmsItem.role || cmsItem.title) || fallbackDoc?.role || '',
+        image: getWixImageUrl(cmsItem.photo || cmsItem.image, fallbackDoc?.image || '/dr-anu.png'),
+        bio: cleanBio,
+        badges: memberBadges
       };
-    }
-    return doc;
-  });
+    });
+  }
 
   return (
     <section className="bg-white py-[50px]">
@@ -157,14 +196,14 @@ export default function TeamGrid({ data }: { data?: any[] }) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase">
-            EXPERT CARE. PERSONAL TOUCH.
+            {introEyebrow}
           </h4>
           <h2 className="text-[35px] font-extrabold text-gray-900 font-serif leading-tight">
-            Meet Our Dedicated Dental Experts
+            {introHeading}
           </h2>
           <div className="w-12 h-0.5 bg-brand-red mx-auto my-3"></div>
           <p className="text-gray-600 text-base md:text-lg leading-relaxed pt-2 font-normal">
-            Highly skilled, continuously trained, and truly passionate about your oral health — our team is here to provide the best care for you and your family.
+            {introDescription}
           </p>
         </div>
 

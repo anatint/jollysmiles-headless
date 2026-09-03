@@ -5,15 +5,30 @@ import { useModal } from '@/context/ModalContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+function cleanHtmlText(text?: string | null): string {
+  if (!text || typeof text !== 'string') return '';
+  return text
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export default function TeamCTA({ data }: { data?: any }) {
   const { openAppointmentModal } = useModal();
   const pathname = usePathname();
 
   const item = Array.isArray(data) ? (data[0] || {}) : (data || {});
-  const ctaHeading = item.ctaHeading || 'Experience the Difference';
-  const ctaDescription = item.ctaDescription || item.ctaSubheading || 'Advanced technology and a caring team for your best smile.';
-  const ctaPrimaryButton = item.ctaPrimaryButton || item.ctaButtonLabel || 'BOOK APPOINTMENT';
-  const ctaSecondaryButton = item.ctaSecondaryButton || 'CONTACT US';
+  const ctaHeading = cleanHtmlText(item.ctaHeading || item.ctaTitle || item.callToActionHeading) || 'Experience the Difference';
+  const ctaDescription = cleanHtmlText(item.ctaDescription || item.ctaSubheading || item.ctaText || item.description) || 'Advanced technology and a caring team for your best smile.';
+  const ctaPrimaryButton = cleanHtmlText(item.ctaPrimaryButton || item.ctaPrimaryLabel || item.ctaButtonLabel || item.primaryButtonLabel || item.ctaText) || 'BOOK APPOINTMENT';
+  const ctaSecondaryButton = cleanHtmlText(item.ctaSecondaryButton || item.ctaSecondaryLabel || item.secondaryButtonLabel) || 'CONTACT US';
 
   return (
     <section className="bg-white py-10 pb-16">
