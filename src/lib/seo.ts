@@ -78,7 +78,7 @@ export const liveSeoData: Record<string, PageSeoConfig> = {
         "@type": "MedicalOrganization",
         "name": "Jolly Smiles Dental Team",
         "url": "https://www.jollysmiles.com/our-team",
-        "medicalSpecialty": "Dentistry"
+        "medicalSpecialty": "http://schema.org/Dentistry"
       }
     ]
   },
@@ -93,7 +93,7 @@ export const liveSeoData: Record<string, PageSeoConfig> = {
         "name": "Jolly Smiles Dental Services",
         "url": "https://www.jollysmiles.com/services",
         "telephone": "+1-302-378-3384",
-        "medicalSpecialty": ["GeneralDentistry", "CosmeticDentistry", "Orthodontics", "PediatricDentistry"]
+        "medicalSpecialty": "http://schema.org/Dentistry"
       }
     ]
   },
