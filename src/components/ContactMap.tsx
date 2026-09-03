@@ -1,12 +1,28 @@
-import Image from 'next/image';
+import React from 'react';
 
 interface ContactMapProps {
   address?: string;
+  mapEmbedUrl?: string;
+  mapImage?: string;
 }
 
-export default function ContactMap({ address }: ContactMapProps) {
-  // Use a default address if none provided
-  const query = address ? encodeURIComponent(address) : "102%20Sleepy%20Hollow%20Dr%20%23100,%20Middletown,%20DE%2019709,%20USA";
+function cleanHtmlText(text?: string): string {
+  if (!text) return '';
+  return text
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export default function ContactMap({ address, mapEmbedUrl }: ContactMapProps) {
+  const cleanAddress = cleanHtmlText(address) || "102 Sleepy Hollow Dr #100, Middletown, DE 19709, USA";
+  const query = encodeURIComponent(cleanAddress);
+
+  const iframeSrc = (mapEmbedUrl && mapEmbedUrl.includes('output=embed'))
+    ? mapEmbedUrl
+    : `https://maps.google.com/maps?q=${query}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (
     <div className="bg-white py-[50px]">
@@ -14,7 +30,7 @@ export default function ContactMap({ address }: ContactMapProps) {
         
         <div className="relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[5/2] rounded-3xl overflow-hidden shadow-xl border border-gray-100">
           <iframe 
-            src={`https://maps.google.com/maps?q=${query}&t=&z=14&ie=UTF8&iwloc=&output=embed`} 
+            src={iframeSrc}
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 

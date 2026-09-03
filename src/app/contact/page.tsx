@@ -25,10 +25,12 @@ export default async function ContactPage() {
       <SchemaJsonLd path="/contact" />
       <ContactHero data={contactData as any} />
       <ContactFormSection data={contactData as any} />
-      <ContactMap address={contactData?.address} />
-      
-      {/* Reused Homepage Component */}
-      <CTABanner />
+      <ContactMap 
+        address={contactData?.visitAddress || contactData?.address} 
+        mapEmbedUrl={contactData?.mapEmbedUrl} 
+        mapImage={contactData?.mapImage}
+      />
+      <CTABanner data={contactData} />
     </div>
   );
 }

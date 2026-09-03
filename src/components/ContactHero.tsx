@@ -1,23 +1,42 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
-
 import { getWixImageUrl } from '@/lib/wix';
 
 interface ContactHeroProps {
   data?: {
+    heading?: string;
     heroHeading?: string;
+    subheading?: string;
     heroSubheading?: string;
+    description?: string;
     heroDescription?: string;
     heroImage?: string;
+    breadcrumb?: string;
   };
 }
 
+function cleanHtmlText(text?: string): string {
+  if (!text) return '';
+  return text
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .trim();
+}
+
 export default function ContactHero({ data }: ContactHeroProps) {
-  // Fallbacks if data is not loaded
-  const heading = data?.heroHeading || "Contact <span class=\"text-brand-red\">Us</span>";
-  const subheading = data?.heroSubheading || "We're here to help you smile brighter.";
-  const description = data?.heroDescription || "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!";
+  const rawHeading = data?.heroHeading || data?.heading || "Contact Us";
+  const heading = rawHeading.includes('<') 
+    ? rawHeading 
+    : rawHeading.replace(/Contact Us/i, 'Contact <span class="text-brand-red">Us</span>');
+
+  const subheading = cleanHtmlText(data?.heroSubheading || data?.subheading) || "We're here to help you smile brighter.";
+  const description = cleanHtmlText(data?.heroDescription || data?.description) || "Have a question or ready to book your appointment? Reach out to us — we'd love to hear from you!";
   const image = getWixImageUrl(data?.heroImage, "/clinic-reception.png");
 
   return (
@@ -32,16 +51,15 @@ export default function ContactHero({ data }: ContactHeroProps) {
           {/* Left Text Column */}
           <div className="flex-1 lg:pr-12 lg:py-8 z-10 relative py-[50px]">
             <h1 
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif"
               dangerouslySetInnerHTML={{ __html: heading }}
             />
-            <h2 className="text-lg lg:text-2xl font-bold text-gray-800 mb-6">
+            <h2 className="text-lg lg:text-2xl font-bold text-gray-800 mb-4 font-serif">
               {subheading}
             </h2>
-            <div 
-              className="text-base lg:text-lg text-gray-600 mb-10 leading-relaxed max-w-lg prose prose-sm"
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
+            <p className="text-base lg:text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+              {description}
+            </p>
             
             {/* Breadcrumb */}
             <div className="flex items-center text-sm font-medium text-brand-red">
