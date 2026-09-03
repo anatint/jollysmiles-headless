@@ -31,14 +31,7 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
           
           {/* Left Text Content */}
           <div className="flex-1 max-w-2xl lg:py-[50px]">
-            {/* Breadcrumbs */}
-            <div className="flex items-center space-x-2 text-xs text-gray-500 mb-6 font-medium">
-              <Link href="/" className="hover:text-brand-red transition">Home</Link>
-              <span>&gt;</span>
-              <Link href="/services" className="hover:text-brand-red transition">Services</Link>
-              <span>&gt;</span>
-              <span className="text-gray-700 font-semibold">Dental Procedures</span>
-            </div>
+            {/* Eyebrow */}
 
             <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">
               {eyebrow}
