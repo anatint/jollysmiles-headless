@@ -1,258 +1,142 @@
 import type { Metadata } from "next";
-import Image from 'next/image';
-import Link from 'next/link';
-import { Sparkles, ArrowRight, Shield, Heart, Smile } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import CTABanner from "@/components/CTABanner";
+import { getCollectionItems, getSingleItem } from "@/lib/wix";
+import { buildPageMetadata } from '@/lib/seo';
+import SchemaJsonLd from '@/components/SchemaJsonLd';
+import ServiceHero from '@/components/services/ServiceHero';
+import ServiceCardsList from '@/components/services/ServiceCardsList';
+import ServiceCtaBanner from '@/components/services/ServiceCtaBanner';
 import FAQSection from "@/components/FAQSection";
 import ContactFormSection from "@/components/ContactFormSection";
-import { getCollectionItems, getSingleItem } from "@/lib/wix";
+import { servicesData, ServiceDetailData } from "@/data/servicesData";
 
-const defaultServices = [
-  {
-    slug: 'dental-implants',
-    title: 'Dental Implants',
-    eyebrow: 'OUR DENTAL IMPLANT CARE',
-    heroDescription: 'Permanent, natural-looking replacement for missing teeth. Restore your bite, preserve your jawbone, and regain your confident smile.',
-    heroImage: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2000&auto=format&fit=crop',
-    introHeading: 'Permanent Teeth. Permanent Confidence.',
-    introDescription: 'Our advanced implant procedures provide long-lasting, stable solutions for single or multiple missing teeth with minimal discomfort.',
-    ctaPrimaryLabel: 'Book Implant Consultation',
-    ctaPrimaryUrl: '/contact',
-    ctaSecondaryLabel: 'Consult Our Experts',
-    ctaSecondaryUrl: '/contact',
-    metaTitle: 'Dental Implants in Middletown, DE | Jolly Smiles',
-    metaDescription: 'Restore your smile with permanent, natural-looking dental implants at Jolly Smiles in Middletown, DE.',
-    active: true
-  },
-  {
-    slug: 'cosmetic-dentistry',
-    title: 'Cosmetic Dentistry',
-    eyebrow: 'OUR COSMETIC CARE',
-    heroDescription: 'Transform your smile with veneers, whitening, and custom aesthetic treatments designed for natural beauty and harmony.',
-    heroImage: '/procedures-hero.png',
-    introHeading: 'Enhancing Smiles. Transforming Lives.',
-    introDescription: 'From subtle enhancements to full smile makeovers, our cosmetic solutions help you smile with pride and joy.',
-    ctaPrimaryLabel: 'Book Cosmetic Consultation',
-    ctaPrimaryUrl: '/contact',
-    ctaSecondaryLabel: 'View Before & After',
-    ctaSecondaryUrl: '/#transformations',
-    metaTitle: 'Cosmetic Dentistry in Middletown, DE | Jolly Smiles',
-    metaDescription: 'Custom cosmetic dentistry including veneers, teeth whitening, and smile makeovers at Jolly Smiles.',
-    active: true
-  },
-  {
-    slug: 'general-dentistry',
-    title: 'General Dentistry',
-    eyebrow: 'OUR PREVENTIVE CARE',
-    heroDescription: 'Comprehensive dental exams, cleanings, and proactive treatments to keep your teeth and gums healthy for a lifetime.',
-    heroImage: '/procedures-hero.png',
-    introHeading: 'Gentle Care for the Whole Family',
-    introDescription: 'We focus on preventive health, patient comfort, and early detection so you can avoid painful issues down the road.',
-    ctaPrimaryLabel: 'Book Appointment',
-    ctaPrimaryUrl: '/contact',
-    ctaSecondaryLabel: 'Contact Us',
-    ctaSecondaryUrl: '/contact',
-    metaTitle: 'General Dentistry | Jolly Smiles Dental Clinic',
-    metaDescription: 'Comprehensive exams, gentle cleanings, and preventive family dentistry in Delaware.',
-    active: true
-  }
-];
-
-import TestimonialsSection from "@/components/TestimonialsSection";
+export const revalidate = 0; // Dynamic rendering for instant CMS updates
 
 export async function generateStaticParams() {
   const wixServices = await getCollectionItems('Services');
-  const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
-  return servicesList.map((service: any) => ({
-    slug: service.slug,
-  }));
-}
+  const slugs = Object.keys(servicesData);
+  
+  if (wixServices && wixServices.length > 0) {
+    wixServices.forEach((s: any) => {
+      if (s.slug && !slugs.includes(s.slug)) {
+        slugs.push(s.slug);
+      }
+    });
+  }
 
-import { buildPageMetadata } from '@/lib/seo';
-import SchemaJsonLd from '@/components/SchemaJsonLd';
+  return slugs.map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const localData = servicesData[slug];
   const wixServices = await getCollectionItems('Services');
-  const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
-  const service = servicesList.find((s: any) => s.slug === slug);
+  const wixService = wixServices.find((s: any) => s.slug === slug);
 
-  if (!service) {
-    return { title: 'Service Not Found | Jolly Smiles' };
+  if (!localData && !wixService) {
+    return { title: 'Service | Jolly Smiles Dental' };
   }
 
-  return buildPageMetadata(`/services/${slug}`, service);
+  const mergedData = {
+    ...localData,
+    ...wixService,
+    title: wixService?.title || localData?.title,
+    metaTitle: wixService?.metaTitle || localData?.metaTitle || `${localData?.title || 'Service'} in Middletown, DE | Jolly Smiles`,
+    metaDescription: wixService?.metaDescription || localData?.metaDescription || localData?.heroParagraphs?.[0] || 'Quality dental care at Jolly Smiles.'
+  };
+
+  return buildPageMetadata(`/services/${slug}`, mergedData);
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  
+  // Try to find matching service in rich services data or Wix CMS
+  let service: ServiceDetailData | undefined = servicesData[slug];
+  
   const wixServices = await getCollectionItems('Services');
-  const servicesList = wixServices.length > 0 ? wixServices : defaultServices;
-  const service = servicesList.find((s: any) => s.slug === slug);
+  const wixService = wixServices.find((s: any) => s.slug === slug);
 
-  if (!service || (service as any).active === false) {
+  // If not found in exact slug, check if fallback is available or 404
+  if (!service && !wixService) {
+    // Check if slug contains keywords
+    if (slug.includes('implant')) service = servicesData['dental-implants'];
+    else if (slug.includes('invisalign') || slug.includes('brace') || slug.includes('ortho')) service = servicesData['invisalign'];
+    else if (slug.includes('crown')) service = servicesData['same-day-crowns'];
+    else if (slug.includes('laser') || slug.includes('lanap') || slug.includes('gum')) service = servicesData['lanap-treatment'];
+    else if (slug.includes('cosmetic') || slug.includes('whitening') || slug.includes('veneer') || slug.includes('smile')) service = servicesData['cosmetic-dentistry'];
+    else service = servicesData['general-dentistry'];
+  }
+
+  if (!service && !wixService) {
     notFound();
   }
 
-  const allFeatures = await getCollectionItems('ServiceFeatures');
-  const serviceFeatures = allFeatures
-    .filter((f: any) => f.serviceSlug === slug && f.active !== false)
-    .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
-    
+  // Fetch site settings and contact settings for dynamic contact info
   const contactData = await getSingleItem('ContactSettings');
-  const testimonialsData = await getCollectionItems('Testimonials');
+  const siteSettings = await getSingleItem('SiteSettings');
+  const phone = contactData?.callPhone || contactData?.phone || siteSettings?.phone || '(302) 658-7200';
+
+  // Merge CMS overrides if available
+  const displayTitle = wixService?.title || service?.title || 'Dental Service';
+  const displayParagraphs = (wixService?.heroParagraphs && Array.isArray(wixService.heroParagraphs))
+    ? wixService.heroParagraphs
+    : (wixService?.heroDescription ? [wixService.heroDescription] : (service?.heroParagraphs || []));
+  const displayHeroImage = wixService?.heroImage || service?.heroImage || '/procedures-hero.png';
+  const displayEyebrow = wixService?.categoryEyebrow || service?.categoryEyebrow || `OUR ${displayTitle.toUpperCase()} CARE`;
+  const displayCategoryHeading = wixService?.categoryHeading || service?.categoryHeading || 'Enhancing Smiles. Transforming Lives.';
+  const displayCategoryDescription = wixService?.categoryDescription || service?.categoryDescription || 'Our advanced dental treatments are safe, effective, and customized to your unique needs.';
+  const displaySubServices = service?.subServices || [];
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "MedicalProcedure",
-    "name": (service as any).title,
-    "description": (service as any).introDescription || (service as any).description || (service as any).heroDescription,
+    "name": displayTitle,
+    "description": displayParagraphs[0] || displayCategoryDescription,
+    "medicalSpecialty": "http://schema.org/Dentistry",
     "provider": {
       "@type": "Dentist",
       "name": "Jolly Smiles Dental",
-      "url": "https://www.jollysmiles.com/"
+      "url": "https://www.jollysmiles.com/",
+      "telephone": phone
     }
   };
 
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white font-sans min-h-screen">
       <SchemaJsonLd path={`/services/${slug}`} customSchemas={[serviceSchema]} />
       
-      {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-br from-red-50/60 via-white to-white py-[25px]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-8">
-            
-            {/* Left Text Column */}
-            <div className="w-full lg:w-[45%] space-y-6">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight font-serif leading-[1.1]">
-                {service.title}
-              </h1>
-              <div className="w-16 h-1 bg-brand-red rounded-full"></div>
-              
-              <div 
-                className="text-gray-700 text-sm md:text-base leading-relaxed max-w-xl font-medium prose prose-sm prose-p:my-2"
-                dangerouslySetInnerHTML={{ __html: service.heroDescription || '' }}
-              />
+      {/* 1. Hero Section */}
+      <ServiceHero
+        title={displayTitle}
+        paragraphs={displayParagraphs}
+        image={displayHeroImage}
+        ctaPrimaryLabel={service?.ctaPrimaryLabel || "BOOK APPOINTMENT"}
+        ctaSecondaryLabel={service?.ctaSecondaryLabel || "CONSULT OUR EXPERTS"}
+      />
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <Link href={service.ctaPrimaryUrl || "/contact"} className="bg-brand-red hover:bg-brand-dark text-white px-6 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-all text-center">
-                  {service.ctaPrimaryLabel || "Book Appointment"}
-                </Link>
-                <Link href={service.ctaSecondaryUrl || "/contact"} className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1">
-                  {service.ctaSecondaryLabel || "Consult Our Experts"} <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Image Column */}
-            <div className="w-full lg:w-[55%]">
-              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-                <Image 
-                  src={service.slug === 'dental-implants' ? 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2000&auto=format&fit=crop' : (service.heroImage || "/procedures-hero.png")} 
-                  alt={`${service.title} Patient`}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Intro Section */}
-      <section className="bg-white border-t border-gray-50 py-[25px]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase">
-            {service.eyebrow || `OUR ${service.title} CARE`}
-          </h4>
-          <h2 className="text-[35px] font-extrabold text-gray-900 font-serif">
-            {service.introHeading || "Enhancing Smiles. Transforming Lives."}
-          </h2>
-          <div className="w-12 h-0.5 bg-brand-red mx-auto"></div>
-          <div 
-            className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto leading-relaxed pt-2"
-            dangerouslySetInnerHTML={{ __html: service.introDescription || '' }}
-          />
-        </div>
-      </section>
-
-      {/* Sub-Services / Features List */}
-      {serviceFeatures.length > 0 && (
-        <section className="bg-white space-y-8 py-[25px]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            {serviceFeatures.map((sub: any, idx: number) => {
-              const parsedTags = sub.tags && Array.isArray(sub.tags) ? sub.tags : 
-                               (typeof sub.tags === 'string' ? JSON.parse(sub.tags || '[]') : []);
-
-              return (
-                <div 
-                  key={idx}
-                  className={`flex flex-col lg:flex-row items-center gap-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-md transition-shadow duration-300 ${
-                    sub.alignLeft ? '' : 'lg:flex-row-reverse'
-                  }`}
-                >
-                  {/* Image */}
-                  <div className="w-full lg:w-[45%]">
-                    <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
-                      <Image 
-                        src={sub.image || "/clinic-reception.png"} 
-                        alt={sub.title || 'Feature'}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Text */}
-                  <div className="w-full lg:w-[55%] space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-brand-red flex-shrink-0">
-                        <Sparkles className="w-4 h-4" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 font-serif">
-                        {sub.title}
-                      </h3>
-                    </div>
-                    <h5 className="font-bold text-gray-800 text-sm">
-                      {sub.subtitle}
-                    </h5>
-                    <div 
-                      className="text-gray-600 text-sm leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: sub.description || '' }}
-                    />
-
-                    <div className="w-full h-[1px] bg-gray-100 my-4"></div>
-
-                    {/* Tags */}
-                    {parsedTags.length > 0 && (
-                      <div className="flex flex-wrap gap-x-6 gap-y-2">
-                        {parsedTags.map((tag: string, tagIdx: number) => (
-                          <div key={tagIdx} className="flex items-center gap-1.5 text-xs font-semibold text-gray-500">
-                            <div className="w-1.5 h-1.5 rounded-full bg-brand-red/60"></div>
-                            {tag}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+      {/* 2. Sub-Services / Procedures Zig-Zag Cards */}
+      {displaySubServices.length > 0 && (
+        <ServiceCardsList
+          eyebrow={displayEyebrow}
+          heading={displayCategoryHeading}
+          description={displayCategoryDescription}
+          subServices={displaySubServices}
+        />
       )}
 
-      <TestimonialsSection data={testimonialsData as any} />
+      {/* 3. Bottom Red CTA Banner */}
+      <ServiceCtaBanner
+        heading={service?.ctaBannerHeading || "Ready to Love Your Smile?"}
+        subheading={service?.ctaBannerSubheading || "Schedule your consultation today and let our experts help you achieve the smile you've always wanted."}
+        phone={phone}
+      />
 
+      {/* 4. FAQ Section */}
       <FAQSection />
 
+      {/* 5. Contact Form Section */}
       <ContactFormSection data={contactData as any} />
-
-      <CTABanner />
     </div>
   );
 }
