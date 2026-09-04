@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import TeamHero from "@/components/about/TeamHero";
 import TeamGrid from "@/components/about/TeamGrid";
-import TeamCTA from "@/components/about/TeamCTA";
+import CTABanner from "@/components/CTABanner";
 import { getCollectionItems } from "@/lib/wix";
 
 function cleanHtmlText(text?: string | null): string {
@@ -77,7 +77,7 @@ export default async function TeamPage() {
       <SchemaJsonLd path="/team" />
       <TeamHero data={activeSettings} />
       <TeamGrid data={teamMembersData} settings={activeSettings} />
-      <TeamCTA data={activeSettings} />
+      <CTABanner data={activeSettings} />
     </main>
   );
 }

@@ -5,7 +5,7 @@ import { buildPageMetadata } from '@/lib/seo';
 import SchemaJsonLd from '@/components/SchemaJsonLd';
 import ServiceHero from '@/components/services/ServiceHero';
 import ServiceCardsList from '@/components/services/ServiceCardsList';
-import ServiceCtaBanner from '@/components/services/ServiceCtaBanner';
+import CTABanner from '@/components/CTABanner';
 import { servicesData, ServiceDetailData } from "@/data/servicesData";
 
 export const revalidate = 0; // Dynamic rendering for instant CMS updates
@@ -123,12 +123,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         />
       )}
 
-      {/* 3. Bottom Red CTA Banner */}
-      <ServiceCtaBanner
-        heading={service?.ctaBannerHeading || "Ready to Love Your Smile?"}
-        subheading={service?.ctaBannerSubheading || "Schedule your consultation today and let our experts help you achieve the smile you've always wanted."}
-        phone={phone}
-      />
+      {/* 3. Bottom CTA Banner */}
+      <CTABanner />
     </div>
   );
 }

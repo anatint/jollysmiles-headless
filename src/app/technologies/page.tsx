@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import TechnologiesHero from '@/components/technologies/TechnologiesHero';
 import TechnologyFeatureList from '@/components/technologies/TechnologyFeatureList';
-import TechnologiesCTA from '@/components/technologies/TechnologiesCTA';
+import CTABanner from '@/components/CTABanner';
 import { getCollectionItems } from "@/lib/wix";
 import { buildPageMetadata } from "@/lib/seo";
 import SchemaJsonLd from "@/components/SchemaJsonLd";
@@ -22,7 +22,7 @@ export default async function TechnologiesPage() {
       <SchemaJsonLd path="/technologies" />
       <TechnologiesHero data={techData} />
       <TechnologyFeatureList data={techData} />
-      <TechnologiesCTA data={techData} />
+      <CTABanner data={techData} />
     </>
   );
 }
