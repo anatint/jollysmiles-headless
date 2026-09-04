@@ -244,21 +244,21 @@ export const servicesData: Record<string, ServiceDetailData> = {
   'invisalign': {
     slug: 'invisalign',
     title: 'Invisalign® Clear Aligners',
-    heroHeading: 'Invisalign® Clear Aligners',
+    heroHeading: 'The Clear Way to a Perfect Smile',
     heroParagraphs: [
       "Experience a comfortable and discreet way to straighten your teeth with Invisalign clear aligners. Designed to fit seamlessly into your lifestyle, Invisalign uses a series of custom-made, nearly invisible aligners to gradually move your teeth into the desired position.",
-      "Unlike traditional metal braces, these aligners are removable, making it easier to eat, brush, and maintain oral hygiene. Achieve the confident smile you've always wanted without the discomfort and visibility of braces."
+      "Unlike traditional metal braces, these aligners are removable, making it easier to eat, brush, and maintain oral hygiene. Achieve the confident smile you’ve always wanted without the discomfort and visibility of braces."
     ],
     heroImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1200&auto=format&fit=crop',
     ctaPrimaryLabel: 'BOOK FREE CONSULTATION',
     ctaSecondaryLabel: 'CONSULT OUR EXPERTS',
     categoryEyebrow: 'WHAT IS THE PROCEDURE OF INVISALIGN?',
     categoryHeading: 'The Clear Way to a Perfect Smile',
-    categoryDescription: 'A clear, step-by-step journey to your perfect smile using advanced aligner technology and expert care at Jolly Smiles in Middletown, DE:',
+    categoryDescription: 'A clear, step-by-step journey to your perfect smile using advanced aligner technology and expert orthodontic care at Jolly Smiles in Middletown, DE:',
     subServices: [
       {
         id: 'expert-orthodontic-care',
-        title: 'Expert Orthodontic Care',
+        title: 'Step 1: Expert Orthodontic Care',
         description: 'Board certified orthodontic care with a proven track record in smile transformations. Dr. Jeena Jolly and our experienced team design personalized treatment plans tailored to your unique smile goals.',
         image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop',
         iconType: 'award',
@@ -270,7 +270,7 @@ export const servicesData: Record<string, ServiceDetailData> = {
       },
       {
         id: 'advanced-digital-technology',
-        title: 'Advanced Digital Technology',
+        title: 'Step 2: Advanced Digital Technology',
         description: 'High-precision 3D digital impressions and 3D X-rays for accurate and comfortable treatment planning. Preview your future smile before starting, with no messy impression putty.',
         image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop',
         iconType: 'sparkles',
@@ -282,19 +282,19 @@ export const servicesData: Record<string, ServiceDetailData> = {
       },
       {
         id: 'custom-aligner-creation',
-        title: 'Custom Creation & Materials',
-        description: 'Your aligners are custom-made with advanced medical-grade SmartTrack® materials for a comfortable fit and effective results. Wear for 20–22 hours daily and remove before eating.',
+        title: 'Step 3: Custom Creation & SmartTrack®',
+        description: 'Your aligners are custom-made with advanced medical-grade SmartTrack® materials for a comfortable fit and effective results. Designed to gently guide your teeth into optimal alignment.',
         image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop',
         iconType: 'aligner',
         features: [
-          { icon: 'gem', text: 'Advanced SmartTrack® Material' },
+          { icon: 'gem', text: 'SmartTrack® Material' },
           { icon: 'check', text: 'Removable Before Eating' },
           { icon: 'smile', text: 'Virtually Invisible' }
         ]
       },
       {
         id: 'wearing-aligners-progress',
-        title: 'Wearing Aligners & Progress Tracking',
+        title: 'Step 4: Wearing Aligners & Tracking Progress',
         description: 'Wear each aligner set for 1–2 weeks to gradually move your teeth, with regular check-ups at our Middletown clinic to ensure your smile transformation stays smoothly on track.',
         image: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop',
         iconType: 'clock',
@@ -302,6 +302,30 @@ export const servicesData: Record<string, ServiceDetailData> = {
           { icon: 'clock', text: 'Wear 1–2 Weeks Each' },
           { icon: 'shield', text: 'Regular Progress Check-Ups' },
           { icon: 'sparkles', text: 'Results You Can Trust' }
+        ]
+      },
+      {
+        id: 'tips-for-success',
+        title: 'Tips for Success & Daily Wear',
+        description: 'To get the best results from your Invisalign treatment, follow these essential tips: wear aligners 20–22 hours daily, remove before eating and drinking, maintain daily cleanliness with lukewarm water and a soft brush, and follow each sequence in order.',
+        image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop',
+        iconType: 'shield',
+        features: [
+          { icon: 'clock', text: 'Wear 20–22 Hours Daily' },
+          { icon: 'check', text: 'Remove Before Eating' },
+          { icon: 'sparkles', text: 'Daily Cleaning Routine' }
+        ]
+      },
+      {
+        id: 'why-choose-jolly-smiles',
+        title: 'Why Choose Jolly Smiles for Invisalign?',
+        description: 'Experience board certified care, flexible payment options, advanced 3D scanning, individualized treatment plans, and a warm, comfort-focused environment dedicated to giving you the smile you deserve.',
+        image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop',
+        iconType: 'gem',
+        features: [
+          { icon: 'zap', text: 'Affordable Payment Plans' },
+          { icon: 'target', text: 'Personalized Treatment' },
+          { icon: 'heart', text: 'Comfort-Focused Care' }
         ]
       }
     ],
