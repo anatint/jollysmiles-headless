@@ -8,7 +8,7 @@ export interface SubServiceItem {
   title: string;
   description: string;
   image: string;
-  iconType: 'tooth' | 'veneer' | 'smile' | 'implant' | 'shield' | 'sparkles' | 'award' | 'crown' | 'laser' | 'aligner' | 'gem';
+  iconType: 'tooth' | 'veneer' | 'smile' | 'implant' | 'shield' | 'sparkles' | 'award' | 'crown' | 'laser' | 'aligner' | 'gem' | 'clock';
   features: SubServiceFeature[];
 }
 
@@ -246,69 +246,69 @@ export const servicesData: Record<string, ServiceDetailData> = {
     title: 'Invisalign® Clear Aligners',
     heroHeading: 'Invisalign® Clear Aligners',
     heroParagraphs: [
-      "Achieve the straight, confident smile you've always wanted without the hassle and look of metal brackets or wires. Invisalign® clear aligners offer a discreet, comfortable orthodontic solution.",
-      "Custom-crafted using SmartTrack® material, your clear aligners gently shift your teeth into place with precision and predictability for teens and adults alike."
+      "Experience a comfortable and discreet way to straighten your teeth with Invisalign clear aligners. Designed to fit seamlessly into your lifestyle, Invisalign uses a series of custom-made, nearly invisible aligners to gradually move your teeth into the desired position.",
+      "Unlike traditional metal braces, these aligners are removable, making it easier to eat, brush, and maintain oral hygiene. Achieve the confident smile you've always wanted without the discomfort and visibility of braces."
     ],
     heroImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1200&auto=format&fit=crop',
-    ctaPrimaryLabel: 'BOOK INVISALIGN CONSULT',
-    ctaSecondaryLabel: 'SEE SMILE PREVIEW',
-    categoryEyebrow: 'OUR ORTHODONTIC CARE',
-    categoryHeading: 'Straighten Your Smile Discreetly.',
-    categoryDescription: 'Discover why millions of patients choose Invisalign® clear aligners for comfortable, nearly invisible teeth straightening:',
+    ctaPrimaryLabel: 'BOOK FREE CONSULTATION',
+    ctaSecondaryLabel: 'CONSULT OUR EXPERTS',
+    categoryEyebrow: 'WHAT IS THE PROCEDURE OF INVISALIGN?',
+    categoryHeading: 'The Clear Way to a Perfect Smile',
+    categoryDescription: 'A clear, step-by-step journey to your perfect smile using advanced aligner technology and expert care at Jolly Smiles in Middletown, DE:',
     subServices: [
       {
-        id: 'invisalign-full',
-        title: 'Invisalign® for Adults & Teens',
-        description: 'Virtually invisible aligners designed to fit seamlessly into your active lifestyle. Remove them easily to eat your favorite foods, brush, and floss normally throughout your treatment.',
-        image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop',
-        iconType: 'aligner',
-        features: [
-          { icon: 'smile', text: 'Virtually Invisible' },
-          { icon: 'check', text: 'Removable for Eating' },
-          { icon: 'target', text: 'Custom SmartTrack® Fit' }
-        ]
-      },
-      {
-        id: 'six-month-braces',
-        title: '6 Month Cosmetic Braces',
-        description: 'For adults looking for fast results on visible front teeth, our cosmetic straightening programs focus on aesthetics in as little as six months without major bite adjustments.',
+        id: 'expert-orthodontic-care',
+        title: 'Expert Orthodontic Care',
+        description: 'Board certified orthodontic care with a proven track record in smile transformations. Dr. Jeena Jolly and our experienced team design personalized treatment plans tailored to your unique smile goals.',
         image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop',
-        iconType: 'tooth',
+        iconType: 'award',
         features: [
-          { icon: 'clock', text: 'Fast 6-Month Results' },
-          { icon: 'smile', text: 'Cosmetic Focus' },
-          { icon: 'award', text: 'Affordable Options' }
+          { icon: 'award', text: 'Board Certified Care' },
+          { icon: 'smile', text: 'Proven Track Record' },
+          { icon: 'target', text: 'Personalized Plans' }
         ]
       },
       {
-        id: 'digital-iteroc-preview',
-        title: 'iTero® 3D Digital Smile Simulation',
-        description: 'See your future smile before you even start treatment! Our 3D iTero scanner captures accurate digital models in seconds without gooey impression putty.',
+        id: 'advanced-digital-technology',
+        title: 'Advanced Digital Technology',
+        description: 'High-precision 3D digital impressions and 3D X-rays for accurate and comfortable treatment planning. Preview your future smile before starting, with no messy impression putty.',
         image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop',
         iconType: 'sparkles',
         features: [
-          { icon: 'target', text: '3D Simulation' },
-          { icon: 'zap', text: 'No Messy Putty' },
-          { icon: 'clock', text: 'Instant Results' }
+          { icon: 'target', text: 'High-Precision 3D Scans' },
+          { icon: 'clock', text: 'Digital Treatment Planning' },
+          { icon: 'shield', text: 'Comfortable Experience' }
         ]
       },
       {
-        id: 'vivera-retainers',
-        title: 'Vivera® Retainers & Smile Retention',
-        description: 'Keep your newly aligned smile perfect with custom Vivera® retainers engineered to be 30% stronger than standard retainers for lasting stability.',
-        image: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop',
-        iconType: 'shield',
+        id: 'custom-aligner-creation',
+        title: 'Custom Creation & Materials',
+        description: 'Your aligners are custom-made with advanced medical-grade SmartTrack® materials for a comfortable fit and effective results. Wear for 20–22 hours daily and remove before eating.',
+        image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop',
+        iconType: 'aligner',
         features: [
-          { icon: 'gem', text: '30% Stronger' },
-          { icon: 'smile', text: 'Comfortable Fit' },
-          { icon: 'shield', text: 'Lasting Alignment' }
+          { icon: 'gem', text: 'Advanced SmartTrack® Material' },
+          { icon: 'check', text: 'Removable Before Eating' },
+          { icon: 'smile', text: 'Virtually Invisible' }
+        ]
+      },
+      {
+        id: 'wearing-aligners-progress',
+        title: 'Wearing Aligners & Progress Tracking',
+        description: 'Wear each aligner set for 1–2 weeks to gradually move your teeth, with regular check-ups at our Middletown clinic to ensure your smile transformation stays smoothly on track.',
+        image: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop',
+        iconType: 'clock',
+        features: [
+          { icon: 'clock', text: 'Wear 1–2 Weeks Each' },
+          { icon: 'shield', text: 'Regular Progress Check-Ups' },
+          { icon: 'sparkles', text: 'Results You Can Trust' }
         ]
       }
     ],
-    ctaBannerHeading: 'Start Your Journey to a Straighter Smile',
-    ctaBannerSubheading: 'Get your free 3D digital smile simulation with our certified Invisalign® provider in Middletown, DE.',
-    metaTitle: 'Invisalign® Clear Aligners in Middletown, DE | Jolly Smiles',
-    metaDescription: 'Straighten your teeth discreetly with Invisalign® clear aligners in Middletown, DE. Book your digital 3D smile consultation today.'
+    ctaBannerHeading: 'Ready to Love Your Smile?',
+    ctaBannerSubheading: "Schedule your free Invisalign consultation today with Dr. Jeena Jolly at Jolly Smiles in Middletown, DE.",
+    metaTitle: 'Invisalign Middletown DE | Clear Aligners | Jolly Smiles',
+    metaDescription: 'Get Invisalign clear aligners at Jolly Smiles in Middletown, DE. Dr. Jeena Jolly offers custom treatment plans for adults and teens. Schedule your free consultation today. Call 302-378-3384.'
   },
 
   'same-day-crowns': {

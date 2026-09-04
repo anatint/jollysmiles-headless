@@ -26,8 +26,10 @@ interface ServiceCardsListProps {
 function renderBadgeIcon(iconType: string) {
   switch (iconType) {
     case 'veneer':
+    case 'gem':
       return <Gem className="w-6 h-6 text-brand-red" />;
     case 'smile':
+    case 'aligner':
       return <Smile className="w-6 h-6 text-brand-red" />;
     case 'implant':
     case 'shield':
@@ -38,6 +40,8 @@ function renderBadgeIcon(iconType: string) {
       return <Zap className="w-6 h-6 text-brand-red" />;
     case 'crown':
       return <Award className="w-6 h-6 text-brand-red" />;
+    case 'clock':
+      return <Clock className="w-6 h-6 text-brand-red" />;
     case 'tooth':
     default:
       return <Sparkles className="w-6 h-6 text-brand-red" />;
