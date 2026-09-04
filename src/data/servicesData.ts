@@ -503,70 +503,134 @@ export const servicesData: Record<string, ServiceDetailData> = {
 
   'lanap-treatment': {
     slug: 'lanap-treatment',
-    title: 'LANAP® Periodontal Therapy',
-    heroHeading: 'LANAP® Laser Periodontal Therapy',
+    title: 'LANAP® Laser Gum Treatment',
+    heroHeading: 'LANAP Laser Gum Treatment in Middletown DE',
     heroParagraphs: [
-      "Gum disease is the leading cause of adult tooth loss, but traditional periodontal surgery with scalpels and sutures can be intimidating. LANAP® is an FDA-cleared laser protocol that treats gum disease with minimal discomfort.",
-      "The PerioLase® MVP-7™ selectively targets diseased tissue and bacteria while preserving healthy gums and stimulating new bone growth around your natural teeth."
+      "Jolly Smiles offers LANAP laser gum surgery in Middletown, Delaware — an FDA-cleared, minimally invasive treatment for moderate to severe gum disease. If you have been told you need gum surgery, LANAP gives you a way to treat periodontal disease without a scalpel, without stitches, and with significantly less pain and downtime than traditional methods.",
+      "Dr. Jeena Jolly uses the PerioLase® MVP-7™ laser to target and remove diseased gum tissue while leaving healthy tissue completely intact. The laser also stimulates your body's natural ability to regenerate bone and reattach gum tissue to the tooth root — something traditional surgery cannot reliably achieve."
     ],
     heroImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1200&auto=format&fit=crop',
-    ctaPrimaryLabel: 'BOOK LANAP CONSULT',
-    ctaSecondaryLabel: 'LEARN ABOUT LASER CARE',
-    categoryEyebrow: 'ADVANCED LASER PERIODONTICS',
-    categoryHeading: 'Save Your Teeth. Without Scalpels.',
-    categoryDescription: 'Why patients choose LANAP® laser therapy over conventional gum surgery:',
+    ctaPrimaryLabel: 'BOOK FREE CONSULTATION',
+    ctaSecondaryLabel: 'CONSULT OUR EXPERTS',
+    categoryEyebrow: 'WHAT IS THE PROCEDURE OF LANAP?',
+    categoryHeading: 'A Clear Journey to Healthier Gums',
+    categoryDescription: 'A clear, step-by-step journey to healthier gums using FDA-cleared laser technology and expert periodontal care at Jolly Smiles in Middletown, DE:',
     subServices: [
       {
-        id: 'laser-bacterial-eradication',
-        title: 'Targeted Laser Technology',
-        description: 'The pulsed laser light destroys 99% of subgingival periodontal pathogens without cutting into healthy gum tissue.',
+        id: 'lanap-step-1-consultation',
+        title: 'Step 1: Consultation & Assessment',
+        description: 'Your treatment begins with a comprehensive dental evaluation where we examine your gum health, measure pocket depths, and identify areas affected by gum disease to create a personalized treatment plan.',
         image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop',
-        iconType: 'laser',
+        iconType: 'award',
         features: [
-          { icon: 'zap', text: 'No Scalpel Cutting' },
-          { icon: 'shield', text: 'Targets Bacteria' },
-          { icon: 'heart', text: 'Minimal Discomfort' }
+          { icon: 'target', text: 'Pocket Measurement' },
+          { icon: 'shield', text: 'Comprehensive Evaluation' },
+          { icon: 'smile', text: 'Personalized Plan' }
         ]
       },
       {
-        id: 'bone-tissue-regeneration',
-        title: 'Natural Bone & Tissue Regeneration',
-        description: 'LANAP® is the only laser procedure scientifically proven to promote true periodontal regeneration, saving loose or severely compromised teeth.',
+        id: 'lanap-step-2-digital-assessment',
+        title: 'Step 2: Digital Assessment & 3D Imaging',
+        description: 'Advanced diagnostic tools, including digital imaging and periodontal charting, are used to understand the severity of infection and bone loss, ensuring precise and effective treatment planning.',
         image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop',
+        iconType: 'sparkles',
+        features: [
+          { icon: 'target', text: 'Digital Imaging' },
+          { icon: 'sparkles', text: 'Periodontal Charting' },
+          { icon: 'shield', text: 'Bone Loss Assessment' }
+        ]
+      },
+      {
+        id: 'lanap-step-3-laser-treatment',
+        title: 'Step 3: PerioLase® MVP-7™ Laser Treatment',
+        description: 'A specialized dental laser is gently applied to the affected areas to remove bacteria and infected tissue while preserving healthy gums, promoting a minimally invasive and comfortable experience.',
+        image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop',
+        iconType: 'laser',
+        features: [
+          { icon: 'zap', text: 'Selective Laser Action' },
+          { icon: 'shield', text: 'Preserves Healthy Tissue' },
+          { icon: 'check', text: 'No Scalpel & No Stitches' }
+        ]
+      },
+      {
+        id: 'lanap-step-4-healing-regeneration',
+        title: 'Step 4: Natural Healing & Bone Regeneration',
+        description: 'After the procedure, the treated area begins natural healing. The laser helps form a protective clot, supporting tissue regeneration and allowing your gums to reattach securely to the teeth.',
+        image: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop',
         iconType: 'shield',
         features: [
-          { icon: 'award', text: 'FDA Cleared' },
-          { icon: 'shield', text: 'Bone Regeneration' },
-          { icon: 'clock', text: '24-48hr Recovery' }
+          { icon: 'heart', text: 'Protective Clot Formation' },
+          { icon: 'sparkles', text: 'Stimulates Bone Growth' },
+          { icon: 'smile', text: 'True Gum Reattachment' }
+        ]
+      },
+      {
+        id: 'lanap-vs-traditional-surgery',
+        title: 'LANAP vs Traditional Gum Surgery',
+        description: 'Traditional periodontal surgery cuts gums with a scalpel and requires 2 to 4 weeks of painful recovery. LANAP eliminates cutting and stitching entirely, allowing most patients to return to normal activities within 24 hours while actively stimulating true bone regeneration.',
+        image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop',
+        iconType: 'gem',
+        features: [
+          { icon: 'clock', text: '24-Hour Fast Recovery' },
+          { icon: 'heart', text: 'Minimal Pain & Bleeding' },
+          { icon: 'gem', text: 'Regenerative Results' }
+        ]
+      },
+      {
+        id: 'lanap-tips-for-success',
+        title: 'Tips for Success & Post-Treatment Care',
+        description: 'To get the best results after LANAP: protect the healing clot with soft foods early on, follow customized home-care instructions, keep all scheduled follow-up check-ins, and avoid smoking.',
+        image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop',
+        iconType: 'shield',
+        features: [
+          { icon: 'check', text: 'Eat Soft Foods Early' },
+          { icon: 'shield', text: 'Protect Healing Clot' },
+          { icon: 'clock', text: 'Follow-Up Check-Ins' }
+        ]
+      },
+      {
+        id: 'why-choose-jolly-smiles-lanap',
+        title: 'Why Choose Jolly Smiles for LANAP?',
+        description: 'Experience expert periodontal care by Dr. Jeena Jolly, FDA-cleared PerioLase MVP-7 laser technology, personalized treatment plans, flexible payment solutions, and a comfort-focused clinical environment.',
+        image: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop',
+        iconType: 'award',
+        features: [
+          { icon: 'award', text: 'FDA-Cleared Technology' },
+          { icon: 'users', text: 'Expert Periodontal Care' },
+          { icon: 'zap', text: 'Affordable Payment Plans' }
         ]
       }
     ],
     faqs: [
       {
-        question: "What is LANAP® laser periodontal therapy?",
-        answer: "LANAP (Laser-Assisted New Attachment Procedure) is an FDA-cleared laser protocol that treats moderate to advanced gum disease without scalpels or stitches, eliminating 99% of bacteria."
+        question: "1. How much does LANAP cost in Middletown DE?",
+        answer: "The cost of LANAP depends on the severity of periodontal disease and how many quadrants require treatment. At Jolly Smiles, we provide clear, upfront cost estimates during your consultation, verify your insurance benefits, and offer flexible payment plans to make treatment affordable."
       },
       {
-        question: "How does LANAP differ from traditional gum surgery?",
-        answer: "Unlike conventional osseous surgery that cuts and removes healthy tissue, the PerioLase laser selectively targets diseased tissue and bacteria while preserving healthy gums and stimulating natural bone regeneration."
+        question: "2. Is LANAP painful?",
+        answer: "LANAP is far less painful than traditional scalpel surgery. Because the PerioLase laser seals nerve endings as it works and requires no cutting or stitches, most patients experience only mild post-treatment soreness that is easily managed with over-the-counter pain relievers."
       },
       {
-        question: "Is LANAP laser therapy painful?",
-        answer: "LANAP causes significantly less pain and swelling than traditional surgery. Most patients require only local anesthetic and report feeling minimal discomfort post-procedure."
+        question: "3. How long is recovery after LANAP?",
+        answer: "Recovery after LANAP is rapid. Most patients return to work and their normal daily routine within 24 hours. You can drive yourself home, return to light activities immediately, and eat soft foods on the day of treatment."
       },
       {
-        question: "How fast is the recovery period after LANAP?",
-        answer: "Most patients return to work and their normal routine within 24 hours. There are no incisions or stitches to heal, allowing for a rapid, comfortable recovery."
+        question: "4. Does dental insurance cover LANAP?",
+        answer: "Many dental insurance plans provide periodontal coverage that applies to LANAP, often billed under standard periodontal surgery codes. Our Middletown office will work directly with your insurance provider to maximize your available benefits."
       },
       {
-        question: "Can LANAP laser treatment save teeth that are already loose?",
-        answer: "Yes! LANAP is specifically clinically proven to regenerate the bone and connective tissues supporting teeth, often saving teeth that would otherwise need extraction."
+        question: "5. Is LANAP FDA approved?",
+        answer: "Yes. LANAP (Laser-Assisted New Attachment Procedure) is FDA-cleared specifically for treating periodontitis and is the only laser protocol scientifically proven to achieve true periodontal regeneration (new bone, cementum, and periodontal ligament)."
+      },
+      {
+        question: "6. What is the difference between LANAP and deep cleaning?",
+        answer: "Deep cleaning (scaling and root planing) removes surface plaque and tartar from above and below the gumline for mild to moderate gum issues. LANAP is an advanced laser surgical protocol for moderate to severe periodontitis that selectively eliminates deep bacteria, removes diseased tissue, and regenerates lost bone without cutting."
       }
     ],
     ctaBannerHeading: 'Take Control of Your Gum Health',
-    ctaBannerSubheading: 'Discover how LANAP® laser gum therapy can restore your oral health comfortably and effectively.',
-    metaTitle: 'LANAP Laser Periodontal Therapy in Middletown, DE | Jolly Smiles',
-    metaDescription: 'Treat gum disease without scalpels or stitches. FDA-cleared LANAP® laser periodontal therapy in Middletown, DE at Jolly Smiles.'
+    ctaBannerSubheading: 'Discover how LANAP® laser gum therapy can restore your oral health comfortably and effectively with Dr. Jeena Jolly in Middletown, DE.',
+    metaTitle: 'LANAP Laser Gum Treatment Middletown DE | Jolly Smiles',
+    metaDescription: 'LANAP laser gum surgery at Jolly Smiles in Middletown, DE. FDA-cleared, no scalpel, no stitches. Dr. Jeena Jolly treats gum disease with faster healing and less pain. Call 302-378-3384.'
   }
 };
 
@@ -578,3 +642,8 @@ servicesData['veneers'] = servicesData['cosmetic-dentistry'];
 servicesData['orthodontics'] = servicesData['invisalign'];
 servicesData['emergency-care'] = servicesData['general-dentistry'];
 servicesData['emergency-dentistry'] = servicesData['general-dentistry'];
+servicesData['lanap'] = servicesData['lanap-treatment'];
+servicesData['laser-periodontics'] = servicesData['lanap-treatment'];
+servicesData['laser-gum-treatment'] = servicesData['lanap-treatment'];
+servicesData['laser-dentistry'] = servicesData['lanap-treatment'];
+

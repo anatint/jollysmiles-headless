@@ -219,7 +219,7 @@ export const liveSeoData: Record<string, PageSeoConfig> = {
   },
   '/services/invisalign': {
     title: "Invisalign Middletown DE | Clear Aligners | Jolly Smiles",
-    description: "Diamond Invisalign Provider in Middletown, DE. Discreet, comfortable clear aligners to straighten teeth for adults and teens.",
+    description: "Get Invisalign clear aligners at Jolly Smiles in Middletown, DE. Dr. Jeena Jolly offers custom treatment plans for adults and teens. Schedule your free consultation today. Call 302-378-3384.",
     canonical: "https://www.jollysmiles.com/invisalign",
     schemas: [
       {
@@ -229,6 +229,29 @@ export const liveSeoData: Record<string, PageSeoConfig> = {
         "description": "Clear orthodontic aligners provided by Diamond Top 1% Provider."
       }
     ]
+  },
+  '/services/lanap-treatment': {
+    title: "LANAP Laser Gum Treatment Middletown DE | Jolly Smiles",
+    description: "LANAP laser gum surgery at Jolly Smiles in Middletown, DE. FDA-cleared, no scalpel, no stitches. Dr. Jeena Jolly treats gum disease with faster healing and less pain. Call 302-378-3384.",
+    canonical: "https://www.jollysmiles.com/lanap",
+    schemas: [
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalProcedure",
+        "name": "LANAP Laser Periodontal Therapy",
+        "description": "FDA-cleared minimally invasive laser gum treatment without scalpels or stitches."
+      }
+    ]
+  },
+  '/services/lanap': {
+    title: "LANAP Laser Gum Treatment Middletown DE | Jolly Smiles",
+    description: "LANAP laser gum surgery at Jolly Smiles in Middletown, DE. FDA-cleared, no scalpel, no stitches. Dr. Jeena Jolly treats gum disease with faster healing and less pain. Call 302-378-3384.",
+    canonical: "https://www.jollysmiles.com/lanap"
+  },
+  '/lanap': {
+    title: "LANAP Laser Gum Treatment Middletown DE | Jolly Smiles",
+    description: "LANAP laser gum surgery at Jolly Smiles in Middletown, DE. FDA-cleared, no scalpel, no stitches. Dr. Jeena Jolly treats gum disease with faster healing and less pain. Call 302-378-3384.",
+    canonical: "https://www.jollysmiles.com/lanap"
   }
 };
 
