@@ -6,8 +6,6 @@ import SchemaJsonLd from '@/components/SchemaJsonLd';
 import ServiceHero from '@/components/services/ServiceHero';
 import ServiceCardsList from '@/components/services/ServiceCardsList';
 import ServiceCtaBanner from '@/components/services/ServiceCtaBanner';
-import FAQSection from "@/components/FAQSection";
-import ContactFormSection from "@/components/ContactFormSection";
 import { servicesData, ServiceDetailData } from "@/data/servicesData";
 
 export const revalidate = 0; // Dynamic rendering for instant CMS updates
@@ -131,12 +129,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         subheading={service?.ctaBannerSubheading || "Schedule your consultation today and let our experts help you achieve the smile you've always wanted."}
         phone={phone}
       />
-
-      {/* 4. FAQ Section */}
-      <FAQSection />
-
-      {/* 5. Contact Form Section */}
-      <ContactFormSection data={contactData as any} />
     </div>
   );
 }
