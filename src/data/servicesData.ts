@@ -12,6 +12,11 @@ export interface SubServiceItem {
   features: SubServiceFeature[];
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface ServiceDetailData {
   slug: string;
   title: string;
@@ -24,6 +29,7 @@ export interface ServiceDetailData {
   categoryHeading: string;
   categoryDescription: string;
   subServices: SubServiceItem[];
+  faqs?: FAQItem[];
   ctaBannerHeading?: string;
   ctaBannerSubheading?: string;
   metaTitle: string;
@@ -93,6 +99,28 @@ export const servicesData: Record<string, ServiceDetailData> = {
           { icon: 'users', text: 'All Ages Welcome' },
           { icon: 'target', text: 'Patient Focused' }
         ]
+      }
+    ],
+    faqs: [
+      {
+        question: "What is the difference between porcelain veneers and teeth whitening?",
+        answer: "Teeth whitening lifts deep surface stains to brighten the shade of your natural enamel. Porcelain veneers are ultra-thin, custom ceramic shells placed over the front of teeth to correct stubborn discoloration, chips, gaps, or slight misalignments simultaneously."
+      },
+      {
+        question: "How long do porcelain veneers typically last?",
+        answer: "With proper oral hygiene and regular dental checkups, high-grade porcelain veneers typically last 10 to 15 years or longer. They are highly durable and naturally resistant to staining from coffee, tea, and wine."
+      },
+      {
+        question: "Will my cosmetic dental treatment look natural?",
+        answer: "Yes! Dr. Jeena Jolly customizes every cosmetic procedure to harmonize with your unique facial aesthetics, tooth shape, and smile line, delivering a seamlessly radiant and natural appearance."
+      },
+      {
+        question: "Does professional teeth whitening cause tooth sensitivity?",
+        answer: "Some patients may experience mild, temporary sensitivity. Our in-office treatments utilize advanced, enamel-safe formulas with desensitizing agents that maximize brightness while minimizing discomfort."
+      },
+      {
+        question: "What is included in a customized smile makeover?",
+        answer: "A smile makeover combines multiple aesthetic treatments tailored to your goals—such as teeth whitening, porcelain veneers, cosmetic bonding, or Invisalign clear aligners—to comprehensively transform your smile."
       }
     ],
     ctaBannerHeading: 'Ready to Love Your Smile?',
@@ -165,6 +193,28 @@ export const servicesData: Record<string, ServiceDetailData> = {
         ]
       }
     ],
+    faqs: [
+      {
+        question: "How long do dental implants last?",
+        answer: "Dental implants are designed to be a permanent, lifelong solution. The titanium implant post fuses directly with your jawbone (osseointegration), achieving success rates exceeding 95–98% with regular oral care."
+      },
+      {
+        question: "Does dental implant surgery hurt?",
+        answer: "Most patients report minimal discomfort during and after the procedure. Local anesthesia numbs the area completely, and gentle precision techniques make recovery smooth and straightforward."
+      },
+      {
+        question: "What is the typical recovery time after getting a dental implant?",
+        answer: "Most patients return to work and daily activities within 24 to 48 hours. The complete biological integration of the implant with your bone takes between 3 to 6 months before placing your final crown."
+      },
+      {
+        question: "Can I receive dental implants if I have experienced bone loss?",
+        answer: "Yes. Using advanced 3D CBCT scans and gentle bone grafting procedures, we can rebuild necessary bone volume to provide a sturdy, stable foundation for long-lasting implants."
+      },
+      {
+        question: "What is the difference between a single implant and All-on-4®?",
+        answer: "A single implant replaces an individual missing tooth with an independent crown. All-on-4® replaces an entire dental arch using four strategically placed implants to support a permanent, non-removable bridge."
+      }
+    ],
     ctaBannerHeading: 'Restore Your Complete Smile Today',
     ctaBannerSubheading: 'Book your comprehensive implant consultation with our Middletown dental implant specialists.',
     metaTitle: 'Dental Implants in Middletown, DE | Jolly Smiles',
@@ -233,6 +283,28 @@ export const servicesData: Record<string, ServiceDetailData> = {
           { icon: 'clock', text: 'Fast Recovery' },
           { icon: 'shield', text: 'Saves Natural Teeth' }
         ]
+      }
+    ],
+    faqs: [
+      {
+        question: "How often should I visit the dentist for exams and cleanings?",
+        answer: "We recommend scheduling a comprehensive dental exam and professional cleaning every six months. Regular visits prevent plaque buildup, detect cavities early, and protect gum health."
+      },
+      {
+        question: "What are the advantages of tooth-colored composite fillings?",
+        answer: "Composite fillings are 100% metal-free and mercury-free. They chemically bond directly to the tooth, preserving more healthy structure while matching your natural enamel color flawlessly."
+      },
+      {
+        question: "What should I do if I experience a sudden dental emergency?",
+        answer: "Call Jolly Smiles immediately at (302) 378-3384. We provide same-day emergency appointments in Middletown to relieve acute toothaches, repair broken teeth, and treat dental trauma."
+      },
+      {
+        question: "Are digital dental X-rays safe?",
+        answer: "Yes. Our modern digital radiography emits up to 80–90% less radiation than traditional film X-rays, providing immediate high-resolution scans with maximum patient safety."
+      },
+      {
+        question: "Do you treat children and provide family dentistry?",
+        answer: "Yes! Jolly Smiles warmly welcomes patients of all ages, from toddlers having their first dental checkup to grandparents, offering compassionate, gentle care tailored to every stage of life."
       }
     ],
     ctaBannerHeading: 'Experience Stress-Free Dental Care',
@@ -329,6 +401,28 @@ export const servicesData: Record<string, ServiceDetailData> = {
         ]
       }
     ],
+    faqs: [
+      {
+        question: "How many hours a day should I wear my Invisalign aligners?",
+        answer: "For maximum effectiveness, wear your aligners for 20 to 22 hours each day, removing them only when eating, drinking non-water beverages, brushing, and flossing."
+      },
+      {
+        question: "How long does Invisalign treatment take on average?",
+        answer: "Treatment length varies based on each patient's individual dental needs, with most adults completing their smile transformation within 6 to 18 months."
+      },
+      {
+        question: "Can I eat and drink normally while undergoing Invisalign?",
+        answer: "Yes! Because Invisalign aligners are completely removable, there are zero dietary restrictions. You can continue enjoying all your favorite foods without worrying about broken brackets."
+      },
+      {
+        question: "Is Invisalign treatment painful or uncomfortable?",
+        answer: "Most patients experience a slight feeling of pressure for the first 24 to 48 hours after inserting a new tray, which is a normal indicator that your teeth are moving as planned."
+      },
+      {
+        question: "Does dental insurance cover Invisalign in Middletown, DE?",
+        answer: "Many dental insurance plans provide orthodontic coverage that includes Invisalign just like traditional braces. Our team helps you verify benefits and offers affordable financing options."
+      }
+    ],
     ctaBannerHeading: 'Ready to Love Your Smile?',
     ctaBannerSubheading: "Schedule your free Invisalign consultation today with Dr. Jeena Jolly at Jolly Smiles in Middletown, DE.",
     metaTitle: 'Invisalign Middletown DE | Clear Aligners | Jolly Smiles',
@@ -375,6 +469,24 @@ export const servicesData: Record<string, ServiceDetailData> = {
         ]
       }
     ],
+    faqs: [
+      {
+        question: "How can a dental crown be fabricated and placed in a single visit?",
+        answer: "We use CEREC 3D digital CAD/CAM technology to take a digital scan of your tooth, design a custom ceramic crown, and mill it in-office within minutes, placing it permanently in one visit."
+      },
+      {
+        question: "Are same-day CEREC crowns as strong as lab-made crowns?",
+        answer: "Yes. CEREC crowns are precision-milled from high-strength, biocompatible ceramic blocks engineered to withstand normal chewing forces and match the longevity of traditional crowns."
+      },
+      {
+        question: "Do I need messy putty impressions for a same-day crown?",
+        answer: "No! We use a comfortable, high-resolution 3D optical camera to scan your teeth digitally, completely eliminating uncomfortable gooey impression trays."
+      },
+      {
+        question: "Will my new crown match the shade of my natural teeth?",
+        answer: "Yes. Dr. Jeena Jolly carefully shade-matches the ceramic block to blend invisibly with your surrounding teeth for a natural, seamless look."
+      }
+    ],
     ctaBannerHeading: 'Restore Your Tooth in Just One Visit',
     ctaBannerSubheading: 'Save time with same-day ceramic crowns at Jolly Smiles in Middletown, DE.',
     metaTitle: 'Same Day CEREC Dental Crowns in Middletown, DE | Jolly Smiles',
@@ -419,6 +531,28 @@ export const servicesData: Record<string, ServiceDetailData> = {
           { icon: 'shield', text: 'Bone Regeneration' },
           { icon: 'clock', text: '24-48hr Recovery' }
         ]
+      }
+    ],
+    faqs: [
+      {
+        question: "What is LANAP® laser periodontal therapy?",
+        answer: "LANAP (Laser-Assisted New Attachment Procedure) is an FDA-cleared laser protocol that treats moderate to advanced gum disease without scalpels or stitches, eliminating 99% of bacteria."
+      },
+      {
+        question: "How does LANAP differ from traditional gum surgery?",
+        answer: "Unlike conventional osseous surgery that cuts and removes healthy tissue, the PerioLase laser selectively targets diseased tissue and bacteria while preserving healthy gums and stimulating natural bone regeneration."
+      },
+      {
+        question: "Is LANAP laser therapy painful?",
+        answer: "LANAP causes significantly less pain and swelling than traditional surgery. Most patients require only local anesthetic and report feeling minimal discomfort post-procedure."
+      },
+      {
+        question: "How fast is the recovery period after LANAP?",
+        answer: "Most patients return to work and their normal routine within 24 hours. There are no incisions or stitches to heal, allowing for a rapid, comfortable recovery."
+      },
+      {
+        question: "Can LANAP laser treatment save teeth that are already loose?",
+        answer: "Yes! LANAP is specifically clinically proven to regenerate the bone and connective tissues supporting teeth, often saving teeth that would otherwise need extraction."
       }
     ],
     ctaBannerHeading: 'Take Control of Your Gum Health',

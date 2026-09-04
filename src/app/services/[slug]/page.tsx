@@ -5,6 +5,7 @@ import { buildPageMetadata } from '@/lib/seo';
 import SchemaJsonLd from '@/components/SchemaJsonLd';
 import ServiceHero from '@/components/services/ServiceHero';
 import ServiceCardsList from '@/components/services/ServiceCardsList';
+import ServiceFAQ from '@/components/services/ServiceFAQ';
 import CTABanner from '@/components/CTABanner';
 import { servicesData, ServiceDetailData } from "@/data/servicesData";
 
@@ -85,6 +86,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const displayCategoryHeading = wixService?.categoryHeading || service?.categoryHeading || 'Enhancing Smiles. Transforming Lives.';
   const displayCategoryDescription = wixService?.categoryDescription || service?.categoryDescription || 'Our advanced dental treatments are safe, effective, and customized to your unique needs.';
   const displaySubServices = service?.subServices || [];
+  const displayFaqs = service?.faqs || [];
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -100,9 +102,25 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     }
   };
 
+  const faqSchema = displayFaqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": displayFaqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  } : null;
+
+  const customSchemas: any[] = [serviceSchema];
+  if (faqSchema) customSchemas.push(faqSchema);
+
   return (
     <div className="bg-white font-sans min-h-screen">
-      <SchemaJsonLd path={`/services/${slug}`} customSchemas={[serviceSchema]} />
+      <SchemaJsonLd path={`/services/${slug}`} customSchemas={customSchemas} />
       
       {/* 1. Hero Section */}
       <ServiceHero
@@ -123,8 +141,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         />
       )}
 
-      {/* 3. Bottom CTA Banner */}
+      {/* 3. Service FAQs Section */}
+      {displayFaqs.length > 0 && (
+        <ServiceFAQ
+          eyebrow={`${displayTitle.toUpperCase()} FAQS`}
+          title={`Frequently Asked Questions`}
+          faqs={displayFaqs}
+        />
+      )}
+
+      {/* 4. Bottom CTA Banner */}
       <CTABanner />
     </div>
   );
 }
+
