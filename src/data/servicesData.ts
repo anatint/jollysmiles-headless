@@ -403,24 +403,32 @@ export const servicesData: Record<string, ServiceDetailData> = {
     ],
     faqs: [
       {
-        question: "How many hours a day should I wear my Invisalign aligners?",
-        answer: "For maximum effectiveness, wear your aligners for 20 to 22 hours each day, removing them only when eating, drinking non-water beverages, brushing, and flossing."
+        question: "1. What is Invisalign and how does it work?",
+        answer: "Invisalign is an advanced orthodontic treatment that uses a series of custom-crafted, clear SmartTrack® aligners to gradually and gently shift your teeth into proper alignment. You wear each set of aligners for 1–2 weeks before progressing to the next, enjoying a virtually invisible smile transformation without metal brackets or wires."
       },
       {
-        question: "How long does Invisalign treatment take on average?",
-        answer: "Treatment length varies based on each patient's individual dental needs, with most adults completing their smile transformation within 6 to 18 months."
+        question: "2. Am I a good candidate for Invisalign in Middletown, DE?",
+        answer: "Invisalign is ideal for teenagers and adults looking to correct mild to complex alignment concerns, including crooked teeth, spacing, crowding, overbites, and underbites. During your consultation at Jolly Smiles in Middletown, DE, Dr. Jeena Jolly will evaluate your bite and determine if Invisalign is the optimal solution for your smile goals."
       },
       {
-        question: "Can I eat and drink normally while undergoing Invisalign?",
-        answer: "Yes! Because Invisalign aligners are completely removable, there are zero dietary restrictions. You can continue enjoying all your favorite foods without worrying about broken brackets."
+        question: "3. Can Invisalign fix crowding, gaps, or bite problems?",
+        answer: "Yes! Invisalign is clinically proven to treat a wide range of orthodontic issues, including crowded teeth, unwanted gaps and spacing, overbites, underbites, crossbites, and open bites with high precision."
       },
       {
-        question: "Is Invisalign treatment painful or uncomfortable?",
-        answer: "Most patients experience a slight feeling of pressure for the first 24 to 48 hours after inserting a new tray, which is a normal indicator that your teeth are moving as planned."
+        question: "4. Do you offer digital smile previews before starting Invisalign?",
+        answer: "Yes! At Jolly Smiles, we utilize advanced high-precision 3D digital scanners to create a detailed digital model of your teeth. You can preview a computerized simulation of your future smile and track each step of your transformation before beginning treatment."
       },
       {
-        question: "Does dental insurance cover Invisalign in Middletown, DE?",
-        answer: "Many dental insurance plans provide orthodontic coverage that includes Invisalign just like traditional braces. Our team helps you verify benefits and offers affordable financing options."
+        question: "5. Is Invisalign treatment at Jolly Smiles more expensive than other dentists?",
+        answer: "No. At Jolly Smiles, we believe top-tier orthodontic care should be accessible and affordable. We offer competitive, transparent pricing, accept most major dental insurance plans with orthodontic benefits, and provide flexible, interest-free monthly payment plans to fit your budget."
+      },
+      {
+        question: "6. Is Invisalign better than braces for adults?",
+        answer: "For many adult patients, Invisalign is the preferred choice because the aligners are nearly invisible, comfortable, and completely removable. You can eat all your favorite foods without restriction and easily brush and floss to maintain optimal oral hygiene throughout your treatment."
+      },
+      {
+        question: "7. How many hours a day should I wear Invisalign aligners?",
+        answer: "To achieve the best and fastest results, you should wear your Invisalign aligners for 20 to 22 hours per day, removing them only when eating, drinking anything other than cool water, brushing, and flossing."
       }
     ],
     ctaBannerHeading: 'Ready to Love Your Smile?',
