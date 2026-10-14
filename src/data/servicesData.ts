@@ -675,16 +675,83 @@ function withLiveImages(pages: Record<string, ServiceDetailData>): Record<string
   return result;
 }
 
+// Every migrated page keeps the exact section structure of the LANAP inner page (2 hero paragraphs, a card list
+// with 3 feature chips per card, an FAQ list, CTA) no matter how much content the live page has. Real live content is
+// never changed; only missing slots are filled with clearly marked dummy content (flagged in `placeholderFields`
+// and listed in docs/service-pages-migration-report.md) so the layout never collapses.
+const MIN_CARDS = 3;
+const MIN_FAQS = 3;
+const CHIPS_PER_CARD = 3;
+const DUMMY_CHIPS = ['Book a Consultation', 'Ask Our Team', 'Middletown, DE'];
+const DUMMY_CARD_TITLES = ['Overview', 'What to Expect', 'Next Steps'];
+
+function withCompleteLayout(page: ServiceDetailData): ServiceDetailData {
+  const name = page.title.replace(/\?$/, '');
+  const lower = name.toLowerCase();
+  const filled = new Set<string>(page.placeholderFields ?? []);
+
+  const heroParagraphs = [...page.heroParagraphs];
+  if (heroParagraphs.length === 0) {
+    heroParagraphs.push(`Detailed information about ${lower} at Jolly Smiles in Middletown, DE is being prepared.`);
+    filled.add('heroParagraphs');
+  }
+  if (heroParagraphs.length < 2) {
+    heroParagraphs.push(`Call our team or book an appointment to talk about ${lower}.`);
+    filled.add('heroParagraphs');
+  }
+
+  const fallbackImage = page.subServices[0]?.image || page.heroImage;
+  const subServices = page.subServices.map((sub) => {
+    if (sub.features.length >= CHIPS_PER_CARD) return sub;
+    const have = new Set(sub.features.map((f) => f.text));
+    const extra = DUMMY_CHIPS.filter((c) => !have.has(c)).slice(0, CHIPS_PER_CARD - sub.features.length);
+    filled.add('subServices.features');
+    return { ...sub, features: [...sub.features, ...extra.map((text) => ({ icon: 'check' as const, text }))] };
+  });
+  for (let i = 0; subServices.length < MIN_CARDS; i++) {
+    const cardTitle = DUMMY_CARD_TITLES[i % DUMMY_CARD_TITLES.length];
+    subServices.push({
+      id: `placeholder-${i + 1}`,
+      title: `${name}: ${cardTitle}`,
+      description: `Placeholder content: details about ${lower} will be added here.`,
+      image: fallbackImage,
+      imageAlt: `${name} at Jolly Smiles`,
+      iconType: 'tooth',
+      features: DUMMY_CHIPS.slice(0, CHIPS_PER_CARD).map((text) => ({ icon: 'check' as const, text })),
+    });
+    filled.add('subServices');
+  }
+
+  const faqs = [...(page.faqs ?? [])];
+  const dummyFaqs = [
+    { question: `What is ${lower}?`, answer: `Placeholder content: this answer will be added. Please call Jolly Smiles to speak with our team about ${lower}.` },
+    { question: `How do I get started with ${lower}?`, answer: 'Placeholder content: this answer will be added. Book an appointment and our team will guide you.' },
+    { question: 'How can I book an appointment?', answer: 'Placeholder content: use the Book Appointment button on this page or call our Middletown office.' },
+  ];
+  for (let i = 0; faqs.length < MIN_FAQS; i++) {
+    faqs.push(dummyFaqs[i % dummyFaqs.length]);
+    filled.add('faqs');
+  }
+
+  return { ...page, heroParagraphs, subServices, faqs, placeholderFields: filled.size ? Array.from(filled) : undefined };
+}
+
+function completeLayouts(pages: Record<string, ServiceDetailData>): Record<string, ServiceDetailData> {
+  return Object.fromEntries(Object.entries(pages).map(([slug, page]) => [slug, withCompleteLayout(page)]));
+}
+
 export const servicesData: Record<string, ServiceDetailData> = {
   ...baseServicesData,
-  ...withLiveImages({
-    ...liveCoreServices,
-    ...liveImplantServices,
-    ...liveCosmeticServices,
-    ...liveOrthoLaserServices,
+  ...completeLayouts({
+    ...withLiveImages({
+      ...liveCoreServices,
+      ...liveImplantServices,
+      ...liveCosmeticServices,
+      ...liveOrthoLaserServices,
+    }),
+    ...livePlaceholderServices,
+    ...liveServicesPageCards,
   }),
-  ...livePlaceholderServices,
-  ...liveServicesPageCards,
 };
 
 // Aliases for alternate slug requests

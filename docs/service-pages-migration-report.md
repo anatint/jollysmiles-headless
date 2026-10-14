@@ -75,3 +75,12 @@ Two cards have **no inner page on the live site** (`/general-dentist-1` redirect
 - `docs/services-cms-import.json`: 37 records (slug, title, hero fields, `subServices` and `faqs` as JSON strings, metaTitle, metaDescription, canonical, sourceUrl, placeholder flags). Regenerate with `npx tsx scripts/export_services_cms.ts`.
 - `src/app/services/[slug]/page.tsx` now uses `subServices` and `faqs` from the collection when present (array or JSON string) and falls back to the local data, so a record added to the collection takes over its page without further code changes.
 - Needed to finish: read permission on the collection for visitors, the real collection ID, and a way to write (Wix connector or API key with Data write).
+
+## Fixed layout on every page (dummy content fills gaps)
+
+Every migrated page now has the same section structure as the LANAP page, regardless of how much content the live page has:
+2 hero paragraphs, at least 3 cards with 3 chips each, at least 3 FAQs, then the CTA. Live content is never altered; missing slots are filled by `withCompleteLayout()` in `src/data/servicesData.ts`
+(constants `MIN_CARDS`, `MIN_FAQS`, `CHIPS_PER_CARD` at the top of that function). Dummy items are neutral and visibly tagged "Placeholder content: …" (cards, FAQ answers);
+dummy chips are "Book a Consultation / Ask Our Team / Middletown, DE"; the dummy hero line is "Call our team or book an appointment …".
+Which fields are dummy per page is in `placeholderFields` (`heroParagraphs`, `subServices`, `subServices.features`, `faqs`, plus image placeholders) and in `docs/services-cms-import.json`.
+To replace dummy content: add real text to the page's file in `src/data/live-services/` (or its Services collection record); the filler disappears automatically once a slot has real content.
