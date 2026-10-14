@@ -84,3 +84,10 @@ Every migrated page now has the same section structure as the LANAP page, regard
 dummy chips are "Book a Consultation / Ask Our Team / Middletown, DE"; the dummy hero line is "Call our team or book an appointment …".
 Which fields are dummy per page is in `placeholderFields` (`heroParagraphs`, `subServices`, `subServices.features`, `faqs`, plus image placeholders) and in `docs/services-cms-import.json`.
 To replace dummy content: add real text to the page's file in `src/data/live-services/` (or its Services collection record); the filler disappears automatically once a slot has real content.
+
+## Images: Unsplash on every service page
+
+All hero and card images on the migrated pages are now Unsplash photos chosen by topic (implants, cosmetic/whitening, aligners, kids, hygiene, emergency/pain, general clinic),
+defined in `src/data/live-services/unsplash-images.ts` (41 photos, each URL checked to load). Hero = first photo of the topic pool, cards = the following photos, so a 7-card page does not repeat a photo.
+This replaces the live-site (wixstatic) images and the local `/dental-chair.png` placeholder, so no page needs an image placeholder any more (`docs/services-cms-import.json` regenerated).
+The older Invisalign and LANAP pages keep their own Unsplash photos. Alt text is generated ("<title> at Jolly Smiles", "<card title> - Jolly Smiles").

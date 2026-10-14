@@ -2,7 +2,7 @@ import { liveCoreServices } from './live-services/core';
 import { liveImplantServices } from './live-services/implants';
 import { liveCosmeticServices } from './live-services/cosmetic';
 import { liveOrthoLaserServices } from './live-services/ortho-laser';
-import { liveServiceImages } from './live-services/images';
+import { unsplashPoolFor } from './live-services/unsplash-images';
 import { liveServicesPageCards } from './live-services/services-page';
 import { livePlaceholderServices } from './live-services/placeholders';
 
@@ -651,25 +651,20 @@ const baseServicesData: Record<string, ServiceDetailData> = {
 
 // Pages migrated from the live jollysmiles.com site (one file per group in ./live-services).
 // Live-site entries override the older placeholder entries above when slugs collide.
-// Images come from the live pages themselves (see ./live-services/images.ts): the first one is the hero,
-// the rest are cycled across the cards in page order, as on the live site.
-function withLiveImages(pages: Record<string, ServiceDetailData>): Record<string, ServiceDetailData> {
+// All images on these pages are Unsplash photos picked by topic (see ./live-services/unsplash-images.ts).
+function withUnsplashImages(pages: Record<string, ServiceDetailData>): Record<string, ServiceDetailData> {
   const result: Record<string, ServiceDetailData> = {};
   for (const [slug, page] of Object.entries(pages)) {
-    const key = page.sourceUrl ? page.sourceUrl.split('/').pop() || slug : slug;
-    const images = liveServiceImages[key] || [];
-    if (images.length === 0) {
-      result[slug] = page;
-      continue;
-    }
+    const pool = unsplashPoolFor(slug);
     result[slug] = {
       ...page,
-      heroImage: images[0].src,
-      heroImageAlt: images[0].alt || page.heroImageAlt,
-      subServices: page.subServices.map((sub, idx) => {
-        const img = images[idx % images.length];
-        return { ...sub, image: img.src, imageAlt: img.alt || sub.imageAlt };
-      }),
+      heroImage: pool[0],
+      heroImageAlt: `${page.title} at Jolly Smiles`,
+      subServices: page.subServices.map((sub, idx) => ({
+        ...sub,
+        image: pool[(idx + 1) % pool.length],
+        imageAlt: `${sub.title} - Jolly Smiles`,
+      })),
     };
   }
   return result;
@@ -746,17 +741,16 @@ function completeLayouts(pages: Record<string, ServiceDetailData>): Record<strin
 
 export const servicesData: Record<string, ServiceDetailData> = {
   ...baseServicesData,
-  ...completeLayouts({
-    ...withLiveImages({
-      ...liveCoreServices,
-      ...liveImplantServices,
-      ...liveCosmeticServices,
-      ...liveOrthoLaserServices,
-    }),
+  ...withUnsplashImages(completeLayouts({
+    ...liveCoreServices,
+    ...liveImplantServices,
+    ...liveCosmeticServices,
+    ...liveOrthoLaserServices,
     ...livePlaceholderServices,
     ...liveServicesPageCards,
-    invisalign: baseServicesData['invisalign'], // 6 live-based cards -> topped up to the 7-card layout
-  }),
+  })),
+  // Older approved pages keep their own Unsplash photos; Invisalign is topped up to the 7-card layout.
+  invisalign: completeLayouts({ invisalign: baseServicesData['invisalign'] }).invisalign,
 };
 
 // Aliases for alternate slug requests
