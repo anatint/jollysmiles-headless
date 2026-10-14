@@ -127,6 +127,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         title={displayTitle}
         paragraphs={displayParagraphs}
         image={displayHeroImage}
+        imageAlt={service?.heroImageAlt}
         ctaPrimaryLabel={service?.ctaPrimaryLabel || "BOOK APPOINTMENT"}
         ctaSecondaryLabel={service?.ctaSecondaryLabel || "CONSULT OUR EXPERTS"}
       />

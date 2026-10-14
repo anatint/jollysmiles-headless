@@ -9,6 +9,7 @@ interface ServiceHeroProps {
   title: string;
   paragraphs: string[];
   image: string;
+  imageAlt?: string;
   ctaPrimaryLabel?: string;
   ctaSecondaryLabel?: string;
 }
@@ -17,6 +18,7 @@ export default function ServiceHero({
   title,
   paragraphs,
   image,
+  imageAlt,
   ctaPrimaryLabel = 'BOOK APPOINTMENT',
   ctaSecondaryLabel = 'CONSULT OUR EXPERTS'
 }: ServiceHeroProps) {
@@ -71,7 +73,7 @@ export default function ServiceHero({
             <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 bg-gray-50">
               <Image
                 src={image}
-                alt={`${title} at Jolly Smiles`}
+                alt={imageAlt || `${title} at Jolly Smiles`}
                 fill
                 className="object-cover object-center"
                 priority

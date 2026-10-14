@@ -125,7 +125,7 @@ export default function ServiceCardsList({
                     <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50 group">
                       <Image
                         src={sub.image}
-                        alt={sub.title}
+                        alt={sub.imageAlt || sub.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -149,9 +149,11 @@ export default function ServiceCardsList({
                     <div className="w-10 h-0.5 bg-brand-red rounded-full"></div>
 
                     {/* Description */}
-                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                      {sub.description}
-                    </p>
+                    {sub.description && (
+                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                        {sub.description}
+                      </p>
+                    )}
 
                     {/* Features Badges / Pills */}
                     {sub.features && sub.features.length > 0 && (

@@ -1,3 +1,9 @@
+import { liveCoreServices } from './live-services/core';
+import { liveImplantServices } from './live-services/implants';
+import { liveCosmeticServices } from './live-services/cosmetic';
+import { liveOrthoLaserServices } from './live-services/ortho-laser';
+import { liveServiceImages } from './live-services/images';
+
 export interface SubServiceFeature {
   icon: 'shield' | 'clock' | 'sparkles' | 'smile' | 'gem' | 'award' | 'users' | 'target' | 'heart' | 'zap' | 'check' | 'calendar';
   text: string;
@@ -8,6 +14,7 @@ export interface SubServiceItem {
   title: string;
   description: string;
   image: string;
+  imageAlt?: string;
   iconType: 'tooth' | 'veneer' | 'smile' | 'implant' | 'shield' | 'sparkles' | 'award' | 'crown' | 'laser' | 'aligner' | 'gem' | 'clock';
   features: SubServiceFeature[];
 }
@@ -23,6 +30,7 @@ export interface ServiceDetailData {
   heroHeading?: string;
   heroParagraphs: string[];
   heroImage: string;
+  heroImageAlt?: string;
   ctaPrimaryLabel?: string;
   ctaSecondaryLabel?: string;
   categoryEyebrow: string;
@@ -34,9 +42,11 @@ export interface ServiceDetailData {
   ctaBannerSubheading?: string;
   metaTitle: string;
   metaDescription: string;
+  canonical?: string;
+  sourceUrl?: string;
 }
 
-export const servicesData: Record<string, ServiceDetailData> = {
+const baseServicesData: Record<string, ServiceDetailData> = {
   'cosmetic-dentistry': {
     slug: 'cosmetic-dentistry',
     title: 'Cosmetic Dentistry',
@@ -634,16 +644,51 @@ export const servicesData: Record<string, ServiceDetailData> = {
   }
 };
 
-// Aliases for alternate slug requests
-servicesData['teeth-whitening'] = servicesData['cosmetic-dentistry'];
-servicesData['porcelain-veneers'] = servicesData['cosmetic-dentistry'];
-servicesData['smile-makeovers'] = servicesData['cosmetic-dentistry'];
-servicesData['veneers'] = servicesData['cosmetic-dentistry'];
-servicesData['orthodontics'] = servicesData['invisalign'];
-servicesData['emergency-care'] = servicesData['general-dentistry'];
-servicesData['emergency-dentistry'] = servicesData['general-dentistry'];
-servicesData['lanap'] = servicesData['lanap-treatment'];
-servicesData['laser-periodontics'] = servicesData['lanap-treatment'];
-servicesData['laser-gum-treatment'] = servicesData['lanap-treatment'];
-servicesData['laser-dentistry'] = servicesData['lanap-treatment'];
+// Pages migrated from the live jollysmiles.com site (one file per group in ./live-services).
+// Live-site entries override the older placeholder entries above when slugs collide.
+// Images come from the live pages themselves (see ./live-services/images.ts): the first one is the hero,
+// the rest are cycled across the cards in page order, as on the live site.
+function withLiveImages(pages: Record<string, ServiceDetailData>): Record<string, ServiceDetailData> {
+  const result: Record<string, ServiceDetailData> = {};
+  for (const [slug, page] of Object.entries(pages)) {
+    const key = page.sourceUrl ? page.sourceUrl.split('/').pop() || slug : slug;
+    const images = liveServiceImages[key] || [];
+    if (images.length === 0) {
+      result[slug] = page;
+      continue;
+    }
+    result[slug] = {
+      ...page,
+      heroImage: images[0].src,
+      heroImageAlt: images[0].alt || page.heroImageAlt,
+      subServices: page.subServices.map((sub, idx) => {
+        const img = images[idx % images.length];
+        return { ...sub, image: img.src, imageAlt: img.alt || sub.imageAlt };
+      }),
+    };
+  }
+  return result;
+}
 
+export const servicesData: Record<string, ServiceDetailData> = {
+  ...baseServicesData,
+  ...withLiveImages({
+    ...liveCoreServices,
+    ...liveImplantServices,
+    ...liveCosmeticServices,
+    ...liveOrthoLaserServices,
+  }),
+};
+
+// Aliases for alternate slug requests
+servicesData['teeth-whitening'] ??= servicesData['cosmetic-dentistry'];
+servicesData['porcelain-veneers'] ??= servicesData['cosmetic-dentistry'];
+servicesData['smile-makeovers'] ??= servicesData['cosmetic-dentistry'];
+servicesData['veneers'] ??= servicesData['cosmetic-dentistry'];
+servicesData['orthodontics'] ??= servicesData['invisalign'];
+servicesData['emergency-care'] ??= servicesData['emergency-dental-services'];
+servicesData['emergency-dentistry'] ??= servicesData['emergency-dental-services'];
+servicesData['lanap'] ??= servicesData['lanap-treatment'];
+servicesData['laser-periodontics'] ??= servicesData['lanap-treatment'];
+servicesData['laser-gum-treatment'] ??= servicesData['lanap-treatment'];
+servicesData['laser-dentistry'] ??= servicesData['lanap-treatment'];
