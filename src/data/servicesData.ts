@@ -675,15 +675,15 @@ function withLiveImages(pages: Record<string, ServiceDetailData>): Record<string
   return result;
 }
 
-// Every migrated page keeps the exact section structure of the LANAP inner page (2 hero paragraphs, a card list
-// with 3 feature chips per card, an FAQ list, CTA) no matter how much content the live page has. Real live content is
+// Every migrated page keeps the exact section structure of the LANAP inner page (2 hero paragraphs, 7 cards
+// with 3 feature chips per card, 6 FAQs, CTA) no matter how much content the live page has. Real live content is
 // never changed; only missing slots are filled with clearly marked dummy content (flagged in `placeholderFields`
 // and listed in docs/service-pages-migration-report.md) so the layout never collapses.
-const MIN_CARDS = 3;
-const MIN_FAQS = 3;
+const MIN_CARDS = 7; // same counts as the LANAP page: 7 cards, 6 FAQs
+const MIN_FAQS = 6;
 const CHIPS_PER_CARD = 3;
 const DUMMY_CHIPS = ['Book a Consultation', 'Ask Our Team', 'Middletown, DE'];
-const DUMMY_CARD_TITLES = ['Overview', 'What to Expect', 'Next Steps'];
+const DUMMY_CARD_TITLES = ['Overview', 'What to Expect', 'Consultation', 'Treatment Process', 'Recovery & Aftercare', 'Why Choose Jolly Smiles', 'Next Steps'];
 
 function withCompleteLayout(page: ServiceDetailData): ServiceDetailData {
   const name = page.title.replace(/\?$/, '');
@@ -700,7 +700,8 @@ function withCompleteLayout(page: ServiceDetailData): ServiceDetailData {
     filled.add('heroParagraphs');
   }
 
-  const fallbackImage = page.subServices[0]?.image || page.heroImage;
+  // Dummy cards reuse the page's own images (cycled) so no unrelated stock photo is introduced.
+  const imagePool = Array.from(new Set([page.heroImage, ...page.subServices.map((sub) => sub.image)]));
   const subServices = page.subServices.map((sub) => {
     if (sub.features.length >= CHIPS_PER_CARD) return sub;
     const have = new Set(sub.features.map((f) => f.text));
@@ -714,7 +715,7 @@ function withCompleteLayout(page: ServiceDetailData): ServiceDetailData {
       id: `placeholder-${i + 1}`,
       title: `${name}: ${cardTitle}`,
       description: `Placeholder content: details about ${lower} will be added here.`,
-      image: fallbackImage,
+      image: imagePool[subServices.length % imagePool.length],
       imageAlt: `${name} at Jolly Smiles`,
       iconType: 'tooth',
       features: DUMMY_CHIPS.slice(0, CHIPS_PER_CARD).map((text) => ({ icon: 'check' as const, text })),
@@ -727,6 +728,9 @@ function withCompleteLayout(page: ServiceDetailData): ServiceDetailData {
     { question: `What is ${lower}?`, answer: `Placeholder content: this answer will be added. Please call Jolly Smiles to speak with our team about ${lower}.` },
     { question: `How do I get started with ${lower}?`, answer: 'Placeholder content: this answer will be added. Book an appointment and our team will guide you.' },
     { question: 'How can I book an appointment?', answer: 'Placeholder content: use the Book Appointment button on this page or call our Middletown office.' },
+    { question: `Is ${lower} right for me?`, answer: 'Placeholder content: this answer will be added. A consultation with our team is the best way to find out.' },
+    { question: `How long does ${lower} take?`, answer: 'Placeholder content: this answer will be added. Please contact our Middletown office for details.' },
+    { question: `Does insurance cover ${lower}?`, answer: 'Placeholder content: this answer will be added. Please contact our Middletown office to discuss coverage.' },
   ];
   for (let i = 0; faqs.length < MIN_FAQS; i++) {
     faqs.push(dummyFaqs[i % dummyFaqs.length]);
@@ -751,6 +755,7 @@ export const servicesData: Record<string, ServiceDetailData> = {
     }),
     ...livePlaceholderServices,
     ...liveServicesPageCards,
+    invisalign: baseServicesData['invisalign'], // 6 live-based cards -> topped up to the 7-card layout
   }),
 };
 

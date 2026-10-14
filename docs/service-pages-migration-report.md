@@ -79,7 +79,7 @@ Two cards have **no inner page on the live site** (`/general-dentist-1` redirect
 ## Fixed layout on every page (dummy content fills gaps)
 
 Every migrated page now has the same section structure as the LANAP page, regardless of how much content the live page has:
-2 hero paragraphs, at least 3 cards with 3 chips each, at least 3 FAQs, then the CTA. Live content is never altered; missing slots are filled by `withCompleteLayout()` in `src/data/servicesData.ts`
+2 hero paragraphs, at least 7 cards with 3 chips each, at least 6 FAQs, then the CTA (exactly the LANAP reference). Live content is never altered; missing slots are filled by `withCompleteLayout()` in `src/data/servicesData.ts`
 (constants `MIN_CARDS`, `MIN_FAQS`, `CHIPS_PER_CARD` at the top of that function). Dummy items are neutral and visibly tagged "Placeholder content: …" (cards, FAQ answers);
 dummy chips are "Book a Consultation / Ask Our Team / Middletown, DE"; the dummy hero line is "Call our team or book an appointment …".
 Which fields are dummy per page is in `placeholderFields` (`heroParagraphs`, `subServices`, `subServices.features`, `faqs`, plus image placeholders) and in `docs/services-cms-import.json`.
