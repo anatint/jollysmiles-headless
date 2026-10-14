@@ -7,7 +7,16 @@ import ServiceHero from '@/components/services/ServiceHero';
 import ServiceCardsList from '@/components/services/ServiceCardsList';
 import ServiceFAQ from '@/components/services/ServiceFAQ';
 import CTABanner from '@/components/CTABanner';
-import { servicesData, ServiceDetailData } from "@/data/servicesData";
+import { servicesData, ServiceDetailData, SubServiceItem, FAQItem } from "@/data/servicesData";
+
+// Repeatable sections (cards, FAQs) can be stored in the Wix Services collection as an array or a JSON string.
+function cmsList<T>(value: unknown): T[] | undefined {
+  let list: unknown = value;
+  if (typeof list === 'string' && list.trim().startsWith('[')) {
+    try { list = JSON.parse(list); } catch { return undefined; }
+  }
+  return Array.isArray(list) && list.length > 0 ? (list as T[]) : undefined;
+}
 
 export const revalidate = 0; // Dynamic rendering for instant CMS updates
 
@@ -85,8 +94,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const displayEyebrow = wixService?.categoryEyebrow || service?.categoryEyebrow || `OUR ${displayTitle.toUpperCase()} CARE`;
   const displayCategoryHeading = wixService?.categoryHeading || service?.categoryHeading || 'Enhancing Smiles. Transforming Lives.';
   const displayCategoryDescription = wixService?.categoryDescription || service?.categoryDescription || 'Our advanced dental treatments are safe, effective, and customized to your unique needs.';
-  const displaySubServices = service?.subServices || [];
-  const displayFaqs = service?.faqs || [];
+  const displaySubServices = cmsList<SubServiceItem>(wixService?.subServices) ?? service?.subServices ?? [];
+  const displayFaqs = cmsList<FAQItem>(wixService?.faqs) ?? service?.faqs ?? [];
 
   const serviceSchema = {
     "@context": "https://schema.org",

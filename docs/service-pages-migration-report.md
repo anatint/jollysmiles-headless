@@ -60,3 +60,18 @@ Veneers & Laminates → `veneers-and-laminates`, Dental Implants → `dental-imp
 
 Two cards have **no inner page on the live site** (`/general-dentist-1` redirects to a 404; "6 month braces" has no link). Their pages contain only the live card text from `/services`
 (General Dentist, 6 Month Braces) — the old invented placeholder text for `general-dentistry` was removed. `teeth-whitening` is the live page's own short text (two whitening methods).
+
+## Placeholders, redirects and CMS status (second brief)
+
+**Placeholder content** (stand-in text only; no clinical claims). Flagged in code (`placeholder` / `placeholderFields`) and in `docs/services-cms-import.json`:
+- Whole-page placeholders — live page exists but has no body content (only H1, SEO title, meta): `dentures`, `dental-bridge`, `dental-bonding`, `tooth-colored-fillings`. Title, meta description and canonical are the live values; hero text, one card and the image are placeholders (`src/data/live-services/placeholders.ts`).
+- Placeholder image only (live page has text but no images; uses `/dental-chair.png`): `missing-teeth`, `teeth-whitening`, `complete-smiles-makeover`, `uneven-smiles`, `full-mouth-reconstruction`, `throbbing-pain`.
+- `tooth-implants` (empty on live) shows the full `dental-implants-in-middletown` content and canonicalises to it; `general-dentistry` and `6-month-braces` contain only the live `/services` card text.
+- Invisalign and LANAP (earlier pages, approved layout) were not rebuilt; some of their wording and their Unsplash images do not come from the live pages.
+
+**Redirects** (`next.config.ts`, permanent): every live root-level service URL `/<slug>` -> `/services/<slug>` (33 slugs) and `/general-dentist-1` -> `/services/general-dentistry`. `/invisalign` and `/lanap` already exist as their own pages and are not redirected. If the headless site later serves the root URLs directly, remove these.
+
+**Services collection (Wix CMS): NOT updated.** The headless client gets `WDE0025: The Services collection does not exist` and there is no working write access from this environment. Prepared instead:
+- `docs/services-cms-import.json`: 37 records (slug, title, hero fields, `subServices` and `faqs` as JSON strings, metaTitle, metaDescription, canonical, sourceUrl, placeholder flags). Regenerate with `npx tsx scripts/export_services_cms.ts`.
+- `src/app/services/[slug]/page.tsx` now uses `subServices` and `faqs` from the collection when present (array or JSON string) and falls back to the local data, so a record added to the collection takes over its page without further code changes.
+- Needed to finish: read permission on the collection for visitors, the real collection ID, and a way to write (Wix connector or API key with Data write).
