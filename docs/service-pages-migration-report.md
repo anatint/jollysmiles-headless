@@ -87,7 +87,10 @@ To replace dummy content: add real text to the page's file in `src/data/live-ser
 
 ## Images: Unsplash on every service page
 
-All hero and card images on the migrated pages are now Unsplash photos chosen by topic (implants, cosmetic/whitening, aligners, kids, hygiene, emergency/pain, general clinic),
-defined in `src/data/live-services/unsplash-images.ts` (41 photos, each URL checked to load). Hero = first photo of the topic pool, cards = the following photos, so a 7-card page does not repeat a photo.
-This replaces the live-site (wixstatic) images and the local `/dental-chair.png` placeholder, so no page needs an image placeholder any more (`docs/services-cms-import.json` regenerated).
-The older Invisalign and LANAP pages keep their own Unsplash photos. Alt text is generated ("<title> at Jolly Smiles", "<card title> - Jolly Smiles").
+All hero and card images are Unsplash photos chosen for each page's own topic (root canal -> tooth model/x-ray, pediatric -> child at the dentist, aligners -> clear aligners, and so on).
+`src/data/live-services/unsplash-images.ts` assigns 8 photos per page (hero + 7 cards) from a pool of 120 dental photos (every URL checked to load).
+- No page repeats a photo within itself, and all 33 page heroes are different photos.
+- Across pages the same photo can appear again on a different page (average 2 uses, max 5): Unsplash has only so many dental photos, and 33 pages x 8 images need 264.
+- Pages that mirror another page's content (`dental-implants`, `tooth-implants`, `same-day-crowns`, `veneers-and-laminates`, ...) use their source page's photos.
+- Replaces the live-site (wixstatic) images and the local `/dental-chair.png` placeholder; Invisalign and LANAP now use the same assignment (their old photos repeated within the page).
+- Alt text is generated ("<title> at Jolly Smiles", "<card title> - Jolly Smiles").

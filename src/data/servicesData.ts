@@ -748,9 +748,10 @@ export const servicesData: Record<string, ServiceDetailData> = {
     ...liveOrthoLaserServices,
     ...livePlaceholderServices,
     ...liveServicesPageCards,
+    // Older approved pages: completed to the same 7-card layout and given their own non-repeating photos.
+    invisalign: baseServicesData['invisalign'],
+    'lanap-treatment': baseServicesData['lanap-treatment'],
   })),
-  // Older approved pages keep their own Unsplash photos; Invisalign is topped up to the 7-card layout.
-  invisalign: completeLayouts({ invisalign: baseServicesData['invisalign'] }).invisalign,
 };
 
 // Aliases for alternate slug requests
