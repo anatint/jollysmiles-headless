@@ -2,8 +2,11 @@ import type { ServiceDetailData, SubServiceItem } from '../servicesData';
 
 type IconType = SubServiceItem['iconType'];
 type Card = [title: string, description: string, iconType: IconType, features?: string[]];
+type FeatureIcon = SubServiceItem['features'][number]['icon'];
 
 const FALLBACK_IMAGE = '/dental-chair.png';
+
+const FEATURE_ICONS: FeatureIcon[] = ['shield', 'clock', 'sparkles', 'smile', 'gem', 'award', 'users', 'target', 'heart', 'zap', 'check', 'calendar'];
 
 const kebab = (s: string) =>
   s
@@ -23,7 +26,7 @@ const buildCards = (cards: Card[], images: string[]): SubServiceItem[] => {
     image: pool[i % pool.length],
     imageAlt: `${title} - Jolly Smiles`,
     iconType,
-    features: (features ?? []).map((text) => ({ icon: 'check' as const, text })),
+    features: (features ?? []).map((text, j) => ({ icon: FEATURE_ICONS[(i * 3 + j) % FEATURE_ICONS.length], text })),
   }));
 };
 
@@ -36,63 +39,46 @@ const CTA = {
 
 const implantCards: Card[] = [
   [
-    'Unlike traditional dentures or bridges, dental implants',
-    'At Jolly Smiles in Middletown, we customize each implant treatment to match your oral health needs and smile goals.',
+    'Dental Implants vs Traditional Dentures',
+    'Dental implants are permanent tooth replacements designed to replace missing or damaged teeth. They consist of a small titanium post that is surgically placed into the jawbone to act as an artificial tooth root. A custom-made crown is then attached to the implant, creating a natural-looking tooth. Unlike traditional dentures or bridges, dental implants: Look and feel like natural teeth. Provide strong support for chewing and speaking. Help prevent bone loss in the jaw. Do not affect nearby healthy teeth. Offer a long-term solution for missing teeth. At Jolly Smiles in Middletown, we customize each implant treatment to match your oral health needs and smile goals.',
     'implant',
-    [
-      'Look and feel like natural teeth',
-      'Provide strong support for chewing and speaking',
-      'Help prevent bone loss in the jaw',
-      'Do not affect nearby healthy teeth',
-      'Offer a long-term solution for missing teeth',
-    ],
+    ['Natural Teeth', 'Chewing and Speaking', 'Prevent Bone Loss'],
   ],
   [
-    'Teeth may be lost due to several reasons, including',
-    'Dental implants help restore both the function and appearance of your smile by replacing missing teeth with strong, natural-looking alternatives.',
+    'Reasons for Tooth Loss',
+    'Teeth may be lost due to several reasons, including: Tooth decay or severe cavities. Gum disease (periodontal disease). Injury or accidents. Aging and wear. Failed root canal treatments. Congenital missing teeth. Dental implants help restore both the function and appearance of your smile by replacing missing teeth with strong, natural-looking alternatives.',
     'tooth',
-    [
-      'Tooth decay or severe cavities',
-      'Gum disease (periodontal disease)',
-      'Injury or accidents',
-      'Aging and wear',
-      'Failed root canal treatments',
-      'Congenital missing teeth',
-    ],
+    ['Tooth Decay', 'Gum Disease', 'Failed Root Canal'],
   ],
-  ['Consultation & Examination', 'During your first visit, our dentist will examine your teeth, gums, and jawbone. Digital scans or X-rays may be taken to determine if dental implants are the right solution for you.', 'tooth'],
-  ['Implant Placement', 'A small titanium implant post is carefully placed into the jawbone where the missing tooth was located. This procedure is performed with precision and patient comfort in mind.', 'implant'],
-  ['Healing & Bone Integration', 'Over the next few months, the implant naturally fuses with the jawbone through a process called osseointegration, creating a strong foundation for the new tooth.', 'shield'],
-  ['Crown Placement', 'Once healing is complete, a custom-made dental crown is attached to the implant, restoring the appearance and function of your tooth.', 'crown'],
-  ['Final Results', 'You leave our Middletown dental office with a strong, natural-looking smile that feels and functions like your real teeth.', 'smile'],
-  ['Natural Appearance', 'Dental implants look and feel just like your natural teeth, blending seamlessly with your smile.', 'sparkles'],
-  ['Long-Lasting Solution', 'With proper care, implants can last many years or even a lifetime.', 'award'],
-  ['Improved Comfort & Stability', 'Unlike dentures, implants stay securely in place and do not slip while eating or speaking.', 'shield'],
-  ['Better Oral Health', 'Dental implants help preserve the jawbone and prevent the shifting of surrounding teeth.', 'tooth'],
-  ['Improved Confidence', 'Restoring missing teeth can enhance your smile and boost self-confidence.', 'smile'],
   [
-    'To maintain the health and longevity of your dental implants',
-    'With proper care, dental implants can remain strong, functional, and beautiful for many years.',
+    'Consultation & Examination',
+    'During your first visit, our dentist will examine your teeth, gums, and jawbone. Digital scans or X-rays may be taken to determine if dental implants are the right solution for you. Implant Placement: A small titanium implant post is carefully placed into the jawbone where the missing tooth was located. This procedure is performed with precision and patient comfort in mind.',
+    'tooth',
+    ['Digital Scans', 'Implant Placement', 'Titanium Implant Post'],
+  ],
+  [
+    'Healing & Bone Integration',
+    'Over the next few months, the implant naturally fuses with the jawbone through a process called osseointegration, creating a strong foundation for the new tooth. Crown Placement: Once healing is complete, a custom-made dental crown is attached to the implant, restoring the appearance and function of your tooth.',
     'shield',
-    [
-      'Brush your teeth twice daily',
-      'Floss regularly around the implant area',
-      'Avoid chewing extremely hard foods',
-      'Schedule routine dental checkups and cleanings',
-      'Maintain good overall oral hygiene',
-    ],
+    ['Bone Integration', 'Osseointegration', 'Custom Dental Crown'],
   ],
   [
-    'To keep your teeth bright after treatment',
-    '',
+    'Final Results',
+    'You leave our Middletown dental office with a strong, natural-looking smile that feels and functions like your real teeth. Natural Appearance: Dental implants look and feel just like your natural teeth, blending seamlessly with your smile. Long-Lasting Solution: With proper care, implants can last many years or even a lifetime.',
+    'smile',
+    ['Natural Appearance', 'Long-Lasting Solution', 'Real Teeth'],
+  ],
+  [
+    'Improved Comfort & Stability',
+    'Unlike dentures, implants stay securely in place and do not slip while eating or speaking. Better Oral Health: Dental implants help preserve the jawbone and prevent the shifting of surrounding teeth. Improved Confidence: Restoring missing teeth can enhance your smile and boost self-confidence.',
+    'award',
+    ['Comfort & Stability', 'Better Oral Health', 'Improved Confidence'],
+  ],
+  [
+    'Maintaining Your Dental Implants',
+    'To maintain the health and longevity of your dental implants: Brush your teeth twice daily. Floss regularly around the implant area. Avoid chewing extremely hard foods. Schedule routine dental checkups and cleanings. Maintain good overall oral hygiene. With proper care, dental implants can remain strong, functional, and beautiful for many years. To keep your teeth bright after treatment: Avoid staining foods and beverages. Use a straw when drinking dark liquids. Quit smoking or tobacco use. Schedule regular dental cleanings. Consider touch-up treatments when needed.',
     'sparkles',
-    [
-      'Avoid staining foods and beverages',
-      'Use a straw when drinking dark liquids',
-      'Quit smoking or tobacco use',
-      'Schedule regular dental cleanings',
-      'Consider touch-up treatments when needed',
-    ],
+    ['Brush Twice Daily', 'Dental Checkups', 'Avoid Staining Foods'],
   ],
 ];
 
@@ -105,53 +91,40 @@ const affordableImages = [
 
 const affordableCards: Card[] = [
   [
-    'Each implant typically includes',
-    'A dental implant is a small titanium post placed into the jawbone to support a replacement tooth. Over time, the implant fuses with the bone through a process called osseointegration, creating a stable and durable base. This advanced tooth replacement option restores both appearance and functionality while helping maintain jawbone density.',
+    'What Each Implant Includes',
+    'A dental implant is a small titanium post placed into the jawbone to support a replacement tooth. Over time, the implant fuses with the bone through a process called osseointegration, creating a stable and durable base. Each implant typically includes: Implant Post – Replaces the tooth root. Abutment – Connects the implant to the restoration. Dental Crown – Custom-made tooth replacement. This advanced tooth replacement option restores both appearance and functionality while helping maintain jawbone density.',
     'implant',
-    [
-      'Implant Post – Replaces the tooth root',
-      'Abutment – Connects the implant to the restoration',
-      'Dental Crown – Custom-made tooth replacement',
-    ],
+    ['Implant Post', 'Abutment', 'Dental Crown'],
   ],
   [
-    'Patients choose dental implants because they offer',
-    'With proper care, implants can last for decades, making them a cost-effective long-term investment in your smile.',
+    'Why Patients Choose Implants',
+    'Patients choose dental implants because they offer: Long-lasting and durable results. Natural look and feel. Improved chewing and speech. Prevention of bone loss. No slipping or discomfort. Protection for surrounding teeth. With proper care, implants can last for decades, making them a cost-effective long-term investment in your smile.',
     'award',
-    [
-      'Long-lasting and durable results',
-      'Natural look and feel',
-      'Improved chewing and speech',
-      'Prevention of bone loss',
-      'No slipping or discomfort',
-      'Protection for surrounding teeth',
-    ],
+    ['Long-Lasting Results', 'Natural Look', 'Improved Chewing'],
   ],
   [
-    'We understand that cost is an important factor when considering dental implants',
-    'Our team focuses on providing affordable dental implant solutions without compromising quality or safety. During your consultation, we evaluate your oral health and recommend the most suitable implant option based on your needs and budget. We offer:',
+    'Affordable Dental Implant Solutions',
+    'We understand that cost is an important factor when considering dental implants. Our team focuses on providing affordable dental implant solutions without compromising quality or safety. We offer: Transparent pricing. Flexible payment options. Customized treatment plans. Guidance on insurance coverage. During your consultation, we evaluate your oral health and recommend the most suitable implant option based on your needs and budget.',
     'gem',
-    [
-      'Transparent pricing',
-      'Flexible payment options',
-      'Customized treatment plans',
-      'Guidance on insurance coverage',
-    ],
+    ['Transparent Pricing', 'Flexible Payment Options', 'Customized Treatment Plans'],
   ],
-  ['Single Tooth Implants', 'Ideal for replacing one missing tooth without affecting adjacent teeth.', 'tooth'],
-  ['Implant-Supported Bridges', 'A great solution for multiple missing teeth in a row.', 'implant'],
-  ['Full Arch Implants', 'Replace an entire upper or lower set of teeth with secure implant-supported dentures. Each treatment plan is carefully designed to restore comfort, aesthetics, and long-term oral health.', 'smile'],
   [
-    'Patients trust our practice because we combine advanced technology with personalized care',
-    'Our goal is to restore your smile with solutions that look natural and function beautifully.',
+    'Single Tooth Implants',
+    'Ideal for replacing one missing tooth without affecting adjacent teeth. Implant-Supported Bridges: A great solution for multiple missing teeth in a row.',
+    'tooth',
+    ['Single Tooth Implants', 'Implant-Supported Bridges', 'Multiple Missing Teeth'],
+  ],
+  [
+    'Full Arch Implants',
+    'Replace an entire upper or lower set of teeth with secure implant-supported dentures. Each treatment plan is carefully designed to restore comfort, aesthetics, and long-term oral health.',
+    'smile',
+    ['Full Arch Implants', 'Implant-Supported Dentures', 'Long-Term Oral Health'],
+  ],
+  [
+    'Patients Trust Our Practice',
+    'Patients trust our practice because we combine advanced technology with personalized care. We focus on: Precision treatment planning. High-quality materials. Comfortable procedures. Patient-centered care. Long-term follow-up support. Our goal is to restore your smile with solutions that look natural and function beautifully.',
     'shield',
-    [
-      'Precision treatment planning',
-      'High-quality materials',
-      'Comfortable procedures',
-      'Patient-centered care',
-      'Long-term follow-up support',
-    ],
+    ['Precision Treatment Planning', 'High-Quality Materials', 'Patient-Centered Care'],
   ],
 ];
 
@@ -164,41 +137,40 @@ const crownsImages = [
 
 const crownsCards: Card[] = [
   [
-    'A dental crown is a custom-made cap that completely covers a damaged or weakened tooth',
-    'Crowns are typically crafted from durable materials like porcelain, ceramic, or zirconia that blend naturally with your smile. This makes them both functional and aesthetically pleasing. Crowns are commonly recommended to:',
+    'What Is a Dental Crown',
+    'A dental crown is a custom-made cap that completely covers a damaged or weakened tooth. Crowns are typically crafted from durable materials like porcelain, ceramic, or zirconia that blend naturally with your smile. This makes them both functional and aesthetically pleasing. Crowns are commonly recommended to: Protect a cracked, worn, or decayed tooth from further damage. Restore shape, size, and strength after a large filling. Support a tooth after root canal therapy. Cover a dental implant for a complete tooth replacement. Improve the appearance of discolored or misshapen teeth.',
     'crown',
-    [
-      'Protect a cracked, worn, or decayed tooth from further damage',
-      'Restore shape, size, and strength after a large filling',
-      'Support a tooth after root canal therapy',
-      'Cover a dental implant for a complete tooth replacement',
-      'Improve the appearance of discolored or misshapen teeth',
-    ],
+    ['Custom-Made Cap', 'Porcelain or Zirconia', 'Protect Damaged Tooth'],
   ],
   [
-    'A dental bridge replaces one or more missing teeth, filling the gap with a prosthetic tooth (or teeth) anchored to adjacent natural teeth or crowns',
-    'The bridge restores your ability to chew and speak properly, maintains facial structure, and prevents surrounding teeth from shifting out of place. Bridges are ideal when you’re missing one or more consecutive teeth and have healthy neighboring teeth to support the restoration.',
+    'What Is a Dental Bridge',
+    'A dental bridge replaces one or more missing teeth, filling the gap with a prosthetic tooth (or teeth) anchored to adjacent natural teeth or crowns. The bridge restores your ability to chew and speak properly, maintains facial structure, and prevents surrounding teeth from shifting out of place. Bridges are ideal when you’re missing one or more consecutive teeth and have healthy neighboring teeth to support the restoration.',
     'implant',
+    ['Prosthetic Tooth', 'Consecutive Missing Teeth', 'Facial Structure'],
   ],
-  ['Consultation & Planning', 'Your dentist evaluates your oral health, takes X-rays, and discusses the best treatment option for your needs (crown, bridge, or both).', 'tooth'],
-  ['Tooth Preparation', 'Damaged teeth (or supporting teeth next to a gap) are gently reshaped to prepare for the crown or bridge. Very precise impressions are taken to create your custom restoration.', 'tooth'],
-  ['Temporary Restoration', 'While your permanent crown or bridge is being made, a temporary version protects your smile.', 'shield'],
-  ['Final Placement', 'Once your custom-fit restoration is ready, it’s carefully secured and adjusted for comfort, function, and natural appearance.', 'crown'],
-  ['Restored Functionality', 'Crowns and bridges allow you to chew, speak, and bite with confidence and comfort.', 'smile'],
-  ['Improved Appearance', 'These restorations blend seamlessly with your natural teeth, enhancing your smile and overall facial aesthetics.', 'sparkles'],
-  ['Long-Lasting Results', 'With good oral hygiene and routine dental checkups, crowns and bridges can last many years — often a decade or more.', 'award'],
-  ['Prevent Future Issues', 'Bridges especially help prevent adjacent teeth from drifting into empty spaces, reducing the risk of bite problems and further tooth loss.', 'shield'],
   [
-    'To protect your investment and maximize longevity',
-    'Good oral hygiene and routine professional care help your crowns and bridges stay strong and functional for many years.',
+    'Consultation & Planning',
+    'Your dentist evaluates your oral health, takes X-rays, and discusses the best treatment option for your needs (crown, bridge, or both). Tooth Preparation: Damaged teeth (or supporting teeth next to a gap) are gently reshaped to prepare for the crown or bridge. Very precise impressions are taken to create your custom restoration.',
+    'tooth',
+    ['Oral Health Evaluation', 'Tooth Preparation', 'Precise Impressions'],
+  ],
+  [
+    'Final Placement',
+    'While your permanent crown or bridge is being made, a temporary version protects your smile. Once your custom-fit restoration is ready, it’s carefully secured and adjusted for comfort, function, and natural appearance.',
+    'crown',
+    ['Temporary Restoration', 'Custom-Fit Restoration', 'Natural Appearance'],
+  ],
+  [
+    'Restored Functionality',
+    'Crowns and bridges allow you to chew, speak, and bite with confidence and comfort. Improved Appearance: These restorations blend seamlessly with your natural teeth, enhancing your smile and overall facial aesthetics. Long-Lasting Results: With good oral hygiene and routine dental checkups, crowns and bridges can last many years — often a decade or more. Prevent Future Issues: Bridges especially help prevent adjacent teeth from drifting into empty spaces, reducing the risk of bite problems and further tooth loss.',
+    'smile',
+    ['Improved Appearance', 'Long-Lasting Results', 'Prevent Future Issues'],
+  ],
+  [
+    'Protect Your Investment',
+    'To protect your investment and maximize longevity: Brush twice daily with a soft-bristle toothbrush and fluoride toothpaste. Floss and use interdental brushes to clean around the restoration. Avoid biting hard objects (like ice or hard candies). Continue regular dental checkups and cleanings with your Jolly Smiles dentist. If you grind your teeth, ask about a custom night guard. Good oral hygiene and routine professional care help your crowns and bridges stay strong and functional for many years.',
     'shield',
-    [
-      'Brush twice daily with a soft-bristle toothbrush and fluoride toothpaste',
-      'Floss and use interdental brushes to clean around the restoration',
-      'Avoid biting hard objects (like ice or hard candies)',
-      'Continue regular dental checkups and cleanings with your Jolly Smiles dentist',
-      'If you grind your teeth, ask about a custom night guard',
-    ],
+    ['Brush Twice Daily', 'Interdental Brushes', 'Custom Night Guard'],
   ],
 ];
 
@@ -206,59 +178,34 @@ const crownsCards: Card[] = [
 
 const sameDayCards: Card[] = [
   [
-    'Unlike traditional crowns that require',
-    'CEREC (Chairside Economical Restoration of Esthetic Ceramics) technology allows us to design, create, and place custom ceramic crowns in a single visit. CEREC crowns are digitally designed and milled right here in our office while you relax.',
+    'CEREC Crown Technology',
+    'CEREC (Chairside Economical Restoration of Esthetic Ceramics) technology allows us to design, create, and place custom ceramic crowns in a single visit. Unlike traditional crowns that require: Multiple appointments. Messy impressions. Temporary crowns. Waiting weeks for a dental lab. CEREC crowns are digitally designed and milled right here in our office while you relax.',
     'clock',
-    ['Multiple appointments', 'Messy impressions', 'Temporary crowns', 'Waiting weeks for a dental lab'],
+    ['Custom Ceramic Crowns', 'Single Visit', 'Digitally Designed'],
   ],
   [
-    'Choosing same-day crowns at Jolly Smiles offers several advantages',
-    'You walk in with a damaged tooth and leave with a fully restored smile — the very same day.',
+    'Advantages of Same-Day Crowns',
+    'Choosing same-day crowns at Jolly Smiles offers several advantages: Completed in just one appointment. No temporary crowns needed. Digital impressions for greater comfort. Strong, durable ceramic material. Natural appearance that blends with your smile. Less time away from work or daily activities. You walk in with a damaged tooth and leave with a fully restored smile — the very same day.',
     'crown',
-    [
-      'Completed in just one appointment',
-      'No temporary crowns needed',
-      'Digital impressions for greater comfort',
-      'Strong, durable ceramic material',
-      'Natural appearance that blends with your smile',
-      'Less time away from work or daily activities',
-    ],
+    ['One Appointment', 'No Temporary Crowns', 'Digital Impressions'],
   ],
   [
-    'A dental crown may be recommended if you have',
-    'Crowns protect and strengthen your natural tooth while restoring its function and appearance.',
+    'A Dental Crown May Be Recommended',
+    'A dental crown may be recommended if you have: A cracked or fractured tooth. Severe tooth decay. A large filling that needs support. A worn-down tooth. A tooth after root canal treatment. A cosmetic concern affecting tooth shape or appearance. Crowns protect and strengthen your natural tooth while restoring its function and appearance.',
     'tooth',
-    [
-      'A cracked or fractured tooth',
-      'Severe tooth decay',
-      'A large filling that needs support',
-      'A worn-down tooth',
-      'A tooth after root canal treatment',
-      'A cosmetic concern affecting tooth shape or appearance',
-    ],
+    ['Fractured Tooth', 'Severe Tooth Decay', 'Root Canal Treatment'],
   ],
   [
-    'Your same-day crown appointment at Jolly Smiles is simple and efficient',
-    '',
+    'Your Same-Day Crown Appointment',
+    'Your same-day crown appointment at Jolly Smiles is simple and efficient: Digital Scan: We take precise 3D images of your tooth — no messy impressions. Custom Design: Your crown is digitally designed to match your bite and surrounding teeth. On-Site Milling: The crown is created in our office using advanced CEREC technology. Placement: We bond the permanent crown securely in place during the same visit.',
     'sparkles',
-    [
-      'Digital Scan: We take precise 3D images of your tooth — no messy impressions.',
-      'Custom Design: Your crown is digitally designed to match your bite and surrounding teeth.',
-      'On-Site Milling: The crown is created in our office using advanced CEREC technology.',
-      'Placement: We bond the permanent crown securely in place during the same visit.',
-    ],
+    ['Digital Scan', 'Custom Design', 'On-Site Milling'],
   ],
   [
-    'We focus on providing modern solutions that save you time without compromising quality',
-    '',
+    'Modern Solutions That Save Time',
+    'Advanced CEREC technology. Experienced and skilled dental team. Comfortable and efficient treatment. High-quality, long-lasting restorations. Convenient location in Middletown. We focus on providing modern solutions that save you time without compromising quality.',
     'award',
-    [
-      'Advanced CEREC technology',
-      'Experienced and skilled dental team',
-      'Comfortable and efficient treatment',
-      'High-quality, long-lasting restorations',
-      'Convenient location in Middletown',
-    ],
+    ['CEREC Technology', 'Skilled Dental Team', 'Convenient Middletown Location'],
   ],
 ];
 
@@ -266,54 +213,46 @@ const sameDayCards: Card[] = [
 
 const inlayCards: Card[] = [
   [
-    'Inlays and onlays are custom restorations made from porcelain, composite resin, or gold, designed to repair teeth with moderate decay or damage',
-    'They are precisely crafted to match your natural tooth color and shape, ensuring a seamless and natural appearance.',
+    'Custom Inlays and Onlays',
+    'Inlays and onlays are custom restorations made from porcelain, composite resin, or gold, designed to repair teeth with moderate decay or damage. Inlays fit within the grooves of a tooth (between the cusps). Onlays extend over one or more cusps of the tooth. They are precisely crafted to match your natural tooth color and shape, ensuring a seamless and natural appearance.',
     'tooth',
-    ['Inlays fit within the grooves of a tooth (between the cusps)', 'Onlays extend over one or more cusps of the tooth'],
+    ['Custom Restorations', 'Moderate Tooth Decay', 'Natural Tooth Color'],
   ],
   [
-    'Your dentist may recommend inlays or onlays if you have',
-    'These restorations help reinforce the tooth structure and prevent further damage.',
+    'Your Dentist May Recommend Inlays',
+    'Your dentist may recommend inlays or onlays if you have: Moderate tooth decay that cannot be treated with a filling. Cracked or fractured teeth. Old or failing fillings that need replacement. Damage that doesn’t require a full dental crown. A desire for a stronger, longer-lasting restoration. These restorations help reinforce the tooth structure and prevent further damage.',
     'shield',
-    [
-      'Moderate tooth decay that cannot be treated with a filling',
-      'Cracked or fractured teeth',
-      'Old or failing fillings that need replacement',
-      'Damage that doesn’t require a full dental crown',
-      'A desire for a stronger, longer-lasting restoration',
-    ],
+    ['Cracked Teeth', 'Failing Fillings', 'Longer-Lasting Restoration'],
   ],
-  ['Consultation & Evaluation', 'We assess your tooth condition and determine whether an inlay or onlay is the best option.', 'tooth'],
-  ['Tooth Preparation', 'The damaged or decayed portion of the tooth is carefully removed and cleaned.', 'tooth'],
-  ['Impressions & Custom Design', 'We take precise impressions to create a custom restoration that fits perfectly.', 'sparkles'],
-  ['Temporary Restoration', 'A temporary inlay/onlay may be placed while your permanent restoration is being crafted.', 'shield'],
-  ['Final Placement', 'The custom inlay or onlay is bonded securely to your tooth, restoring its strength and function.', 'crown'],
-  ['Preserves Natural Tooth Structure', 'Requires less removal of healthy tooth compared to crowns.', 'tooth'],
-  ['Durable & Long-Lasting', 'Made from strong materials that can last many years with proper care.', 'award'],
-  ['Natural Appearance', 'Blends seamlessly with your natural teeth.', 'sparkles'],
-  ['Improved Strength', 'Reinforces weakened teeth and prevents further damage.', 'shield'],
-  ['Stain Resistant', 'Porcelain materials resist staining better than traditional fillings.', 'gem'],
   [
-    'Our team at Jolly Smiles Middletown will help you choose the best restorative option based on your needs',
-    '',
+    'Consultation & Evaluation',
+    'We assess your tooth condition and determine whether an inlay or onlay is the best option. Tooth Preparation: The damaged or decayed portion of the tooth is carefully removed and cleaned. Impressions & Custom Design: We take precise impressions to create a custom restoration that fits perfectly.',
+    'tooth',
+    ['Tooth Preparation', 'Precise Impressions', 'Custom Design'],
+  ],
+  [
+    'Temporary Restoration',
+    'A temporary inlay/onlay may be placed while your permanent restoration is being crafted. Final Placement: The custom inlay or onlay is bonded securely to your tooth, restoring its strength and function.',
+    'crown',
+    ['Temporary Inlay', 'Final Placement', 'Bonded Securely'],
+  ],
+  [
+    'Preserves Natural Tooth Structure',
+    'Requires less removal of healthy tooth compared to crowns. Durable & Long-Lasting: Made from strong materials that can last many years with proper care. Natural Appearance: Blends seamlessly with your natural teeth. Improved Strength: Reinforces weakened teeth and prevents further damage. Stain Resistant: Porcelain materials resist staining better than traditional fillings.',
+    'award',
+    ['Durable & Long-Lasting', 'Improved Strength', 'Stain Resistant'],
+  ],
+  [
+    'Choosing the Best Restorative Option',
+    'Have mild to moderate tooth damage. Want a more durable option than fillings. Prefer a conservative alternative to crowns. Maintain good oral hygiene and healthy gums. Our team at Jolly Smiles Middletown will help you choose the best restorative option based on your needs.',
     'smile',
-    [
-      'Have mild to moderate tooth damage',
-      'Want a more durable option than fillings',
-      'Prefer a conservative alternative to crowns',
-      'Maintain good oral hygiene and healthy gums',
-    ],
+    ['Durable Option', 'Conservative Alternative', 'Healthy Gums'],
   ],
   [
-    'To keep your restoration in excellent condition',
-    'With proper care, inlays and onlays can last for many years.',
-    'shield',
-    [
-      'Avoid biting on very hard objects',
-      'Limit foods and drinks that may stain',
-      'Visit your dentist regularly for checkups',
-      'Wear a night guard if you grind your teeth',
-    ],
+    'Restoration in Excellent Condition',
+    'To keep your restoration in excellent condition: Avoid biting on very hard objects. Limit foods and drinks that may stain. Visit your dentist regularly for checkups. Wear a night guard if you grind your teeth. With proper care, inlays and onlays can last for many years.',
+    'sparkles',
+    ['Hard Objects', 'Visit Your Dentist', 'Night Guard'],
   ],
 ];
 
@@ -321,69 +260,54 @@ const inlayCards: Card[] = [
 
 const rootCanalCards: Card[] = [
   [
-    'Root canal treatment is a dental procedure used to remove infected or damaged pulp from inside the tooth',
-    'The pulp contains nerves and blood vessels, and when it becomes infected, it can cause pain and swelling. Root canal therapy helps preserve your natural tooth and eliminates the need for extraction. This treatment involves:',
+    'Root Canal Treatment',
+    'Root canal treatment is a dental procedure used to remove infected or damaged pulp from inside the tooth. The pulp contains nerves and blood vessels, and when it becomes infected, it can cause pain and swelling. This treatment involves: Removing the infected pulp. Cleaning and disinfecting the inner canals. Filling and sealing the tooth. Restoring the tooth with a crown (if needed). Root canal therapy helps preserve your natural tooth and eliminates the need for extraction.',
     'tooth',
-    [
-      'Removing the infected pulp',
-      'Cleaning and disinfecting the inner canals',
-      'Filling and sealing the tooth',
-      'Restoring the tooth with a crown (if needed)',
-    ],
+    ['Infected Pulp', 'Disinfecting Inner Canals', 'Preserve Natural Tooth'],
   ],
   [
-    'You may require a root canal if you experience',
-    'If you notice any of these symptoms, it’s important to seek dental care promptly.',
+    'You May Require a Root Canal',
+    'You may require a root canal if you experience: Persistent tooth pain or throbbing. Sensitivity to hot or cold that lingers. Swollen or tender gums. Darkening or discoloration of the tooth. A small bump (abscess) on the gums. Pain while chewing or biting. If you notice any of these symptoms, it’s important to seek dental care promptly.',
     'shield',
-    [
-      'Persistent tooth pain or throbbing',
-      'Sensitivity to hot or cold that lingers',
-      'Swollen or tender gums',
-      'Darkening or discoloration of the tooth',
-      'A small bump (abscess) on the gums',
-      'Pain while chewing or biting',
-    ],
+    ['Persistent Tooth Pain', 'Tender Gums', 'Pain While Chewing'],
   ],
-  ['Consultation & Diagnosis', 'We examine your tooth using digital X-rays to determine the extent of infection and create a personalized treatment plan.', 'tooth'],
-  ['Local Anesthesia', 'The area is numbed to ensure a painless and comfortable experience throughout the procedure.', 'shield'],
-  ['Cleaning the Infection', 'The infected pulp is carefully removed, and the root canals are cleaned and disinfected.', 'sparkles'],
-  ['Filling & Sealing', 'The canals are filled with a biocompatible material and sealed to prevent reinfection.', 'tooth'],
-  ['Restoration', 'A dental crown may be placed to restore strength, function, and appearance.', 'crown'],
-  ['Pain Relief', 'Eliminates the source of infection and discomfort.', 'smile'],
-  ['Saves Your Natural Tooth', 'Avoids extraction and maintains your natural bite.', 'tooth'],
-  ['Prevents Further Infection', 'Stops bacteria from spreading to surrounding teeth and gums.', 'shield'],
-  ['Restores Function', 'Allows you to chew and speak normally.', 'smile'],
-  ['Long-Lasting Results', 'With proper care, treated teeth can last many years.', 'award'],
   [
-    'Our team at Jolly Smiles Middletown will guide you toward the best treatment option for your needs',
-    '',
+    'Consultation & Diagnosis',
+    'We examine your tooth using digital X-rays to determine the extent of infection and create a personalized treatment plan. Local Anesthesia: The area is numbed to ensure a painless and comfortable experience throughout the procedure.',
+    'tooth',
+    ['Digital X-rays', 'Personalized Treatment Plan', 'Local Anesthesia'],
+  ],
+  [
+    'Cleaning the Infection',
+    'The infected pulp is carefully removed, and the root canals are cleaned and disinfected. Filling & Sealing: The canals are filled with a biocompatible material and sealed to prevent reinfection. Restoration: A dental crown may be placed to restore strength, function, and appearance.',
+    'sparkles',
+    ['Biocompatible Material', 'Prevent Reinfection', 'Dental Crown'],
+  ],
+  [
+    'Pain Relief',
+    'Eliminates the source of infection and discomfort. Saves Your Natural Tooth: Avoids extraction and maintains your natural bite. Prevents Further Infection: Stops bacteria from spreading to surrounding teeth and gums. Restores Function: Allows you to chew and speak normally. Long-Lasting Results: With proper care, treated teeth can last many years.',
     'smile',
-    [
-      'Have a deeply decayed or infected tooth',
-      'Want to save your natural tooth instead of extraction',
-      'Experience ongoing tooth pain or sensitivity',
-      'Have swelling or signs of dental infection',
-      'Are in good overall oral health',
-    ],
+    ['Saves Natural Tooth', 'Prevents Further Infection', 'Restores Function'],
   ],
   [
-    'To ensure long-lasting results',
-    'Proper care helps protect your restored tooth and overall oral health.',
+    'Best Treatment Option for Your Needs',
+    'Have a deeply decayed or infected tooth. Want to save your natural tooth instead of extraction. Experience ongoing tooth pain or sensitivity. Have swelling or signs of dental infection. Are in good overall oral health. Our team at Jolly Smiles Middletown will guide you toward the best treatment option for your needs.',
+    'award',
+    ['Deeply Decayed Tooth', 'Ongoing Tooth Pain', 'Signs of Infection'],
+  ],
+  [
+    'Ensuring Long-Lasting Results',
+    'To ensure long-lasting results: Avoid chewing hard foods immediately after treatment. Take prescribed medications as directed. Attend regular dental checkups. Maintain good oral hygiene habits. Proper care helps protect your restored tooth and overall oral health.',
     'shield',
-    [
-      'Avoid chewing hard foods immediately after treatment',
-      'Take prescribed medications as directed',
-      'Attend regular dental checkups',
-      'Maintain good oral hygiene habits',
-    ],
+    ['Prescribed Medications', 'Regular Dental Checkups', 'Oral Hygiene Habits'],
   ],
 ];
 
 /* ---------------- Missing Teeth ---------------- */
 
 const missingCards: Card[] = [
-  ['Dental Bridge', 'With the help of adjacent teeth, an artificial tooth is fixed, replacing the missing tooth.', 'implant'],
-  ['Dentures', 'Removable components resembling teeth and the surrounding gums. They can be “complete” (replacing all the upper or lower teeth) or “partial” (replacing teeth while some natural teeth stand)', 'smile'],
+  ['Dental Bridge', 'With the help of adjacent teeth, an artificial tooth is fixed, replacing the missing tooth.', 'implant', ['Adjacent Teeth', 'Artificial Tooth', 'Missing Tooth']],
+  ['Dentures', 'Removable components resembling teeth and the surrounding gums. They can be “complete” (replacing all the upper or lower teeth) or “partial” (replacing teeth while some natural teeth stand)', 'smile', ['Removable Components', 'Surrounding Gums', 'Natural Teeth']],
 ];
 
 /* ---------------- Entries ---------------- */
@@ -396,7 +320,6 @@ const real: Record<string, ServiceDetailData> = {
     heroParagraphs: [
       'At Jolly Smiles, we offer advanced dental implant solutions in Middletown to restore missing teeth and bring back your confident smile. Missing teeth can affect your ability to eat, speak, and smile comfortably. Dental implants provide a long-lasting and natural-looking replacement that functions just like your real teeth.',
       'Our experienced dental team uses modern techniques and high-quality implant materials to ensure safe, precise, and comfortable treatment. With dental implants, you can enjoy a strong, stable, and beautiful smile for years to come.',
-      'Dental implants are permanent tooth replacements designed to replace missing or damaged teeth. They consist of a small titanium post that is surgically placed into the jawbone to act as an artificial tooth root. A custom-made crown is then attached to the implant, creating a natural-looking tooth.',
     ],
     heroImage: FALLBACK_IMAGE,
     heroImageAlt: 'Dental Implants in Middletown at Jolly Smiles',
