@@ -8,56 +8,67 @@ const defaultServices = [
     title: "General Dentist",
     description: "Comprehensive care for your oral health and beautiful smile.",
     image: "/after-1.jpg",
-    link: "/services/general-dentistry"
+    link: ""
   },
   {
     title: "Same Day Crowns",
     description: "Custom-made crowns in just one visit for a perfect fit.",
     image: "/before-1.jpg",
-    link: "/services/general-dentistry"
+    link: ""
   },
   {
     title: "Invisalign®",
     description: "Clear aligners for a straighter smile without metal braces.",
     image: "/after-2.jpg",
-    link: "/services/cosmetic-dentistry"
+    link: ""
   },
   {
     title: "6 Month Braces",
     description: "Fast, effective teeth straightening in as little as 6 months.",
     image: "/before-2.jpg",
-    link: "/services/cosmetic-dentistry"
+    link: ""
   },
   {
     title: "Veneers & Laminates",
     description: "Transform your smile with natural-looking veneers.",
     image: "/after-3.jpg",
-    link: "/services/cosmetic-dentistry"
+    link: ""
   },
   {
     title: "Dental Implants",
     description: "Permanent replacement for missing teeth that looks and feels natural.",
     image: "/before-3.png",
-    link: "/services/dental-implants"
+    link: ""
   },
   {
     title: "Teeth Whitening",
     description: "Brighten your smile safely and effectively.",
     image: "/after-4.jpg",
-    link: "/services/cosmetic-dentistry"
+    link: ""
   },
   {
     title: "LANAP Treatment",
     description: "Advanced laser treatment to treat gum disease and save your teeth with minimal discomfort.",
     image: "/before-3.png",
-    link: "/services/general-dentistry"
+    link: ""
   }
 ];
 
 function getServiceLink(title: string) {
   const t = title.toLowerCase();
   if (t.includes('implant')) return '/services/dental-implants';
-  if (t.includes('whitening') || t.includes('veneer') || t.includes('invisalign') || t.includes('brace')) return '/services/cosmetic-dentistry';
+  if (t.includes('whitening')) return '/services/teeth-whitening';
+  if (t.includes('veneer') || t.includes('laminate')) return '/services/veneers-and-laminates';
+  if (t.includes('crown')) return '/services/same-day-crowns';
+  if (t.includes('invisalign')) return '/services/invisalign';
+  if (t.includes('brace')) return '/services/6-month-braces';
+  if (t.includes('lanap') || t.includes('laser') || t.includes('gum')) return '/services/lanap-treatment';
+  if (t.includes('full mouth') || t.includes('reconstruction')) return '/services/full-mouth-reconstruction';
+  if (t.includes('restorative')) return '/services/restorative-dentistry';
+  if (t.includes('preventive')) return '/services/preventive-dental-care';
+  if (t.includes('pediatric') || t.includes('child')) return '/services/pediatric-dentistry';
+  if (t.includes('emergency')) return '/services/emergency-dental-services';
+  if (t.includes('cosmetic') || t.includes('makeover')) return '/services/cosmetic-dentistry';
   return '/services/general-dentistry';
 }
 
@@ -92,7 +103,7 @@ export default function ServicesGrid({ data }: { data?: any }) {
       link: s.slug ? `/services/${s.slug}` : getServiceLink(s.title || s.name)
     }));
   } else {
-    displayServices = defaultServices;
+    displayServices = defaultServices.map((service) => ({ ...service, link: getServiceLink(service.title) }));
   }
 
   return (

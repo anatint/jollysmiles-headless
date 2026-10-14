@@ -49,3 +49,14 @@ Already migrated earlier and untouched: `invisalign`, `lanap` (`lanap-treatment`
 4. `inisalign-treatment` text is cut mid-word in the last FAQ answer on the live page; only the first complete sentence was kept.
 5. Images: pages use their own live images. Six pages (teeth-whitening, complete-smiles-makeover, uneven-smiles, full-mouth-reconstruction, missing-teeth, throbbing-pain) have **no images on the live site** and use the existing `/dental-chair.png`. A shared stock photo (`db6928_665f35fd…webp`, small/soft) appears on most live pages and is used last. Most live image alts are filenames, so descriptive alts were generated.
 6. Live pages have no category header, so `categoryDescription` = the live meta description; card titles for heading-less blocks use the page's own lead-in wording.
+
+## Services grid (`/services` cards) — follow-up
+
+The grid cards previously linked to placeholder pages (`general-dentistry`, `cosmetic-dentistry`). Each card now links to its own page:
+General Dentist → `general-dentistry`, Same Day Crowns → `same-day-crowns`, Invisalign® → `invisalign`, 6 Month Braces → `6-month-braces`,
+Veneers & Laminates → `veneers-and-laminates`, Dental Implants → `dental-implants`, Teeth Whitening → `teeth-whitening`, LANAP → `lanap-treatment`.
+`same-day-crowns`, `dental-implants` and `veneers-and-laminates` are the slugs the live grid links to; they show the full content of the live pages that actually hold it
+(`same-day-dental-crowns-middletown`, `dental-implants-in-middletown`, `veneers-laminates`) and canonicalise to them.
+
+Two cards have **no inner page on the live site** (`/general-dentist-1` redirects to a 404; "6 month braces" has no link). Their pages contain only the live card text from `/services`
+(General Dentist, 6 Month Braces) — the old invented placeholder text for `general-dentistry` was removed. `teeth-whitening` is the live page's own short text (two whitening methods).

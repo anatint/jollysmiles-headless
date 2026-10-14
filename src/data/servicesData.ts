@@ -3,6 +3,7 @@ import { liveImplantServices } from './live-services/implants';
 import { liveCosmeticServices } from './live-services/cosmetic';
 import { liveOrthoLaserServices } from './live-services/ortho-laser';
 import { liveServiceImages } from './live-services/images';
+import { liveServicesPageCards } from './live-services/services-page';
 
 export interface SubServiceFeature {
   icon: 'shield' | 'clock' | 'sparkles' | 'smile' | 'gem' | 'award' | 'users' | 'target' | 'heart' | 'zap' | 'check' | 'calendar';
@@ -678,13 +679,16 @@ export const servicesData: Record<string, ServiceDetailData> = {
     ...liveCosmeticServices,
     ...liveOrthoLaserServices,
   }),
+  ...liveServicesPageCards,
 };
 
 // Aliases for alternate slug requests
 servicesData['teeth-whitening'] ??= servicesData['cosmetic-dentistry'];
-servicesData['porcelain-veneers'] ??= servicesData['cosmetic-dentistry'];
-servicesData['smile-makeovers'] ??= servicesData['cosmetic-dentistry'];
-servicesData['veneers'] ??= servicesData['cosmetic-dentistry'];
+servicesData['porcelain-veneers'] ??= servicesData['veneers-laminates'];
+servicesData['smile-makeovers'] ??= servicesData['complete-smiles-makeover'];
+servicesData['veneers'] ??= servicesData['veneers-laminates'];
+// The live services grid links to these slugs; the real content lives on the pages they alias.
+servicesData['veneers-and-laminates'] ??= { ...servicesData['veneers-laminates'], slug: 'veneers-and-laminates' };
 servicesData['orthodontics'] ??= servicesData['invisalign'];
 servicesData['emergency-care'] ??= servicesData['emergency-dental-services'];
 servicesData['emergency-dentistry'] ??= servicesData['emergency-dental-services'];
