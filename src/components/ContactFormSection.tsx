@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { submitFormSubmission } from '@/lib/wix';
 
 export interface ContactSettingsData {
   heading?: string;
@@ -50,6 +51,7 @@ function cleanHtmlText(text?: string): string {
 export default function ContactFormSection({ data }: { data?: ContactSettingsData }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   // Parse Form Fields if passed as string or object
   let formFields: any[] = [];
@@ -123,13 +125,32 @@ export default function ContactFormSection({ data }: { data?: ContactSettingsDat
   const formHeading = cleanHtmlText(data?.formHeading) || "Send Us a Message";
   const privacyNote = cleanHtmlText(data?.privacyNote) || "We respect your privacy. Your information is safe with us.";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Saves the contact form into the Wix CMS "FormSubmissions" collection.
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+    try {
+      const values = new FormData(form);
+      const known: Record<string, string> = {};
+      const extra: string[] = [];
+      formFields.forEach((field) => {
+        const value = String(values.get(field.name) ?? '').trim();
+        if (!value) return;
+        if (field.name === 'fullName' || field.name === 'name') known.name = value;
+        else if (['email', 'phone', 'service', 'message'].includes(field.name)) known[field.name] = value;
+        else extra.push(`${field.label}: ${value}`); // any other CMS field is kept in the message
+      });
+      if (extra.length) known.message = [known.message, ...extra].filter(Boolean).join(' | ');
+      await submitFormSubmission('contact-page', known);
+      form.reset();
       setSubmitted(true);
-    }, 800);
+    } catch {
+      setError('Sorry, we could not send your message. Please try again or call us.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -238,6 +259,7 @@ export default function ContactFormSection({ data }: { data?: ContactSettingsDat
                             <textarea 
                               placeholder={`${field.label}${field.required ? '*' : ''}`} 
                               rows={5}
+                              name={field.name}
                               className="w-full px-5 py-4 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700 resize-none"
                               required={field.required}
                             ></textarea>
@@ -249,6 +271,7 @@ export default function ContactFormSection({ data }: { data?: ContactSettingsDat
                         return (
                           <div key={idx} className="col-span-1 md:col-span-2">
                             <select 
+                              name={field.name}
                               className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700 appearance-none"
                               required={field.required}
                               defaultValue=""
@@ -266,6 +289,7 @@ export default function ContactFormSection({ data }: { data?: ContactSettingsDat
                         <div key={idx} className="col-span-1">
                           <input 
                             type={field.type} 
+                            name={field.name}
                             placeholder={`${field.label}${field.required ? '*' : ''}`} 
                             className="w-full px-5 py-3.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-red focus:border-brand-red transition-all text-sm text-gray-700"
                             required={field.required}
@@ -274,6 +298,8 @@ export default function ContactFormSection({ data }: { data?: ContactSettingsDat
                       );
                     })}
                   </div>
+
+                  {error && <p className="text-sm text-red-600 font-medium" role="alert">{error}</p>}
 
                   <button 
                     type="submit"

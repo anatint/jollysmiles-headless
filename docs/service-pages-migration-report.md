@@ -121,3 +121,12 @@ Created in the Wix CMS (multiple-item collection, name and ID `Appointments`) wi
 `name` (Text), `email` (Email), `phone` (Text), `service` (Text), `date` (Text, `YYYY-MM-DD`), `message` (Text). The default `Title` field is unused.
 Permissions use Wix's "Collect content" preset: **Everyone can add** items (the website form), **Collaborators only can view** them. Checked from the site's client: reading is blocked (`WDE0027`), inserting works. A test entry created for that check was deleted.
 Submissions appear in the CMS under Appointments.
+
+## Wix CMS: Form Submissions collection (popup + contact page forms)
+
+One collection now receives both website forms: **Form Submissions** (collection ID `FormSubmissions`). It replaces the single-purpose `Appointments` collection created earlier, which is now unused (empty; safe to delete).
+Fields: `formType` (`appointment-popup` or `contact-page`), `name`, `email` (Email), `phone`, `service`, `date`, `message`, `sourcePage` (page the form was sent from), `status` (set to `new`), plus the default `Title` (e.g. "Contact message - Jane Doe").
+Permissions: **Everyone can add**, **Collaborators only can view** ("Collect content" preset); reading from the website's client returns `WDE0027`.
+Code: `submitFormSubmission()` in `src/lib/wix.ts`; the popup (`AppointmentModal.tsx`, via `submitAppointment`) and the Contact page form (`ContactFormSection.tsx`, which previously only faked a send with a timer) both call it.
+Contact form fields come from the ContactSettings CMS (`fullName`, `phone`, `email`, `service`, `message`); `fullName` is saved as `name`, and any extra CMS field is appended to `message`.
+Tested end to end on a local server with marked test entries (both landed with the right `formType`); the test entries were deleted.

@@ -26,15 +26,39 @@ export async function getSingleItem(collectionId: string) {
   return itemsList[0] || null;
 }
 
-export async function submitAppointment(data: any) {
+// Every website form (appointment popup, contact page) saves into the same Wix CMS collection.
+export const FORM_SUBMISSIONS_COLLECTION = 'FormSubmissions';
+
+export type FormType = 'appointment-popup' | 'contact-page';
+
+export interface FormSubmissionInput {
+  name?: string;
+  email?: string;
+  phone?: string;
+  service?: string;
+  date?: string;
+  message?: string;
+}
+
+export async function submitFormSubmission(formType: FormType, data: FormSubmissionInput) {
+  const label = formType === 'appointment-popup' ? 'Appointment request' : 'Contact message';
+  const payload = {
+    title: `${label} - ${data.name || data.email || 'website visitor'}`,
+    formType,
+    status: 'new',
+    sourcePage: typeof window !== 'undefined' ? window.location.pathname : '',
+    ...data,
+  };
   try {
-    const response = await wixClient.items.insert('Appointments', data);
-    return response;
+    return await wixClient.items.insert(FORM_SUBMISSIONS_COLLECTION, payload);
   } catch (error) {
-    console.error('Error submitting appointment:', error);
+    console.error(`Error submitting ${formType} form:`, error);
     throw error;
   }
 }
+
+// Kept for existing callers: the popup form.
+export const submitAppointment = (data: FormSubmissionInput) => submitFormSubmission('appointment-popup', data);
 
 export function getWixImageUrl(url?: any, fallback: string = ''): string {
   if (!url) return fallback;
