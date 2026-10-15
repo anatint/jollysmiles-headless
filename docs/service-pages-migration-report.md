@@ -113,3 +113,11 @@ because their rows have no `offerings` JSON; once a row gets `offerings` and `fa
 The page root carries `data-content-source="cms"|"local"` for checking. Rich-text fields (hero subheading, meta description, offering descriptions) are stored by Wix as HTML and converted to plain paragraphs.
 
 Placeholder content in the new items (dummy cards/FAQs where the live site had none) is flagged in each item's `sections` field.
+
+## Wix CMS: Appointments collection (popup form)
+
+The "Make Appointment" popup (`src/components/AppointmentModal.tsx`) saves its submissions with `submitAppointment()` (`src/lib/wix.ts`) into a collection with the ID `Appointments`, which did not exist, so every submission failed.
+Created in the Wix CMS (multiple-item collection, name and ID `Appointments`) with these fields, matching what the form sends:
+`name` (Text), `email` (Email), `phone` (Text), `service` (Text), `date` (Text, `YYYY-MM-DD`), `message` (Text). The default `Title` field is unused.
+Permissions use Wix's "Collect content" preset: **Everyone can add** items (the website form), **Collaborators only can view** them. Checked from the site's client: reading is blocked (`WDE0027`), inserting works. A test entry created for that check was deleted.
+Submissions appear in the CMS under Appointments.
