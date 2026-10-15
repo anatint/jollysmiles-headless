@@ -172,7 +172,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* HTML Article Body */}
         <div 
           className="prose prose-lg max-w-none text-gray-700 leading-relaxed font-sans prose-headings:font-serif prose-headings:font-bold prose-a:text-brand-red prose-img:rounded-2xl"
-          dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
+          dangerouslySetInnerHTML={{ __html: (blog.contentHtml || '').replace(/<h1(\s[^>]*)?>/gi, '<h2$1>').replace(/<\/h1>/gi, '</h2>') }}
         />
 
         {/* Author / Practice Card */}
