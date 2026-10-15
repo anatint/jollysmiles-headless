@@ -14,9 +14,10 @@ export default function BlogHero() {
           
           {/* Left Text Column */}
           <div className="flex-1 max-w-xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-4 tracking-tight font-serif">
+            <h1 className="sr-only">NEWS AND ANNOUNCEMENTS</h1>
+<div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-4 tracking-tight font-serif">
               Our <span className="text-brand-red">Blog</span>
-            </h1>
+            </div>
             <h2 className="text-lg lg:text-2xl font-bold text-gray-800 mb-6 font-serif">
               Tips, Insights & Smile Guides
             </h2>

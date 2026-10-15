@@ -39,10 +39,11 @@ export default function TechnologiesHero({ data }: { data?: any }) {
             </h3>
           </div>
           
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif">
+          <h1 className="sr-only">Technologies</h1>
+<div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif">
             {heading}
             {highlight && <span className="block text-brand-red mt-2">{highlight}</span>}
-          </h1>
+          </div>
           
           <p className="text-gray-800 text-lg md:text-xl leading-relaxed max-w-2xl font-medium">
             {description}

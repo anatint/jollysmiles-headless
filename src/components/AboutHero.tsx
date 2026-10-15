@@ -22,13 +22,14 @@ export default function AboutHero({ data }: { data?: any }) {
           
           {/* Left Text Column */}
           <div className="flex-1 max-w-xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-4 tracking-tight font-serif">
+            <h1 className="sr-only">Jolly Smiles is ready to serve all of your dental needs.</h1>
+<div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-4 tracking-tight font-serif">
               {heading.includes('Us') ? (
                 <>About <span className="text-brand-red">Us</span></>
               ) : (
                 heading
               )}
-            </h1>
+            </div>
             <h2 className="text-lg lg:text-2xl font-bold text-gray-800 mb-6 font-serif">
               {tagline}
             </h2>

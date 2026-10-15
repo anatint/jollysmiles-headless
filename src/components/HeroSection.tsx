@@ -29,7 +29,8 @@ export default function HeroSection({ heroData, statsData }: { heroData?: any[],
           <div className="inline-block bg-white border border-brand-red text-brand-red font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-6 rounded shadow-sm">
             {hero?.eyebrow || "Delaware's Trusted Dental Care"}
           </div>
-          <h1 
+          <h1 className="sr-only">HEALTHY SMILE CAN CHANGE THE WORLD FOR YOU</h1>
+<div 
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight"
             dangerouslySetInnerHTML={{ __html: hero?.heading || `Transform Your Smile, <br /><span class="text-brand-red">Transform Your Life.</span>` }}
           />

@@ -33,14 +33,15 @@ export default function ServicesHero({ data }: { data?: any }) {
             <h4 className="text-brand-red font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">
               {heading}
             </h4>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif">
+            <h1 className="sr-only">OUR SERVICES</h1>
+<div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-[1.05] mb-6 tracking-tight font-serif">
               {subheading.includes('Healthier') ? (
                 <>Complete Dental Care <br className="hidden sm:block" />
                 <span className="text-brand-red">For a Healthier You</span></>
               ) : (
                 subheading
               )}
-            </h1>
+            </div>
             <p className="text-base sm:text-lg text-gray-700 mb-10 leading-relaxed max-w-xl font-medium">
               {description}
             </p>
