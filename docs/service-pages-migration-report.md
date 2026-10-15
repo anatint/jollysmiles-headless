@@ -94,3 +94,22 @@ All hero and card images are Unsplash photos chosen for each page's own topic (r
 - Pages that mirror another page's content (`dental-implants`, `tooth-implants`, `same-day-crowns`, `veneers-and-laminates`, ...) use their source page's photos.
 - Replaces the live-site (wixstatic) images and the local `/dental-chair.png` placeholder; Invisalign and LANAP now use the same assignment (their old photos repeated within the page).
 - Alt text is generated ("<title> at Jolly Smiles", "<card title> - Jolly Smiles").
+
+## Wix CMS: Services collection (updated)
+
+**Collection ID:** the collection shown as "Services" in the Wix CMS has the ID `service-pages` (display name "Services"). The site asked for an ID of `Services`, which is why it always got
+"WDE0025: The Services collection does not exist". The site now reads `service-pages` (`src/lib/servicePages.ts`).
+
+**Added to the collection (6 new items, fields filled in the existing schema, no new collection or fields):**
+`general-dentistry`, `same-day-crowns`, `6-month-braces`, `veneers-and-laminates`, `dental-implants`, `teeth-whitening`.
+Each item has: Title, Slug (`/services/<slug>`), Service Slug, Meta Title / Description, Eyebrow, Hero Heading / Subheading / Image, CTA labels and actions, Offerings Eyebrow / Heading / Intro / Section Subtitle,
+Offering 1-4 (title, description, align), Offerings (JSON, all 7 cards with Unsplash image URL, alt text and 3 chips), FAQs (JSON, 6 items), FAQ Heading, Experience block, Sections (placeholder flags) and Published = true.
+Offering 1-4 "Bullets" and "Image" fields were left empty (like the existing rows); the chips and card images live in the `offerings` JSON.
+
+**Existing rows left untouched:** `invisalign`, `lanap-treatment` (two of the eight grid pages) and `cosmetic-dentistry` already had CMS rows with content written in the CMS, plus a stray draft row `lanap-treatment` (no published flag). They still render from the local page data
+because their rows have no `offerings` JSON; once a row gets `offerings` and `faqs` filled, the page switches to the CMS automatically.
+
+**How the page chooses its content:** a record drives the page only if it has the `offerings` array; otherwise the local data in `src/data/servicesData.ts` is used.
+The page root carries `data-content-source="cms"|"local"` for checking. Rich-text fields (hero subheading, meta description, offering descriptions) are stored by Wix as HTML and converted to plain paragraphs.
+
+Placeholder content in the new items (dummy cards/FAQs where the live site had none) is flagged in each item's `sections` field.

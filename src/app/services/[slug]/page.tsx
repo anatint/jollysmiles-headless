@@ -1,73 +1,61 @@
 import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
-import { getCollectionItems, getSingleItem } from "@/lib/wix";
+import { getSingleItem } from "@/lib/wix";
+import { getServicePages, findServicePage, isCompleteServicePage, servicePageToDetail } from "@/lib/servicePages";
 import { buildPageMetadata } from '@/lib/seo';
 import SchemaJsonLd from '@/components/SchemaJsonLd';
 import ServiceHero from '@/components/services/ServiceHero';
 import ServiceCardsList from '@/components/services/ServiceCardsList';
 import ServiceFAQ from '@/components/services/ServiceFAQ';
 import CTABanner from '@/components/CTABanner';
-import { servicesData, ServiceDetailData, SubServiceItem, FAQItem } from "@/data/servicesData";
-
-// Repeatable sections (cards, FAQs) can be stored in the Wix Services collection as an array or a JSON string.
-function cmsList<T>(value: unknown): T[] | undefined {
-  let list: unknown = value;
-  if (typeof list === 'string' && list.trim().startsWith('[')) {
-    try { list = JSON.parse(list); } catch { return undefined; }
-  }
-  return Array.isArray(list) && list.length > 0 ? (list as T[]) : undefined;
-}
+import { servicesData, ServiceDetailData } from "@/data/servicesData";
 
 export const revalidate = 0; // Dynamic rendering for instant CMS updates
 
-export async function generateStaticParams() {
-  const wixServices = await getCollectionItems('Services');
-  const slugs = Object.keys(servicesData);
-  
-  if (wixServices && wixServices.length > 0) {
-    wixServices.forEach((s: any) => {
-      if (s.slug && !slugs.includes(s.slug)) {
-        slugs.push(s.slug);
-      }
-    });
+/**
+ * Page content comes from the Wix `service-pages` collection (shown as "Services" in the CMS) when the record is
+ * complete; otherwise from the local data in src/data/servicesData.ts.
+ */
+async function loadService(slug: string): Promise<{ service?: ServiceDetailData; source: 'cms' | 'local' }> {
+  const record = findServicePage(await getServicePages(), slug);
+  if (record && isCompleteServicePage(record)) {
+    return { service: servicePageToDetail(record), source: 'cms' };
   }
+  return { service: servicesData[slug], source: 'local' };
+}
 
+export async function generateStaticParams() {
+  const records = await getServicePages();
+  const slugs = Object.keys(servicesData);
+  records.forEach((r: any) => {
+    const s = r?.serviceSlug;
+    if (s && !slugs.includes(s)) slugs.push(s);
+  });
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const localData = servicesData[slug];
-  const wixServices = await getCollectionItems('Services');
-  const wixService = wixServices.find((s: any) => s.slug === slug);
+  const { service } = await loadService(slug);
 
-  if (!localData && !wixService) {
+  if (!service) {
     return { title: 'Service | Jolly Smiles Dental' };
   }
 
-  const mergedData = {
-    ...localData,
-    ...wixService,
-    title: wixService?.title || localData?.title,
-    metaTitle: wixService?.metaTitle || localData?.metaTitle || `${localData?.title || 'Service'} in Middletown, DE | Jolly Smiles`,
-    metaDescription: wixService?.metaDescription || localData?.metaDescription || localData?.heroParagraphs?.[0] || 'Quality dental care at Jolly Smiles.'
-  };
-
-  return buildPageMetadata(`/services/${slug}`, mergedData);
+  return buildPageMetadata(`/services/${slug}`, {
+    ...service,
+    metaTitle: service.metaTitle || `${service.title || 'Service'} in Middletown, DE | Jolly Smiles`,
+    metaDescription: service.metaDescription || service.heroParagraphs?.[0] || 'Quality dental care at Jolly Smiles.',
+  });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  
-  // Try to find matching service in rich services data or Wix CMS
-  let service: ServiceDetailData | undefined = servicesData[slug];
-  
-  const wixServices = await getCollectionItems('Services');
-  const wixService = wixServices.find((s: any) => s.slug === slug);
 
-  // If not found in exact slug, check if fallback is available or 404
-  if (!service && !wixService) {
-    // Check if slug contains keywords
+  let { service, source } = await loadService(slug);
+
+  // Unknown slug: fall back to the closest local page by keyword (as before), otherwise 404.
+  if (!service) {
     if (slug.includes('implant')) service = servicesData['dental-implants'];
     else if (slug.includes('invisalign') || slug.includes('brace') || slug.includes('ortho')) service = servicesData['invisalign'];
     else if (slug.includes('crown')) service = servicesData['same-day-crowns'];
@@ -76,7 +64,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     else service = servicesData['general-dentistry'];
   }
 
-  if (!service && !wixService) {
+  if (!service) {
     notFound();
   }
 
@@ -85,17 +73,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const siteSettings = await getSingleItem('SiteSettings');
   const phone = contactData?.callPhone || contactData?.phone || siteSettings?.phone || '(302) 658-7200';
 
-  // Merge CMS overrides if available
-  const displayTitle = wixService?.title || service?.title || 'Dental Service';
-  const displayParagraphs = (wixService?.heroParagraphs && Array.isArray(wixService.heroParagraphs))
-    ? wixService.heroParagraphs
-    : (wixService?.heroDescription ? [wixService.heroDescription] : (service?.heroParagraphs || []));
-  const displayHeroImage = wixService?.heroImage || service?.heroImage || '/procedures-hero.png';
-  const displayEyebrow = wixService?.categoryEyebrow || service?.categoryEyebrow || `OUR ${displayTitle.toUpperCase()} CARE`;
-  const displayCategoryHeading = wixService?.categoryHeading || service?.categoryHeading || 'Enhancing Smiles. Transforming Lives.';
-  const displayCategoryDescription = wixService?.categoryDescription || service?.categoryDescription || 'Our advanced dental treatments are safe, effective, and customized to your unique needs.';
-  const displaySubServices = cmsList<SubServiceItem>(wixService?.subServices) ?? service?.subServices ?? [];
-  const displayFaqs = cmsList<FAQItem>(wixService?.faqs) ?? service?.faqs ?? [];
+  const displayTitle = service.title || 'Dental Service';
+  const displayParagraphs = service.heroParagraphs || [];
+  const displayHeroImage = service.heroImage || '/procedures-hero.png';
+  const displayEyebrow = service.categoryEyebrow || `OUR ${displayTitle.toUpperCase()} CARE`;
+  const displayCategoryHeading = service.categoryHeading || 'Enhancing Smiles. Transforming Lives.';
+  const displayCategoryDescription = service.categoryDescription || 'Our advanced dental treatments are safe, effective, and customized to your unique needs.';
+  const displaySubServices = service.subServices || [];
+  const displayFaqs = service.faqs || [];
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -128,7 +113,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (faqSchema) customSchemas.push(faqSchema);
 
   return (
-    <div className="bg-white font-sans min-h-screen">
+    <div className="bg-white font-sans min-h-screen" data-content-source={source}>
       <SchemaJsonLd path={`/services/${slug}`} customSchemas={customSchemas} />
       
       {/* 1. Hero Section */}
@@ -136,9 +121,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         title={displayTitle}
         paragraphs={displayParagraphs}
         image={displayHeroImage}
-        imageAlt={service?.heroImageAlt}
-        ctaPrimaryLabel={service?.ctaPrimaryLabel || "BOOK APPOINTMENT"}
-        ctaSecondaryLabel={service?.ctaSecondaryLabel || "CONSULT OUR EXPERTS"}
+        imageAlt={service.heroImageAlt}
+        ctaPrimaryLabel={service.ctaPrimaryLabel || "BOOK APPOINTMENT"}
+        ctaSecondaryLabel={service.ctaSecondaryLabel || "CONSULT OUR EXPERTS"}
       />
 
       {/* 2. Sub-Services / Procedures Zig-Zag Cards */}
