@@ -59,7 +59,7 @@ export default function ServiceHero({
               </button>
 
               <Link
-                href="/contact#contact-form"
+                href="/contact-us#contact-form"
                 className="bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-3 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 text-center"
               >
                 {ctaSecondaryLabel}

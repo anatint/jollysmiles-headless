@@ -1,0 +1,5 @@
+import { sitemapResponse } from '@/lib/sitemapXml';
+
+export function GET() {
+  return sitemapResponse('blog-posts-sitemap');
+}

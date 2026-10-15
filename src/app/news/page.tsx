@@ -13,7 +13,7 @@ import SchemaJsonLd from '@/components/SchemaJsonLd';
 export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
-  return buildPageMetadata('/blog');
+  return buildPageMetadata('/news');
 }
 
 export default async function BlogPage() {
@@ -21,7 +21,7 @@ export default async function BlogPage() {
 
   return (
     <div className="bg-white font-sans min-h-screen">
-      <SchemaJsonLd path="/blog" />
+      <SchemaJsonLd path="/news" />
       <BlogHero />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[35px]">
@@ -63,7 +63,7 @@ export default async function BlogPage() {
                 Looking for trusted dental care? From cosmetic smile makeovers to dental implants, our friendly experts are here for you.
               </p>
               <Link 
-                href="/contact"
+                href="/contact-us"
                 className="w-full bg-brand-red hover:bg-brand-dark text-white font-bold text-xs uppercase tracking-wider py-3 rounded-lg flex items-center justify-center gap-2 transition shadow-sm"
               >
                 Book An Appointment <ArrowRight className="w-3.5 h-3.5" />
@@ -80,7 +80,7 @@ export default async function BlogPage() {
                 {blogs.slice(0, 5).map((post) => (
                   <Link 
                     key={`sidebar-${post.id}`} 
-                    href={`/blog/${post.slug}`} 
+                    href={`/post/${post.slug}`} 
                     className="flex gap-4 group items-center"
                   >
                     <div className="relative w-16 h-16 rounded-xl bg-gray-100 flex-shrink-0 overflow-hidden border border-gray-100">
@@ -112,7 +112,7 @@ export default async function BlogPage() {
                 Contact our friendly team today for consultations or answers to your dental concerns.
               </p>
               <Link 
-                href="/contact" 
+                href="/contact-us" 
                 className="w-full bg-white border border-brand-red text-brand-red hover:bg-red-50 font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition inline-flex items-center justify-center gap-1"
               >
                 Contact Us

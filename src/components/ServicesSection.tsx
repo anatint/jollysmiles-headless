@@ -6,31 +6,31 @@ const services = [
     title: "Dental Implants",
     description: "Permanent solutions for missing teeth that look, feel, and function naturally.",
     icon: <Drill className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
-    link: "/services/dental-implants"
+    link: "/dental-implants"
   },
   {
     title: "Invisalign®",
     description: "Straighten your teeth comfortably and confidently with clear aligners.",
     icon: <SmilePlus className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
-    link: "/services/invisalign"
+    link: "/invisalign"
   },
   {
     title: "LANAP Treatment",
     description: "Advanced laser treatment to treat gum disease and save your teeth with minimal discomfort.",
     icon: <Sparkles className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
-    link: "/services/lanap-treatment"
+    link: "/lanap"
   },
   {
     title: "Teeth Whitening",
     description: "Professional whitening for a brighter, more radiant smile.",
     icon: <Stethoscope className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
-    link: "/services/cosmetic-dentistry"
+    link: "/cosmetic-dentistry"
   },
   {
     title: "Emergency Care",
     description: "Same-day care for dental emergencies when you need us most.",
     icon: <BriefcaseMedical className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
-    link: "/services/emergency-care"
+    link: "/emergency-dental-services"
   }
 ];
 
@@ -52,7 +52,7 @@ export default function ServicesSection({ data }: { data?: ServiceData[] }) {
           title: s.title || "Dental Service",
           description: s.shortDescription ? s.shortDescription.replace(/<[^>]*>?/gm, '') : "Comprehensive dental care for your smile.",
           icon: staticMatch ? staticMatch.icon : <Sparkles className="w-10 h-10 text-brand-red" strokeWidth={1.5} />,
-          link: `/services/${s.slug}`
+          link: `/${s.slug}`
         };
       })
     : services;

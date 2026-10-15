@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { getLiveSeo, liveSeoToMetadata } from '@/lib/liveSeo';
 
 export interface PageSeoConfig {
   title: string;
@@ -256,6 +257,10 @@ export const liveSeoData: Record<string, PageSeoConfig> = {
 };
 
 export function buildPageMetadata(path: string, cmsData?: any): Metadata {
+  // The live site's exact SEO data for this URL always wins (title, description, canonical, OG, ...).
+  const live = getLiveSeo(path);
+  if (live) return liveSeoToMetadata(live);
+
   const fallback = liveSeoData[path] || liveSeoData['/'];
   const title = cmsData?.metaTitle || cmsData?.meta_title || cmsData?.title || fallback.title;
   const description = cmsData?.metaDescription || cmsData?.meta_description || cmsData?.description || fallback.description;

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const aboutSettingsList = await getCollectionItems('AboutSettings');
   const aboutPageSettingsList = await getCollectionItems('AboutPageSettings');
   const root = aboutSettingsList[0] || aboutPageSettingsList[0] || {};
-  return buildPageMetadata('/about', root);
+  return buildPageMetadata('/about-us', root);
 }
 
 export const revalidate = 0;
@@ -36,7 +36,7 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-white font-sans">
-      <SchemaJsonLd path="/about" />
+      <SchemaJsonLd path="/about-us" />
       <AboutHero data={aboutData} />
       <OurStory data={aboutData} />
       <OurValues data={valuesData.length > 0 ? valuesData : aboutData} />

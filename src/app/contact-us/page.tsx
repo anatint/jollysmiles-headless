@@ -13,7 +13,7 @@ export const revalidate = 0; // Force dynamic rendering so CMS changes appear in
 
 export async function generateMetadata(): Promise<Metadata> {
   const contactData = await getSingleItem('ContactSettings');
-  return buildPageMetadata('/contact', contactData);
+  return buildPageMetadata('/contact-us', contactData);
 }
 
 export default async function ContactPage() {
@@ -22,7 +22,7 @@ export default async function ContactPage() {
 
   return (
     <div className="bg-white font-sans">
-      <SchemaJsonLd path="/contact" />
+      <SchemaJsonLd path="/contact-us" />
       <ContactHero data={contactData as any} />
       <ContactFormSection data={contactData as any} />
       <ContactMap 

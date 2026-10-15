@@ -17,13 +17,13 @@ export default function Header({ settings, navigation }: { settings?: any, navig
     ? navigation.filter(n => n.visible !== false && n.location !== 'footer').sort((a, b) => (a.order || 0) - (b.order || 0))
     : [
         { label: 'Home', url: '/' },
-        { label: 'About', url: '/about' },
+        { label: 'About', url: '/about-us' },
         { label: 'Services', url: '/services' },
         { label: 'Procedures', url: '/procedures' },
         { label: 'Technologies', url: '/technologies' },
-        { label: 'Our Team', url: '/team' },
-        { label: 'Blog', url: '/blog' },
-        { label: 'Contact', url: '/contact' }
+        { label: 'Our Team', url: '/our-team' },
+        { label: 'Blog', url: '/news' },
+        { label: 'Contact', url: '/contact-us' }
       ];
 
   let logoUrl = settings?.logo || "/logo.png";
@@ -54,7 +54,7 @@ export default function Header({ settings, navigation }: { settings?: any, navig
                 return (
                   <Link 
                     key={idx} 
-                    href={item.url === '/contact' ? (pathname === '/contact' ? '#contact-form' : '/contact#contact-form') : item.url} 
+                    href={item.url === '/contact-us' ? (pathname === '/contact-us' ? '#contact-form' : '/contact-us#contact-form') : item.url} 
                     className={`font-medium hover:text-brand-red transition ${isActive ? 'text-brand-red border-b-2 border-brand-red pb-1' : 'text-gray-700'}`}
                   >
                     {item.label}
@@ -87,14 +87,14 @@ export default function Header({ settings, navigation }: { settings?: any, navig
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-3 space-y-1 shadow-lg absolute w-full left-0">
           <Link href="/" className="block px-3 py-2 text-brand-red font-medium">Home</Link>
-          <Link href="/about" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">About Us</Link>
-          <Link href="/team" className="block px-3 py-2 pl-6 text-gray-600 font-medium hover:text-brand-red">Our Team</Link>
+          <Link href="/about-us" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">About Us</Link>
+          <Link href="/our-team" className="block px-3 py-2 pl-6 text-gray-600 font-medium hover:text-brand-red">Our Team</Link>
           <Link href="/services" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Services</Link>
           <Link href="/procedures" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Procedures</Link>
           <Link href="/technologies" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Technologies</Link>
 
-          <Link href="/blog" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Blog</Link>
-          <Link href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'} className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Contact Us</Link>
+          <Link href="/news" className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Blog</Link>
+          <Link href={pathname === '/contact-us' ? '#contact-form' : '/contact-us#contact-form'} className="block px-3 py-2 text-gray-700 font-medium hover:text-brand-red">Contact Us</Link>
           <button 
             onClick={() => {
               setIsMobileMenuOpen(false);

@@ -44,7 +44,7 @@ export default function CTABanner({ data }: { data?: any }) {
               {ctaPrimaryButton}
             </button>
             <Link 
-              href={pathname === '/contact' ? '#contact-form' : '/contact#contact-form'}
+              href={pathname === '/contact-us' ? '#contact-form' : '/contact-us#contact-form'}
               className="w-full sm:w-auto bg-white border border-brand-red text-brand-red hover:bg-red-50 px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-2 whitespace-nowrap"
             >
               <Phone className="w-3.5 h-3.5 text-brand-red" />

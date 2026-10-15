@@ -56,20 +56,20 @@ const defaultServices = [
 
 function getServiceLink(title: string) {
   const t = title.toLowerCase();
-  if (t.includes('implant')) return '/services/dental-implants';
-  if (t.includes('whitening')) return '/services/teeth-whitening';
-  if (t.includes('veneer') || t.includes('laminate')) return '/services/veneers-and-laminates';
-  if (t.includes('crown')) return '/services/same-day-crowns';
-  if (t.includes('invisalign')) return '/services/invisalign';
-  if (t.includes('brace')) return '/services/6-month-braces';
-  if (t.includes('lanap') || t.includes('laser') || t.includes('gum')) return '/services/lanap-treatment';
-  if (t.includes('full mouth') || t.includes('reconstruction')) return '/services/full-mouth-reconstruction';
-  if (t.includes('restorative')) return '/services/restorative-dentistry';
-  if (t.includes('preventive')) return '/services/preventive-dental-care';
-  if (t.includes('pediatric') || t.includes('child')) return '/services/pediatric-dentistry';
-  if (t.includes('emergency')) return '/services/emergency-dental-services';
-  if (t.includes('cosmetic') || t.includes('makeover')) return '/services/cosmetic-dentistry';
-  return '/services/general-dentistry';
+  if (t.includes('implant')) return '/dental-implants';
+  if (t.includes('whitening')) return '/teeth-whitening';
+  if (t.includes('veneer') || t.includes('laminate')) return '/veneers-and-laminates';
+  if (t.includes('crown')) return '/same-day-crowns';
+  if (t.includes('invisalign')) return '/invisalign';
+  if (t.includes('brace')) return '/6-month-braces';
+  if (t.includes('lanap') || t.includes('laser') || t.includes('gum')) return '/lanap';
+  if (t.includes('full mouth') || t.includes('reconstruction')) return '/full-mouth-reconstruction';
+  if (t.includes('restorative')) return '/restorative-dentistry';
+  if (t.includes('preventive')) return '/preventive-dental-care';
+  if (t.includes('pediatric') || t.includes('child')) return '/pediatric-dentistry';
+  if (t.includes('emergency')) return '/emergency-dental-services';
+  if (t.includes('cosmetic') || t.includes('makeover')) return '/cosmetic-dentistry';
+  return '/general-dentistry';
 }
 
 export default function ServicesGrid({ data }: { data?: any }) {
@@ -100,7 +100,7 @@ export default function ServicesGrid({ data }: { data?: any }) {
       title: s.title || s.name,
       description: s.description || s.heroDescription || '',
       image: getWixImageUrl(s.image || s.heroImage || s.photo, '/after-1.jpg'),
-      link: s.slug ? `/services/${s.slug}` : getServiceLink(s.title || s.name)
+      link: s.slug ? `/${s.slug}` : getServiceLink(s.title || s.name)
     }));
   } else {
     displayServices = defaultServices.map((service) => ({ ...service, link: getServiceLink(service.title) }));

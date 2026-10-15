@@ -13,7 +13,7 @@ export default function ProceduresHero({ data }: { data?: any[] }) {
   const heading = root?.heroHeading || `Dental Procedures <br /><span class="text-brand-red">Designed for Your Smile</span>`;
   const description = root?.heroDescription || "We combine advanced technology with compassionate care to deliver safe, comfortable, and effective dental procedures for patients in Middletown, DE and surrounding communities.";
   const primaryLabel = root?.ctaPrimaryLabel || "OUR TEAM";
-  const primaryUrl = "/team";
+  const primaryUrl = "/our-team";
   const secondaryLabel = root?.ctaSecondaryLabel && !root.ctaSecondaryLabel.toLowerCase().includes('working')
     ? root.ctaSecondaryLabel 
     : "BOOK AN APPOINTMENT";

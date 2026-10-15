@@ -44,7 +44,7 @@ export default function HeroSection({ heroData, statsData }: { heroData?: any[],
             >
               {hero?.primaryButtonLabel || "Book An Appointment"}
             </button>
-            <Link href={hero?.secondaryButtonUrl || "/contact"} className="w-full sm:w-auto bg-white border-[2px] border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs">
+            <Link href={hero?.secondaryButtonUrl || "/contact-us"} className="w-full sm:w-auto bg-white border-[2px] border-brand-red text-brand-red hover:bg-red-50 px-5 py-2.5 rounded-[4px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs">
               {hero?.secondaryButtonLabel || "Free Consultation"} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </div>

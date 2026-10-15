@@ -13,7 +13,8 @@ export const wixClient = createClient({
 
 export async function getCollectionItems(collectionId: string) {
   try {
-    const response = await wixClient.items.query(collectionId).find();
+    // Wix returns only 50 items by default; blog posts need all of them.
+    const response = await wixClient.items.query(collectionId).limit(1000).find();
     return response.items;
   } catch (error) {
     console.error(`Error fetching collection ${collectionId}:`, error);

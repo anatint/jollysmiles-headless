@@ -1,4 +1,6 @@
 import blogsData from '@/data/blogs.json';
+import extraBlogsData from '@/data/extraBlogs.json';
+import newsCategoriesData from '@/data/newsCategories.json';
 import { getCollectionItems, getWixImageUrl } from './wix';
 
 export interface BlogPost {
@@ -149,9 +151,13 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
   }
 
   // Use live Wix items if available, or fall back to local
-  const baseList = wixList.length > 0 ? wixList : localList;
+  // CMS posts first; any post that only exists in the local export is added so no live URL can disappear.
+  const wixSlugs = new Set(wixList.map((p: any) => String(p.slug || '').toLowerCase()));
+  const baseList = wixList.length > 0
+    ? [...wixList, ...localList.filter((p: any) => p.slug && !wixSlugs.has(String(p.slug).toLowerCase()))]
+    : localList;
 
-  return baseList.map((post: any, idx: number) => {
+  const posts: BlogPost[] = baseList.map((post: any, idx: number) => {
     const rawSlug = post.slug || (post.title ? post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : `post-${idx + 1}`);
     const localMatch = localMap.get(rawSlug.toLowerCase());
 
@@ -205,6 +211,41 @@ export async function getAllBlogs(): Promise<BlogPost[]> {
       metaDescription: metaDescription
     };
   });
+
+  return [...posts, ...getExtraLivePosts(new Set(posts.map((p) => p.slug.toLowerCase())))];
+}
+
+// Posts that exist on the live site (https://www.jollysmiles.com/post/<slug>) but not in the Wix blog / blogs.json.
+// Captured from the live pages (src/data/extraBlogs.json) so every live post URL keeps working after the migration.
+function getExtraLivePosts(existing: Set<string>): BlogPost[] {
+  const categories = newsCategoriesData as Record<string, { title: string; h1: string; posts: string[] }>;
+  const categoryOf = (slug: string) => {
+    for (const [key, cat] of Object.entries(categories)) {
+      if (key !== '__news__' && cat.posts.includes(slug)) return cat.h1 || cat.title;
+    }
+    return 'Dental Care';
+  };
+  return Object.values(extraBlogsData as Record<string, any>)
+    .filter((p) => p?.slug && !existing.has(String(p.slug).toLowerCase()))
+    .map((p) => {
+      const text = stripHtml(p.contentHtml);
+      const words = text ? text.split(' ').length : 0;
+      const published = p.publishedTime ? new Date(p.publishedTime) : null;
+      return {
+        id: p.slug,
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.metaDescription || text.slice(0, 200),
+        contentHtml: p.contentHtml || `<p>${p.metaDescription || ''}</p>`,
+        coverImage: p.coverImage || '/clinic-reception.png',
+        category: categoryOf(p.slug),
+        date: published && !isNaN(published.getTime()) ? published.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent',
+        readTime: `${Math.max(1, Math.round(words / 200))} min read`,
+        author: p.author || 'Jolly Smiles',
+        metaTitle: p.metaTitle || p.title,
+        metaDescription: p.metaDescription || '',
+      } satisfies BlogPost;
+    });
 }
 
 export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {

@@ -52,7 +52,7 @@ export default function ServicesHero({ data }: { data?: any }) {
               >
                 {primaryButton}
               </button>
-              <Link href="/contact" className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-3 rounded-lg font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
+              <Link href="/contact-us" className="w-full sm:w-auto bg-transparent border-2 border-brand-red text-brand-red hover:bg-red-50 px-6 py-3 rounded-lg font-bold uppercase tracking-wider transition-colors flex items-center justify-center shadow-sm text-xs group">
                 {secondaryButton} <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Share2, User, ChevronRight, Spa
 import CTABanner from '@/components/CTABanner';
 import { getAllBlogs, getBlogBySlug } from '@/lib/blogs';
 import SchemaJsonLd from '@/components/SchemaJsonLd';
+import { getLiveSeo, liveSeoToMetadata } from '@/lib/liveSeo';
 
 export const revalidate = 0;
 
@@ -18,6 +19,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+
+  // The live site's exact title, description, canonical, Open Graph and Twitter tags for this post.
+  const live = getLiveSeo(`/post/${slug}`);
+  if (live) return liveSeoToMetadata(live);
+
   const blog = await getBlogBySlug(slug);
 
   if (!blog) {
@@ -80,7 +86,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="bg-white font-sans min-h-screen">
-      <SchemaJsonLd customSchemas={[articleSchema]} />
+      <SchemaJsonLd path={`/post/${slug}`} customSchemas={[articleSchema]} />
       
       {/* Hero / Header Section */}
       <div className="relative bg-gradient-to-b from-red-50/60 via-white to-white py-[40px] border-b border-gray-100">
@@ -89,7 +95,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {/* Breadcrumb & Back Link */}
           <div className="flex items-center justify-between gap-4 mb-6">
             <Link 
-              href="/blog" 
+              href="/news" 
               className="inline-flex items-center text-sm font-bold text-brand-red hover:text-brand-dark transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -99,7 +105,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="hidden sm:flex items-center text-sm font-medium text-brand-red">
               <Link href="/" className="hover:underline">Home</Link>
               <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-              <Link href="/blog" className="hover:underline">Blog</Link>
+              <Link href="/news" className="hover:underline">Blog</Link>
               <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
               <span className="text-gray-700 truncate max-w-[200px]">{blog.category}</span>
             </div>
@@ -183,7 +189,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               Our team of dedicated dental professionals in Middletown, DE is committed to providing patient-centered, compassionate care with the latest technology.
             </p>
             <div className="pt-1">
-              <Link href="/team" className="text-brand-red font-bold text-xs uppercase tracking-wider hover:underline inline-flex items-center">
+              <Link href="/our-team" className="text-brand-red font-bold text-xs uppercase tracking-wider hover:underline inline-flex items-center">
                 Meet Our Doctors <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </Link>
             </div>
@@ -201,7 +207,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <p className="text-gray-500 text-sm mt-1">Explore helpful guides and oral health insights</p>
               </div>
               <Link 
-                href="/blog" 
+                href="/news" 
                 className="text-brand-red font-bold text-sm hover:underline hidden sm:inline-flex items-center"
               >
                 View All <ArrowRight className="w-4 h-4 ml-1" />
@@ -212,7 +218,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {recentBlogs.map((item) => (
                 <Link 
                   key={item.id} 
-                  href={`/blog/${item.slug}`}
+                  href={`/post/${item.slug}`}
                   className="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col h-full"
                 >
                   <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">

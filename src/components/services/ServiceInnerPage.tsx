@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import { getSingleItem } from "@/lib/wix";
 import { getServicePages, findServicePage, isCompleteServicePage, servicePageToDetail } from "@/lib/servicePages";
@@ -9,14 +8,22 @@ import ServiceCardsList from '@/components/services/ServiceCardsList';
 import ServiceFAQ from '@/components/services/ServiceFAQ';
 import CTABanner from '@/components/CTABanner';
 import { servicesData, ServiceDetailData } from "@/data/servicesData";
+import type { Metadata } from 'next';
 
-export const revalidate = 0; // Dynamic rendering for instant CMS updates
+const LIVE_H1: Record<string, string> = {
+  '/invisalign': 'Invisalign Treatment',
+  '/lanap': 'Lanap Treatment',
+  '/dental-implants': 'Dental implants',
+  '/tooth-implants': 'Tooth Implants',
+  '/same-day-crowns': 'Same day crowns',
+  '/veneers-and-laminates': 'Veneers and laminates',
+};
 
 /**
  * Page content comes from the Wix `service-pages` collection (shown as "Services" in the CMS) when the record is
  * complete; otherwise from the local data in src/data/servicesData.ts.
  */
-async function loadService(slug: string): Promise<{ service?: ServiceDetailData; source: 'cms' | 'local' }> {
+export async function loadService(slug: string): Promise<{ service?: ServiceDetailData; source: 'cms' | 'local' }> {
   const record = findServicePage(await getServicePages(), slug);
   if (record && isCompleteServicePage(record)) {
     return { service: servicePageToDetail(record), source: 'cms' };
@@ -24,45 +31,24 @@ async function loadService(slug: string): Promise<{ service?: ServiceDetailData;
   return { service: servicesData[slug], source: 'local' };
 }
 
-export async function generateStaticParams() {
-  const records = await getServicePages();
-  const slugs = Object.keys(servicesData);
-  records.forEach((r: any) => {
-    const s = r?.serviceSlug;
-    if (s && !slugs.includes(s)) slugs.push(s);
-  });
-  return slugs.map((slug) => ({ slug }));
-}
-
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const { service } = await loadService(slug);
+/** `dataKey` is the page's key in the data; `path` is the live URL path used for SEO (title, description, canonical). */
+export async function serviceMetadata(dataKey: string, path: string): Promise<Metadata> {
+  const { service } = await loadService(dataKey);
 
   if (!service) {
     return { title: 'Service | Jolly Smiles Dental' };
   }
 
-  return buildPageMetadata(`/services/${slug}`, {
+  return buildPageMetadata(path, {
     ...service,
     metaTitle: service.metaTitle || `${service.title || 'Service'} in Middletown, DE | Jolly Smiles`,
     metaDescription: service.metaDescription || service.heroParagraphs?.[0] || 'Quality dental care at Jolly Smiles.',
   });
 }
 
-export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function ServiceInnerPage({ slug, path }: { slug: string; path: string }) {
 
-  let { service, source } = await loadService(slug);
-
-  // Unknown slug: fall back to the closest local page by keyword (as before), otherwise 404.
-  if (!service) {
-    if (slug.includes('implant')) service = servicesData['dental-implants'];
-    else if (slug.includes('invisalign') || slug.includes('brace') || slug.includes('ortho')) service = servicesData['invisalign'];
-    else if (slug.includes('crown')) service = servicesData['same-day-crowns'];
-    else if (slug.includes('laser') || slug.includes('lanap') || slug.includes('gum')) service = servicesData['lanap-treatment'];
-    else if (slug.includes('cosmetic') || slug.includes('whitening') || slug.includes('veneer') || slug.includes('smile')) service = servicesData['cosmetic-dentistry'];
-    else service = servicesData['general-dentistry'];
-  }
+  const { service, source } = await loadService(slug);
 
   if (!service) {
     notFound();
@@ -73,7 +59,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const siteSettings = await getSingleItem('SiteSettings');
   const phone = contactData?.callPhone || contactData?.phone || siteSettings?.phone || '(302) 658-7200';
 
-  const displayTitle = service.title || 'Dental Service';
+  // Same H1 text as the live page of this URL (the live H1 is a ranking signal).
+  const displayTitle = LIVE_H1[path] || service.title || 'Dental Service';
   const displayParagraphs = service.heroParagraphs || [];
   const displayHeroImage = service.heroImage || '/procedures-hero.png';
   const displayEyebrow = service.categoryEyebrow || `OUR ${displayTitle.toUpperCase()} CARE`;
@@ -114,7 +101,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="bg-white font-sans min-h-screen" data-content-source={source}>
-      <SchemaJsonLd path={`/services/${slug}`} customSchemas={customSchemas} />
+      <SchemaJsonLd path={path} customSchemas={customSchemas} />
       
       {/* 1. Hero Section */}
       <ServiceHero

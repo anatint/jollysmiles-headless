@@ -101,7 +101,7 @@ export default function ServiceFAQ({
         <div className="mt-10 text-center text-sm text-gray-500">
           <span>Still have questions? </span>
           <a
-            href="/contact#contact-form"
+            href="/contact-us#contact-form"
             className="text-brand-red font-semibold hover:underline"
           >
             Contact our Middletown team

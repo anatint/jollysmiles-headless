@@ -1,0 +1,289 @@
+{
+ "__news__": {
+  "path": "/news",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "News | Jolly Smiles Dental Clinic in Delaware, Get in touch with us for news",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "straighten-your-teeth-invisibly-with-invisalign-clear-aligners",
+   "importance-hydration-oral-health-1",
+   "enhance-your-smile-with-cosmetic-dentistry-services"
+  ]
+ },
+ "preventive-dentistry": {
+  "path": "/news/categories/preventive-dentistry",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Preventive Dentistry",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "sealants-fluoride-middletown",
+   "regular-dental-checkups-middletown",
+   "daily-oral-hygiene-middletown",
+   "the-role-of-preventive-dentistry-in-middletown"
+  ]
+ },
+ "video": {
+  "path": "/news/categories/video",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Video",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "orthodontics": {
+  "path": "/news/categories/orthodontics",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Orthodontics",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "traditional-braces-middletown",
+   "introduction-to-orthodontics-in-middletown",
+   "choosing-orthodontist-middletown",
+   "orthodontic-treatment-cost-middletown"
+  ]
+ },
+ "medicare": {
+  "path": "/news/categories/medicare",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Medicare",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "general-dentistry": {
+  "path": "/news/categories/general-dentistry",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "General Dentistry",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "teeth-cleaning-middletown-1",
+   "mastering-dental-fillings-in-middletown-a-comprehensive-guide-to-types-and-procedures",
+   "teeth-cleaning-middletown",
+   "tooth-decay-prevention-middletown"
+  ]
+ },
+ "image": {
+  "path": "/news/categories/image",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Image",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "announcements": {
+  "path": "/news/categories/announcements",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Announcements",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "types-of-dental-surgeries": {
+  "path": "/news/categories/types-of-dental-surgeries",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Types of dental surgeries",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "oral-surgery-introduction-middletown"
+  ]
+ },
+ "endodontics": {
+  "path": "/news/categories/endodontics",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Endodontics",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "root-canal-care-in-middletown",
+   "post-root-canal-care-middletown",
+   "signs-root-canal-middletown"
+  ]
+ },
+ "eye-care": {
+  "path": "/news/categories/eye-care",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Eye care",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "periodontics": {
+  "path": "/news/categories/periodontics",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Periodontics",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "periodontal-treatments-middletown",
+   "understanding-periodontics-middletown",
+   "preventing-gum-disease-middletown"
+  ]
+ },
+ "oral-surgery": {
+  "path": "/news/categories/oral-surgery",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Oral Surgery",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "dental-implants-middletown",
+   "wisdom-tooth-removal-middletown"
+  ]
+ },
+ "pediatric-dentistry": {
+  "path": "/news/categories/pediatric-dentistry",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Pediatric Dentistry",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "dental-sealants-children-middletown",
+   "child-friendly-dental-practices-in-middletown",
+   "first-dental-visit-middletown",
+   "pediatric-dental-emergencies-middletown"
+  ]
+ },
+ "news": {
+  "path": "/news/categories/news",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "News",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "video-1": {
+  "path": "/news/categories/video-1",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Video",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "dental-technology": {
+  "path": "/news/categories/dental-technology",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Dental Technology",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "managing-dental-anxiety-in-children",
+   "latest-dental-technologies-middletown",
+   "digital-impressions-middletown"
+  ]
+ },
+ "emergency-dental-care": {
+  "path": "/news/categories/emergency-dental-care",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Emergency Dental Care",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "lost-filling-crown-middletown",
+   "dental-emergency-definition-middletown"
+  ]
+ },
+ "audio": {
+  "path": "/news/categories/audio",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Audio",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "dental-emergency": {
+  "path": "/news/categories/dental-emergency",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Dental Emergency",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "gallery-1": {
+  "path": "/news/categories/gallery-1",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Gallery",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "audio-1": {
+  "path": "/news/categories/audio-1",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Audio",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "cosmetic-dentistry": {
+  "path": "/news/categories/cosmetic-dentistry",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Cosmetic Dentistry",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown",
+   "gum-contouring-middletown",
+   "smile-makeover-what-middletown-patients-need-to-know",
+   "teeth-whitening-middletown-1",
+   "porcelain-crowns-bridges-middletown"
+  ]
+ },
+ "gallery": {
+  "path": "/news/categories/gallery",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Gallery",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ },
+ "image-1": {
+  "path": "/news/categories/image-1",
+  "h1": "NEWS AND ANNOUNCEMENTS",
+  "title": "Image",
+  "posts": [
+   "oral-surgery-recovery-middletown",
+   "broken-knocked-out-teeth-middletown",
+   "dental-emergencies-middletown"
+  ]
+ }
+}

@@ -53,7 +53,7 @@ export default function BlogSection({ data }: { data?: any[] }) {
             </h2>
             <p className="text-gray-600 text-lg">Expert advice for a healthier smile</p>
           </div>
-          <Link href="/blog" className="mt-6 md:mt-0 text-brand-red font-bold text-xs tracking-wider uppercase flex items-center hover:text-red-700 transition-colors">
+          <Link href="/news" className="mt-6 md:mt-0 text-brand-red font-bold text-xs tracking-wider uppercase flex items-center hover:text-red-700 transition-colors">
             View All Articles <ArrowRight className="w-4 h-4 ml-2" />
           </Link>
         </div>
@@ -75,7 +75,7 @@ export default function BlogSection({ data }: { data?: any[] }) {
                 <h3 className="text-lg font-bold text-gray-900 mb-4 leading-snug group-hover:text-brand-red transition-colors">
                   {article.title}
                 </h3>
-                <Link href={`/blog/${article.slug || '#'}`} className="mt-auto text-brand-red font-bold text-xs tracking-wider uppercase flex items-center group-hover:text-red-700 transition-colors">
+                <Link href={`/post/${article.slug || '#'}`} className="mt-auto text-brand-red font-bold text-xs tracking-wider uppercase flex items-center group-hover:text-red-700 transition-colors">
                   Read More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

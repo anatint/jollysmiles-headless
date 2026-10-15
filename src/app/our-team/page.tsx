@@ -60,7 +60,7 @@ export const revalidate = 0;
 export async function generateMetadata(): Promise<Metadata> {
   const settingsList = await getTeamSettingsData();
   const settingsItem = settingsList[0] || {};
-  return buildPageMetadata('/team', settingsItem);
+  return buildPageMetadata('/our-team', settingsItem);
 }
 
 export default async function TeamPage() {
@@ -74,7 +74,7 @@ export default async function TeamPage() {
 
   return (
     <main className="bg-white font-sans min-h-screen">
-      <SchemaJsonLd path="/team" />
+      <SchemaJsonLd path="/our-team" />
       <TeamHero data={activeSettings} />
       <TeamGrid data={teamMembersData} settings={activeSettings} />
       <CTABanner data={activeSettings} />

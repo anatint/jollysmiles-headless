@@ -1,5 +1,12 @@
-import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
+import ServiceInnerPage, { serviceMetadata } from '@/components/services/ServiceInnerPage';
 
-export default function InvisalignRedirect() {
-  redirect('/services/invisalign');
+export const revalidate = 0;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return serviceMetadata('invisalign', '/invisalign');
+}
+
+export default function InvisalignPage() {
+  return <ServiceInnerPage slug="invisalign" path="/invisalign" />;
 }

@@ -15,13 +15,13 @@ export default function Footer({ settings, navigation }: { settings?: any, navig
       ? navigation.filter(n => n.visible !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
       : [
           { label: 'Home', url: '/' },
-          { label: 'About', url: '/about' },
+          { label: 'About', url: '/about-us' },
           { label: 'Services', url: '/services' },
           { label: 'Procedures', url: '/procedures' },
           { label: 'Technologies', url: '/technologies' },
-          { label: 'Our Team', url: '/team' },
-          { label: 'Blog', url: '/blog' },
-          { label: 'Contact', url: '/contact' }
+          { label: 'Our Team', url: '/our-team' },
+          { label: 'Blog', url: '/news' },
+          { label: 'Contact', url: '/contact-us' }
         ];
 
   const phone = settings?.phone || "302 DR-TEETH (378-3384)";
@@ -82,7 +82,7 @@ export default function Footer({ settings, navigation }: { settings?: any, navig
               {navItems.map((item, idx) => (
                 <li key={idx}>
                   <Link 
-                    href={item.url === '/contact' ? (pathname === '/contact' ? '#contact-form' : '/contact#contact-form') : item.url} 
+                    href={item.url === '/contact-us' ? (pathname === '/contact-us' ? '#contact-form' : '/contact-us#contact-form') : item.url} 
                     className="hover:text-white hover:underline transition-colors"
                   >
                     {item.label}
@@ -96,11 +96,11 @@ export default function Footer({ settings, navigation }: { settings?: any, navig
           <div className="lg:col-span-3">
             <h3 className="font-bold text-lg mb-6 uppercase tracking-wider text-white">Our Services</h3>
             <ul className="space-y-3 text-red-100">
-              <li><Link href="/services/dental-implants" className="hover:text-white hover:underline transition-colors">Dental Implants</Link></li>
-              <li><Link href="/services/invisalign" className="hover:text-white hover:underline transition-colors">Invisalign®</Link></li>
-              <li><Link href="/services/lanap-treatment" className="hover:text-white hover:underline transition-colors">LANAP Treatment</Link></li>
-              <li><Link href="/services/cosmetic-dentistry" className="hover:text-white hover:underline transition-colors">Teeth Whitening</Link></li>
-              <li><Link href="/services/emergency-care" className="hover:text-white hover:underline transition-colors">Emergency Care</Link></li>
+              <li><Link href="/dental-implants" className="hover:text-white hover:underline transition-colors">Dental Implants</Link></li>
+              <li><Link href="/invisalign" className="hover:text-white hover:underline transition-colors">Invisalign®</Link></li>
+              <li><Link href="/lanap" className="hover:text-white hover:underline transition-colors">LANAP Treatment</Link></li>
+              <li><Link href="/cosmetic-dentistry" className="hover:text-white hover:underline transition-colors">Teeth Whitening</Link></li>
+              <li><Link href="/emergency-dental-services" className="hover:text-white hover:underline transition-colors">Emergency Care</Link></li>
             </ul>
           </div>
 

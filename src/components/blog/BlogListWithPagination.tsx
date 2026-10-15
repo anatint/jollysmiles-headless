@@ -162,7 +162,7 @@ export default function BlogListWithPagination({ blogs, itemsPerPage = 6 }: Blog
               className="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
             >
               {/* Article Image Container */}
-              <Link href={`/blog/${post.slug}`} className="block relative aspect-[16/10] w-full bg-gray-50 overflow-hidden">
+              <Link href={`/post/${post.slug}`} className="block relative aspect-[16/10] w-full bg-gray-50 overflow-hidden">
                 <Image 
                   src={post.coverImage} 
                   alt={post.title} 
@@ -178,7 +178,7 @@ export default function BlogListWithPagination({ blogs, itemsPerPage = 6 }: Blog
               
               {/* Card Content */}
               <div className="p-6 flex flex-col flex-grow">
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/post/${post.slug}`}>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-brand-red transition-colors font-serif line-clamp-2">
                     {post.title}
                   </h3>
@@ -202,7 +202,7 @@ export default function BlogListWithPagination({ blogs, itemsPerPage = 6 }: Blog
                   </div>
                   
                   <Link 
-                    href={`/blog/${post.slug}`}
+                    href={`/post/${post.slug}`}
                     className="text-brand-red font-bold flex items-center gap-1 hover:text-brand-dark transition-colors group-hover:translate-x-1 duration-300"
                   >
                     Read <ArrowRight className="w-3.5 h-3.5" />
